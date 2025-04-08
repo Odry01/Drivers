@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    can0_driver.h
+    fcm360w_driver.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -13,13 +13,13 @@
   Description:
     This header file provides function prototypes and data type definitions for
     the application.  Some of these are required by the system (such as the
-    "CAN0_DRIVER_Initialize" and "CAN0_DRIVER_Tasks" prototypes) and some of them are only used
-    internally by the application (such as the "CAN0_DRIVER_STATES" definition).  Both
+    "FCM360W_DRIVER_Initialize" and "FCM360W_DRIVER_Tasks" prototypes) and some of them are only used
+    internally by the application (such as the "FCM360W_DRIVER_STATES" definition).  Both
     are defined here for convenience.
- *******************************************************************************/
+*******************************************************************************/
 
-#ifndef _CAN0_DRIVER_H
-#define _CAN0_DRIVER_H
+#ifndef _FCM360W_DRIVER_H
+#define _FCM360W_DRIVER_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -31,15 +31,12 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "configuration.h"
-#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C"
-{
+extern "C" {
 
 #endif
 // DOM-IGNORE-END
@@ -50,13 +47,7 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define CAN0_WRITE_ID(ID)   (ID << 18)
-#define CAN0_READ_ID(ID)    (ID >> 18)
-#define CAN0_MESSAGE_ID     0x1
-#define CAN0_DATA_TX_BYTES  64
-
 // *****************************************************************************
-
 /* Application states
 
   Summary:
@@ -65,24 +56,19 @@ extern "C"
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
- */
+*/
 
 typedef enum
 {
-    CAN0_DRIVER_STATE_INIT = 0,
-    CAN0_DRIVER_STATE_IDLE,
-    CAN0_DRIVER_STATE_CHECK_BUS_OFF_INTERRUPT,
-    CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT,
-    CAN0_DRIVER_STATE_ERROR_CHECK,
-    CAN0_DRIVER_STATE_FIFO0_CHECK,
-    CAN0_DRIVER_STATE_MESSAGE_RECEIVE,
-    CAN0_DRIVER_STATE_SET_MESSAGE_CONTENT,
-    CAN0_DRIVER_STATE_MESSAGE_TRANSMIT,
-    CAN0_DRIVER_STATE_ERROR,
-} CAN0_DRIVER_STATES;
+    /* Application's state machine's initial state. */
+    FCM360W_DRIVER_STATE_INIT=0,
+    FCM360W_DRIVER_STATE_SERVICE_TASKS,
+    /* TODO: Define states used by the application state machine. */
+
+} FCM360W_DRIVER_STATES;
+
 
 // *****************************************************************************
-
 /* Application Data
 
   Summary:
@@ -98,44 +84,19 @@ typedef enum
 typedef struct
 {
     /* The application's current state */
-    CAN0_DRIVER_STATES state;
+    FCM360W_DRIVER_STATES state;
 
-    /* Driver variables */
-    CAN_TX_BUFFER *TX_BUFFER;
-    bool CAN0_TASK_START;
-    bool CAN0_TASK_COMPLETED;
-    uint8_t TX_ERROR_COUNT;
-    uint8_t RX_ERROR_COUNT;
-    uint8_t NUMBER_OF_MESSAGES;
-    uint8_t TX_FIFO[CAN0_TX_FIFO_BUFFER_SIZE];
-    uint8_t RX_FIFO0[CAN0_RX_FIFO0_SIZE];
-    uint8_t CAN0_RAM_ALOCATION[CAN0_MESSAGE_RAM_CONFIG_SIZE] __attribute__((aligned(32)));
-} CAN0_DRIVER_DATA;
+    /* TODO: Define any additional data used by the application. */
 
-typedef union
-{
-
-    struct
-    {
-        uint64_t DATA_0;
-        uint64_t DATA_1;
-        uint64_t DATA_2;
-        uint64_t DATA_3;
-        uint64_t DATA_4;
-        uint64_t DATA_5;
-        uint64_t DATA_6;
-        uint64_t DATA_7;
-    } data;
-    uint8_t bytes[CAN0_DATA_TX_BYTES];
-} CAN0_DATA_TX;
+} FCM360W_DRIVER_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-
-
+/* These routines are called by drivers when certain events occur.
+*/
 
 // *****************************************************************************
 // *****************************************************************************
@@ -145,7 +106,7 @@ typedef union
 
 /*******************************************************************************
   Function:
-    void CAN0_DRIVER_Initialize ( void )
+    void FCM360W_DRIVER_Initialize ( void )
 
   Summary:
      MPLAB Harmony application initialization routine.
@@ -153,7 +114,7 @@ typedef union
   Description:
     This function initializes the Harmony application.  It places the
     application in its initial state and prepares it to run so that its
-    CAN0_DRIVER_Tasks function can be called.
+    FCM360W_DRIVER_Tasks function can be called.
 
   Precondition:
     All other system initialization routines should be called before calling
@@ -167,18 +128,19 @@ typedef union
 
   Example:
     <code>
-    CAN0_DRIVER_Initialize();
+    FCM360W_DRIVER_Initialize();
     </code>
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
- */
+*/
 
-void CAN0_DRIVER_Initialize(void);
+void FCM360W_DRIVER_Initialize ( void );
+
 
 /*******************************************************************************
   Function:
-    void CAN0_DRIVER_Tasks ( void )
+    void FCM360W_DRIVER_Tasks ( void )
 
   Summary:
     MPLAB Harmony Demo application tasks function
@@ -199,32 +161,14 @@ void CAN0_DRIVER_Initialize(void);
 
   Example:
     <code>
-    CAN0_DRIVER_Tasks();
+    FCM360W_DRIVER_Tasks();
     </code>
 
   Remarks:
     This routine must be called from SYS_Tasks() routine.
  */
 
-void CAN0_DRIVER_Tasks(void);
-
-bool CAN0_DRIVER_Get_Task_Start_Status(void);
-
-void CAN0_DRIVER_Set_Task_Start_Status(bool STATUS);
-
-bool CAN0_DRIVER_Get_Task_Completed_Status(void);
-
-void CAN0_DRIVER_Set_Task_Completed_Status(bool STATUS);
-
-void CAN0_DRIVER_Set_Message_Content(uint32_t ID);
-
-void CAN0_DRIVER_Get_Received_Data(uint8_t NUMBER_OF_MESSAGES, CAN_RX_BUFFER *RX_BUFFER, uint8_t LENGTH_OF_RX_BUFFER);
-
-uint8_t CAN0_DRIVER_Set_DLC(uint8_t LENGTH);
-
-void CAN0_DRIVER_Set_Data(uint64_t DATA_0, uint64_t DATA_1, uint64_t DATA_2, uint64_t DATA_3, uint64_t DATA_4, uint64_t DATA_5, uint64_t DATA_6, uint64_t DATA_7);
-
-void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
+void FCM360W_DRIVER_Tasks( void );
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -232,8 +176,9 @@ void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 #endif
 //DOM-IGNORE-END
 
-#endif /* _CAN0_DRIVER_H */
+#endif /* _FCM360W_DRIVER_H */
 
 /*******************************************************************************
  End of File
  */
+

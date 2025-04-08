@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    mcp9808_driver.c
+    fcm360w_driver.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -27,7 +27,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include "mcp9808_driver.h"
+#include "fcm360w_driver.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -45,12 +45,12 @@
     This structure holds the application's data.
 
   Remarks:
-    This structure should be initialized by the MCP9808_DRIVER_Initialize function.
+    This structure should be initialized by the FCM360W_DRIVER_Initialize function.
 
     Application strings and buffers are be defined outside this structure.
 */
 
-MCP9808_DRIVER_DATA mcp9808_driverData;
+FCM360W_DRIVER_DATA fcm360w_driverData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -58,7 +58,8 @@ MCP9808_DRIVER_DATA mcp9808_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-
+/* TODO:  Add any necessary callback functions.
+*/
 
 // *****************************************************************************
 // *****************************************************************************
@@ -66,6 +67,9 @@ MCP9808_DRIVER_DATA mcp9808_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
+
+/* TODO:  Add any necessary local functions.
+*/
 
 
 // *****************************************************************************
@@ -76,47 +80,71 @@ MCP9808_DRIVER_DATA mcp9808_driverData;
 
 /*******************************************************************************
   Function:
-    void MCP9808_DRIVER_Initialize ( void )
+    void FCM360W_DRIVER_Initialize ( void )
 
   Remarks:
-    See prototype in mcp9808_driver.h.
+    See prototype in fcm360w_driver.h.
  */
 
-void MCP9808_DRIVER_Initialize ( void )
+void FCM360W_DRIVER_Initialize ( void )
 {
-    mcp9808_driverData.state = MCP9808_DRIVER_STATE_INIT;
+    /* Place the App state machine in its initial state. */
+    fcm360w_driverData.state = FCM360W_DRIVER_STATE_INIT;
+
+
+
+    /* TODO: Initialize your application's state machine and other
+     * parameters.
+     */
 }
+
 
 /******************************************************************************
   Function:
-    void MCP9808_DRIVER_Tasks ( void )
+    void FCM360W_DRIVER_Tasks ( void )
 
   Remarks:
-    See prototype in mcp9808_driver.h.
+    See prototype in fcm360w_driver.h.
  */
 
-void MCP9808_DRIVER_Tasks ( void )
+void FCM360W_DRIVER_Tasks ( void )
 {
-    switch ( mcp9808_driverData.state )
+
+    /* Check the application's current state. */
+    switch ( fcm360w_driverData.state )
     {
-        case MCP9808_DRIVER_STATE_INIT:
+        /* Application's initial state. */
+        case FCM360W_DRIVER_STATE_INIT:
         {
-            mcp9808_driverData.state = MCP9808_DRIVER_STATE_SERVICE_TASKS;
+            bool appInitialized = true;
+
+
+            if (appInitialized)
+            {
+
+                fcm360w_driverData.state = FCM360W_DRIVER_STATE_SERVICE_TASKS;
+            }
             break;
         }
 
-        case MCP9808_DRIVER_STATE_SERVICE_TASKS:
+        case FCM360W_DRIVER_STATE_SERVICE_TASKS:
         {
 
             break;
         }
-        
+
+        /* TODO: implement your application state machine.*/
+
+
+        /* The default state should never be executed. */
         default:
         {
+            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
+
 
 /*******************************************************************************
  End of File

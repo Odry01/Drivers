@@ -145,13 +145,13 @@ void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
 
 void SHT4X_DRIVER_Temperature_Calculation(void)
 {
-    sht4x_driverData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) sht4x_sensorData.T_VALUE / 65535);
-    sht4x_driverData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) sht4x_sensorData.T_VALUE / 65535);
+    sht4x_sensorData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) sht4x_sensorData.T_VALUE / 65535);
+    sht4x_sensorData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) sht4x_sensorData.T_VALUE / 65535);
 }
 
 void SHT4X_DRIVER_Humidity_Calculation(void)
 {
-    sht4x_driverData.HUMIDITY = -6 + 125 * ((float) sht4x_sensorData.H_VALUE / 65535);
+    sht4x_sensorData.HUMIDITY = -6 + 125 * ((float) sht4x_sensorData.H_VALUE / 65535);
 }
 
 void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -162,9 +162,9 @@ void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
              "Temperature: %.2f  C\r\n"
              "Temperature: %.2f  F\r\n"
              "Humidity: %.2f %%\r\n",
-             sht4x_driverData.CELSIUS_TEMPERATURE,
-             sht4x_driverData.FAHRENHEIT_TEMPERATURE,
-             sht4x_driverData.HUMIDITY
+             sht4x_sensorData.CELSIUS_TEMPERATURE,
+             sht4x_sensorData.FAHRENHEIT_TEMPERATURE,
+             sht4x_sensorData.HUMIDITY
              );
 }
 
@@ -184,9 +184,41 @@ void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 
 void SHT4X_DRIVER_Initialize(void)
 {
+    sht4x_driverData.state = SHT4X_DRIVER_STATE_INIT;
     sht4x_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
     sht4x_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
     sht4x_driverData.I2C_TRANSFER_STATUS = false;
+}
+
+/******************************************************************************
+  Function:
+    void SHT4X_DRIVER_Tasks ( void )
+
+  Remarks:
+    See prototype in sht4x_driver.h.
+ */
+
+void SHT4X_DRIVER_Tasks(void)
+{
+    switch (sht4x_driverData.state)
+    {
+        case SHT4X_DRIVER_STATE_INIT:
+        {
+            sht4x_driverData.state = SHT4X_DRIVER_STATE_SERVICE_TASKS;
+            break;
+        }
+
+        case SHT4X_DRIVER_STATE_SERVICE_TASKS:
+        {
+
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
 }
 
 /*******************************************************************************

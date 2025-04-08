@@ -642,9 +642,9 @@ void SYS_Initialize ( void* data )
 
 
     SUPC_Initialize();
+    AC_Initialize();
     RTC_Initialize();
 
-    AC_Initialize();
     FREQM_Initialize();
 
     PDEC_QDECInitialize();
@@ -657,9 +657,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_SPI_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_I2C_Initialize();
+
+    EVSYS_Initialize();
 
 	SYSTICK_TimerInitialize();
     PM_Initialize();
@@ -700,16 +700,17 @@ void SYS_Initialize ( void* data )
 
 
     /* MISRAC 2012 deviation block end */
+    BME690_DRIVER_Initialize();
     CAN0_DRIVER_Initialize();
     CONSOLE_DRIVER_Initialize();
-    RSTC_DRIVER_Initialize();
-    RTC_DRIVER_Initialize();
-    TIMER_DRIVER_Initialize();
-    BME690_DRIVER_Initialize();
+    FCM360W_DRIVER_Initialize();
     HDC302X_DRIVER_Initialize();
     LC709204F_DRIVER_Initialize();
     MCP9808_DRIVER_Initialize();
+    RSTC_DRIVER_Initialize();
+    RTC_DRIVER_Initialize();
     SHT4X_DRIVER_Initialize();
+    TIMER_DRIVER_Initialize();
 
 
     NVIC_Initialize();

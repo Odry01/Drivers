@@ -31,7 +31,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -48,7 +50,23 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
+// *****************************************************************************
 
+/* Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+ */
+
+typedef enum
+{
+    MCP9808_DRIVER_STATE_INIT = 0,
+    MCP9808_DRIVER_STATE_SERVICE_TASKS,
+} MCP9808_DRIVER_STATES;
 
 // *****************************************************************************
 
@@ -66,8 +84,10 @@ extern "C"
 
 typedef struct
 {
+    /* The application's current state */
+    MCP9808_DRIVER_STATES state;
+
     /* Driver variables */
-    
 } MCP9808_DRIVER_DATA;
 
 // *****************************************************************************
@@ -116,6 +136,38 @@ typedef struct
  */
 
 void MCP9808_DRIVER_Initialize(void);
+
+/*******************************************************************************
+  Function:
+    void MCP9808_DRIVER_Tasks ( void )
+
+  Summary:
+    MPLAB Harmony Demo application tasks function
+
+  Description:
+    This routine is the Harmony Demo application's tasks function.  It
+    defines the application's state machine and core logic.
+
+  Precondition:
+    The system and application initialization ("SYS_Initialize") should be
+    called before calling this.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    MCP9808_DRIVER_Tasks();
+    </code>
+
+  Remarks:
+    This routine must be called from SYS_Tasks() routine.
+ */
+
+void MCP9808_DRIVER_Tasks(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

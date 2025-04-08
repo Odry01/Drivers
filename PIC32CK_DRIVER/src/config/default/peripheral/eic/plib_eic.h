@@ -80,10 +80,73 @@
 
 typedef enum
 {
+    /* External Interrupt Controller Pin 0 */
+    EIC_PIN_0 = 0,
+
+    /* External Interrupt Controller Pin 1 */
+    EIC_PIN_1 = 1,
+
+    /* External Interrupt Controller Pin 2 */
+    EIC_PIN_2 = 2,
+
+    /* External Interrupt Controller Pin 3 */
+    EIC_PIN_3 = 3,
+
+    /* External Interrupt Controller Pin 4 */
+    EIC_PIN_4 = 4,
+
+    /* External Interrupt Controller Pin 5 */
+    EIC_PIN_5 = 5,
+
+    /* External Interrupt Controller Pin 6 */
+    EIC_PIN_6 = 6,
+
+    /* External Interrupt Controller Pin 7 */
+    EIC_PIN_7 = 7,
+
+    /* External Interrupt Controller Pin 8 */
+    EIC_PIN_8 = 8,
+
+    /* External Interrupt Controller Pin 9 */
+    EIC_PIN_9 = 9,
+
+    /* External Interrupt Controller Pin 10 */
+    EIC_PIN_10 = 10,
+
+    /* External Interrupt Controller Pin 11 */
+    EIC_PIN_11 = 11,
+
+    /* External Interrupt Controller Pin 12 */
+    EIC_PIN_12 = 12,
+
+    /* External Interrupt Controller Pin 13 */
+    EIC_PIN_13 = 13,
+
+    /* External Interrupt Controller Pin 14 */
+    EIC_PIN_14 = 14,
+
+    /* External Interrupt Controller Pin 15 */
+    EIC_PIN_15 = 15,
+
     EIC_PIN_MAX = 16
 
 } EIC_PIN;
 
+
+typedef void (*EIC_CALLBACK) (uintptr_t context);
+
+typedef struct
+{
+    /* External Interrupt Pin Callback Handler */
+    EIC_CALLBACK    callback;
+
+    /* External Interrupt Pin Client context */
+    uintptr_t       context;
+
+    /* External Interrupt Pin number */
+    EIC_PIN         eicPinNo;
+
+} EIC_CALLBACK_OBJ;
 
 
 // *****************************************************************************
@@ -96,6 +159,10 @@ typedef enum
 */
 
 void EIC_Initialize (void);
+void EIC_InterruptEnable (EIC_PIN pin);
+void EIC_InterruptDisable (EIC_PIN pin);
+void EIC_CallbackRegister(EIC_PIN pin, EIC_CALLBACK callback, uintptr_t context);
+
 
 #ifdef __cplusplus // Provide C++ Compatibility
 }

@@ -16,7 +16,7 @@
     "TIMER_DRIVER_Initialize" and "TIMER_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "TIMER_DRIVER_STATES" definition).  Both
     are defined here for convenience.
- *******************************************************************************/
+*******************************************************************************/
 
 #ifndef _TIMER_DRIVER_H
 #define _TIMER_DRIVER_H
@@ -38,8 +38,7 @@
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C"
-{
+extern "C" {
 
 #endif
 // DOM-IGNORE-END
@@ -49,15 +48,14 @@ extern "C"
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-
-#define TIMER0  1000                // Main timer
-#define TIMER1  1000                // Bus timer
-#define TIMER2  1000                // FS timer
-#define TIMER3  1000                // Startup timer
+    
+#define TIMER0  1000
+#define TIMER1  1000
+#define TIMER2  1000
+#define TIMER3  1000
 
 // *****************************************************************************
-
-/** Application Data
+/* Application Data
 
   Summary:
     Holds application data
@@ -102,7 +100,38 @@ void TMR3_Callback(uintptr_t CONTEXT);
 // *****************************************************************************
 // *****************************************************************************
 
-void TIMER_DRIVER_Initialize(void);
+/*******************************************************************************
+  Function:
+    void TIMER_DRIVER_Initialize ( void )
+
+  Summary:
+     MPLAB Harmony application initialization routine.
+
+  Description:
+    This function initializes the Harmony application.  It places the
+    application in its initial state and prepares it to run so that its
+    TIMER_DRIVER_Tasks function can be called.
+
+  Precondition:
+    All other system initialization routines should be called before calling
+    this routine (in "SYS_Initialize").
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    TIMER_DRIVER_Initialize();
+    </code>
+
+  Remarks:
+    This routine must be called from the SYS_Initialize function.
+*/
+
+void TIMER_DRIVER_Initialize ( void );
 
 bool TIMER_DRIVER_Get_TMR0_Status(void);
 

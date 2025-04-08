@@ -83,6 +83,42 @@ void SYS_Tasks ( void )
     
 
     /* Maintain the application's state machine. */
+        /* Call Application task BME690_DRIVER. */
+    BME690_DRIVER_Tasks();
+
+    /* Call Application task CAN0_DRIVER. */
+    CAN0_DRIVER_Tasks();
+
+    /* Call Application task CONSOLE_DRIVER. */
+    CONSOLE_DRIVER_Tasks();
+
+    /* Call Application task FCM360W_DRIVER. */
+    FCM360W_DRIVER_Tasks();
+
+    /* Call Application task HDC302X_DRIVER. */
+    HDC302X_DRIVER_Tasks();
+
+    /* Call Application task LC709204F_DRIVER. */
+    LC709204F_DRIVER_Tasks();
+
+    /* Call Application task MCP9808_DRIVER. */
+    MCP9808_DRIVER_Tasks();
+
+    /* Call Application task RSTC_DRIVER. */
+    RSTC_DRIVER_Tasks();
+
+    /* Call Application task RTC_DRIVER. */
+    RTC_DRIVER_Tasks();
+
+    /* Call Application task SHT4X_DRIVER. */
+    SHT4X_DRIVER_Tasks();
+
+    /* Call Application task TIMER_DRIVER. */
+    TIMER_DRIVER_Tasks();
+
+
+
+
 }
 
 /*******************************************************************************

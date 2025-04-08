@@ -383,13 +383,13 @@ void HDC302X_DRIVER_Store_NIST_10_Value(void)
 
 void HDC302X_DRIVER_Temperature_Calculation(void)
 {
-    hdc302x_driverData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) hdc302x_sensorData.T_VALUE / 65535);
-    hdc302x_driverData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) hdc302x_sensorData.T_VALUE / 65535);
+    hdc302x_sensorData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) hdc302x_sensorData.T_VALUE / 65535);
+    hdc302x_sensorData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) hdc302x_sensorData.T_VALUE / 65535);
 }
 
 void HDC302X_DRIVER_Humidity_Calculation(void)
 {
-    hdc302x_driverData.HUMIDITY = ((float) hdc302x_sensorData.H_VALUE / 65535) * 100;
+    hdc302x_sensorData.HUMIDITY = ((float) hdc302x_sensorData.H_VALUE / 65535) * 100;
 }
 
 void HDC302X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
@@ -484,9 +484,9 @@ void HDC302X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
              "Temperature: %.2f  C\r\n"
              "Temperature: %.2f  F\r\n"
              "Humidity: %.2f %%\r\n",
-             hdc302x_driverData.CELSIUS_TEMPERATURE,
-             hdc302x_driverData.FAHRENHEIT_TEMPERATURE,
-             hdc302x_driverData.HUMIDITY
+             hdc302x_sensorData.CELSIUS_TEMPERATURE,
+             hdc302x_sensorData.FAHRENHEIT_TEMPERATURE,
+             hdc302x_sensorData.HUMIDITY
              );
 }
 
@@ -506,9 +506,48 @@ void HDC302X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 
 void HDC302X_DRIVER_Initialize(void)
 {
+    hdc302x_driverData.state = HDC302X_DRIVER_STATE_INIT;
     hdc302x_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
     hdc302x_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
     hdc302x_driverData.I2C_TRANSFER_STATUS = false;
+}
+
+/******************************************************************************
+  Function:
+    void HDC302X_DRIVER_Tasks ( void )
+
+  Remarks:
+    See prototype in hdc302x_driver.h.
+ */
+
+void HDC302X_DRIVER_Tasks(void)
+{
+    switch (hdc302x_driverData.state)
+    {
+        case HDC302X_DRIVER_STATE_INIT:
+        {
+            bool appInitialized = true;
+
+
+            if (appInitialized)
+            {
+
+                hdc302x_driverData.state = HDC302X_DRIVER_STATE_SERVICE_TASKS;
+            }
+            break;
+        }
+
+        case HDC302X_DRIVER_STATE_SERVICE_TASKS:
+        {
+
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
 }
 
 /*******************************************************************************

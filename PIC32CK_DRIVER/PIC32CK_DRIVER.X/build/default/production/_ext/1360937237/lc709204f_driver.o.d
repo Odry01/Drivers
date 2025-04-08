@@ -108,7 +108,77 @@ build/default/production/_ext/1360937237/lc709204f_driver.o: \
  ../src/packs/PIC32CK2051GC01064_DFP/pio/pic32ck2051gc01064.h \
  ../src/config/default/device_cache.h \
  ../src/config/default/toolchain_specifics.h \
- ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h
+ ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h \
+ ../src/config/default/definitions.h \
+ ../src/config/default/peripheral/supc/plib_supc.h \
+ ../src/config/default/peripheral/ac/plib_ac.h \
+ ../src/config/default/peripheral/rtc/plib_rtc.h \
+ ../src/config/default/device.h \
+ ../src/config/default/peripheral/freqm/plib_freqm.h \
+ ../src/config/default/system/time/sys_time.h \
+ ../src/config/default/system/system.h \
+ ../src/config/default/system/system_common.h \
+ ../src/config/default/system/system_module.h \
+ ../src/config/default/system/system_common.h \
+ ../src/config/default/system/time/sys_time_definitions.h \
+ ../src/config/default/system/int/sys_int.h \
+ ../src/config/default/system/int/sys_int_mapping.h \
+ ../src/config/default/peripheral/pdec/plib_pdec.h \
+ ../src/config/default/peripheral/pdec/plib_pdec_common.h \
+ ../src/config/default/driver/i2c/drv_i2c.h \
+ ../src/config/default/driver/i2c/drv_i2c_definitions.h \
+ ../src/config/default/driver/driver.h \
+ ../src/config/default/driver/driver_common.h \
+ ../src/config/default/driver/i2c/src/drv_i2c_local.h \
+ ../src/config/default/driver/i2c/drv_i2c_definitions.h \
+ ../src/config/default/osal/osal.h \
+ ../src/config/default/osal/osal_definitions.h \
+ ../src/config/default/osal/osal_impl_basic.h \
+ ../src/config/default/peripheral/trng/plib_trng.h \
+ ../src/config/default/driver/spi/drv_spi.h \
+ ../src/config/default/driver/spi/drv_spi_definitions.h \
+ ../src/config/default/system/ports/sys_ports.h \
+ ../src/config/default/system/ports/sys_ports_mapping.h \
+ ../src/config/default/peripheral/port/plib_port.h \
+ ../src/config/default/driver/spi/src/drv_spi_local.h \
+ ../src/config/default/driver/spi/drv_spi.h \
+ ../src/config/default/system/int/sys_int.h \
+ ../src/config/default/system/ports/sys_ports.h \
+ ../src/config/default/system/cache/sys_cache.h \
+ ../src/config/default/osal/osal.h \
+ ../src/config/default/system/debug/sys_debug.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom3_usart.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h \
+ ../src/config/default/peripheral/sercom/usart/plib_sercom2_usart.h \
+ ../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h \
+ ../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h \
+ ../src/config/default/peripheral/sercom/i2c_master/plib_sercom0_i2c_master.h \
+ ../src/config/default/peripheral/sercom/i2c_master/plib_sercom_i2c_master_common.h \
+ ../src/config/default/peripheral/evsys/plib_evsys.h \
+ ../src/config/default/peripheral/port/plib_port.h \
+ ../src/config/default/peripheral/clock/plib_clock.h \
+ ../src/config/default/peripheral/nvic/plib_nvic.h \
+ ../src/config/default/peripheral/systick/plib_systick.h \
+ ../src/config/default/peripheral/cmcc/plib_cmcc.h \
+ ../src/config/default/peripheral/pm/plib_pm.h \
+ ../src/config/default/peripheral/can/plib_can0.h \
+ ../src/config/default/peripheral/can/plib_can_common.h \
+ ../src/config/default/peripheral/eic/plib_eic.h \
+ ../src/config/default/peripheral/rstc/plib_rstc.h \
+ ../src/config/default/peripheral/tcc/plib_tcc0.h \
+ ../src/config/default/peripheral/tcc/plib_tcc_common.h \
+ ../src/config/default/driver/usart/drv_usart.h \
+ ../src/config/default/driver/usart/drv_usart_definitions.h \
+ ../src/config/default/driver/usart/src/drv_usart_local.h \
+ ../src/config/default/driver/usart/drv_usart.h \
+ ../src/config/default/peripheral/ccl/plib_ccl.h \
+ ../src/config/default/system/console/sys_console.h \
+ ../src/config/default/system/console/src/sys_console_local.h \
+ ../src/config/default/system/console/src/sys_console_uart_definitions.h \
+ ../src/bme690_driver.h ../src/can0_driver.h ../src/console_driver.h \
+ ../src/fcm360w_driver.h ../src/hdc302x_driver.h \
+ ../src/lc709204f_driver.h ../src/mcp9808_driver.h ../src/rstc_driver.h \
+ ../src/rtc_driver.h ../src/sht4x_driver.h ../src/timer_driver.h
 
 ../src/lc709204f_driver.h:
 
@@ -331,3 +401,157 @@ build/default/production/_ext/1360937237/lc709204f_driver.o: \
 ../src/config/default/toolchain_specifics.h:
 
 ../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h:
+
+../src/config/default/definitions.h:
+
+../src/config/default/peripheral/supc/plib_supc.h:
+
+../src/config/default/peripheral/ac/plib_ac.h:
+
+../src/config/default/peripheral/rtc/plib_rtc.h:
+
+../src/config/default/device.h:
+
+../src/config/default/peripheral/freqm/plib_freqm.h:
+
+../src/config/default/system/time/sys_time.h:
+
+../src/config/default/system/system.h:
+
+../src/config/default/system/system_common.h:
+
+../src/config/default/system/system_module.h:
+
+../src/config/default/system/system_common.h:
+
+../src/config/default/system/time/sys_time_definitions.h:
+
+../src/config/default/system/int/sys_int.h:
+
+../src/config/default/system/int/sys_int_mapping.h:
+
+../src/config/default/peripheral/pdec/plib_pdec.h:
+
+../src/config/default/peripheral/pdec/plib_pdec_common.h:
+
+../src/config/default/driver/i2c/drv_i2c.h:
+
+../src/config/default/driver/i2c/drv_i2c_definitions.h:
+
+../src/config/default/driver/driver.h:
+
+../src/config/default/driver/driver_common.h:
+
+../src/config/default/driver/i2c/src/drv_i2c_local.h:
+
+../src/config/default/driver/i2c/drv_i2c_definitions.h:
+
+../src/config/default/osal/osal.h:
+
+../src/config/default/osal/osal_definitions.h:
+
+../src/config/default/osal/osal_impl_basic.h:
+
+../src/config/default/peripheral/trng/plib_trng.h:
+
+../src/config/default/driver/spi/drv_spi.h:
+
+../src/config/default/driver/spi/drv_spi_definitions.h:
+
+../src/config/default/system/ports/sys_ports.h:
+
+../src/config/default/system/ports/sys_ports_mapping.h:
+
+../src/config/default/peripheral/port/plib_port.h:
+
+../src/config/default/driver/spi/src/drv_spi_local.h:
+
+../src/config/default/driver/spi/drv_spi.h:
+
+../src/config/default/system/int/sys_int.h:
+
+../src/config/default/system/ports/sys_ports.h:
+
+../src/config/default/system/cache/sys_cache.h:
+
+../src/config/default/osal/osal.h:
+
+../src/config/default/system/debug/sys_debug.h:
+
+../src/config/default/peripheral/sercom/usart/plib_sercom3_usart.h:
+
+../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h:
+
+../src/config/default/peripheral/sercom/usart/plib_sercom2_usart.h:
+
+../src/config/default/peripheral/sercom/spi_master/plib_sercom1_spi_master.h:
+
+../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h:
+
+../src/config/default/peripheral/sercom/i2c_master/plib_sercom0_i2c_master.h:
+
+../src/config/default/peripheral/sercom/i2c_master/plib_sercom_i2c_master_common.h:
+
+../src/config/default/peripheral/evsys/plib_evsys.h:
+
+../src/config/default/peripheral/port/plib_port.h:
+
+../src/config/default/peripheral/clock/plib_clock.h:
+
+../src/config/default/peripheral/nvic/plib_nvic.h:
+
+../src/config/default/peripheral/systick/plib_systick.h:
+
+../src/config/default/peripheral/cmcc/plib_cmcc.h:
+
+../src/config/default/peripheral/pm/plib_pm.h:
+
+../src/config/default/peripheral/can/plib_can0.h:
+
+../src/config/default/peripheral/can/plib_can_common.h:
+
+../src/config/default/peripheral/eic/plib_eic.h:
+
+../src/config/default/peripheral/rstc/plib_rstc.h:
+
+../src/config/default/peripheral/tcc/plib_tcc0.h:
+
+../src/config/default/peripheral/tcc/plib_tcc_common.h:
+
+../src/config/default/driver/usart/drv_usart.h:
+
+../src/config/default/driver/usart/drv_usart_definitions.h:
+
+../src/config/default/driver/usart/src/drv_usart_local.h:
+
+../src/config/default/driver/usart/drv_usart.h:
+
+../src/config/default/peripheral/ccl/plib_ccl.h:
+
+../src/config/default/system/console/sys_console.h:
+
+../src/config/default/system/console/src/sys_console_local.h:
+
+../src/config/default/system/console/src/sys_console_uart_definitions.h:
+
+../src/bme690_driver.h:
+
+../src/can0_driver.h:
+
+../src/console_driver.h:
+
+../src/fcm360w_driver.h:
+
+../src/hdc302x_driver.h:
+
+../src/lc709204f_driver.h:
+
+../src/mcp9808_driver.h:
+
+../src/rstc_driver.h:
+
+../src/rtc_driver.h:
+
+../src/sht4x_driver.h:
+
+../src/timer_driver.h:

@@ -449,7 +449,7 @@ static void SYS_TIME_CounterInit(const SYS_MODULE_INIT* init)
     const SYS_TIME_INIT* initData = (const SYS_TIME_INIT *)init;
 
     counterObj->timePlib = initData->timePlib;
-    counterObj->hwTimerTickFreq = (float)SYS_TIME_TICK_FREQ_IN_HZ;
+    counterObj->hwTimerTickFreq = (uint32_t)SYS_TIME_TICK_FREQ_IN_HZ;
     counterObj->hwTimerIntNum = initData->hwTimerIntNum;
 
     counterObj->swCounter64 = 0;
@@ -582,16 +582,16 @@ uint32_t  SYS_TIME_CountToMS ( uint32_t count )
 
 uint32_t SYS_TIME_USToCount ( uint32_t us )
 {
-    float count = ((us * gSystemCounterObj.hwTimerTickFreq) / 1000000);
+    uint32_t count = (uint32_t)(((uint64_t)us * gSystemCounterObj.hwTimerTickFreq) / 1000000UL);
 
-    return (uint32_t) ((uint32_t)count + ((count - (uint32_t)count) > 0));
+    return count;
 }
 
 uint32_t SYS_TIME_MSToCount ( uint32_t ms )
 {
-    float count = ((ms * gSystemCounterObj.hwTimerTickFreq) / 1000);
+    uint32_t count = (uint32_t)(((uint64_t)ms * gSystemCounterObj.hwTimerTickFreq) / 1000UL);
 
-    return (uint32_t) ((uint32_t)count + ((count - (uint32_t)count) > 0));
+    return count;
 }
 /* MISRAC 2012 deviation block end */
 

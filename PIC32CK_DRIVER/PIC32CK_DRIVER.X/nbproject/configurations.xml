@@ -156,6 +156,7 @@
         <itemPath>../src/rtc_driver.h</itemPath>
         <itemPath>../src/sht4x_driver.h</itemPath>
         <itemPath>../src/timer_driver.h</itemPath>
+        <itemPath>../src/fcm360w_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
@@ -417,11 +418,11 @@
         <itemPath>../src/config/default/pin_configurations.csv</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="drivers" projectFiles="true">
-        <itemPath>../src/bme690_driver.c</itemPath>
-        <itemPath>../src/lc709204f_driver.c</itemPath>
-        <itemPath>../src/hdc302x_driver.c</itemPath>
         <itemPath>../src/console_driver.c</itemPath>
         <itemPath>../src/can0_driver.c</itemPath>
+        <itemPath>../src/lc709204f_driver.c</itemPath>
+        <itemPath>../src/hdc302x_driver.c</itemPath>
+        <itemPath>../src/bme690_driver.c</itemPath>
         <itemPath>../src/mcp9808_driver.c</itemPath>
         <itemPath>../src/rstc_driver.c</itemPath>
         <itemPath>../src/rtc_driver.c</itemPath>
@@ -429,6 +430,7 @@
         <itemPath>../src/timer_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
+      <itemPath>../src/fcm360w_driver.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

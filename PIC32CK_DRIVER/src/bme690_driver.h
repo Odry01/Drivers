@@ -101,13 +101,13 @@ extern "C"
 #define BME690_PRESS_MSB_0_REGISTER                     0x1F
 #define BME690_SUB_MEAS_INDEX_0_REGISTER                0x1E
 #define BME690_MEAS_STATUS_0_REGISTER                   0x1D
-    
+
 #define BME690_PAR_T1_CALIBRATION_LSB_REGISTER          0xEA
 #define BME690_PAR_T1_CALIBRATION_MSB_REGISTER          0xE9
 #define BME690_PAR_T2_CALIBRATION_LSB_REGISTER          0x8B
 #define BME690_PAR_T2_CALIBRATION_MSB_REGISTER          0x8A
 #define BME690_PAR_T3_CALIBRATION_LSB_REGISTER          0x8C
-    
+
 #define BME690_PAR_H1_CALIBRATION_LSB_REGISTER          0xE3
 #define BME690_PAR_H1_CALIBRATION_MSB_REGISTER          0xE2
 #define BME690_PAR_H2_CALIBRATION_LSB_REGISTER          0xE4    
@@ -116,7 +116,7 @@ extern "C"
 #define BME690_PAR_H5_CALIBRATION_LSB_REGISTER          0xE1
 #define BME690_PAR_H5_CALIBRATION_MSB_REGISTER          0xE2
 #define BME690_PAR_H6_CALIBRATION_LSB_REGISTER          0xE7
-    
+
 #define BME690_PAR_P1_CALIBRATION_LSB_REGISTER          0x95
 #define BME690_PAR_P1_CALIBRATION_MSB_REGISTER          0x94
 #define BME690_PAR_P2_CALIBRATION_LSB_REGISTER          0x97
@@ -133,7 +133,7 @@ extern "C"
 #define BME690_PAR_P9_CALIBRATION_MSB_REGISTER          0x9C 
 #define BME690_PAR_P10_CALIBRATION_LSB_REGISTER         0x9E
 #define BME690_PAR_P11_CALIBRATION_LSB_REGISTER         0x9F
-    
+
 #define BME690_PAR_G1_CALIBRATION_LSB_REGISTER          0xED
 #define BME690_PAR_G2_CALIBRATION_LSB_REGISTER          0xEB
 #define BME690_PAR_G2_CALIBRATION_MSB_REGISTER          0xEC
@@ -141,6 +141,28 @@ extern "C"
 
 #define BME690_I2C_RX_BUFFER_SIZE                       8
 #define BME690_I2C_TX_BUFFER_SIZE                       8
+
+// *****************************************************************************
+
+/* Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+ */
+
+typedef enum
+{
+    /* Application's state machine's initial state. */
+    BME690_DRIVER_STATE_INIT = 0,
+    BME690_DRIVER_STATE_SERVICE_TASKS,
+    /* TODO: Define states used by the application state machine. */
+
+} BME690_DRIVER_STATES;
+
 
 // *****************************************************************************
 
@@ -158,6 +180,9 @@ extern "C"
 
 typedef struct
 {
+    /* The application's current state */
+    BME690_DRIVER_STATES state;
+
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
@@ -190,7 +215,7 @@ typedef struct
     float GAS_RESISTANCE;
 } BME690_DRIVER_SENSOR_DATA;
 
-typedef struct 
+typedef struct
 {
     int16_t PAR_H1;
     int8_t PAR_H2;
@@ -219,9 +244,9 @@ typedef struct
     uint8_t RES_HEAT_RANGE;
     int8_t RES_HEAT_VALUE;
     int8_t RANGE_SW_ERROR;
-}BME690_DRIVER_CALIBRATION_DATA;
+} BME690_DRIVER_CALIBRATION_DATA;
 
-typedef struct 
+typedef struct
 {
     uint8_t ENABLE;
     uint16_t HEATER_TEMPERATURE;
@@ -230,7 +255,7 @@ typedef struct
     uint16_t *HEATER_DURATION_PROFILE;
     uint8_t PROFILE_LENGTH;
     uint16_t SHARED_HEATER_DURATION;
-}BME690_DRIVER_HEATER_CONFIGURATION;
+} BME690_DRIVER_HEATER_CONFIGURATION;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -260,17 +285,58 @@ void BME690_DRIVER_Alert(uintptr_t CONTEXT);
     application in its initial state and prepares it to run so that its
     BME690_DRIVER_Tasks function can be called.
 
+  Precondition:
+    All other system initialization routines should be called before calling
+    this routine (in "SYS_Initialize").
+
   Parameters:
     None.
 
   Returns:
     None.
 
+  Example:
+    <code>
+    BME690_DRIVER_Initialize();
+    </code>
+
   Remarks:
     This routine must be called from the SYS_Initialize function.
  */
 
 void BME690_DRIVER_Initialize(void);
+
+/*******************************************************************************
+  Function:
+    void BME690_DRIVER_Tasks ( void )
+
+  Summary:
+    MPLAB Harmony Demo application tasks function
+
+  Description:
+    This routine is the Harmony Demo application's tasks function.  It
+    defines the application's state machine and core logic.
+
+  Precondition:
+    The system and application initialization ("SYS_Initialize") should be
+    called before calling this.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    BME690_DRIVER_Tasks();
+    </code>
+
+  Remarks:
+    This routine must be called from SYS_Tasks() routine.
+ */
+
+void BME690_DRIVER_Tasks(void);
 
 void BME690_DRIVER_Get_Variant_ID(void);
 
@@ -369,6 +435,8 @@ void BME690_DRIVER_Get_Sub_Measurement_Status(uint8_t REGISTER);
 void BME690_DRIVER_Get_Measurement_Status(uint8_t REGISTER);
 
 void BME690_DRIVER_Get_Calibration_Register_Value(uint8_t REGISTER);
+
+void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

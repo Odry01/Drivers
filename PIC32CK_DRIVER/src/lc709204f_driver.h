@@ -31,7 +31,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -47,8 +49,8 @@ extern "C"
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-
-#define LC709204F_I2CADDR 0x0B /// LC709204F default i2c address
+    
+#define LC709204F_I2CADDR 0x0B                                  /// LC709204F default i2c address
 
 #define LC709204F_REG_TIME_TO_EMPTY                        0x03 /// R - Displays estimated time to empty.
 #define LC709204F_REG_BEFORE_RSOC                          0x04 /// W - Optional Command, especially for obtaining the voltage with intentional timing after power on reset.
@@ -95,6 +97,25 @@ extern "C"
 
 // *****************************************************************************
 
+/* Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+ */
+
+typedef enum
+{
+    LC709204F_DRIVER_STATE_INIT = 0,
+    LC709204F_DRIVER_STATE_SERVICE_TASKS,
+} LC709204F_DRIVER_STATES;
+
+
+// *****************************************************************************
+
 /* Application Data
 
   Summary:
@@ -109,7 +130,11 @@ extern "C"
 
 typedef struct
 {
+    /* The application's current state */
+    LC709204F_DRIVER_STATES state;
+    
     /* Driver variables */
+    
 } LC709204F_DRIVER_DATA;
 
 // *****************************************************************************
@@ -158,6 +183,38 @@ typedef struct
  */
 
 void LC709204F_DRIVER_Initialize(void);
+
+/*******************************************************************************
+  Function:
+    void LC709204F_DRIVER_Tasks ( void )
+
+  Summary:
+    MPLAB Harmony Demo application tasks function
+
+  Description:
+    This routine is the Harmony Demo application's tasks function.  It
+    defines the application's state machine and core logic.
+
+  Precondition:
+    The system and application initialization ("SYS_Initialize") should be
+    called before calling this.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    LC709204F_DRIVER_Tasks();
+    </code>
+
+  Remarks:
+    This routine must be called from SYS_Tasks() routine.
+ */
+
+void LC709204F_DRIVER_Tasks(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

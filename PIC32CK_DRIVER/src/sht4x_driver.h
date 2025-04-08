@@ -16,7 +16,7 @@
     "SHT4X_DRIVER_Initialize" and "SHT4X_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "SHT4X_DRIVER_STATES" definition).  Both
     are defined here for convenience.
- *******************************************************************************/
+*******************************************************************************/
 
 #ifndef _SHT4X_DRIVER_H
 #define _SHT4X_DRIVER_H
@@ -31,14 +31,14 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "configuration.h"
 #include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C"
-{
+extern "C" {
 
 #endif
 // DOM-IGNORE-END
@@ -48,7 +48,7 @@ extern "C"
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-
+    
 #define SHT4X_I2C_ADDRESS                               0x44
 #define SHT4X_MEASURE_TEMP_HUM_HIGH_PRECISION           0xFD
 #define SHT4X_MEASURE_TEMP_HUM_MEDIUM_PRECISION         0xF6
@@ -65,8 +65,24 @@ extern "C"
 #define SHT4X_I2C_TX_BUFFER_SIZE                        8
 
 // *****************************************************************************
+/* Application states
 
-/** Application Data
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+*/
+
+typedef enum
+{
+    SHT4X_DRIVER_STATE_INIT=0,
+    SHT4X_DRIVER_STATE_SERVICE_TASKS,
+} SHT4X_DRIVER_STATES;
+
+// *****************************************************************************
+/* Application Data
 
   Summary:
     Holds application data
@@ -80,6 +96,9 @@ extern "C"
 
 typedef struct
 {
+    /* The application's current state */
+    SHT4X_DRIVER_STATES state;
+
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
@@ -88,9 +107,6 @@ typedef struct
     bool SHT4X_TASK_COMPLETED;
     uint8_t I2C_DATA_RECEIVE[SHT4X_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[SHT4X_I2C_TX_BUFFER_SIZE];
-    float CELSIUS_TEMPERATURE;
-    float FAHRENHEIT_TEMPERATURE;
-    float HUMIDITY;
 } SHT4X_DRIVER_DATA;
 
 typedef struct
@@ -98,6 +114,9 @@ typedef struct
     uint16_t T_VALUE;
     uint16_t H_VALUE;
     uint32_t SERIAL_NUMBER;
+    float CELSIUS_TEMPERATURE;
+    float FAHRENHEIT_TEMPERATURE;
+    float HUMIDITY;
 } SHT4X_DRIVER_SENSOR_DATA;
 
 // *****************************************************************************
@@ -114,21 +133,70 @@ void SHT4X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HA
 // *****************************************************************************
 // *****************************************************************************
 
-/** SHT4X_DRIVER_Initialize
+/*******************************************************************************
+  Function:
+    void SHT4X_DRIVER_Initialize ( void )
 
-Summary:
-Initialize the SHT4X sensor driver.
+  Summary:
+     MPLAB Harmony application initialization routine.
 
-Description:
-This function initializes the SHT4X sensor driver, configuring it for sensor communication.
+  Description:
+    This function initializes the Harmony application.  It places the
+    application in its initial state and prepares it to run so that its
+    SHT4X_DRIVER_Tasks function can be called.
 
-Parameters:
-None.
+  Precondition:
+    All other system initialization routines should be called before calling
+    this routine (in "SYS_Initialize").
 
-Remarks:
-Call this function once at the start of the application to prepare the SHT4X sensor for use.
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    SHT4X_DRIVER_Initialize();
+    </code>
+
+  Remarks:
+    This routine must be called from the SYS_Initialize function.
+*/
+
+void SHT4X_DRIVER_Initialize ( void );
+
+/*******************************************************************************
+  Function:
+    void SHT4X_DRIVER_Tasks ( void )
+
+  Summary:
+    MPLAB Harmony Demo application tasks function
+
+  Description:
+    This routine is the Harmony Demo application's tasks function.  It
+    defines the application's state machine and core logic.
+
+  Precondition:
+    The system and application initialization ("SYS_Initialize") should be
+    called before calling this.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    SHT4X_DRIVER_Tasks();
+    </code>
+
+  Remarks:
+    This routine must be called from SYS_Tasks() routine.
  */
-void SHT4X_DRIVER_Initialize(void);
+
+void SHT4X_DRIVER_Tasks( void );
 
 bool SHT4X_DRIVER_Get_Task_Start_Status(void);
 

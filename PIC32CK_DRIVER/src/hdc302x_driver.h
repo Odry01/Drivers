@@ -146,6 +146,24 @@ extern "C"
 
 // *****************************************************************************
 
+/* Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+ */
+
+typedef enum
+{
+    HDC302X_DRIVER_STATE_INIT = 0,
+    HDC302X_DRIVER_STATE_SERVICE_TASKS,
+} HDC302X_DRIVER_STATES;
+
+// *****************************************************************************
+
 /* Application Data
 
   Summary:
@@ -160,6 +178,9 @@ extern "C"
 
 typedef struct
 {
+    /* The application's current state */
+    HDC302X_DRIVER_STATES state;
+
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
@@ -169,9 +190,6 @@ typedef struct
     bool HDC302X_ALERT;
     uint8_t I2C_DATA_RECEIVE[HDC302X_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[HDC302X_I2C_TX_BUFFER_SIZE];
-    float CELSIUS_TEMPERATURE;
-    float FAHRENHEIT_TEMPERATURE;
-    float HUMIDITY;
 } HDC302X_DRIVER_DATA;
 
 typedef struct
@@ -196,6 +214,9 @@ typedef struct
     uint8_t NIST_VALUE_0;
     uint16_t T_VALUE;
     uint16_t H_VALUE;
+    float CELSIUS_TEMPERATURE;
+    float FAHRENHEIT_TEMPERATURE;
+    float HUMIDITY;
 } HDC302X_DRIVER_SENSOR_DATA;
 
 typedef struct
@@ -262,6 +283,38 @@ void HDC302X_DRIVER_Temperature_Alert(uintptr_t CONTEXT);
  */
 
 void HDC302X_DRIVER_Initialize(void);
+
+/*******************************************************************************
+  Function:
+    void HDC302X_DRIVER_Tasks ( void )
+
+  Summary:
+    MPLAB Harmony Demo application tasks function
+
+  Description:
+    This routine is the Harmony Demo application's tasks function.  It
+    defines the application's state machine and core logic.
+
+  Precondition:
+    The system and application initialization ("SYS_Initialize") should be
+    called before calling this.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    HDC302X_DRIVER_Tasks();
+    </code>
+
+  Remarks:
+    This routine must be called from SYS_Tasks() routine.
+ */
+
+void HDC302X_DRIVER_Tasks(void);
 
 bool HDC302X_DRIVER_Get_Task_Start_Status(void);
 

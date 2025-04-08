@@ -84,8 +84,40 @@ LC709204F_DRIVER_DATA lc709204f_driverData;
 
 void LC709204F_DRIVER_Initialize(void)
 {
-    
+    lc709204f_driverData.state = LC709204F_DRIVER_STATE_INIT;
 }
+
+/******************************************************************************
+  Function:
+    void LC709204F_DRIVER_Tasks ( void )
+
+  Remarks:
+    See prototype in lc709204f_driver.h.
+ */
+
+void LC709204F_DRIVER_Tasks(void)
+{
+    switch (lc709204f_driverData.state)
+    {
+        case LC709204F_DRIVER_STATE_INIT:
+        {
+            lc709204f_driverData.state = LC709204F_DRIVER_STATE_SERVICE_TASKS;
+            break;
+        }
+
+        case LC709204F_DRIVER_STATE_SERVICE_TASKS:
+        {
+
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
+}
+
 
 /*******************************************************************************
  End of File

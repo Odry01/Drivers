@@ -239,7 +239,7 @@ void BME690_DRIVER_Get_Gas_Wait(uint8_t REGISTER)
 
 void BME690_DRIVER_Set_Gas_Wait(uint8_t REGISTER, uint8_t CONFIG)
 {
-    
+
 }
 
 void BME690_DRIVER_Get_Res_Heat(void)
@@ -377,6 +377,18 @@ void BME690_DRIVER_Get_Calibration_Register_Value(uint8_t REGISTER)
 
 }
 
+void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
+{
+    SYS_CONSOLE_Print
+            (
+             CONSOLE_HANDLE,
+             "Temperature: %.2f  C\r\n"
+             "Humidity: %.2f %%\r\n",
+             bme690_sensorData.TEMPERATURE,
+             bme690_sensorData.HUMIDITY
+             );
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -393,9 +405,41 @@ void BME690_DRIVER_Get_Calibration_Register_Value(uint8_t REGISTER)
 
 void BME690_DRIVER_Initialize(void)
 {
+    bme690_driverData.state = BME690_DRIVER_STATE_INIT;
     bme690_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
     bme690_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
     bme690_driverData.I2C_TRANSFER_STATUS = false;
+    EIC_CallbackRegister(EIC_PIN_0, BME690_DRIVER_Alert, 0);
+}
+
+/******************************************************************************
+  Function:
+    void BME690_DRIVER_Tasks ( void )
+
+  Remarks:
+    See prototype in bme690_driver.h.
+ */
+
+void BME690_DRIVER_Tasks(void)
+{
+    switch (bme690_driverData.state)
+    {
+        case BME690_DRIVER_STATE_INIT:
+        {
+            bme690_driverData.state = BME690_DRIVER_STATE_SERVICE_TASKS;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_SERVICE_TASKS:
+        {
+
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
 }
 
 /*******************************************************************************
