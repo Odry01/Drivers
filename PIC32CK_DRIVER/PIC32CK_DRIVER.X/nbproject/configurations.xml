@@ -428,9 +428,9 @@
         <itemPath>../src/rtc_driver.c</itemPath>
         <itemPath>../src/sht4x_driver.c</itemPath>
         <itemPath>../src/timer_driver.c</itemPath>
+        <itemPath>../src/fcm360w_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
-      <itemPath>../src/fcm360w_driver.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
