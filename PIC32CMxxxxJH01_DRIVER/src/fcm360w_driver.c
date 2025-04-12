@@ -48,7 +48,7 @@
     This structure should be initialized by the FCM360W_DRIVER_Initialize function.
 
     Application strings and buffers are be defined outside this structure.
-*/
+ */
 
 FCM360W_DRIVER_DATA fcm360w_driverData;
 
@@ -58,8 +58,7 @@ FCM360W_DRIVER_DATA fcm360w_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/* TODO:  Add any necessary callback functions.
-*/
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -67,9 +66,6 @@ FCM360W_DRIVER_DATA fcm360w_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-
-/* TODO:  Add any necessary local functions.
-*/
 
 
 // *****************************************************************************
@@ -86,18 +82,10 @@ FCM360W_DRIVER_DATA fcm360w_driverData;
     See prototype in fcm360w_driver.h.
  */
 
-void FCM360W_DRIVER_Initialize ( void )
+void FCM360W_DRIVER_Initialize(void)
 {
-    /* Place the App state machine in its initial state. */
     fcm360w_driverData.state = FCM360W_DRIVER_STATE_INIT;
-
-
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
-
 
 /******************************************************************************
   Function:
@@ -107,44 +95,22 @@ void FCM360W_DRIVER_Initialize ( void )
     See prototype in fcm360w_driver.h.
  */
 
-void FCM360W_DRIVER_Tasks ( void )
+void FCM360W_DRIVER_Tasks(void)
 {
-
-    /* Check the application's current state. */
-    switch ( fcm360w_driverData.state )
+    switch (fcm360w_driverData.state)
     {
-        /* Application's initial state. */
         case FCM360W_DRIVER_STATE_INIT:
         {
-            bool appInitialized = true;
-
-
-            if (appInitialized)
-            {
-
-                fcm360w_driverData.state = FCM360W_DRIVER_STATE_SERVICE_TASKS;
-            }
+            fcm360w_driverData.state = FCM360W_DRIVER_STATE_INIT;
             break;
         }
 
-        case FCM360W_DRIVER_STATE_SERVICE_TASKS:
-        {
-
-            break;
-        }
-
-        /* TODO: implement your application state machine.*/
-
-
-        /* The default state should never be executed. */
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
-
 
 /*******************************************************************************
  End of File

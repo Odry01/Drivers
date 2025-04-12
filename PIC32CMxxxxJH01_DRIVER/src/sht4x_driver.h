@@ -16,7 +16,7 @@
     "SHT4X_DRIVER_Initialize" and "SHT4X_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "SHT4X_DRIVER_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _SHT4X_DRIVER_H
 #define _SHT4X_DRIVER_H
@@ -38,7 +38,8 @@
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -48,7 +49,7 @@ extern "C" {
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-    
+
 #define SHT4X_I2C_ADDRESS                               0x44
 #define SHT4X_MEASURE_TEMP_HUM_HIGH_PRECISION           0xFD
 #define SHT4X_MEASURE_TEMP_HUM_MEDIUM_PRECISION         0xF6
@@ -65,6 +66,7 @@ extern "C" {
 #define SHT4X_I2C_TX_BUFFER_SIZE                        8
 
 // *****************************************************************************
+
 /* Application states
 
   Summary:
@@ -73,15 +75,28 @@ extern "C" {
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
+ */
 
 typedef enum
 {
-    SHT4X_DRIVER_STATE_INIT=0,
-    SHT4X_DRIVER_STATE_SERVICE_TASKS,
+    SHT4X_DRIVER_STATE_INIT = 0,
+    SHT4X_DRIVER_STATE_I2C_HANDLER_REGISTER,
+    SHT4X_DRIVER_STATE_IDLE,
+    SHT4X_DRIVER_STATE_START_MEASURE,
+    SHT4X_DRIVER_STATE_START_MEASURE_ACK,
+    SHT4X_DRIVER_STATE_START_MEASURE_WAIT_FOR_TRANSFER,
+    SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE,
+    SHT4X_DRIVER_STATE_GET_MEASURE_DATA,
+    SHT4X_DRIVER_STATE_GET_MEASURE_DATA_ACK,
+    SHT4X_DRIVER_STATE_GET_MEASURE_DATA_WAIT_FOR_TRANSFER,
+    SHT4X_DRIVER_STATE_CALCULATE_DATA,
+    SHT4X_DRIVER_STATE_STORE_DATA,
+    SHT4X_DRIVER_STATE_TIMER_EXPIRED,
+    SHT4X_DRIVER_STATE_ERROR,
 } SHT4X_DRIVER_STATES;
 
 // *****************************************************************************
+
 /* Application Data
 
   Summary:
@@ -162,9 +177,9 @@ void SHT4X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HA
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
-*/
+ */
 
-void SHT4X_DRIVER_Initialize ( void );
+void SHT4X_DRIVER_Initialize(void);
 
 /*******************************************************************************
   Function:
@@ -196,7 +211,7 @@ void SHT4X_DRIVER_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 
-void SHT4X_DRIVER_Tasks( void );
+void SHT4X_DRIVER_Tasks(void);
 
 bool SHT4X_DRIVER_Get_Task_Start_Status(void);
 
@@ -206,11 +221,11 @@ bool SHT4X_DRIVER_Get_Task_Completed_Status(void);
 
 void SHT4X_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
-void SHT4X_DRIVER_Measurement_Readout_Write(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER);
+void SHT4X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER);
 
-void SHT4X_DRIVER_Measurement_Readout_Read(uint8_t I2C_ADDRESS);
+void SHT4X_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS);
 
-void SHT4X_DRIVER_Measurement_Readout_Store_Values(void);
+void SHT4X_DRIVER_Store_Measure_Values(void);
 
 void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS);
 
@@ -218,9 +233,9 @@ void SHT4X_DRIVER_Store_Serial_Number(void);
 
 void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS);
 
-void SHT4X_DRIVER_Temperature_Calculation(void);
+void SHT4X_DRIVER_Calculation_Temperature(uint16_t T_VALUE);
 
-void SHT4X_DRIVER_Humidity_Calculation(void);
+void SHT4X_DRIVER_Calculation_Humidity(uint16_t H_VALUE);
 
 void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
