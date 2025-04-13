@@ -183,21 +183,21 @@ uint8_t CAN0_DRIVER_Set_DLC(uint8_t LENGTH)
     return DLC;
 }
 
-void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0)
+void CAN0_DRIVER_Set_Received_Data(uint64_t EXAMPLE_RECEIVE_DATA_0)
 {
-    can0_driverData.DATA_0 = DATA_0;
+    can0_driverData.EXAMPLE_RECEIVE_DATA_0 = EXAMPLE_RECEIVE_DATA_0;
 }
 
-void CAN0_DRIVER_Set_Transmited_Data(uint64_t DATA_0, uint64_t DATA_1, uint64_t DATA_2, uint64_t DATA_3, uint64_t DATA_4, uint64_t DATA_5, uint64_t DATA_6, uint64_t DATA_7)
+void CAN0_DRIVER_Set_Transmited_Data(uint64_t EXAMPLE_TRANSIT_DATA_0, uint64_t EXAMPLE_TRANSIT_DATA_1, uint64_t EXAMPLE_TRANSIT_DATA_2, uint64_t EXAMPLE_TRANSIT_DATA_3, uint64_t EXAMPLE_TRANSIT_DATA_4, uint64_t EXAMPLE_TRANSIT_DATA_5, uint64_t EXAMPLE_TRANSIT_DATA_6, uint64_t EXAMPLE_TRANSIT_DATA_7)
 {
-    can0DataTx.data.DATA_0 = DATA_0;
-    can0DataTx.data.DATA_1 = DATA_1;
-    can0DataTx.data.DATA_2 = DATA_2;
-    can0DataTx.data.DATA_3 = DATA_3;
-    can0DataTx.data.DATA_4 = DATA_4;
-    can0DataTx.data.DATA_5 = DATA_5;
-    can0DataTx.data.DATA_6 = DATA_6;
-    can0DataTx.data.DATA_7 = DATA_7;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_0 = EXAMPLE_TRANSIT_DATA_0;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_1 = EXAMPLE_TRANSIT_DATA_1;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_2 = EXAMPLE_TRANSIT_DATA_2;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_3 = EXAMPLE_TRANSIT_DATA_3;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_4 = EXAMPLE_TRANSIT_DATA_4;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_5 = EXAMPLE_TRANSIT_DATA_5;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_6 = EXAMPLE_TRANSIT_DATA_6;
+    can0DataTx.data.EXAMPLE_TRANSIT_DATA_7 = EXAMPLE_TRANSIT_DATA_7;
 }
 
 void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -269,59 +269,59 @@ void CAN0_DRIVER_Tasks(void)
             }
             else
             {
-                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT;
+                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_BUS_STATUS;
             }
             break;
         }
 
-        case CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT:
+        case CAN0_DRIVER_STATE_CHECK_BUS_STATUS:
+        {
+            if (((CAN0_ErrorGet() & CAN_PSR_LEC_Msk) == CAN_ERROR_NONE) || ((CAN0_ErrorGet() & CAN_PSR_LEC_Msk) == CAN_ERROR_LEC_NC))
+            {
+                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO0;
+            }
+            else
+            {
+                can0_driverData.state = CAN0_DRIVER_STATE_ERROR;
+            }
+            break;
+        }
+
+        case CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO0:
         {
             if (CAN0_InterruptGet(CAN_INTERRUPT_RF0N_MASK) == true)
             {
                 CAN0_InterruptClear(CAN_INTERRUPT_RF0N_MASK);
-                can0_driverData.state = CAN0_DRIVER_STATE_ERROR_CHECK;
+                can0_driverData.state = CAN0_DRIVER_STATE_GET_MESSAGE_COUNT_RX_FIFO0;
             }
             else
             {
-                can0_driverData.state = CAN0_DRIVER_STATE_SET_MESSAGE_CONTENT;
+                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO1;
             }
             break;
         }
 
-        case CAN0_DRIVER_STATE_ERROR_CHECK:
-        {
-            if (((CAN0_ErrorGet() & CAN_PSR_LEC_Msk) == CAN_ERROR_NONE) || ((CAN0_ErrorGet() & CAN_PSR_LEC_Msk) == CAN_ERROR_LEC_NC))
-            {
-                can0_driverData.state = CAN0_DRIVER_STATE_FIFO0_CHECK;
-            }
-            else
-            {
-                can0_driverData.state = CAN0_DRIVER_STATE_ERROR;
-            }
-            break;
-        }
-
-        case CAN0_DRIVER_STATE_FIFO0_CHECK:
+        case CAN0_DRIVER_STATE_GET_MESSAGE_COUNT_RX_FIFO0:
         {
             if (CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_0) > 0)
             {
-                can0_driverData.NUMBER_OF_MESSAGES = CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_0);
-                can0_driverData.state = CAN0_DRIVER_STATE_MESSAGE_RECEIVE;
+                can0_driverData.RX_FIFO0_MESSAGE_COUNT = CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_0);
+                can0_driverData.state = CAN0_DRIVER_STATE_RECEIVE_MESSAGE_RX_FIFO0;
             }
             else
             {
-                can0_driverData.state = CAN0_DRIVER_STATE_SET_MESSAGE_CONTENT;
+                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO1;
             }
             break;
         }
 
-        case CAN0_DRIVER_STATE_MESSAGE_RECEIVE:
+        case CAN0_DRIVER_STATE_RECEIVE_MESSAGE_RX_FIFO0:
         {
-            memset(can0_driverData.RX_FIFO0, 0x00, (can0_driverData.NUMBER_OF_MESSAGES * CAN0_RX_FIFO0_ELEMENT_SIZE));
-            if (CAN0_MessageReceiveFifo(CAN_RX_FIFO_0, can0_driverData.NUMBER_OF_MESSAGES, (CAN_RX_BUFFER *) can0_driverData.RX_FIFO0) == true)
+            memset(can0_driverData.RX_FIFO0, 0x00, (can0_driverData.RX_FIFO0_MESSAGE_COUNT * CAN0_RX_FIFO0_ELEMENT_SIZE));
+            if (CAN0_MessageReceiveFifo(CAN_RX_FIFO_0, can0_driverData.RX_FIFO0_MESSAGE_COUNT, (CAN_RX_BUFFER *) can0_driverData.RX_FIFO0) == true)
             {
-                CAN0_DRIVER_Get_Received_Data(can0_driverData.NUMBER_OF_MESSAGES, (CAN_RX_BUFFER *) can0_driverData.RX_FIFO0, CAN0_RX_FIFO0_ELEMENT_SIZE);
-                can0_driverData.state = CAN0_DRIVER_STATE_SET_MESSAGE_CONTENT;
+                CAN0_DRIVER_Get_Received_Data(can0_driverData.RX_FIFO0_MESSAGE_COUNT, (CAN_RX_BUFFER *) can0_driverData.RX_FIFO0, CAN0_RX_FIFO0_ELEMENT_SIZE);
+                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO1;
             }
             else
             {
@@ -330,7 +330,50 @@ void CAN0_DRIVER_Tasks(void)
             break;
         }
 
-        case CAN0_DRIVER_STATE_SET_MESSAGE_CONTENT:
+        case CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO1:
+        {
+            if (CAN0_InterruptGet(CAN_INTERRUPT_RF1N_MASK) == true)
+            {
+                CAN0_InterruptClear(CAN_INTERRUPT_RF1N_MASK);
+                can0_driverData.state = CAN0_DRIVER_STATE_GET_MESSAGE_COUNT_RX_FIFO1;
+            }
+            else
+            {
+                can0_driverData.state = CAN0_DRIVER_STATE_SET_CONTENT_TRANSMIT_MESSAGE;
+            }
+            break;
+        }
+
+        case CAN0_DRIVER_STATE_GET_MESSAGE_COUNT_RX_FIFO1:
+        {
+            if (CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_1) > 0)
+            {
+                can0_driverData.RX_FIFO1_MESSAGE_COUNT = CAN0_RxFifoFillLevelGet(CAN_RX_FIFO_1);
+                can0_driverData.state = CAN0_DRIVER_STATE_RECEIVE_MESSAGE_RX_FIFO1;
+            }
+            else
+            {
+                can0_driverData.state = CAN0_DRIVER_STATE_SET_CONTENT_TRANSMIT_MESSAGE;
+            }
+            break;
+        }
+
+        case CAN0_DRIVER_STATE_RECEIVE_MESSAGE_RX_FIFO1:
+        {
+            memset(can0_driverData.RX_FIFO1, 0x00, (can0_driverData.RX_FIFO1_MESSAGE_COUNT * CAN0_RX_FIFO1_ELEMENT_SIZE));
+            if (CAN0_MessageReceiveFifo(CAN_RX_FIFO_1, can0_driverData.RX_FIFO1_MESSAGE_COUNT, (CAN_RX_BUFFER *) can0_driverData.RX_FIFO1) == true)
+            {
+                CAN0_DRIVER_Get_Received_Data(can0_driverData.RX_FIFO1_MESSAGE_COUNT, (CAN_RX_BUFFER *) can0_driverData.RX_FIFO1, CAN0_RX_FIFO1_ELEMENT_SIZE);
+                can0_driverData.state = CAN0_DRIVER_STATE_SET_CONTENT_TRANSMIT_MESSAGE;
+            }
+            else
+            {
+                can0_driverData.state = CAN0_DRIVER_STATE_ERROR;
+            }
+            break;
+        }
+
+        case CAN0_DRIVER_STATE_SET_CONTENT_TRANSMIT_MESSAGE:
         {
             CAN0_DRIVER_Set_Message_Content(CAN0_MESSAGE_ID);
             can0_driverData.state = CAN0_DRIVER_STATE_MESSAGE_TRANSMIT;

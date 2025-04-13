@@ -54,7 +54,7 @@ extern "C"
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -78,7 +78,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data

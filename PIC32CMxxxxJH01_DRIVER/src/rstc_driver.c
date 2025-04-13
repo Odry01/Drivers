@@ -137,11 +137,11 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_DRIVER_Get_Task_Start_Status() == true)
             {
-                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_BODCORE_RESET;
+                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_POR_RESET;
             }
             break;
         }
-        
+
         case RSTC_DRIVER_STATE_CHECK_POR_RESET:
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_POR_RESET)
@@ -153,7 +153,8 @@ void RSTC_DRIVER_Tasks(void)
             else
             {
                 rstc_driverData.RESET_REASON = 0;
-                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_BODVDD_RESET;
+                RSTC_DRIVER_Set_Task_Completed_Status(false);
+                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_BODCORE_RESET;
             }
             break;
         }
@@ -169,6 +170,7 @@ void RSTC_DRIVER_Tasks(void)
             else
             {
                 rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Task_Completed_Status(false);
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_BODVDD_RESET;
             }
             break;
@@ -185,6 +187,7 @@ void RSTC_DRIVER_Tasks(void)
             else
             {
                 rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Task_Completed_Status(false);
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_EXT_RESET;
             }
             break;
@@ -201,7 +204,8 @@ void RSTC_DRIVER_Tasks(void)
             else
             {
                 rstc_driverData.RESET_REASON = 0;
-                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_EXT_RESET;
+                RSTC_DRIVER_Set_Task_Completed_Status(false);
+                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_WDT_RESET;
             }
             break;
         }
@@ -217,7 +221,8 @@ void RSTC_DRIVER_Tasks(void)
             else
             {
                 rstc_driverData.RESET_REASON = 0;
-                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_EXT_RESET;
+                RSTC_DRIVER_Set_Task_Completed_Status(false);
+                rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_SYST_RESET;
             }
             break;
         }
@@ -233,6 +238,7 @@ void RSTC_DRIVER_Tasks(void)
             else
             {
                 rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Task_Completed_Status(true);
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             break;
@@ -244,7 +250,6 @@ void RSTC_DRIVER_Tasks(void)
         }
     }
 }
-
 
 /*******************************************************************************
  End of File
