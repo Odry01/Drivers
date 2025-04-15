@@ -170,6 +170,8 @@
         <itemPath>../src/sht4x_driver.h</itemPath>
         <itemPath>../src/timer_driver.h</itemPath>
         <itemPath>../src/xm125_driver.h</itemPath>
+        <itemPath>../src/ad9954_driver.h</itemPath>
+        <itemPath>../src/ntc_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
@@ -436,6 +438,8 @@
         <itemPath>../src/sht4x_driver.c</itemPath>
         <itemPath>../src/timer_driver.c</itemPath>
         <itemPath>../src/xm125_driver.c</itemPath>
+        <itemPath>../src/ntc_driver.c</itemPath>
+        <itemPath>../src/ad9954_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>

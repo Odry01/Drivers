@@ -1,8 +1,8 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     can0_driver.h
@@ -72,7 +72,7 @@ typedef enum
     CAN0_DRIVER_STATE_INIT = 0,
     CAN0_DRIVER_STATE_IDLE,
     CAN0_DRIVER_STATE_CHECK_BUS_OFF_INTERRUPT,
-    CAN0_DRIVER_STATE_CHECK_BUS_STATUS,
+    CAN0_DRIVER_STATE_CHECK_BUS_ERROR_STATUS,
     CAN0_DRIVER_STATE_CHECK_NEW_MESSAGE_INTERRUPT_RX_FIFO0,
     CAN0_DRIVER_STATE_GET_MESSAGE_COUNT_RX_FIFO0,
     CAN0_DRIVER_STATE_RECEIVE_MESSAGE_RX_FIFO0,

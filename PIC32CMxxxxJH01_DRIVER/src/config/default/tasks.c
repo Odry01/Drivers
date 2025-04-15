@@ -83,7 +83,10 @@ void SYS_Tasks ( void )
     
 
     /* Maintain the application's state machine. */
-        /* Call Application task BME690_DRIVER. */
+        /* Call Application task AD9954_DRIVER. */
+    AD9954_DRIVER_Tasks();
+
+    /* Call Application task BME690_DRIVER. */
     BME690_DRIVER_Tasks();
 
     /* Call Application task CAN0_DRIVER. */
@@ -100,6 +103,9 @@ void SYS_Tasks ( void )
 
     /* Call Application task MCP9808_DRIVER. */
     MCP9808_DRIVER_Tasks();
+
+    /* Call Application task NTC_DRIVER. */
+    NTC_DRIVER_Tasks();
 
     /* Call Application task RSTC_DRIVER. */
     RSTC_DRIVER_Tasks();

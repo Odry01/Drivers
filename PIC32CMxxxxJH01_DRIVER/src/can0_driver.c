@@ -1,8 +1,8 @@
 /*******************************************************************************
   MPLAB Harmony Application Source File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     can0_driver.c
@@ -269,12 +269,12 @@ void CAN0_DRIVER_Tasks(void)
             }
             else
             {
-                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_BUS_STATUS;
+                can0_driverData.state = CAN0_DRIVER_STATE_CHECK_BUS_ERROR_STATUS;
             }
             break;
         }
 
-        case CAN0_DRIVER_STATE_CHECK_BUS_STATUS:
+        case CAN0_DRIVER_STATE_CHECK_BUS_ERROR_STATUS:
         {
             if (((CAN0_ErrorGet() & CAN_PSR_LEC_Msk) == CAN_ERROR_NONE) || ((CAN0_ErrorGet() & CAN_PSR_LEC_Msk) == CAN_ERROR_LEC_NC))
             {

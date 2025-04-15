@@ -5,7 +5,7 @@
     Odry01
 
   File Name:
-    console_driver.c
+    ntc_driver.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -27,7 +27,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include "console_driver.h"
+#include "ntc_driver.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -45,12 +45,12 @@
     This structure holds the application's data.
 
   Remarks:
-    This structure should be initialized by the CONSOLE_DRIVER_Initialize function.
+    This structure should be initialized by the NTC_DRIVER_Initialize function.
 
     Application strings and buffers are be defined outside this structure.
-*/
+ */
 
-CONSOLE_DRIVER_DATA console_driverData;
+NTC_DRIVER_DATA ntc_driverData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -58,8 +58,7 @@ CONSOLE_DRIVER_DATA console_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/* TODO:  Add any necessary callback functions.
-*/
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -67,9 +66,6 @@ CONSOLE_DRIVER_DATA console_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-
-/* TODO:  Add any necessary local functions.
-*/
 
 
 // *****************************************************************************
@@ -80,71 +76,47 @@ CONSOLE_DRIVER_DATA console_driverData;
 
 /*******************************************************************************
   Function:
-    void CONSOLE_DRIVER_Initialize ( void )
+    void NTC_DRIVER_Initialize ( void )
 
   Remarks:
-    See prototype in console_driver.h.
+    See prototype in ntc_driver.h.
  */
 
-void CONSOLE_DRIVER_Initialize ( void )
+void NTC_DRIVER_Initialize(void)
 {
-    /* Place the App state machine in its initial state. */
-    console_driverData.state = CONSOLE_DRIVER_STATE_INIT;
-
-
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
+    ntc_driverData.state = NTC_DRIVER_STATE_INIT;
 }
-
 
 /******************************************************************************
   Function:
-    void CONSOLE_DRIVER_Tasks ( void )
+    void NTC_DRIVER_Tasks ( void )
 
   Remarks:
-    See prototype in console_driver.h.
+    See prototype in ntc_driver.h.
  */
 
-void CONSOLE_DRIVER_Tasks ( void )
+void NTC_DRIVER_Tasks(void)
 {
-
-    /* Check the application's current state. */
-    switch ( console_driverData.state )
+    switch (ntc_driverData.state)
     {
-        /* Application's initial state. */
-        case CONSOLE_DRIVER_STATE_INIT:
+        case NTC_DRIVER_STATE_INIT:
         {
-            bool appInitialized = true;
-
-
-            if (appInitialized)
-            {
-
-                console_driverData.state = CONSOLE_DRIVER_STATE_SERVICE_TASKS;
-            }
+            ntc_driverData.state = NTC_DRIVER_STATE_SERVICE_TASKS;
             break;
         }
 
-        case CONSOLE_DRIVER_STATE_SERVICE_TASKS:
+        case NTC_DRIVER_STATE_SERVICE_TASKS:
         {
 
             break;
         }
 
-        /* TODO: implement your application state machine.*/
-
-
-        /* The default state should never be executed. */
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
-
 
 /*******************************************************************************
  End of File
