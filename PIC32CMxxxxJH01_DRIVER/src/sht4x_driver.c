@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the SHT4X_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 SHT4X_DRIVER_DATA sht4x_driverData;
 
@@ -174,14 +161,6 @@ void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void SHT4X_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in sht4x_driver.h.
- */
-
 void SHT4X_DRIVER_Initialize(void)
 {
     sht4x_driverData.state = SHT4X_DRIVER_STATE_INIT;
@@ -189,14 +168,6 @@ void SHT4X_DRIVER_Initialize(void)
     sht4x_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
     sht4x_driverData.I2C_TRANSFER_STATUS = false;
 }
-
-/******************************************************************************
-  Function:
-    void SHT4X_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in sht4x_driver.h.
- */
 
 void SHT4X_DRIVER_Tasks(void)
 {
@@ -225,21 +196,21 @@ void SHT4X_DRIVER_Tasks(void)
 
         case SHT4X_DRIVER_STATE_IDLE:
         {
-            if(SHT4X_DRIVER_Get_Task_Start_Status() == true)
+            if (SHT4X_DRIVER_Get_Task_Start_Status() == true)
             {
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_START_MEASURE;
             }
             break;
         }
-        
+
         case SHT4X_DRIVER_STATE_START_MEASURE:
         {
-            SHT4X_DRIVER_Start_Measurement(SHT4X_I2C_ADDRESS,SHT4X_MEASURE_TEMP_HUM_HIGH_PRECISION);
+            SHT4X_DRIVER_Start_Measurement(SHT4X_I2C_ADDRESS, SHT4X_MEASURE_TEMP_HUM_HIGH_PRECISION);
             TIMER_DRIVER_Start_TMR1();
             sht4x_driverData.state = SHT4X_DRIVER_STATE_START_MEASURE_ACK;
             break;
         }
-        
+
         case SHT4X_DRIVER_STATE_START_MEASURE_ACK:
         {
             if (sht4x_driverData.I2C_TRANSFER_HANDLE == DRV_I2C_TRANSFER_HANDLE_INVALID)
@@ -279,7 +250,7 @@ void SHT4X_DRIVER_Tasks(void)
 
         case SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE:
         {
-            if(TIMER_DRIVER_Get_TMR2_Status() == true)
+            if (TIMER_DRIVER_Get_TMR2_Status() == true)
             {
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA;
             }
@@ -293,7 +264,7 @@ void SHT4X_DRIVER_Tasks(void)
             sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA_ACK;
             break;
         }
-        
+
         case SHT4X_DRIVER_STATE_GET_MEASURE_DATA_ACK:
         {
             if (sht4x_driverData.I2C_TRANSFER_HANDLE == DRV_I2C_TRANSFER_HANDLE_INVALID)
@@ -330,7 +301,7 @@ void SHT4X_DRIVER_Tasks(void)
             }
             break;
         }
-        
+
         case SHT4X_DRIVER_STATE_CALCULATE_DATA:
         {
             SHT4X_DRIVER_Calculation_Temperature(sht4x_sensorData.T_VALUE);
@@ -338,7 +309,7 @@ void SHT4X_DRIVER_Tasks(void)
             sht4x_driverData.state = SHT4X_DRIVER_STATE_STORE_DATA;
             break;
         }
-        
+
         case SHT4X_DRIVER_STATE_STORE_DATA:
         {
             /* Add function for storing temperature */
@@ -346,7 +317,7 @@ void SHT4X_DRIVER_Tasks(void)
             sht4x_driverData.state = SHT4X_DRIVER_STATE_IDLE;
             break;
         }
-        
+
         case SHT4X_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(sht4x_driverData.I2C_HANDLE);
@@ -362,7 +333,7 @@ void SHT4X_DRIVER_Tasks(void)
             sht4x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;
         }
-        
+
         default:
         {
             break;

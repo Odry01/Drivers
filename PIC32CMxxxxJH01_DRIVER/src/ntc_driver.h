@@ -88,7 +88,7 @@ typedef struct
 {
     /* The application's current state */
     NTC_DRIVER_STATES state;
-    
+
     /* Driver variables */
 } NTC_DRIVER_DATA;
 

@@ -242,7 +242,7 @@ void CLOCK_Initialize (void)
 
 
     /* Configure the APBC Bridge Clocks */
-    MCLK_REGS->MCLK_APBCMASK = 0xc12321eU;
+    MCLK_REGS->MCLK_APBCMASK = 0xc12361eU;
 
 
     /* Enabling the Clock Failure Interrupt */

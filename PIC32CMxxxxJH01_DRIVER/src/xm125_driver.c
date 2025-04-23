@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the XM125_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
-*/
 
 XM125_DRIVER_DATA xm125_driverData;
 
@@ -58,8 +45,7 @@ XM125_DRIVER_DATA xm125_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/* TODO:  Add any necessary callback functions.
-*/
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -68,9 +54,6 @@ XM125_DRIVER_DATA xm125_driverData;
 // *****************************************************************************
 
 
-/* TODO:  Add any necessary local functions.
-*/
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -78,52 +61,19 @@ XM125_DRIVER_DATA xm125_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void XM125_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in xm125_driver.h.
- */
-
-void XM125_DRIVER_Initialize ( void )
+void XM125_DRIVER_Initialize(void)
 {
-    /* Place the App state machine in its initial state. */
     xm125_driverData.state = XM125_DRIVER_STATE_INIT;
-
-
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
-
-/******************************************************************************
-  Function:
-    void XM125_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in xm125_driver.h.
- */
-
-void XM125_DRIVER_Tasks ( void )
+void XM125_DRIVER_Tasks(void)
 {
-
-    /* Check the application's current state. */
-    switch ( xm125_driverData.state )
+    switch (xm125_driverData.state)
     {
-        /* Application's initial state. */
         case XM125_DRIVER_STATE_INIT:
         {
-            bool appInitialized = true;
 
-
-            if (appInitialized)
-            {
-
-                xm125_driverData.state = XM125_DRIVER_STATE_SERVICE_TASKS;
-            }
+            xm125_driverData.state = XM125_DRIVER_STATE_SERVICE_TASKS;
             break;
         }
 
@@ -133,13 +83,8 @@ void XM125_DRIVER_Tasks ( void )
             break;
         }
 
-        /* TODO: implement your application state machine.*/
-
-
-        /* The default state should never be executed. */
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }

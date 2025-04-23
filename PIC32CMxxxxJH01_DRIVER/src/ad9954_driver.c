@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the AD9954_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 AD9954_DRIVER_DATA ad9954_driverData;
 
@@ -74,26 +61,10 @@ AD9954_DRIVER_DATA ad9954_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void AD9954_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in ad9954_driver.h.
- */
-
 void AD9954_DRIVER_Initialize(void)
 {
     ad9954_driverData.state = AD9954_DRIVER_STATE_INIT;
 }
-
-/******************************************************************************
-  Function:
-    void AD9954_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in ad9954_driver.h.
- */
 
 void AD9954_DRIVER_Tasks(void)
 {
@@ -110,7 +81,7 @@ void AD9954_DRIVER_Tasks(void)
 
             break;
         }
-        
+
         default:
         {
             break;

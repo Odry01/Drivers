@@ -334,10 +334,6 @@ void HDC302X_DRIVER_Set_Set_Low_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS);
 
-void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS);
-
-void HDC302X_DRIVER_Exit_Auto_Measurement_Mode(uint8_t I2C_ADDRESS);
-
 void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Offset_Values(void);
@@ -358,11 +354,15 @@ void HDC302X_DRIVER_Get_Clear_Low_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Clear_Low_Alert(void);
 
-void HDC302X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS);
+void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS);
 
-void HDC302X_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS);
+void HDC302X_DRIVER_Exit_Auto_Measurement_Mode(uint8_t I2C_ADDRESS);
 
-void HDC302X_DRIVER_Get_Measurement_Values(uint8_t I2C_ADDRESS);
+void HDC302X_DRIVER_Start_Manual_Measurement(uint8_t I2C_ADDRESS);
+
+void HDC302X_DRIVER_Get_Manual_Measure_Values(uint8_t I2C_ADDRESS);
+
+void HDC302X_DRIVER_Get_Auto_Measure_Values(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Measurement_Values(void);
 

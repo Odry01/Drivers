@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the CAN0_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 CAN0_DRIVER_DATA can0_driverData;
 
@@ -211,35 +198,17 @@ void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
              );
 }
 
-
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void CAN0_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in can0_driver.h.
- */
-
 void CAN0_DRIVER_Initialize(void)
 {
     can0_driverData.state = CAN0_DRIVER_STATE_INIT;
     CAN0_MessageRAMConfigSet(can0_driverData.CAN0_RAM_ALOCATION);
 }
-
-/******************************************************************************
-  Function:
-    void CAN0_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in can0_driver.h.
- */
 
 void CAN0_DRIVER_Tasks(void)
 {

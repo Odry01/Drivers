@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the MCP9808_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 MCP9808_DRIVER_DATA mcp9808_driverData;
 
@@ -217,14 +204,6 @@ void MCP9808_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void MCP9808_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in mcp9808_driver.h.
- */
-
 void MCP9808_DRIVER_Initialize(void)
 {
     mcp9808_driverData.state = MCP9808_DRIVER_STATE_INIT;
@@ -232,14 +211,6 @@ void MCP9808_DRIVER_Initialize(void)
     mcp9808_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
     mcp9808_driverData.I2C_TRANSFER_STATUS = false;
 }
-
-/******************************************************************************
-  Function:
-    void MCP9808_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in mcp9808_driver.h.
- */
 
 void MCP9808_DRIVER_Tasks(void)
 {

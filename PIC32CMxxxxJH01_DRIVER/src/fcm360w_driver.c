@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the FCM360W_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 FCM360W_DRIVER_DATA fcm360w_driverData;
 
@@ -74,26 +61,10 @@ FCM360W_DRIVER_DATA fcm360w_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void FCM360W_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in fcm360w_driver.h.
- */
-
 void FCM360W_DRIVER_Initialize(void)
 {
     fcm360w_driverData.state = FCM360W_DRIVER_STATE_INIT;
 }
-
-/******************************************************************************
-  Function:
-    void FCM360W_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in fcm360w_driver.h.
- */
 
 void FCM360W_DRIVER_Tasks(void)
 {

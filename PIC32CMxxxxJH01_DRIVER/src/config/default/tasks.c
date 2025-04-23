@@ -101,6 +101,9 @@ void SYS_Tasks ( void )
     /* Call Application task HDC302X_DRIVER. */
     HDC302X_DRIVER_Tasks();
 
+    /* Call Application task LED_DRIVER. */
+    LED_DRIVER_Tasks();
+
     /* Call Application task MCP9808_DRIVER. */
     MCP9808_DRIVER_Tasks();
 

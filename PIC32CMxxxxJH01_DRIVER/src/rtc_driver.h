@@ -68,7 +68,7 @@ typedef enum
 {
     RTC_DRIVER_STATE_INIT = 0,
     RTC_DRIVER_STATE_IDLE,
-    RTC_DRIVER_STATE_CHECK_XOSC32K_FAILURE,
+    RTC_DRIVER_STATE_CHECK_XOSC32K_ALERT,
     RTC_DRIVER_STATE_GET_TIME,
     RTC_DRIVER_STATE_STORE_TIME_VALUE,
     RTC_DRIVER_STATE_ERROR,
@@ -96,7 +96,7 @@ typedef struct
     /* Driver variables */
     bool RTC_TASK_START;
     bool RTC_TASK_COMPLETED;
-    bool RTC_XOSC32K_FAILURE;
+    bool RTC_XOSC32K_ALERT;
     uint32_t TIME;
 } RTC_DRIVER_DATA;
 
@@ -106,7 +106,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-void RTC_DRIVER_XOSC32K_Failure_Callback(uintptr_t CONTEXT);
+void RTC_DRIVER_XOSC32K_Alert_Callback(uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************

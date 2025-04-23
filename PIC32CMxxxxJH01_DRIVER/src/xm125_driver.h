@@ -16,7 +16,7 @@
     "XM125_DRIVER_Initialize" and "XM125_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "XM125_DRIVER_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _XM125_DRIVER_H
 #define _XM125_DRIVER_H
@@ -31,12 +31,15 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -47,7 +50,10 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
+
 /* Application states
 
   Summary:
@@ -56,19 +62,16 @@ extern "C" {
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
+ */
 
 typedef enum
 {
-    /* Application's state machine's initial state. */
-    XM125_DRIVER_STATE_INIT=0,
+    XM125_DRIVER_STATE_INIT = 0,
     XM125_DRIVER_STATE_SERVICE_TASKS,
-    /* TODO: Define states used by the application state machine. */
-
 } XM125_DRIVER_STATES;
 
-
 // *****************************************************************************
+
 /* Application Data
 
   Summary:
@@ -86,8 +89,7 @@ typedef struct
     /* The application's current state */
     XM125_DRIVER_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-
+    /* Driver variables */
 } XM125_DRIVER_DATA;
 
 // *****************************************************************************
@@ -95,8 +97,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -133,10 +135,9 @@ typedef struct
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
-*/
+ */
 
-void XM125_DRIVER_Initialize ( void );
-
+void XM125_DRIVER_Initialize(void);
 
 /*******************************************************************************
   Function:
@@ -168,7 +169,7 @@ void XM125_DRIVER_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 
-void XM125_DRIVER_Tasks( void );
+void XM125_DRIVER_Tasks(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -181,4 +182,3 @@ void XM125_DRIVER_Tasks( void );
 /*******************************************************************************
  End of File
  */
-

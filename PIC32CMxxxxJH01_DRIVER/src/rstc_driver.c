@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the RSTC_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 RSTC_DRIVER_DATA rstc_driverData;
 
@@ -102,26 +89,10 @@ void RSTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void RSTC_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in rstc_driver.h.
- */
-
 void RSTC_DRIVER_Initialize(void)
 {
     rstc_driverData.state = RSTC_DRIVER_STATE_INIT;
 }
-
-/******************************************************************************
-  Function:
-    void RSTC_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in rstc_driver.h.
- */
 
 void RSTC_DRIVER_Tasks(void)
 {

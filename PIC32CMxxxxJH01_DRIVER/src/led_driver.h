@@ -1,11 +1,11 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Author:
-    Odry01
+  Company:
+    Microchip Technology Inc.
 
   File Name:
-    ad9954_driver.h
+    led_driver.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -13,13 +13,13 @@
   Description:
     This header file provides function prototypes and data type definitions for
     the application.  Some of these are required by the system (such as the
-    "AD9954_DRIVER_Initialize" and "AD9954_DRIVER_Tasks" prototypes) and some of them are only used
-    internally by the application (such as the "AD9954_DRIVER_STATES" definition).  Both
+    "LED_DRIVER_Initialize" and "LED_DRIVER_Tasks" prototypes) and some of them are only used
+    internally by the application (such as the "LED_DRIVER_STATES" definition).  Both
     are defined here for convenience.
  *******************************************************************************/
 
-#ifndef _AD9954_DRIVER_H
-#define _AD9954_DRIVER_H
+#ifndef _LED_DRIVER_H
+#define _LED_DRIVER_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -50,7 +50,12 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-
+#define LED_DATA_WIDTH  24
+#define NO_OF_LEDS      20
+#define NO_OF_BUFFER    1
+#define BUFFER_SIZE     (LED_DATA_WIDTH * NO_OF_LEDS * 4)
+#define T1H             20
+#define T1L             9
 
 // *****************************************************************************
 
@@ -66,9 +71,13 @@ extern "C"
 
 typedef enum
 {
-    AD9954_DRIVER_STATE_INIT = 0,
-    AD9954_DRIVER_STATE_SERVICE_TASKS,
-} AD9954_DRIVER_STATES;
+    LED_DRIVER_STATE_INIT = 0,
+    LED_DRIVER_STATE_IDLE,
+    LED_DRIVER_STATE_SET_COLOR,
+    LED_DRIVER_STATE_SET_LED_STRIP_DATA,
+    LED_DRIVER_STATE_SEND_LED_STRIP_DATA,
+    LED_DRIVER_STATE_SEND_LED_STRIP_DATA_WAIT_FOR_TRANSFER,
+} LED_DRIVER_STATES;
 
 // *****************************************************************************
 
@@ -87,10 +96,17 @@ typedef enum
 typedef struct
 {
     /* The application's current state */
-    AD9954_DRIVER_STATES state;
+    LED_DRIVER_STATES state;
 
     /* Driver variables */
-} AD9954_DRIVER_DATA;
+    bool LED_TASK_START;
+    bool LED_TASK_COMPLETED;
+    bool DMAC_CH4_TRANSFER_STATUS;
+    uint8_t RED_LED;
+    uint8_t GREEN_LED;
+    uint8_t BLUE_LED;
+    uint32_t DMAC_CH4_BUFFER[NO_OF_BUFFER][NO_OF_LEDS][LED_DATA_WIDTH];
+} LED_DRIVER_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,7 +114,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-
+void LED_DRIVER_DMAC_CH4_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -108,7 +124,7 @@ typedef struct
 
 /*******************************************************************************
   Function:
-    void AD9954_DRIVER_Initialize ( void )
+    void LED_DRIVER_Initialize ( void )
 
   Summary:
      MPLAB Harmony application initialization routine.
@@ -116,7 +132,7 @@ typedef struct
   Description:
     This function initializes the Harmony application.  It places the
     application in its initial state and prepares it to run so that its
-    AD9954_DRIVER_Tasks function can be called.
+    LED_DRIVER_Tasks function can be called.
 
   Precondition:
     All other system initialization routines should be called before calling
@@ -130,18 +146,18 @@ typedef struct
 
   Example:
     <code>
-    AD9954_DRIVER_Initialize();
+    LED_DRIVER_Initialize();
     </code>
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
  */
 
-void AD9954_DRIVER_Initialize(void);
+void LED_DRIVER_Initialize(void);
 
 /*******************************************************************************
   Function:
-    void AD9954_DRIVER_Tasks ( void )
+    void LED_DRIVER_Tasks ( void )
 
   Summary:
     MPLAB Harmony Demo application tasks function
@@ -162,14 +178,30 @@ void AD9954_DRIVER_Initialize(void);
 
   Example:
     <code>
-    AD9954_DRIVER_Tasks();
+    LED_DRIVER_Tasks();
     </code>
 
   Remarks:
     This routine must be called from SYS_Tasks() routine.
  */
 
-void AD9954_DRIVER_Tasks(void);
+void LED_DRIVER_Tasks(void);
+
+bool LED_DRIVER_Get_Task_Start_Status(void);
+
+void LED_DRIVER_Set_Task_Start_Status(bool STATUS);
+
+bool LED_DRIVER_Get_Task_Completed_Status(void);
+
+void LED_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void LED_DRIVER_Set_Color(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
+
+void LED_DRIVER_Set_LED_Strip_Data(uint8_t BUFFER_INDEX, uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
+
+void LED_DRIVER_Send_LED_Strip_Data(void);
+
+void LED_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -177,7 +209,7 @@ void AD9954_DRIVER_Tasks(void);
 #endif
 //DOM-IGNORE-END
 
-#endif /* _AD9954_DRIVER_H */
+#endif /* _LED_DRIVER_H */
 
 /*******************************************************************************
  End of File

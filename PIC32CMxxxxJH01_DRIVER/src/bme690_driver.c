@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the BME690_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 BME690_DRIVER_DATA bme690_driverData;
 
@@ -395,14 +382,6 @@ void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void BME690_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in bme690_driver.h.
- */
-
 void BME690_DRIVER_Initialize(void)
 {
     bme690_driverData.state = BME690_DRIVER_STATE_INIT;
@@ -411,14 +390,6 @@ void BME690_DRIVER_Initialize(void)
     bme690_driverData.I2C_TRANSFER_STATUS = false;
     EIC_CallbackRegister(EIC_PIN_0, BME690_DRIVER_Alert, 0);
 }
-
-/******************************************************************************
-  Function:
-    void BME690_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in bme690_driver.h.
- */
 
 void BME690_DRIVER_Tasks(void)
 {

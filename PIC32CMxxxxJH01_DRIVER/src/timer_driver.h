@@ -16,7 +16,7 @@
     "TIMER_DRIVER_Initialize" and "TIMER_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "TIMER_DRIVER_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _TIMER_DRIVER_H
 #define _TIMER_DRIVER_H
@@ -38,7 +38,8 @@
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -48,13 +49,14 @@ extern "C" {
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-    
+
 #define TIMER0  1000
 #define TIMER1  1000
 #define TIMER2  1000
 #define TIMER3  1000
 
 // *****************************************************************************
+
 /* Application Data
 
   Summary:
@@ -129,9 +131,9 @@ void TMR3_Callback(uintptr_t CONTEXT);
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
-*/
+ */
 
-void TIMER_DRIVER_Initialize ( void );
+void TIMER_DRIVER_Initialize(void);
 
 bool TIMER_DRIVER_Get_TMR0_Status(void);
 

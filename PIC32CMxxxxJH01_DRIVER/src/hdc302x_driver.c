@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the HDC302X_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 HDC302X_DRIVER_DATA hdc302x_driverData;
 
@@ -166,20 +153,6 @@ void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS)
-{
-    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
-    DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
-}
-
-void HDC302X_DRIVER_Exit_Auto_Measurement_Mode(uint8_t I2C_ADDRESS)
-{
-    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
-    DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
-}
-
 void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_OFFSET_MSB;
@@ -245,19 +218,33 @@ void HDC302X_DRIVER_Store_Clear_Low_Alert(void)
     hdc302x_sensorData.CLEAR_LOW_ALERT_LSB = hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
-void HDC302X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS)
+void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS)
+void HDC302X_DRIVER_Exit_Auto_Measurement_Mode(uint8_t I2C_ADDRESS)
+{
+    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
+    DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
+}
+
+void HDC302X_DRIVER_Start_Manual_Measurement(uint8_t I2C_ADDRESS)
+{
+    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
+    DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
+}
+
+void HDC302X_DRIVER_Get_Manual_Measure_Values(uint8_t I2C_ADDRESS)
 {
     DRV_I2C_ReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, &hdc302x_driverData.I2C_DATA_RECEIVE, 6, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Get_Measurement_Values(uint8_t I2C_ADDRESS)
+void HDC302X_DRIVER_Get_Auto_Measure_Values(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_MODE_READ_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_MODE_READ;
@@ -485,14 +472,6 @@ void HDC302X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void HDC302X_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in hdc302x_driver.h.
- */
-
 void HDC302X_DRIVER_Initialize(void)
 {
     hdc302x_driverData.state = HDC302X_DRIVER_STATE_INIT;
@@ -500,14 +479,6 @@ void HDC302X_DRIVER_Initialize(void)
     hdc302x_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
     hdc302x_driverData.I2C_TRANSFER_STATUS = false;
 }
-
-/******************************************************************************
-  Function:
-    void HDC302X_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in hdc302x_driver.h.
- */
 
 void HDC302X_DRIVER_Tasks(void)
 {

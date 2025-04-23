@@ -447,6 +447,8 @@ void SYS_Initialize ( void* data )
 
     DAC_Initialize();
 
+    TCC1_PWMInitialize();
+
     TCC0_PWMInitialize();
 
 
@@ -485,6 +487,7 @@ void SYS_Initialize ( void* data )
     CONSOLE_DRIVER_Initialize();
     FCM360W_DRIVER_Initialize();
     HDC302X_DRIVER_Initialize();
+    LED_DRIVER_Initialize();
     MCP9808_DRIVER_Initialize();
     NTC_DRIVER_Initialize();
     RSTC_DRIVER_Initialize();

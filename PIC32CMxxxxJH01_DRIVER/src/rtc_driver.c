@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the RTC_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 RTC_DRIVER_DATA rtc_driverData;
 
@@ -58,9 +45,9 @@ RTC_DRIVER_DATA rtc_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-void RTC_DRIVER_XOSC32K_Failure_Callback(uintptr_t CONTEXT)
+void RTC_DRIVER_XOSC32K_Alert_Callback(uintptr_t CONTEXT)
 {
-    rtc_driverData.RTC_XOSC32K_FAILURE = true;
+    rtc_driverData.RTC_XOSC32K_ALERT = true;
 }
 
 // *****************************************************************************
@@ -105,28 +92,12 @@ void RTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void RTC_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in rtc_driver.h.
- */
-
 void RTC_DRIVER_Initialize(void)
 {
     rtc_driverData.state = RTC_DRIVER_STATE_INIT;
-    OSC32KCTRL_CallbackRegister(RTC_DRIVER_XOSC32K_Failure_Callback, 0);
+    OSC32KCTRL_CallbackRegister(RTC_DRIVER_XOSC32K_Alert_Callback, 0);
     RTC_Timer32Start();
 }
-
-/******************************************************************************
-  Function:
-    void RTC_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in rtc_driver.h.
- */
 
 void RTC_DRIVER_Tasks(void)
 {
@@ -147,9 +118,9 @@ void RTC_DRIVER_Tasks(void)
             break;
         }
 
-        case RTC_DRIVER_STATE_CHECK_XOSC32K_FAILURE:
+        case RTC_DRIVER_STATE_CHECK_XOSC32K_ALERT:
         {
-            if (rtc_driverData.RTC_XOSC32K_FAILURE == true)
+            if (rtc_driverData.RTC_XOSC32K_ALERT == true)
             {
                 rtc_driverData.state = RTC_DRIVER_STATE_ERROR;
             }

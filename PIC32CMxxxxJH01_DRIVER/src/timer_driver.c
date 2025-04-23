@@ -36,19 +36,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the TIMER_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 TIMER_DRIVER_DATA timer_driverData;
 
@@ -169,14 +156,6 @@ void TIMER_DRIVER_Stop_TMR3(void)
 // Section: Application Initialization and State Machine Functions
 // *****************************************************************************
 // *****************************************************************************
-
-/*******************************************************************************
-  Function:
-    void TIMER_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in timer_driver.h.
- */
 
 void TIMER_DRIVER_Initialize(void)
 {
