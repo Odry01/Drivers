@@ -159,7 +159,10 @@ extern "C"
 typedef enum
 {
     HDC302X_DRIVER_STATE_INIT = 0,
-    HDC302X_DRIVER_STATE_SERVICE_TASKS,
+    HDC302X_DRIVER_STATE_I2C_HANDLER_REGISTER,
+    HDC302X_DRIVER_STATE_IDLE,
+    HDC302X_DRIVER_STATE_TIMER_EXPIRED,
+    HDC302X_DRIVER_STATE_ERROR,
 } HDC302X_DRIVER_STATES;
 
 // *****************************************************************************

@@ -486,13 +486,47 @@ void HDC302X_DRIVER_Tasks(void)
     {
         case HDC302X_DRIVER_STATE_INIT:
         {
-            hdc302x_driverData.state = HDC302X_DRIVER_STATE_SERVICE_TASKS;
+            hdc302x_driverData.I2C_HANDLE = DRV_I2C_Open(DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE);
+            hdc302x_driverData.state = HDC302X_DRIVER_STATE_I2C_HANDLER_REGISTER;
             break;
         }
 
-        case HDC302X_DRIVER_STATE_SERVICE_TASKS:
+        case HDC302X_DRIVER_STATE_I2C_HANDLER_REGISTER:
         {
+            if (hdc302x_driverData.I2C_HANDLE == DRV_HANDLE_INVALID)
+            {
+                hdc302x_driverData.state = HDC302X_DRIVER_STATE_ERROR;
+            }
+            else
+            {
+                DRV_I2C_TransferEventHandlerSet(hdc302x_driverData.I2C_HANDLE, HDC302X_DRIVER_I2C_Callback, (uintptr_t) &hdc302x_driverData.I2C_TRANSFER_STATUS);
+                hdc302x_driverData.state = HDC302X_DRIVER_STATE_IDLE;
+            }
+            break;
+        }
 
+        case HDC302X_DRIVER_STATE_IDLE:
+        {
+            if (HDC302X_DRIVER_Get_Task_Start_Status() == true)
+            {
+                hdc302x_driverData.state = HDC302X_DRIVER_STATE_IDLE;
+            }
+            break;
+        }
+        
+        case HDC302X_DRIVER_STATE_TIMER_EXPIRED:
+        {
+            DRV_I2C_Close(hdc302x_driverData.I2C_HANDLE);
+            HDC302X_DRIVER_Set_Task_Completed_Status(true);
+            hdc302x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            break;
+        }
+
+        case HDC302X_DRIVER_STATE_ERROR:
+        {
+            DRV_I2C_Close(hdc302x_driverData.I2C_HANDLE);
+            HDC302X_DRIVER_Set_Task_Completed_Status(true);
+            hdc302x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;
         }
 

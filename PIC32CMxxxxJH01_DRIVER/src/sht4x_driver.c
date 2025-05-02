@@ -188,7 +188,7 @@ void SHT4X_DRIVER_Tasks(void)
             }
             else
             {
-                DRV_I2C_TransferEventHandlerSet(sht4x_driverData.I2C_HANDLE, SHT4X_DRIVER_I2C_Callback, (uintptr_t) & sht4x_driverData.I2C_TRANSFER_STATUS);
+                DRV_I2C_TransferEventHandlerSet(sht4x_driverData.I2C_HANDLE, SHT4X_DRIVER_I2C_Callback, (uintptr_t) &sht4x_driverData.I2C_TRANSFER_STATUS);
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_IDLE;
             }
             break;

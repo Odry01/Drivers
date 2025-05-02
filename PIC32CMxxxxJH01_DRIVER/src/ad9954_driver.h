@@ -50,7 +50,25 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
+#define AD9954_CFR1_ADDRESS     0x00
+#define AD9954_CFR2_ADDRESS     0x01
+#define AD9954_ASF_ADDRESS      0x02
+#define AD9954_ARR_ADDRESS      0x03
+#define AD9954_FTW0_ADDRESS     0x04
+#define AD9954_POW0_ADDRESS     0x05
+#define AD9954_FTW1_ADDRESS     0x06
+#define AD9954_RSCW0_ADDRESS    0x07
+#define AD9954_RSCW1_ADDRESS    0x08
+#define AD9954_RSCW2_ADDRESS    0x08
+#define AD9954_RSCW3_ADDRESS    0x08
+#define AD9954_RAM_ADDRESS      0x0B
+#define AD9954_NLSCW_ADDRESS    0x07
+#define AD9954_PLSCW_ADDRESS    0x08
 
+#define AD9954_RW_BIT_SET       0x80
+    
+#define AD9954_SPI_DATA_RX      32
+#define AD9954_SPI_DATA_TX      32
 
 // *****************************************************************************
 
@@ -67,7 +85,10 @@ extern "C"
 typedef enum
 {
     AD9954_DRIVER_STATE_INIT = 0,
-    AD9954_DRIVER_STATE_SERVICE_TASKS,
+    AD9954_DRIVER_STATE_SPI_HANDLER_REGISTER,
+    AD9954_DRIVER_STATE_IDLE,
+    AD9954_DRIVER_STATE_TIMER_EXPIRED,
+    AD9954_DRIVER_STATE_ERROR,
 } AD9954_DRIVER_STATES;
 
 // *****************************************************************************
@@ -90,7 +111,39 @@ typedef struct
     AD9954_DRIVER_STATES state;
 
     /* Driver variables */
+    DRV_HANDLE SPI_HANDLE;
+    DRV_SPI_TRANSFER_HANDLE SPI_TRANSFER_HANDLE;
+    bool SPI_TRANSFER_STATUS;
+    bool AD9954_TASK_START;
+    bool AD9954_TASK_COMPLETED;
+    uint8_t SPI_DATA_RECEIVE[AD9954_SPI_DATA_RX];
+    uint8_t SPI_DATA_TRANSMIT[AD9954_SPI_DATA_TX];
 } AD9954_DRIVER_DATA;
+
+typedef struct
+{
+    uint8_t ARR_REGISTER_VALUE;
+    uint16_t CFR2_REGISTER_VALUE;
+    uint16_t ASF_REGISTER_VALUE;
+    uint16_t POW0_REGISTER_VALUE;
+    uint32_t CFR1_REGISTER_VALUE;
+    uint32_t FTW0_REGISTER_VALUE;
+    uint32_t FTW1_REGISTER_VALUE;
+    uint32_t RAM_REGISTER_VALUE;
+    uint64_t RSCW0_REGISTER_VALUE;
+    uint64_t RSCW1_REGISTER_VALUE;
+    uint64_t RSCW2_REGISTER_VALUE;
+    uint64_t RSCW3_REGISTER_VALUE;
+    uint64_t NLSCW_REGISTER_VALUE;
+    uint64_t PLSCW_REGISTER_VALUE;
+} AD9954_DRIVER_DDS_DATA;
+
+typedef struct
+{
+    float FREQUENCY;
+    float POSITIVE_LINEAR_SWEEP;
+    float NEGATIVE_LINEAR_SWEEP;
+} AD9954_DRIVER_SETTING_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,7 +151,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-
+void AD9954_DRIVER_SPI_Callback(DRV_SPI_TRANSFER_EVENT EVENT, DRV_SPI_TRANSFER_HANDLE SPI_TRANSFER_HANDLE, uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -170,6 +223,96 @@ void AD9954_DRIVER_Initialize(void);
  */
 
 void AD9954_DRIVER_Tasks(void);
+
+bool AD9954_DRIVER_Get_Task_Start_Status(void);
+
+void AD9954_DRIVER_Set_Task_Start_Status(bool STATUS);
+
+bool AD9954_DRIVER_Get_Task_Completed_Status(void);
+
+void AD9954_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void AD9954_DRIVER_Get_CFR1_Register(void);
+
+void AD9954_DRIVER_Store_CFR1_Register(void);
+
+void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3);
+
+void AD9954_DRIVER_Get_CFR2_Register(void);
+
+void AD9954_DRIVER_Store_CFR2_Register(void);
+
+void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_0, uint8_t WORD_1);
+
+void AD9954_DRIVER_Get_ASF_Register(void);
+
+void AD9954_DRIVER_Store_ASF_Register(void);
+
+void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_0, uint8_t WORD_1);
+
+void AD9954_DRIVER_Get_ARR_Register(void);
+
+void AD9954_DRIVER_Store_ARR_Register(void);
+
+void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0);
+
+void AD9954_DRIVER_Get_FTW0_Register(void);
+
+void AD9954_DRIVER_Store_FTW0_Register(void);
+
+void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3);
+
+void AD9954_DRIVER_Get_POW0_Register(void);
+
+void AD9954_DRIVER_Store_POW0_Register(void);
+
+void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_0, uint8_t WORD_1);
+
+void AD9954_DRIVER_Get_FTW1_Register(void);
+
+void AD9954_DRIVER_Store_FTW1_Register(void);
+
+void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3);
+
+void AD9954_DRIVER_Get_RSCW0_Register(void);
+
+void AD9954_DRIVER_Store_RSCW0_Register(void);
+
+void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+
+void AD9954_DRIVER_Get_RSCW1_Register(void);
+
+void AD9954_DRIVER_Store_RSCW1_Register(void);
+
+void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+
+void AD9954_DRIVER_Get_RSCW2_Register(void);
+
+void AD9954_DRIVER_Store_RSCW2_Register(void);
+
+void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+
+void AD9954_DRIVER_Get_RSCW3_Register(void);
+
+void AD9954_DRIVER_Store_RSCW3_Register(void);
+
+void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+
+void AD9954_DRIVER_Get_NLSCW_Register(void);
+
+void AD9954_DRIVER_Store_NLSCW_Register(void);
+
+void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+
+void AD9954_DRIVER_Get_PLSCW_Register(void);
+
+void AD9954_DRIVER_Store_PLSCW_Register(void);
+
+void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+
+void AD9954_DRIVER_Set_Frequency(uint32_t FREQUENCY);
+
+void AD9954_DRIVER_Set_Linear_Sweep(uint32_t POSITIVE_LINEAR_SWEEP, uint32_t NEGATIVE_LINEAR_SWEEP);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
