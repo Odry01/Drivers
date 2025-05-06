@@ -413,7 +413,50 @@ void AD9954_DRIVER_Tasks(void)
             else
             {
                 DRV_SPI_TransferEventHandlerSet(ad9954_driverData.SPI_HANDLE, AD9954_DRIVER_SPI_Callback, (uintptr_t) & ad9954_driverData.SPI_TRANSFER_STATUS);
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_CFR1;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_CFR1:
+        {
+            AD9954_DRIVER_Set_CFR1_Register(0b00000000, 0b00000000, 0b00100000, 0b00000000);
+            TIMER_DRIVER_Start_TMR1();
+            ad9954_driverData.state = AD9954_DRIVER_STATE_SET_CFR1_ACK;
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_CFR1_ACK:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_HANDLE == DRV_SPI_TRANSFER_HANDLE_INVALID)
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            else
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_CFR1_WAIT_FOR_TRANSFER;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_CFR1_WAIT_FOR_TRANSFER:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_STATUS == true)
+            {
+                TIMER_DRIVER_Stop_TMR1();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
         }
@@ -422,7 +465,179 @@ void AD9954_DRIVER_Tasks(void)
         {
             if (AD9954_DRIVER_Get_Task_Start_Status() == true)
             {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW0;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_FTW0:
+        {
+            AD9954_DRIVER_Set_FTW0_Register(0b01000000, 0b00010011, 0b01100001, 0b00100111);
+            TIMER_DRIVER_Start_TMR1();
+            ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW0_ACK;
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_FTW0_ACK:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_HANDLE == DRV_SPI_TRANSFER_HANDLE_INVALID)
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            else
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW0_WAIT_FOR_TRANSFER;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_FTW0_WAIT_FOR_TRANSFER:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_STATUS == true)
+            {
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW1;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_FTW1:
+        {
+            AD9954_DRIVER_Set_FTW1_Register(0b11100110, 0b10101110, 0b00100101, 0b00101000);
+            TIMER_DRIVER_Start_TMR1();
+            ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW1_ACK;
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_FTW1_ACK:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_HANDLE == DRV_SPI_TRANSFER_HANDLE_INVALID)
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            else
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW1_WAIT_FOR_TRANSFER;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_FTW1_WAIT_FOR_TRANSFER:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_STATUS == true)
+            {
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_NLSCW;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_NLSCW:
+        {
+            AD9954_DRIVER_Set_NLSCW_Register(0b11110100, 0b00011011, 0b00000000, 0b00000000, 0b00000001);
+            TIMER_DRIVER_Start_TMR1();
+            ad9954_driverData.state = AD9954_DRIVER_STATE_SET_NLSCW_ACK;
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_NLSCW_ACK:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_HANDLE == DRV_SPI_TRANSFER_HANDLE_INVALID)
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            else
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_NLSCW_WAIT_FOR_TRANSFER;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_NLSCW_WAIT_FOR_TRANSFER:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_STATUS == true)
+            {
+                TIMER_DRIVER_Stop_TMR1();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_PLSCW:
+        {
+            AD9954_DRIVER_Set_NLSCW_Register(0b11110100, 0b00011011, 0b00000001, 0b00000000, 0b00000001);
+            TIMER_DRIVER_Start_TMR1();
+            ad9954_driverData.state = AD9954_DRIVER_STATE_SET_PLSCW_ACK;
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_PLSCW_ACK:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_HANDLE == DRV_SPI_TRANSFER_HANDLE_INVALID)
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            else
+            {
+                ad9954_driverData.state = AD9954_DRIVER_STATE_SET_PLSCW_WAIT_FOR_TRANSFER;
+            }
+            break;
+        }
+
+        case AD9954_DRIVER_STATE_SET_PLSCW_WAIT_FOR_TRANSFER:
+        {
+            if (ad9954_driverData.SPI_TRANSFER_STATUS == true)
+            {
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
+            }
+            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            {
+                TIMER_DRIVER_Set_TMR1_Status(false);
+                TIMER_DRIVER_Stop_TMR1();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
         }
