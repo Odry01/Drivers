@@ -251,7 +251,7 @@ void AD9954_DRIVER_Get_CFR1_Register(void);
 
 void AD9954_DRIVER_Store_CFR1_Register(void);
 
-void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3);
+void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_CFR2_Register(void);
 
@@ -275,7 +275,7 @@ void AD9954_DRIVER_Get_FTW0_Register(void);
 
 void AD9954_DRIVER_Store_FTW0_Register(void);
 
-void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3);
+void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_POW0_Register(void);
 
@@ -287,43 +287,43 @@ void AD9954_DRIVER_Get_FTW1_Register(void);
 
 void AD9954_DRIVER_Store_FTW1_Register(void);
 
-void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3);
+void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_RSCW0_Register(void);
 
 void AD9954_DRIVER_Store_RSCW0_Register(void);
 
-void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_RSCW1_Register(void);
 
 void AD9954_DRIVER_Store_RSCW1_Register(void);
 
-void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_RSCW2_Register(void);
 
 void AD9954_DRIVER_Store_RSCW2_Register(void);
 
-void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_RSCW3_Register(void);
 
 void AD9954_DRIVER_Store_RSCW3_Register(void);
 
-void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_NLSCW_Register(void);
 
 void AD9954_DRIVER_Store_NLSCW_Register(void);
 
-void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Get_PLSCW_Register(void);
 
 void AD9954_DRIVER_Store_PLSCW_Register(void);
 
-void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_0, uint8_t WORD_1, uint8_t WORD_2, uint8_t WORD_3, uint8_t WORD_4);
+void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
 void AD9954_DRIVER_Set_Frequency(uint32_t FREQUENCY);
 

@@ -45,24 +45,14 @@ TIMER_DRIVER_DATA timer_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-void TMR0_Callback(uintptr_t CONTEXT)
+void Main_TMR_Callback(uintptr_t CONTEXT)
 {
-    timer_driverData.TMR0_EXPIRED = true;
+    timer_driverData.MAIN_TMR_EXPIRED = true;
 }
 
-void TMR1_Callback(uintptr_t CONTEXT)
+void Bus_TMR_Callback(uintptr_t CONTEXT)
 {
-    timer_driverData.TMR1_EXPIRED = true;
-}
-
-void TMR2_Callback(uintptr_t CONTEXT)
-{
-    timer_driverData.TMR2_EXPIRED = true;
-}
-
-void TMR3_Callback(uintptr_t CONTEXT)
-{
-    timer_driverData.TMR3_EXPIRED = true;
+    timer_driverData.BUS_TMR_EXPIRED = true;
 }
 
 // *****************************************************************************
@@ -71,110 +61,62 @@ void TMR3_Callback(uintptr_t CONTEXT)
 // *****************************************************************************
 // *****************************************************************************
 
-bool TIMER_DRIVER_Get_TMR0_Status(void)
+bool TIMER_DRIVER_Get_Main_TMR_Status(void)
 {
-    return (timer_driverData.TMR0_EXPIRED);
+    return (timer_driverData.MAIN_TMR_EXPIRED);
 }
 
-void TIMER_DRIVER_Set_TMR0_Status(bool STATUS)
+void TIMER_DRIVER_Set_Main_TMR_Status(bool STATUS)
 {
-    timer_driverData.TMR0_EXPIRED = STATUS;
+    timer_driverData.MAIN_TMR_EXPIRED = STATUS;
 }
 
-void TIMER_DRIVER_Start_TMR0(void)
+void TIMER_DRIVER_Start_Main_TMR(void)
 {
-    SYS_TIME_TimerStart(timer_driverData.TMR0_HANDLE);
+    SYS_TIME_TimerStart(timer_driverData.MAIN_TMR);
 }
 
-void TIMER_DRIVER_Stop_TMR0(void)
+void TIMER_DRIVER_Stop_Main_TMR(void)
 {
-    SYS_TIME_TimerStop(timer_driverData.TMR0_HANDLE);
+    SYS_TIME_TimerStop(timer_driverData.MAIN_TMR);
 }
 
-bool TIMER_DRIVER_Get_TMR1_Status(void)
+bool TIMER_DRIVER_Get_Bus_TMR_Status(void)
 {
-    return (timer_driverData.TMR1_EXPIRED);
+    return (timer_driverData.BUS_TMR_EXPIRED);
 }
 
-void TIMER_DRIVER_Set_TMR1_Status(bool STATUS)
+void TIMER_DRIVER_Set_Bus_TMR_Status(bool STATUS)
 {
-    timer_driverData.TMR1_EXPIRED = STATUS;
+    timer_driverData.BUS_TMR_EXPIRED = STATUS;
 }
 
-void TIMER_DRIVER_Start_TMR1(void)
+void TIMER_DRIVER_Start_Bus_TMR(void)
 {
-    SYS_TIME_TimerStart(timer_driverData.TMR1_HANDLE);
+    SYS_TIME_TimerStart(timer_driverData.BUS_TMR);
 }
 
-void TIMER_DRIVER_Stop_TMR1(void)
+void TIMER_DRIVER_Stop_Bus_TMR(void)
 {
-    SYS_TIME_TimerStop(timer_driverData.TMR1_HANDLE);
-}
-
-bool TIMER_DRIVER_Get_TMR2_Status(void)
-{
-    return (timer_driverData.TMR2_EXPIRED);
-}
-
-void TIMER_DRIVER_Set_TMR2_Status(bool STATUS)
-{
-    timer_driverData.TMR2_EXPIRED = STATUS;
-}
-
-void TIMER_DRIVER_Start_TMR2(void)
-{
-    SYS_TIME_TimerStart(timer_driverData.TMR2_HANDLE);
-}
-
-void TIMER_DRIVER_Stop_TMR2(void)
-{
-    SYS_TIME_TimerStop(timer_driverData.TMR2_HANDLE);
-}
-
-bool TIMER_DRIVER_Get_TMR3_Status(void)
-{
-    return (timer_driverData.TMR3_EXPIRED);
-}
-
-void TIMER_DRIVER_Set_TMR3_Status(bool STATUS)
-{
-    timer_driverData.TMR3_EXPIRED = STATUS;
-}
-
-void TIMER_DRIVER_Start_TMR3(void)
-{
-    SYS_TIME_TimerStart(timer_driverData.TMR3_HANDLE);
-}
-
-void TIMER_DRIVER_Stop_TMR3(void)
-{
-    SYS_TIME_TimerStop(timer_driverData.TMR3_HANDLE);
+    SYS_TIME_TimerStop(timer_driverData.BUS_TMR);
 }
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Application Initialization and State Machine Functions
+// Section: Application Initialization
 // *****************************************************************************
 // *****************************************************************************
 
 void TIMER_DRIVER_Initialize(void)
 {
-    timer_driverData.TMR0_HANDLE = SYS_TIME_HANDLE_INVALID;
-    timer_driverData.TMR1_HANDLE = SYS_TIME_HANDLE_INVALID;
-    timer_driverData.TMR2_HANDLE = SYS_TIME_HANDLE_INVALID;
-    timer_driverData.TMR3_HANDLE = SYS_TIME_HANDLE_INVALID;
-    timer_driverData.TMR0_EXPIRED = false;
-    timer_driverData.TMR1_EXPIRED = false;
-    timer_driverData.TMR2_EXPIRED = false;
-    timer_driverData.TMR3_EXPIRED = false;
-    timer_driverData.TMR0_HANDLE = SYS_TIME_CallbackRegisterMS(TMR0_Callback, 0, TIMER0, SYS_TIME_PERIODIC);
-    timer_driverData.TMR1_HANDLE = SYS_TIME_CallbackRegisterMS(TMR1_Callback, 0, TIMER1, SYS_TIME_PERIODIC);
-    timer_driverData.TMR2_HANDLE = SYS_TIME_CallbackRegisterMS(TMR2_Callback, 0, TIMER2, SYS_TIME_PERIODIC);
-    timer_driverData.TMR3_HANDLE = SYS_TIME_CallbackRegisterMS(TMR3_Callback, 0, TIMER3, SYS_TIME_PERIODIC);
-    TIMER_DRIVER_Stop_TMR0();
-    TIMER_DRIVER_Stop_TMR1();
-    TIMER_DRIVER_Stop_TMR2();
-    TIMER_DRIVER_Stop_TMR3();
+    timer_driverData.MAIN_TMR = SYS_TIME_HANDLE_INVALID;
+    timer_driverData.BUS_TMR = SYS_TIME_HANDLE_INVALID;
+    timer_driverData.MAIN_TMR_EXPIRED = false;
+    timer_driverData.BUS_TMR_EXPIRED = false;
+    timer_driverData.MAIN_TMR = SYS_TIME_CallbackRegisterMS(Main_TMR_Callback, 0, MAIN_TIMER, SYS_TIME_PERIODIC);
+    timer_driverData.BUS_TMR = SYS_TIME_CallbackRegisterMS(Bus_TMR_Callback, 0, BUS_TIMER, SYS_TIME_PERIODIC);
+    TIMER_DRIVER_Stop_Main_TMR();
+    TIMER_DRIVER_Stop_Bus_TMR();
 }
 
 /*******************************************************************************
