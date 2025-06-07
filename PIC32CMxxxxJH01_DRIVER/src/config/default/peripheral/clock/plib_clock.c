@@ -82,7 +82,7 @@ static void OSC32KCTRL_Initialize(void)
     /****************** XOSC32K initialization  ******************************/
 
     /* Configure 32K External Oscillator */
-    OSC32KCTRL_REGS->OSC32KCTRL_XOSC32K = OSC32KCTRL_XOSC32K_STARTUP(3UL) | OSC32KCTRL_XOSC32K_ENABLE_Msk | OSC32KCTRL_XOSC32K_EN1K_Msk | OSC32KCTRL_XOSC32K_EN32K_Msk | OSC32KCTRL_XOSC32K_ONDEMAND_Msk | OSC32KCTRL_XOSC32K_XTALEN_Msk;
+    OSC32KCTRL_REGS->OSC32KCTRL_XOSC32K = OSC32KCTRL_XOSC32K_STARTUP(5UL) | OSC32KCTRL_XOSC32K_ENABLE_Msk | OSC32KCTRL_XOSC32K_EN1K_Msk | OSC32KCTRL_XOSC32K_ONDEMAND_Msk | OSC32KCTRL_XOSC32K_XTALEN_Msk;
 
     /* Enable clock failure detection */
     OSC32KCTRL_REGS->OSC32KCTRL_CFDCTRL |= OSC32KCTRL_CFDCTRL_CFDEN_Msk  ;
@@ -105,28 +105,6 @@ static void GCLK0_Initialize(void)
     }
 }
 
-
-static void GCLK1_Initialize(void)
-{
-    GCLK_REGS->GCLK_GENCTRL[1] = GCLK_GENCTRL_DIV(3UL) | GCLK_GENCTRL_SRC(6UL) | GCLK_GENCTRL_GENEN_Msk;
-
-    while((GCLK_REGS->GCLK_SYNCBUSY & GCLK_SYNCBUSY_GENCTRL1_Msk) == GCLK_SYNCBUSY_GENCTRL1_Msk)
-    {
-        /* wait for the Generator 1 synchronization */
-    }
-}
-
-
-static void GCLK2_Initialize(void)
-{
-    GCLK_REGS->GCLK_GENCTRL[2] = GCLK_GENCTRL_DIV(1UL) | GCLK_GENCTRL_SRC(1UL) | GCLK_GENCTRL_GENEN_Msk;
-
-    while((GCLK_REGS->GCLK_SYNCBUSY & GCLK_SYNCBUSY_GENCTRL2_Msk) == GCLK_SYNCBUSY_GENCTRL2_Msk)
-    {
-        /* wait for the Generator 2 synchronization */
-    }
-}
-
 void CLOCK_Initialize (void)
 {
     /* Function to Initialize the Oscillators */
@@ -136,8 +114,6 @@ void CLOCK_Initialize (void)
     OSC32KCTRL_Initialize();
 
     GCLK0_Initialize();
-    GCLK1_Initialize();
-    GCLK2_Initialize();
 
 
     /* Selection of the Generator and write Lock for EIC */
@@ -161,43 +137,43 @@ void CLOCK_Initialize (void)
     {
         /* Wait for synchronization */
     }
-    /* Selection of the Generator and write Lock for EVSYS_3 */
-    GCLK_REGS->GCLK_PCHCTRL[8] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+    /* Selection of the Generator and write Lock for EVSYS_0 */
+    GCLK_REGS->GCLK_PCHCTRL[5] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
 
-    while ((GCLK_REGS->GCLK_PCHCTRL[8] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
+    while ((GCLK_REGS->GCLK_PCHCTRL[5] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
     {
         /* Wait for synchronization */
     }
     /* Selection of the Generator and write Lock for SERCOM0_CORE */
-    GCLK_REGS->GCLK_PCHCTRL[18] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+    GCLK_REGS->GCLK_PCHCTRL[18] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
 
     while ((GCLK_REGS->GCLK_PCHCTRL[18] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
     {
         /* Wait for synchronization */
     }
     /* Selection of the Generator and write Lock for SERCOM1_CORE */
-    GCLK_REGS->GCLK_PCHCTRL[19] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+    GCLK_REGS->GCLK_PCHCTRL[19] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
 
     while ((GCLK_REGS->GCLK_PCHCTRL[19] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
     {
         /* Wait for synchronization */
     }
     /* Selection of the Generator and write Lock for SERCOM2_CORE */
-    GCLK_REGS->GCLK_PCHCTRL[20] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+    GCLK_REGS->GCLK_PCHCTRL[20] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
 
     while ((GCLK_REGS->GCLK_PCHCTRL[20] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
     {
         /* Wait for synchronization */
     }
     /* Selection of the Generator and write Lock for SERCOM3_CORE */
-    GCLK_REGS->GCLK_PCHCTRL[21] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+    GCLK_REGS->GCLK_PCHCTRL[21] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
 
     while ((GCLK_REGS->GCLK_PCHCTRL[21] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
     {
         /* Wait for synchronization */
     }
     /* Selection of the Generator and write Lock for CAN0 */
-    GCLK_REGS->GCLK_PCHCTRL[26] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+    GCLK_REGS->GCLK_PCHCTRL[26] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
 
     while ((GCLK_REGS->GCLK_PCHCTRL[26] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
     {
@@ -238,11 +214,18 @@ void CLOCK_Initialize (void)
     {
         /* Wait for synchronization */
     }
+    /* Selection of the Generator and write Lock for AC */
+    GCLK_REGS->GCLK_PCHCTRL[42] = GCLK_PCHCTRL_GEN(0x0UL)  | GCLK_PCHCTRL_CHEN_Msk;
+
+    while ((GCLK_REGS->GCLK_PCHCTRL[42] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
+    {
+        /* Wait for synchronization */
+    }
 
 
 
     /* Configure the APBC Bridge Clocks */
-    MCLK_REGS->MCLK_APBCMASK = 0xc12361eU;
+    MCLK_REGS->MCLK_APBCMASK = 0xc1a161fU;
 
 
     /* Enabling the Clock Failure Interrupt */

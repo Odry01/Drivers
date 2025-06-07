@@ -86,38 +86,10 @@ void SUPC_Initialize( void )
     }
 
     /* Configure VREF */
-    SUPC_REGS->SUPC_VREF = SUPC_VREF_SEL(0x2UL) | SUPC_VREF_VREFOE_Msk;
+    SUPC_REGS->SUPC_VREF = SUPC_VREF_SEL(0x0UL);
 
-    /* Enable BOD33 detect interrupt */
-    SUPC_REGS->SUPC_INTENSET = SUPC_INTFLAG_BODVDDDET_Msk;
 }
 
 
 
-typedef struct
-{
-    SUPC_BODVDD_CALLBACK callback;
-    uintptr_t context;
-} SUPC_BODVDD_CALLBACK_OBJ;
 
-static volatile SUPC_BODVDD_CALLBACK_OBJ supcCallbackObject;
-
-void SUPC_BODVDDCallbackRegister( SUPC_BODVDD_CALLBACK callback, uintptr_t context )
-{
-    supcCallbackObject.callback = callback;
-    supcCallbackObject.context = context;
-}
-
-void __attribute__((used)) SUPC_InterruptHandler( void )
-{
-    uintptr_t context = supcCallbackObject.context;
-    if ((SUPC_REGS->SUPC_INTFLAG & SUPC_INTFLAG_BODVDDDET_Msk) == SUPC_INTFLAG_BODVDDDET_Msk)
-    {
-        SUPC_REGS->SUPC_INTFLAG = SUPC_INTFLAG_BODVDDDET_Msk;
-
-        if (supcCallbackObject.callback != NULL)
-        {
-            supcCallbackObject.callback(context);
-        }
-    }
-}

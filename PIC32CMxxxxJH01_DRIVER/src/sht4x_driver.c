@@ -188,7 +188,7 @@ void SHT4X_DRIVER_Tasks(void)
             }
             else
             {
-                DRV_I2C_TransferEventHandlerSet(sht4x_driverData.I2C_HANDLE, SHT4X_DRIVER_I2C_Callback, (uintptr_t) &sht4x_driverData.I2C_TRANSFER_STATUS);
+                DRV_I2C_TransferEventHandlerSet(sht4x_driverData.I2C_HANDLE, SHT4X_DRIVER_I2C_Callback, (uintptr_t) & sht4x_driverData.I2C_TRANSFER_STATUS);
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_IDLE;
             }
             break;
@@ -206,7 +206,7 @@ void SHT4X_DRIVER_Tasks(void)
         case SHT4X_DRIVER_STATE_START_MEASURE:
         {
             SHT4X_DRIVER_Start_Measurement(SHT4X_I2C_ADDRESS, SHT4X_MEASURE_TEMP_HUM_HIGH_PRECISION);
-            TIMER_DRIVER_Start_TMR1();
+            TIMER_DRIVER_Start_Bus_TMR();
             sht4x_driverData.state = SHT4X_DRIVER_STATE_START_MEASURE_ACK;
             break;
         }
@@ -217,10 +217,10 @@ void SHT4X_DRIVER_Tasks(void)
             {
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_ERROR;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_TIMER_EXPIRED;
             }
             else
@@ -234,15 +234,15 @@ void SHT4X_DRIVER_Tasks(void)
         {
             if (sht4x_driverData.I2C_TRANSFER_STATUS == true)
             {
-                TIMER_DRIVER_Stop_TMR1();
-                TIMER_DRIVER_Start_TMR2();
+                TIMER_DRIVER_Stop_Bus_TMR();
+                TIMER_DRIVER_Start_Wait_TMR();
                 sht4x_driverData.I2C_TRANSFER_STATUS = false;
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
@@ -250,7 +250,7 @@ void SHT4X_DRIVER_Tasks(void)
 
         case SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE:
         {
-            if (TIMER_DRIVER_Get_TMR2_Status() == true)
+            if (TIMER_DRIVER_Get_Wait_TMR_Status() == true)
             {
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA;
             }
@@ -260,7 +260,7 @@ void SHT4X_DRIVER_Tasks(void)
         case SHT4X_DRIVER_STATE_GET_MEASURE_DATA:
         {
             SHT4X_DRIVER_Get_Measure_Values(SHT4X_I2C_ADDRESS);
-            TIMER_DRIVER_Start_TMR1();
+            TIMER_DRIVER_Start_Bus_TMR();
             sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA_ACK;
             break;
         }
@@ -271,10 +271,10 @@ void SHT4X_DRIVER_Tasks(void)
             {
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_ERROR;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_TIMER_EXPIRED;
             }
             else
@@ -288,15 +288,14 @@ void SHT4X_DRIVER_Tasks(void)
         {
             if (sht4x_driverData.I2C_TRANSFER_STATUS == true)
             {
-                TIMER_DRIVER_Stop_TMR1();
-                TIMER_DRIVER_Start_TMR2();
+                TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.I2C_TRANSFER_STATUS = false;
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_CALCULATE_DATA;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;

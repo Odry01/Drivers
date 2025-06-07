@@ -1,0 +1,53 @@
+configVersion: 1.0.0
+componentName: freqm
+coreVersion: 5.8.2
+device: PIC32CM5164JH01032
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: freqm
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.22.4
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: freqm
+          x: '789'
+          y: '325'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    FREQM_REF_CLOCK_FREQUENCY:
+      attributes:
+        id: FREQM_REF_CLOCK_FREQUENCY
+      children:
+      - children:
+        - attributes:
+            id: freqm
+            value: '48000000'
+          type: Dynamic
+        type: Values
+      type: Integer
+    FREQM_RESULT_RIGHT_SHIFT:
+      attributes:
+        id: FREQM_RESULT_RIGHT_SHIFT
+      children:
+      - children:
+        - attributes:
+            id: freqm
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+  userData: {}

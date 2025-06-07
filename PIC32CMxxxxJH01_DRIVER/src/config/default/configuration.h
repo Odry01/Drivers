@@ -82,11 +82,8 @@ extern "C" {
 /* TIME System Service Configuration Options */
 #define SYS_TIME_INDEX_0                            (0)
 #define SYS_TIME_MAX_TIMERS                         (50)
-#define SYS_TIME_HW_COUNTER_WIDTH                   (16)
-#define SYS_TIME_HW_COUNTER_PERIOD                  (0xFFFFU)
-#define SYS_TIME_HW_COUNTER_HALF_PERIOD             (SYS_TIME_HW_COUNTER_PERIOD>>1)
-#define SYS_TIME_CPU_CLOCK_FREQUENCY                (48000000)
-#define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES    (200)
+#define SYS_TIME_HW_COUNTER_WIDTH                   (24)
+#define SYS_TIME_TICK_FREQ_IN_HZ                    (1000)
 
 #define SYS_CONSOLE_INDEX_0                       0
 
@@ -109,7 +106,7 @@ extern "C" {
 /* I2C Driver Instance 0 Configuration Options */
 #define DRV_I2C_INDEX_0                       0
 #define DRV_I2C_CLIENTS_NUMBER_IDX0           1
-#define DRV_I2C_QUEUE_SIZE_IDX0               2
+#define DRV_I2C_QUEUE_SIZE_IDX0               1
 #define DRV_I2C_CLOCK_SPEED_IDX0              100
 
 /* I2C Driver Common Configuration Options */
@@ -123,16 +120,16 @@ extern "C" {
 #define DRV_SPI_INDEX_0                       0
 #define DRV_SPI_CLIENTS_NUMBER_IDX0           1
 #define DRV_SPI_DMA_MODE
-#define DRV_SPI_XMIT_DMA_CH_IDX0              SYS_DMA_CHANNEL_0
-#define DRV_SPI_RCV_DMA_CH_IDX0               SYS_DMA_CHANNEL_1
-#define DRV_SPI_QUEUE_SIZE_IDX0               4
+#define DRV_SPI_XMIT_DMA_CH_IDX0              SYS_DMA_CHANNEL_2
+#define DRV_SPI_RCV_DMA_CH_IDX0               SYS_DMA_CHANNEL_3
+#define DRV_SPI_QUEUE_SIZE_IDX0               1
 
 /* USART Driver Instance 0 Configuration Options */
 #define DRV_USART_INDEX_0                  0
 #define DRV_USART_CLIENTS_NUMBER_IDX0      1
-#define DRV_USART_XMIT_DMA_CH_IDX0         SYS_DMA_CHANNEL_2
-#define DRV_USART_RCV_DMA_CH_IDX0          SYS_DMA_CHANNEL_3
-#define DRV_USART_QUEUE_SIZE_IDX0          5
+#define DRV_USART_XMIT_DMA_CH_IDX0         SYS_DMA_CHANNEL_0
+#define DRV_USART_RCV_DMA_CH_IDX0          SYS_DMA_CHANNEL_1
+#define DRV_USART_QUEUE_SIZE_IDX0          1
 
 /* USART Driver Global Configuration Options */
 #define DRV_USART_INSTANCES_NUMBER         1

@@ -68,11 +68,8 @@
 // DOM-IGNORE-END
 
 
-typedef void (*SUPC_BODVDD_CALLBACK)( uintptr_t context );
-
 void SUPC_Initialize( void );
 
-void SUPC_BODVDDCallbackRegister( SUPC_BODVDD_CALLBACK callback, uintptr_t context );
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

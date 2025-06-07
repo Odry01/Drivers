@@ -82,7 +82,7 @@ void EIC_Initialize (void)
     /* NMI Control register */
 
     /* Interrupt sense type and filter control for EXTINT channels 0 to 7*/
-    EIC_REGS->EIC_CONFIG0 =  EIC_CONFIG0_SENSE0_FALL | EIC_CONFIG0_FILTEN0_Msk |
+    EIC_REGS->EIC_CONFIG0 =  EIC_CONFIG0_SENSE0_HIGH | EIC_CONFIG0_FILTEN0_Msk |
                               EIC_CONFIG0_SENSE1_FALL | EIC_CONFIG0_FILTEN1_Msk |
                               EIC_CONFIG0_SENSE2_FALL | EIC_CONFIG0_FILTEN2_Msk |
                               EIC_CONFIG0_SENSE3_FALL | EIC_CONFIG0_FILTEN3_Msk |
@@ -95,7 +95,7 @@ void EIC_Initialize (void)
     EIC_REGS->EIC_CONFIG1 =  EIC_CONFIG1_SENSE8_FALL | EIC_CONFIG1_FILTEN8_Msk |
                               EIC_CONFIG1_SENSE9_FALL | EIC_CONFIG1_FILTEN9_Msk |
                               EIC_CONFIG1_SENSE10_FALL | EIC_CONFIG1_FILTEN10_Msk |
-                              EIC_CONFIG1_SENSE11_FALL | EIC_CONFIG1_FILTEN11_Msk |
+                              EIC_CONFIG1_SENSE11_FALL  |
                               EIC_CONFIG1_SENSE12_FALL | EIC_CONFIG1_FILTEN12_Msk |
                               EIC_CONFIG1_SENSE13_FALL | EIC_CONFIG1_FILTEN13_Msk |
                               EIC_CONFIG1_SENSE14_FALL | EIC_CONFIG1_FILTEN14_Msk |
@@ -103,14 +103,16 @@ void EIC_Initialize (void)
 
 
     /* Debouncer enable */
-    EIC_REGS->EIC_DEBOUNCEN = 0xffff;
+    EIC_REGS->EIC_DEBOUNCEN = 0xf7fe;
 
+    /* Event Control Output enable */
+    EIC_REGS->EIC_EVCTRL = 0x1;
 
     /* Debouncer Setting */
-    EIC_REGS->EIC_DPRESCALER = EIC_DPRESCALER_PRESCALER0(0x7) | EIC_DPRESCALER_PRESCALER1(0x7) | EIC_DPRESCALER_STATES0_Msk | EIC_DPRESCALER_STATES1_Msk;
+    EIC_REGS->EIC_DPRESCALER = EIC_DPRESCALER_PRESCALER0(0x2) | EIC_DPRESCALER_PRESCALER1(0x2) | EIC_DPRESCALER_TICKON_Msk | EIC_DPRESCALER_STATES0_Msk | EIC_DPRESCALER_STATES1_Msk;
 
     /* External Interrupt enable*/
-    EIC_REGS->EIC_INTENSET = 0xffff;
+    EIC_REGS->EIC_INTENSET = 0xfeff;
 
     /* Callbacks for enabled interrupts */
     eicCallbackObject[0].eicPinNo = EIC_PIN_0;

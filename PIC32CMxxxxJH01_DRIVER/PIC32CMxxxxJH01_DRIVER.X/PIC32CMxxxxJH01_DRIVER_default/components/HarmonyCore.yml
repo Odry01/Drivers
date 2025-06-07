@@ -1,0 +1,1269 @@
+configVersion: 1.0.0
+componentName: HarmonyCore
+coreVersion: 5.8.2
+device: PIC32CM5164JH01032
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: HarmonyCore
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: core
+  type: package
+  version: v3.15.2
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: HarmonyCore
+          x: '631'
+          y: '5'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    APP0_C:
+      attributes:
+        id: APP0_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    APP0_H:
+      attributes:
+        id: APP0_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    APP10_C:
+      attributes:
+        id: APP10_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ntc_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP10_H:
+      attributes:
+        id: APP10_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ntc_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP11_C:
+      attributes:
+        id: APP11_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: rstc_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP11_H:
+      attributes:
+        id: APP11_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: rstc_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP12_C:
+      attributes:
+        id: APP12_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: rtc_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP12_H:
+      attributes:
+        id: APP12_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: rtc_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP13_C:
+      attributes:
+        id: APP13_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: sht4x_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP13_H:
+      attributes:
+        id: APP13_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: sht4x_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP14_C:
+      attributes:
+        id: APP14_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: timer_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP14_H:
+      attributes:
+        id: APP14_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: timer_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP15_C:
+      attributes:
+        id: APP15_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP15_H:
+      attributes:
+        id: APP15_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP1_C:
+      attributes:
+        id: APP1_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ad9954_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP1_H:
+      attributes:
+        id: APP1_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ad9954_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP2_C:
+      attributes:
+        id: APP2_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: bme690_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP2_H:
+      attributes:
+        id: APP2_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: bme690_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP3_C:
+      attributes:
+        id: APP3_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: can0_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP3_H:
+      attributes:
+        id: APP3_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: can0_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP4_C:
+      attributes:
+        id: APP4_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: console_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP4_H:
+      attributes:
+        id: APP4_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: console_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP5_C:
+      attributes:
+        id: APP5_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: fan_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP5_H:
+      attributes:
+        id: APP5_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: fan_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP6_C:
+      attributes:
+        id: APP6_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: fcm360w_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP6_H:
+      attributes:
+        id: APP6_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: fcm360w_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP7_C:
+      attributes:
+        id: APP7_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: hdc302x_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP7_H:
+      attributes:
+        id: APP7_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: hdc302x_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP8_C:
+      attributes:
+        id: APP8_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: led_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP8_H:
+      attributes:
+        id: APP8_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: led_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP9_C:
+      attributes:
+        id: APP9_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: mcp9808_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP9_H:
+      attributes:
+        id: APP9_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: mcp9808_driver.h
+          type: String
+        type: Attributes
+      type: File
+    CONFIGURATION_H:
+      attributes:
+        id: CONFIGURATION_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DMA_DEF:
+      attributes:
+        id: DMA_DEF
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DMA_HEADER:
+      attributes:
+        id: DMA_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DMA_MAPPING:
+      attributes:
+        id: DMA_MAPPING
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DMA_SOURCE:
+      attributes:
+        id: DMA_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DRIVER_COMMON:
+      attributes:
+        id: DRIVER_COMMON
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    DRIVER_ROOT:
+      attributes:
+        id: DRIVER_ROOT
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    ENABLE_APP_FILE:
+      attributes:
+        id: ENABLE_APP_FILE
+      children:
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_DRV_COMMON:
+      attributes:
+        id: ENABLE_DRV_COMMON
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_OSAL:
+      attributes:
+        id: ENABLE_OSAL
+      children:
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_SYS_CACHE:
+      attributes:
+        id: ENABLE_SYS_CACHE
+      children:
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_SYS_COMMON:
+      attributes:
+        id: ENABLE_SYS_COMMON
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_SYS_DMA:
+      attributes:
+        id: ENABLE_SYS_DMA
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_SYS_INT:
+      attributes:
+        id: ENABLE_SYS_INT
+      children:
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ENABLE_SYS_PORTS:
+      attributes:
+        id: ENABLE_SYS_PORTS
+      children:
+      - children:
+        - attributes:
+            id: readOnly
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    GEN_APP_TASKS:
+      attributes:
+        id: GEN_APP_TASKS
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    GEN_APP_TASK_COUNT:
+      attributes:
+        id: GEN_APP_TASK_COUNT
+      children:
+      - children:
+        - attributes:
+            value: '16'
+          type: User
+        type: Values
+      type: Integer
+    GEN_APP_TASK_NAME_1:
+      attributes:
+        id: GEN_APP_TASK_NAME_1
+      children:
+      - children:
+        - attributes:
+            value: ad9954_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_10:
+      attributes:
+        id: GEN_APP_TASK_NAME_10
+      children:
+      - children:
+        - attributes:
+            value: ntc_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_11:
+      attributes:
+        id: GEN_APP_TASK_NAME_11
+      children:
+      - children:
+        - attributes:
+            value: rstc_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_12:
+      attributes:
+        id: GEN_APP_TASK_NAME_12
+      children:
+      - children:
+        - attributes:
+            value: rtc_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_13:
+      attributes:
+        id: GEN_APP_TASK_NAME_13
+      children:
+      - children:
+        - attributes:
+            value: sht4x_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_14:
+      attributes:
+        id: GEN_APP_TASK_NAME_14
+      children:
+      - children:
+        - attributes:
+            value: timer_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_15:
+      attributes:
+        id: GEN_APP_TASK_NAME_15
+      children:
+      - children:
+        - attributes:
+            value: xm125_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_2:
+      attributes:
+        id: GEN_APP_TASK_NAME_2
+      children:
+      - children:
+        - attributes:
+            value: bme690_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_3:
+      attributes:
+        id: GEN_APP_TASK_NAME_3
+      children:
+      - children:
+        - attributes:
+            value: can0_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_4:
+      attributes:
+        id: GEN_APP_TASK_NAME_4
+      children:
+      - children:
+        - attributes:
+            value: console_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_5:
+      attributes:
+        id: GEN_APP_TASK_NAME_5
+      children:
+      - children:
+        - attributes:
+            value: fan_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_6:
+      attributes:
+        id: GEN_APP_TASK_NAME_6
+      children:
+      - children:
+        - attributes:
+            value: fcm360w_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_7:
+      attributes:
+        id: GEN_APP_TASK_NAME_7
+      children:
+      - children:
+        - attributes:
+            value: hdc302x_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_8:
+      attributes:
+        id: GEN_APP_TASK_NAME_8
+      children:
+      - children:
+        - attributes:
+            value: led_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_9:
+      attributes:
+        id: GEN_APP_TASK_NAME_9
+      children:
+      - children:
+        - attributes:
+            value: mcp9808_driver
+          type: User
+        type: Values
+      type: String
+    INT_DEF:
+      attributes:
+        id: INT_DEF
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    INT_HEADER:
+      attributes:
+        id: INT_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    INT_MAPPING:
+      attributes:
+        id: INT_MAPPING
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    INT_SOURCE:
+      attributes:
+        id: INT_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    OSAL_DEFINITIONS_H:
+      attributes:
+        id: OSAL_DEFINITIONS_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    OSAL_H:
+      attributes:
+        id: OSAL_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    OSAL_IMPL_BASIC_H:
+      attributes:
+        id: OSAL_IMPL_BASIC_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    OSAL_SYSDEF_H:
+      attributes:
+        id: OSAL_SYSDEF_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    OSAL_TIMEOUT_PERIPHERAL:
+      attributes:
+        id: OSAL_TIMEOUT_PERIPHERAL
+      children:
+      - children:
+        - attributes:
+            id: HarmonyCore
+            value: ''
+          type: Dynamic
+        type: Values
+      type: String
+    PORTS_DEF:
+      attributes:
+        id: PORTS_DEF
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    PORTS_HEADER:
+      attributes:
+        id: PORTS_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    PORTS_MAPPING:
+      attributes:
+        id: PORTS_MAPPING
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYSTEM_COMMON:
+      attributes:
+        id: SYSTEM_COMMON
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYSTEM_MODULE:
+      attributes:
+        id: SYSTEM_MODULE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYSTEM_ROOT:
+      attributes:
+        id: SYSTEM_ROOT
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_DEBUG_DEF_HEADER:
+      attributes:
+        id: SYS_DEBUG_DEF_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_DEBUG_HEADER:
+      attributes:
+        id: SYS_DEBUG_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_TASKS_H:
+      attributes:
+        id: SYS_TASKS_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    TASKS_C:
+      attributes:
+        id: TASKS_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    USER_H:
+      attributes:
+        id: USER_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+  userData: {}

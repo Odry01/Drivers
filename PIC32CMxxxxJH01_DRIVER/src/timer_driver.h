@@ -52,7 +52,8 @@ extern "C"
 
 #define MAIN_TIMER          5000
 #define BUS_TIMER           250
-    
+#define WAIT_TIMER          25
+
 // *****************************************************************************
 
 /* Application Data
@@ -72,8 +73,10 @@ typedef struct
     /* Driver variables */
     SYS_TIME_HANDLE MAIN_TMR;
     SYS_TIME_HANDLE BUS_TMR;
+    SYS_TIME_HANDLE WAIT_TMR;
     volatile bool MAIN_TMR_EXPIRED;
     volatile bool BUS_TMR_EXPIRED;
+    volatile bool WAIT_TMR_EXPIRED;
 } TIMER_DRIVER_DATA;
 
 // *****************************************************************************
@@ -85,6 +88,8 @@ typedef struct
 void Main_TMR_Callback(uintptr_t CONTEXT);
 
 void Bus_TMR_Callback(uintptr_t CONTEXT);
+
+void Wait_TMR_Callback(uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -140,6 +145,14 @@ void TIMER_DRIVER_Set_Bus_TMR_Status(bool STATUS);
 void TIMER_DRIVER_Start_Bus_TMR(void);
 
 void TIMER_DRIVER_Stop_Bus_TMR(void);
+
+bool TIMER_DRIVER_Get_Wait_TMR_Status(void);
+
+void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS);
+
+void TIMER_DRIVER_Start_Wait_TMR(void);
+
+void TIMER_DRIVER_Stop_Wait_TMR(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

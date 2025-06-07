@@ -45,7 +45,7 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef PLIB_TC0_H      // Guards against multiple inclusion
+#ifndef PLIB_TC0_H       // Guards against multiple inclusion
 #define PLIB_TC0_H
 
 // *****************************************************************************
@@ -85,33 +85,24 @@
    this interface.
 */
 
-// *****************************************************************************
+void TC0_CaptureInitialize ( void );
 
-void TC0_TimerInitialize( void );
+void TC0_CaptureStart ( void );
 
-void TC0_TimerStart( void );
+void TC0_CaptureStop ( void );
 
-void TC0_TimerStop( void );
-
-uint32_t TC0_TimerFrequencyGet( void );
+uint32_t TC0_CaptureFrequencyGet( void );
 
 
-void TC0_Timer16bitPeriodSet( uint16_t period );
+uint16_t TC0_Capture16bitChannel0Get( void );
 
-uint16_t TC0_Timer16bitPeriodGet( void );
-
-uint16_t TC0_Timer16bitCounterGet( void );
-
-void TC0_Timer16bitCounterSet( uint16_t count );
-
-void TC0_Timer16bitCompareSet( uint16_t compare );
+uint16_t TC0_Capture16bitChannel1Get( void );
 
 
+void TC0_CaptureCallbackRegister(TC_CAPTURE_CALLBACK callback, uintptr_t context);
 
-void TC0_TimerCallbackRegister( TC_TIMER_CALLBACK callback, uintptr_t context );
 
-
-void TC0_TimerCommandSet(TC_COMMAND command);
+void TC0_CaptureCommandSet(TC_COMMAND command);
 
 
 // DOM-IGNORE-BEGIN

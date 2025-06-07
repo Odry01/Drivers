@@ -240,7 +240,7 @@ void MCP9808_DRIVER_Tasks(void)
         case MCP9808_DRIVER_STATE_GET_MANUFACTURER_ID:
         {
             MCP9808_DRIVER_Get_Manufacturer_ID(MCP9808_I2C_ADDRESS);
-            TIMER_DRIVER_Start_TMR1();
+            TIMER_DRIVER_Start_Bus_TMR();
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_GET_MANUFACTURER_ID_ACK;
             break;
         }
@@ -251,10 +251,10 @@ void MCP9808_DRIVER_Tasks(void)
             {
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_ERROR;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             else
@@ -268,13 +268,13 @@ void MCP9808_DRIVER_Tasks(void)
         {
             if (mcp9808_driverData.I2C_TRANSFER_STATUS == true)
             {
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_STORE_MANUFACTURER_ID;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
@@ -290,7 +290,7 @@ void MCP9808_DRIVER_Tasks(void)
         case MCP9808_DRIVER_STATE_GET_DEVICE_ID:
         {
             MCP9808_DRIVER_Get_Device_ID(MCP9808_I2C_ADDRESS);
-            TIMER_DRIVER_Start_TMR1();
+            TIMER_DRIVER_Start_Bus_TMR();
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_GET_DEVICE_ID_ACK;
             break;
         }
@@ -301,10 +301,10 @@ void MCP9808_DRIVER_Tasks(void)
             {
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_ERROR;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             else
@@ -318,13 +318,13 @@ void MCP9808_DRIVER_Tasks(void)
         {
             if (mcp9808_driverData.I2C_TRANSFER_STATUS == true)
             {
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_STORE_DEVICE_ID;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
@@ -340,7 +340,7 @@ void MCP9808_DRIVER_Tasks(void)
         case MCP9808_DRIVER_STATE_SET_RESULT_RESOLUTION:
         {
             MCP9808_DRIVER_Set_Result_Resolution(MCP9808_I2C_ADDRESS, 0b00000001);
-            TIMER_DRIVER_Start_TMR1();
+            TIMER_DRIVER_Start_Bus_TMR();
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_SET_RESULT_RESOLUTION_ACK;
             break;
         }
@@ -351,10 +351,10 @@ void MCP9808_DRIVER_Tasks(void)
             {
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_ERROR;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             else
@@ -368,13 +368,13 @@ void MCP9808_DRIVER_Tasks(void)
         {
             if (mcp9808_driverData.I2C_TRANSFER_STATUS == true)
             {
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
@@ -392,7 +392,7 @@ void MCP9808_DRIVER_Tasks(void)
         case MCP9808_DRIVER_STATE_GET_TEMPERATURE_VALUES:
         {
             MCP9808_DRIVER_Get_Temperature_Values(MCP9808_I2C_ADDRESS);
-            TIMER_DRIVER_Start_TMR1();
+            TIMER_DRIVER_Start_Bus_TMR();
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_GET_TEMPERATURE_VALUES_ACK;
             break;
         }
@@ -403,10 +403,10 @@ void MCP9808_DRIVER_Tasks(void)
             {
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_ERROR;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             else
@@ -420,13 +420,13 @@ void MCP9808_DRIVER_Tasks(void)
         {
             if (mcp9808_driverData.I2C_TRANSFER_STATUS == true)
             {
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_STORE_TEMPERATURE_VALUES;
             }
-            else if (TIMER_DRIVER_Get_TMR1_Status() == true)
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_TMR1_Status(false);
-                TIMER_DRIVER_Stop_TMR1();
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
                 mcp9808_driverData.state = MCP9808_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;

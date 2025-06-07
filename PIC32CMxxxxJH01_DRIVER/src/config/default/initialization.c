@@ -91,26 +91,26 @@ static DRV_I2C_TRANSFER_OBJ drvI2C0TransferObj[DRV_I2C_QUEUE_SIZE_IDX0];
 static const DRV_I2C_PLIB_INTERFACE drvI2C0PLibAPI = {
 
     /* I2C PLib Transfer Read Add function */
-    .read_t = (DRV_I2C_PLIB_READ)SERCOM0_I2C_Read,
+    .read_t = (DRV_I2C_PLIB_READ)SERCOM3_I2C_Read,
 
     /* I2C PLib Transfer Write Add function */
-    .write_t = (DRV_I2C_PLIB_WRITE)SERCOM0_I2C_Write,
+    .write_t = (DRV_I2C_PLIB_WRITE)SERCOM3_I2C_Write,
 
 
     /* I2C PLib Transfer Write Read Add function */
-    .writeRead = (DRV_I2C_PLIB_WRITE_READ)SERCOM0_I2C_WriteRead,
+    .writeRead = (DRV_I2C_PLIB_WRITE_READ)SERCOM3_I2C_WriteRead,
 
     /*I2C PLib Transfer Abort function */
-    .transferAbort = (DRV_I2C_PLIB_TRANSFER_ABORT)SERCOM0_I2C_TransferAbort,
+    .transferAbort = (DRV_I2C_PLIB_TRANSFER_ABORT)SERCOM3_I2C_TransferAbort,
 
     /* I2C PLib Transfer Status function */
-    .errorGet = (DRV_I2C_PLIB_ERROR_GET)SERCOM0_I2C_ErrorGet,
+    .errorGet = (DRV_I2C_PLIB_ERROR_GET)SERCOM3_I2C_ErrorGet,
 
     /* I2C PLib Transfer Setup function */
-    .transferSetup = (DRV_I2C_PLIB_TRANSFER_SETUP)SERCOM0_I2C_TransferSetup,
+    .transferSetup = (DRV_I2C_PLIB_TRANSFER_SETUP)SERCOM3_I2C_TransferSetup,
 
     /* I2C PLib Callback Register */
-    .callbackRegister = (DRV_I2C_PLIB_CALLBACK_REGISTER)SERCOM0_I2C_CallbackRegister,
+    .callbackRegister = (DRV_I2C_PLIB_CALLBACK_REGISTER)SERCOM3_I2C_CallbackRegister,
 };
 
 
@@ -120,7 +120,7 @@ static const DRV_I2C_INTERRUPT_SOURCES drvI2C0InterruptSources =
     .isSingleIntSrc                        = true,
 
     /* Peripheral interrupt line */
-    .intSources.i2cInterrupt             = (int32_t)SERCOM0_IRQn,
+    .intSources.i2cInterrupt             = (int32_t)SERCOM3_IRQn,
 };
 
 /* I2C Driver Initialization Data */
@@ -161,16 +161,16 @@ static DRV_SPI_TRANSFER_OBJ drvSPI0TransferObjPool[DRV_SPI_QUEUE_SIZE_IDX0];
 static const DRV_SPI_PLIB_INTERFACE drvSPI0PlibAPI = {
 
     /* SPI PLIB Setup */
-    .setup = (DRV_SPI_PLIB_SETUP)SERCOM1_SPI_TransferSetup,
+    .setup = (DRV_SPI_PLIB_SETUP)SERCOM2_SPI_TransferSetup,
 
     /* SPI PLIB WriteRead function */
-    .writeRead = (DRV_SPI_PLIB_WRITE_READ)SERCOM1_SPI_WriteRead,
+    .writeRead = (DRV_SPI_PLIB_WRITE_READ)SERCOM2_SPI_WriteRead,
 
     /* SPI PLIB Transfer Status function */
-    .isTransmitterBusy = (DRV_SPI_PLIB_TRANSMITTER_IS_BUSY)SERCOM1_SPI_IsTransmitterBusy,
+    .isTransmitterBusy = (DRV_SPI_PLIB_TRANSMITTER_IS_BUSY)SERCOM2_SPI_IsTransmitterBusy,
 
     /* SPI PLIB Callback Register */
-    .callbackRegister = (DRV_SPI_PLIB_CALLBACK_REGISTER)SERCOM1_SPI_CallbackRegister,
+    .callbackRegister = (DRV_SPI_PLIB_CALLBACK_REGISTER)SERCOM2_SPI_CallbackRegister,
 };
 
 static const uint32_t drvSPI0remapDataBits[]= { 0x0, 0x1, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU, 0xFFFFFFFFU };
@@ -183,7 +183,7 @@ static const DRV_SPI_INTERRUPT_SOURCES drvSPI0InterruptSources =
     .isSingleIntSrc                        = true,
 
     /* Peripheral interrupt line */
-    .intSources.spiInterrupt             = (int32_t)SERCOM1_IRQn,
+    .intSources.spiInterrupt             = (int32_t)SERCOM2_IRQn,
     /* DMA interrupt line */
     .intSources.dmaInterrupt               = (int32_t)DMAC_IRQn,
 };
@@ -213,10 +213,10 @@ static const DRV_SPI_INIT drvSPI0InitData =
     .dmaChannelReceive  = DRV_SPI_RCV_DMA_CH_IDX0,
 
     /* SPI Transmit Register */
-    .spiTransmitAddress =  (void *)&(SERCOM1_REGS->SPIM.SERCOM_DATA),
+    .spiTransmitAddress =  (void *)&(SERCOM2_REGS->SPIM.SERCOM_DATA),
 
     /* SPI Receive Register */
-    .spiReceiveAddress  = (void *)&(SERCOM1_REGS->SPIM.SERCOM_DATA),
+    .spiReceiveAddress  = (void *)&(SERCOM2_REGS->SPIM.SERCOM_DATA),
 
     /* SPI Queue Size */
     .transferObjPoolSize = DRV_SPI_QUEUE_SIZE_IDX0,
@@ -236,17 +236,17 @@ static DRV_USART_CLIENT_OBJ drvUSART0ClientObjPool[DRV_USART_CLIENTS_NUMBER_IDX0
 static DRV_USART_BUFFER_OBJ drvUSART0BufferObjPool[DRV_USART_QUEUE_SIZE_IDX0];
 
 static const DRV_USART_PLIB_INTERFACE drvUsart0PlibAPI = {
-    .readCallbackRegister = (DRV_USART_PLIB_READ_CALLBACK_REG)SERCOM3_USART_ReadCallbackRegister,
-    .read_t = (DRV_USART_PLIB_READ)SERCOM3_USART_Read,
-    .readIsBusy = (DRV_USART_PLIB_READ_IS_BUSY)SERCOM3_USART_ReadIsBusy,
-    .readCountGet = (DRV_USART_PLIB_READ_COUNT_GET)SERCOM3_USART_ReadCountGet,
-    .readAbort = (DRV_USART_PLIB_READ_ABORT)SERCOM3_USART_ReadAbort,
-    .writeCallbackRegister = (DRV_USART_PLIB_WRITE_CALLBACK_REG)SERCOM3_USART_WriteCallbackRegister,
-    .write_t = (DRV_USART_PLIB_WRITE)SERCOM3_USART_Write,
-    .writeIsBusy = (DRV_USART_PLIB_WRITE_IS_BUSY)SERCOM3_USART_WriteIsBusy,
-    .writeCountGet = (DRV_USART_PLIB_WRITE_COUNT_GET)SERCOM3_USART_WriteCountGet,
-    .errorGet = (DRV_USART_PLIB_ERROR_GET)SERCOM3_USART_ErrorGet,
-    .serialSetup = (DRV_USART_PLIB_SERIAL_SETUP)SERCOM3_USART_SerialSetup
+    .readCallbackRegister = (DRV_USART_PLIB_READ_CALLBACK_REG)SERCOM0_USART_ReadCallbackRegister,
+    .read_t = (DRV_USART_PLIB_READ)SERCOM0_USART_Read,
+    .readIsBusy = (DRV_USART_PLIB_READ_IS_BUSY)SERCOM0_USART_ReadIsBusy,
+    .readCountGet = (DRV_USART_PLIB_READ_COUNT_GET)SERCOM0_USART_ReadCountGet,
+    .readAbort = (DRV_USART_PLIB_READ_ABORT)SERCOM0_USART_ReadAbort,
+    .writeCallbackRegister = (DRV_USART_PLIB_WRITE_CALLBACK_REG)SERCOM0_USART_WriteCallbackRegister,
+    .write_t = (DRV_USART_PLIB_WRITE)SERCOM0_USART_Write,
+    .writeIsBusy = (DRV_USART_PLIB_WRITE_IS_BUSY)SERCOM0_USART_WriteIsBusy,
+    .writeCountGet = (DRV_USART_PLIB_WRITE_COUNT_GET)SERCOM0_USART_WriteCountGet,
+    .errorGet = (DRV_USART_PLIB_ERROR_GET)SERCOM0_USART_ErrorGet,
+    .serialSetup = (DRV_USART_PLIB_SERIAL_SETUP)SERCOM0_USART_SerialSetup
 };
 
 static const uint32_t drvUsart0remapDataWidth[] = { 0x5, 0x6, 0x7, 0x0, 0x1 };
@@ -260,7 +260,7 @@ static const DRV_USART_INTERRUPT_SOURCES drvUSART0InterruptSources =
     .isSingleIntSrc                        = true,
 
     /* Peripheral interrupt line */
-    .intSources.usartInterrupt             = (int32_t)SERCOM3_IRQn,
+    .intSources.usartInterrupt             = (int32_t)SERCOM0_IRQn,
     /* DMA interrupt line */
     .intSources.dmaInterrupt               = (int32_t)DMAC_IRQn,
 };
@@ -277,11 +277,11 @@ static const DRV_USART_INIT drvUsart0InitData =
 
     .dmaChannelTransmit = DRV_USART_XMIT_DMA_CH_IDX0,
 
-    .usartTransmitAddress = (void *)&(SERCOM3_REGS->USART_INT.SERCOM_DATA),
+    .usartTransmitAddress = (void *)&(SERCOM0_REGS->USART_INT.SERCOM_DATA),
 
     .dmaChannelReceive = DRV_USART_RCV_DMA_CH_IDX0,
 
-    .usartReceiveAddress = (void *)&(SERCOM3_REGS->USART_INT.SERCOM_DATA),
+    .usartReceiveAddress = (void *)&(SERCOM0_REGS->USART_INT.SERCOM_DATA),
 
     /* Combined size of transmit and receive buffer objects */
     .bufferObjPoolSize = DRV_USART_QUEUE_SIZE_IDX0,
@@ -329,19 +329,19 @@ SYSTEM_OBJECTS sysObj;
 // <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
 
 static const SYS_TIME_PLIB_INTERFACE sysTimePlibAPI = {
-    .timerCallbackSet = (SYS_TIME_PLIB_CALLBACK_REGISTER)TC0_TimerCallbackRegister,
-    .timerStart = (SYS_TIME_PLIB_START)TC0_TimerStart,
-    .timerStop = (SYS_TIME_PLIB_STOP)TC0_TimerStop,
-    .timerFrequencyGet = (SYS_TIME_PLIB_FREQUENCY_GET)TC0_TimerFrequencyGet,
-    .timerPeriodSet = (SYS_TIME_PLIB_PERIOD_SET)TC0_Timer16bitPeriodSet,
-    .timerCompareSet = (SYS_TIME_PLIB_COMPARE_SET)TC0_Timer16bitCompareSet,
-    .timerCounterGet = (SYS_TIME_PLIB_COUNTER_GET)TC0_Timer16bitCounterGet,
+    .timerCallbackSet = (SYS_TIME_PLIB_CALLBACK_REGISTER)SYSTICK_TimerCallbackSet,
+    .timerStart = (SYS_TIME_PLIB_START)SYSTICK_TimerStart,
+    .timerStop = (SYS_TIME_PLIB_STOP)SYSTICK_TimerStop,
+    .timerFrequencyGet = (SYS_TIME_PLIB_FREQUENCY_GET)SYSTICK_TimerFrequencyGet,
+    .timerInterruptRestore = (SYS_TIME_PLIB_INTERRUPT_RESTORE)SYSTICK_TimerInterruptRestore,
+    .timerInterruptDisable = (SYS_TIME_PLIB_INTERRUPT_DISABLE)SYSTICK_TimerInterruptDisable,
+    .timerPeriodSet = (SYS_TIME_PLIB_PERIOD_SET)SYSTICK_TimerPeriodSet,
 };
 
 static const SYS_TIME_INIT sysTimeInitData =
 {
     .timePlib = &sysTimePlibAPI,
-    .hwTimerIntNum = TC0_IRQn,
+    .hwTimerIntNum = SysTick_IRQn,
 };
 
 // </editor-fold>
@@ -350,12 +350,12 @@ static const SYS_TIME_INIT sysTimeInitData =
 
 static const SYS_CONSOLE_UART_PLIB_INTERFACE sysConsole0UARTPlibAPI =
 {
-    .read_t = (SYS_CONSOLE_UART_PLIB_READ)SERCOM2_USART_Read,
-    .readCountGet = (SYS_CONSOLE_UART_PLIB_READ_COUNT_GET)SERCOM2_USART_ReadCountGet,
-    .readFreeBufferCountGet = (SYS_CONSOLE_UART_PLIB_READ_FREE_BUFFFER_COUNT_GET)SERCOM2_USART_ReadFreeBufferCountGet,
-    .write_t = (SYS_CONSOLE_UART_PLIB_WRITE)SERCOM2_USART_Write,
-    .writeCountGet = (SYS_CONSOLE_UART_PLIB_WRITE_COUNT_GET)SERCOM2_USART_WriteCountGet,
-    .writeFreeBufferCountGet = (SYS_CONSOLE_UART_PLIB_WRITE_FREE_BUFFER_COUNT_GET)SERCOM2_USART_WriteFreeBufferCountGet,
+    .read_t = (SYS_CONSOLE_UART_PLIB_READ)SERCOM1_USART_Read,
+    .readCountGet = (SYS_CONSOLE_UART_PLIB_READ_COUNT_GET)SERCOM1_USART_ReadCountGet,
+    .readFreeBufferCountGet = (SYS_CONSOLE_UART_PLIB_READ_FREE_BUFFFER_COUNT_GET)SERCOM1_USART_ReadFreeBufferCountGet,
+    .write_t = (SYS_CONSOLE_UART_PLIB_WRITE)SERCOM1_USART_Write,
+    .writeCountGet = (SYS_CONSOLE_UART_PLIB_WRITE_COUNT_GET)SERCOM1_USART_WriteCountGet,
+    .writeFreeBufferCountGet = (SYS_CONSOLE_UART_PLIB_WRITE_FREE_BUFFER_COUNT_GET)SERCOM1_USART_WriteFreeBufferCountGet,
 };
 
 static const SYS_CONSOLE_UART_INIT_DATA sysConsole0UARTInitData =
@@ -416,10 +416,9 @@ void SYS_Initialize ( void* data )
 
     SUPC_Initialize();
 
-    TC1_TimerInitialize();
+    TC0_CaptureInitialize();
 
-    TC0_TimerInitialize();
-
+    AC_Initialize();
     RTC_Initialize();
 
     FREQM_Initialize();
@@ -429,16 +428,17 @@ void SYS_Initialize ( void* data )
 
     ADC0_Initialize();
 
-    SERCOM3_USART_Initialize();
+    SERCOM3_I2C_Initialize();
 
-    SERCOM2_USART_Initialize();
+    SERCOM2_SPI_Initialize();
 
-    SERCOM1_SPI_Initialize();
+    SERCOM1_USART_Initialize();
 
     EVSYS_Initialize();
 
-    SERCOM0_I2C_Initialize();
+    SERCOM0_USART_Initialize();
 
+	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
     CAN0_Initialize();
@@ -481,10 +481,12 @@ void SYS_Initialize ( void* data )
 
 
     /* MISRAC 2012 deviation block end */
+    APP_Initialize();
     AD9954_DRIVER_Initialize();
     BME690_DRIVER_Initialize();
     CAN0_DRIVER_Initialize();
     CONSOLE_DRIVER_Initialize();
+    FAN_DRIVER_Initialize();
     FCM360W_DRIVER_Initialize();
     HDC302X_DRIVER_Initialize();
     LED_DRIVER_Initialize();

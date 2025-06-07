@@ -1,0 +1,41 @@
+configVersion: 1.0.0
+componentName: rtc
+coreVersion: 5.8.2
+device: PIC32CM5164JH01032
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: rtc
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.22.4
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: rtc
+          x: '635'
+          y: '90'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    RTC_MODE0_PRESCALER:
+      attributes:
+        id: RTC_MODE0_PRESCALER
+      children:
+      - children:
+        - attributes:
+            value: '11'
+          type: User
+        type: Values
+      type: KeyValueSet
+  userData: {}

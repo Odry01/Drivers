@@ -92,9 +92,9 @@ void ADC0_Initialize( void )
                                       (ADC_CALIB_BIASCOMP((calib_low_word & ADC0_BIASCAL_Msk) >> ADC0_BIASCAL_POS)));
 
     /* Prescaler */
-    ADC0_REGS->ADC_CTRLB = (uint8_t)ADC_CTRLB_PRESCALER_DIV2;
+    ADC0_REGS->ADC_CTRLB = (uint8_t)ADC_CTRLB_PRESCALER_DIV8;
     /* Sampling length */
-    ADC0_REGS->ADC_SAMPCTRL = (uint8_t)ADC_SAMPCTRL_SAMPLEN(11UL);
+    ADC0_REGS->ADC_SAMPCTRL = (uint8_t)ADC_SAMPCTRL_SAMPLEN(3UL);
 
     /* Reference */
     ADC0_REGS->ADC_REFCTRL = (uint8_t)ADC_REFCTRL_REFSEL_INTREF | ADC_REFCTRL_REFCOMP_Msk;
@@ -103,7 +103,7 @@ void ADC0_Initialize( void )
     ADC0_REGS->ADC_INPUTCTRL = (uint16_t) ADC_POSINPUT_AIN0;
 
     /* Resolution & Operation Mode */
-    ADC0_REGS->ADC_CTRLC = (uint16_t)(ADC_CTRLC_RESSEL_12BIT | ADC_CTRLC_WINMODE(0UL) );
+    ADC0_REGS->ADC_CTRLC = (uint16_t)(ADC_CTRLC_RESSEL_12BIT | ADC_CTRLC_WINMODE(0UL) | ADC_CTRLC_FREERUN_Msk);
 
 
     /* Clear all interrupt flags */

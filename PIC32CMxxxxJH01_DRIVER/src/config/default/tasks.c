@@ -83,7 +83,10 @@ void SYS_Tasks ( void )
     
 
     /* Maintain the application's state machine. */
-        /* Call Application task AD9954_DRIVER. */
+        /* Call Application task APP. */
+    APP_Tasks();
+
+    /* Call Application task AD9954_DRIVER. */
     AD9954_DRIVER_Tasks();
 
     /* Call Application task BME690_DRIVER. */
@@ -94,6 +97,9 @@ void SYS_Tasks ( void )
 
     /* Call Application task CONSOLE_DRIVER. */
     CONSOLE_DRIVER_Tasks();
+
+    /* Call Application task FAN_DRIVER. */
+    FAN_DRIVER_Tasks();
 
     /* Call Application task FCM360W_DRIVER. */
     FCM360W_DRIVER_Tasks();

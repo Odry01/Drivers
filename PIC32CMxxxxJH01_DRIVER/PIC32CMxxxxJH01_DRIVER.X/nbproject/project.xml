@@ -4,7 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>PIC32CMxxxxJH01_DRIVER</name>
-            <creation-uuid>8cb9e506-9929-4a69-b545-beb59b763bde</creation-uuid>
+            <creation-uuid>ebca94fb-585e-4c88-9829-cea480303085</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
@@ -19,9 +19,5 @@
                 <project-formatting-style>false</project-formatting-style>
             </formatting>
         </data>
-        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
-            <word>ld</word>
-            <word>Odry</word>
-        </spellchecker-wordlist>
     </configuration>
 </project>
