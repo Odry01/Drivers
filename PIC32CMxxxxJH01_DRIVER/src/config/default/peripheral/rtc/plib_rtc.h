@@ -48,6 +48,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <time.h>
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus // Provide C++ Compatibility
@@ -61,20 +62,18 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-/* Frequency of Counter Clock for RTC */
-#define RTC_COUNTER_CLOCK_FREQUENCY        (1024U / (1UL << (0xBU - 1U)))
 
-#define RTC_TIMER32_INT_MASK_PER0  RTC_MODE0_INTENSET_PER0_Msk
-#define RTC_TIMER32_INT_MASK_PER1  RTC_MODE0_INTENSET_PER1_Msk
-#define RTC_TIMER32_INT_MASK_PER2  RTC_MODE0_INTENSET_PER2_Msk
-#define RTC_TIMER32_INT_MASK_PER3  RTC_MODE0_INTENSET_PER3_Msk
-#define RTC_TIMER32_INT_MASK_PER4  RTC_MODE0_INTENSET_PER4_Msk
-#define RTC_TIMER32_INT_MASK_PER5  RTC_MODE0_INTENSET_PER5_Msk
-#define RTC_TIMER32_INT_MASK_PER6  RTC_MODE0_INTENSET_PER6_Msk
-#define RTC_TIMER32_INT_MASK_PER7  RTC_MODE0_INTENSET_PER7_Msk
-#define RTC_TIMER32_INT_MASK_CMP0  RTC_MODE0_INTENSET_CMP0_Msk
-#define RTC_TIMER32_INT_MASK_OVF  RTC_MODE0_INTENSET_OVF_Msk
-#define RTC_TIMER32_INT_MASK_INVALID 0xFFFFFFFFU
+#define RTC_CLOCK_INT_MASK_PER0  RTC_MODE2_INTENSET_PER0_Msk
+#define RTC_CLOCK_INT_MASK_PER1  RTC_MODE2_INTENSET_PER1_Msk
+#define RTC_CLOCK_INT_MASK_PER2  RTC_MODE2_INTENSET_PER2_Msk
+#define RTC_CLOCK_INT_MASK_PER3  RTC_MODE2_INTENSET_PER3_Msk
+#define RTC_CLOCK_INT_MASK_PER4  RTC_MODE2_INTENSET_PER4_Msk
+#define RTC_CLOCK_INT_MASK_PER5  RTC_MODE2_INTENSET_PER5_Msk
+#define RTC_CLOCK_INT_MASK_PER6  RTC_MODE2_INTENSET_PER6_Msk
+#define RTC_CLOCK_INT_MASK_PER7  RTC_MODE2_INTENSET_PER7_Msk
+#define RTC_CLOCK_INT_MASK_ALARM0  RTC_MODE2_INTENSET_ALARM0_Msk
+#define RTC_CLOCK_INT_MASK_OVF  RTC_MODE2_INTENSET_OVF_Msk
+#define RTC_CLOCK_INT_MASK_INVALID  0xFFFFFFFFU
 // *****************************************************************************
 // *****************************************************************************
 // Section: Data Types
@@ -82,30 +81,35 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-typedef uint32_t RTC_TIMER32_INT_MASK;
-typedef void (*RTC_TIMER32_CALLBACK)( RTC_TIMER32_INT_MASK intCause, uintptr_t context );
+typedef enum
+{
+    RTC_ALARM_MASK_SS = 0x1U,    //Alarm every minute
+    RTC_ALARM_MASK_MMSS,        //Alarm every Hour
+    RTC_ALARM_MASK_HHMMSS,      //Alarm Every Day
+    RTC_ALARM_MASK_DDHHMMSS,    //Alarm Every Month
+    RTC_ALARM_MASK_MMDDHHMMSS,  //Alarm Every year
+    RTC_ALARM_MASK_YYMMDDHHMMSS //Alarm Once
+} RTC_ALARM_MASK;
+
+typedef uint32_t RTC_CLOCK_INT_MASK;
+
+typedef void (*RTC_CALLBACK)( RTC_CLOCK_INT_MASK intCause, uintptr_t context );
 
 typedef struct
 {
-    /* Timer 32Bit */
-    RTC_TIMER32_CALLBACK timer32BitCallback;
-    RTC_TIMER32_INT_MASK timer32intCause;
+    /* RTC Clock*/
+    RTC_CLOCK_INT_MASK intCause;
+    RTC_CALLBACK alarmCallback;
     uintptr_t context;
 } RTC_OBJECT;
 
 void RTC_Initialize(void);
-void RTC_Timer32CountSyncEnable ( void );
-void RTC_Timer32CountSyncDisable ( void );
-void RTC_Timer32Start ( void );
-void RTC_Timer32Stop ( void );
-void RTC_Timer32CounterSet ( uint32_t count );
-uint32_t RTC_Timer32CounterGet ( void );
-uint32_t RTC_Timer32FrequencyGet ( void );
-void RTC_Timer32CompareSet ( uint32_t compareValue );
-uint32_t RTC_Timer32PeriodGet ( void );
-void RTC_Timer32InterruptEnable( RTC_TIMER32_INT_MASK interruptMask );
-void RTC_Timer32InterruptDisable( RTC_TIMER32_INT_MASK interruptMask );
-void RTC_Timer32CallbackRegister ( RTC_TIMER32_CALLBACK callback, uintptr_t context );
+void RTC_RTCCClockSyncEnable ( void );
+void RTC_RTCCClockSyncDisable ( void );
+bool RTC_RTCCTimeSet (struct tm * initialTime );
+void RTC_RTCCTimeGet ( struct tm * currentTime );
+bool RTC_RTCCAlarmSet ( struct tm * alarmTime, RTC_ALARM_MASK mask );
+void RTC_RTCCCallbackRegister ( RTC_CALLBACK callback, uintptr_t context);
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

@@ -7,6 +7,9 @@
   File Name:
     can0_driver.c
 
+  Status:
+    In development
+ 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
 
@@ -194,7 +197,9 @@ void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
             (
              CONSOLE_HANDLE,
              "CAN0 TX error count: %d\r\n"
-             "CAN0 RX error count: %d\r\n", can0_driverData.TX_ERROR_COUNT, can0_driverData.RX_ERROR_COUNT
+             "CAN0 RX error count: %d\r\n",
+             can0_driverData.TX_ERROR_COUNT,
+             can0_driverData.RX_ERROR_COUNT
              );
 }
 

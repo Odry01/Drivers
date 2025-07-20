@@ -27,5 +27,25 @@ data:
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
-  symbols: {}
+  symbols:
+    SUPC_VREF_SEL:
+      attributes:
+        id: SUPC_VREF_SEL
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
+    SUPC_VREF_VREFOE:
+      attributes:
+        id: SUPC_VREF_VREFOE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
   userData: {}

@@ -118,6 +118,9 @@
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc_common.h</itemPath>
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc0.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="wdt" displayName="wdt" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/wdt/plib_wdt.h</itemPath>
+            </logicalFolder>
           </logicalFolder>
           <logicalFolder name="system" displayName="system" projectFiles="true">
             <logicalFolder name="console" displayName="console" projectFiles="true">
@@ -168,7 +171,6 @@
         <itemPath>../src/console_driver.h</itemPath>
         <itemPath>../src/fan_driver.h</itemPath>
         <itemPath>../src/fcm360w_driver.h</itemPath>
-        <itemPath>../src/led_driver.h</itemPath>
         <itemPath>../src/hdc302x_driver.h</itemPath>
         <itemPath>../src/mcp9808_driver.h</itemPath>
         <itemPath>../src/ntc_driver.h</itemPath>
@@ -177,6 +179,8 @@
         <itemPath>../src/sht4x_driver.h</itemPath>
         <itemPath>../src/timer_driver.h</itemPath>
         <itemPath>../src/xm125_driver.h</itemPath>
+        <itemPath>../src/sen6x_driver.h</itemPath>
+        <itemPath>../src/ws281x_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="PIC32CM5164JH01032_DFP"
@@ -408,7 +412,7 @@
               <itemPath>../src/config/default/peripheral/rstc/plib_rstc.c</itemPath>
             </logicalFolder>
             <logicalFolder name="rtc" displayName="rtc" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/rtc/plib_rtc_timer.c</itemPath>
+              <itemPath>../src/config/default/peripheral/rtc/plib_rtc_clock.c</itemPath>
             </logicalFolder>
             <logicalFolder name="sercom" displayName="sercom" projectFiles="true">
               <logicalFolder name="i2c_master" displayName="i2c_master" projectFiles="true">
@@ -434,6 +438,9 @@
             <logicalFolder name="tcc" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc1.c</itemPath>
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc0.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="wdt" displayName="wdt" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/wdt/plib_wdt.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="stdio" displayName="stdio" projectFiles="true">
@@ -464,7 +471,6 @@
       </logicalFolder>
       <logicalFolder name="f1" displayName="drivers" projectFiles="true">
         <itemPath>../src/can0_driver.c</itemPath>
-        <itemPath>../src/led_driver.c</itemPath>
         <itemPath>../src/sht4x_driver.c</itemPath>
         <itemPath>../src/rstc_driver.c</itemPath>
         <itemPath>../src/ad9954_driver.c</itemPath>
@@ -478,6 +484,8 @@
         <itemPath>../src/ntc_driver.c</itemPath>
         <itemPath>../src/timer_driver.c</itemPath>
         <itemPath>../src/xm125_driver.c</itemPath>
+        <itemPath>../src/sen6x_driver.c</itemPath>
+        <itemPath>../src/ws281x_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>

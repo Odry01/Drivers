@@ -204,4 +204,34 @@ data:
           type: Dynamic
         type: Values
       type: String
+    ADC_CONV_TRIGGER:
+      attributes:
+        id: ADC_CONV_TRIGGER
+      children:
+      - children:
+        - attributes:
+            value: SW Trigger
+          type: User
+        type: Values
+      type: Combo
+    ADC_SAMPCTRL_SAMPLEN:
+      attributes:
+        id: ADC_SAMPCTRL_SAMPLEN
+      children:
+      - children:
+        - attributes:
+            value: '18'
+          type: User
+        type: Values
+      type: Integer
+    ADC_INTENSET_RESRDY:
+      attributes:
+        id: ADC_INTENSET_RESRDY
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
   userData: {}

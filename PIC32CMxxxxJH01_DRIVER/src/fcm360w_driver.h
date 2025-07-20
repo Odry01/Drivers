@@ -7,6 +7,9 @@
   File Name:
     fcm360w_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -156,27 +159,6 @@ extern "C"
 #define AT_QFWRITE                                      "AT+QFWRITE"
 #define AT_QFLST                                        "AT+QFDEL"
 
-/* Wi-Fi URC Commands */
-#define QSTASTAT                                        "+QSTASTAT"
-#define QAPSTAT                                         "+QAPSTAT"
-#define QOTASTAT                                        "+QOTASTAT"
-
-/* BLE URC Commands */
-#define QBLESTAT                                        "+QBLESTAT"
-#define QBLEMTU                                         "+QBLEMTU"
-#define QBLERECV                                        "+QBLERECV"
-#define QBLEPEERROLE                                    "+QBLEPEERROLE"
-
-/* TCP/UDP URC Commands */
-#define QIURC                                           "+QIURC"
-
-/* SSL URC Commands */
-#define QSSLURC                                         "+QSSLURC"
-
-/* MQTT URC Commands */
-#define QMTSTAT                                         "+QMTSTAT"
-#define QMTRECV                                         "+QMTRECV"
-
 #define FCM360W_RX_DATA_SIZE                            256
 #define FCM360W_TX_DATA_SIZE                            256
 
@@ -258,68 +240,7 @@ void FCM360W_DRIVER_USART_Callback(DRV_USART_BUFFER_EVENT EVENT, DRV_USART_BUFFE
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void FCM360W_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    FCM360W_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    FCM360W_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void FCM360W_DRIVER_Initialize(void);
-
-/*******************************************************************************
-  Function:
-    void FCM360W_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    FCM360W_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
 
 void FCM360W_DRIVER_Tasks(void);
 

@@ -4,7 +4,7 @@
 
 
 project: PIC32CMxxxxJH01_DRIVER
-creation_date: 2025-06-07T21:29:33.779+02:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2025-07-20T14:18:45.693+02:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
 mcc_version: v5.6.2

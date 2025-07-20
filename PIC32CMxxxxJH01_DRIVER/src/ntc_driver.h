@@ -7,6 +7,9 @@
   File Name:
     ntc_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -54,7 +57,7 @@ extern "C"
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -67,12 +70,17 @@ extern "C"
 typedef enum
 {
     NTC_DRIVER_STATE_INIT = 0,
-    NTC_DRIVER_STATE_SERVICE_TASKS,
+    NTC_DRIVER_STATE_IDLE,
+    NTC_DRIVER_STATE_START_MEASUREMENT,
+    NTC_DRIVER_STATE_WAIT_FOR_MEASUREMENT,
+    NTC_DRIVER_STATE_GET_RESULT,
+    NTC_DRIVER_STATE_CALCULATION_TEMPERATURE,
+    NTC_DRIVER_STATE_STORE_DATA,
 } NTC_DRIVER_STATES;
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -90,7 +98,16 @@ typedef struct
     NTC_DRIVER_STATES state;
 
     /* Driver variables */
+    volatile bool NTC_TASK_START;
+    volatile bool NTC_TASK_COMPLETED;
+    volatile bool ADC0_RESULT_READY;
 } NTC_DRIVER_DATA;
+
+typedef struct
+{
+    uint16_t T_VALUE;
+    float CELSIUS_TEMPERATURE;
+} NTC_DRIVER_SENSOR_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,7 +115,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-
+void NTC_DRIVER_Callback(ADC_STATUS STATUS, uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -106,70 +123,21 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void NTC_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    NTC_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    NTC_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void NTC_DRIVER_Initialize(void);
 
-/*******************************************************************************
-  Function:
-    void NTC_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    NTC_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
-
 void NTC_DRIVER_Tasks(void);
+
+bool NTC_DRIVER_Get_Task_Start_Status(void);
+
+void NTC_DRIVER_Set_Task_Start_Status(bool STATUS);
+
+bool NTC_DRIVER_Get_Task_Completed_Status(void);
+
+void NTC_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void NTC_DRIVER_Calculation_Temperature(uint16_t T_VALUE);
+
+void NTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

@@ -7,6 +7,9 @@
   File Name:
     rtc_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -94,8 +97,12 @@ typedef struct
     RTC_DRIVER_STATES state;
 
     /* Driver variables */
+    struct tm INIT_TIME;
+    struct tm SYSTEM_TIME;
+    struct tm ALARM_TIME;
     bool RTC_TASK_START;
     bool RTC_TASK_COMPLETED;
+    bool RTC_ALARM;
     bool RTC_XOSC32K_ALERT;
     uint32_t TIME;
 } RTC_DRIVER_DATA;
@@ -105,6 +112,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
+
+void RTC_DRIVER_Alarm_Callback(RTC_CLOCK_INT_MASK INT, uintptr_t CONTEXT);
 
 void RTC_DRIVER_XOSC32K_Alert_Callback(uintptr_t CONTEXT);
 

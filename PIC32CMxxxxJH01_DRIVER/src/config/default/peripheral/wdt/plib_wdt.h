@@ -1,22 +1,23 @@
 /*******************************************************************************
- System Interrupts File
+  Watch Dog Timer PLIB.
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    interrupt.h
+    plib_wdt.h
 
   Summary:
-    Interrupt vectors mapping
+    Interface definition of WDT PLIB.
 
   Description:
-    This file contains declarations of device vectors used by Harmony 3
- *******************************************************************************/
+    This file defines the interface for the WDT Plib.
+    It allows user to setup timeout duration and restart watch dog timer.
+*******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -36,41 +37,71 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
- *******************************************************************************/
+*******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef INTERRUPTS_H
-#define INTERRUPTS_H
+#ifndef PLIB_WDT_H    // Guards against multiple inclusion
+#define PLIB_WDT_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+
 #include <stdint.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include "device.h"
 
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus // Provide C++ Compatibility
+
+    extern "C" {
+
+#endif
+// DOM-IGNORE-END
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Data Types
+// *****************************************************************************
+// *****************************************************************************
 
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Handler Routines
+// Section: Interface Routines
 // *****************************************************************************
 // *****************************************************************************
-void Reset_Handler (void);
-void NonMaskableInt_Handler (void);
-void HardFault_Handler (void);
-void SysTick_Handler (void);
-void OSC32KCTRL_InterruptHandler (void);
-void RTC_InterruptHandler (void);
-void EIC_InterruptHandler (void);
-void DMAC_InterruptHandler (void);
-void SERCOM0_USART_InterruptHandler (void);
-void SERCOM1_USART_InterruptHandler (void);
-void SERCOM2_SPI_InterruptHandler (void);
-void SERCOM3_I2C_InterruptHandler (void);
-void TC0_CaptureInterruptHandler (void);
-void ADC0_InterruptHandler (void);
+
+void WDT_Enable( void );
+
+void WDT_Disable( void );
+
+void WDT_EnableWindowMode( void );
+
+void WDT_DisableWindowMode( void );
+
+bool WDT_IsEnabled(void);
+
+bool WDT_IsAlwaysOn(void);
+
+bool WDT_IsWindowModeEnabled(void);
+
+void WDT_TimeoutPeriodSet(uint8_t TimeoutPeriod);
+
+void WDT_Clear( void );
+
+void WDT_ClearWithSync( void );
 
 
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
 
-#endif // INTERRUPTS_H
+    }
+
+#endif
+// DOM-IGNORE-END
+
+#endif /* PLIB_WDT_H */

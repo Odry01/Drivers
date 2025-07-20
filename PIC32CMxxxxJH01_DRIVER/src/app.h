@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     app.h
 
+  Status:
+    Finished
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -16,7 +19,7 @@
     "APP_Initialize" and "APP_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "APP_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _APP_H
 #define _APP_H
@@ -31,12 +34,15 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -47,8 +53,11 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
-/* Application states
+
+/** Application states
 
   Summary:
     Application states enumeration
@@ -56,20 +65,24 @@ extern "C" {
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
+ */
 
 typedef enum
 {
-    /* Application's state machine's initial state. */
-    APP_STATE_INIT=0,
-    APP_STATE_SERVICE_TASKS,
-    /* TODO: Define states used by the application state machine. */
-
+    APP_STATE_INIT = 0,
+    APP_STATE_START_MAIN_TMR,
+    APP_STATE_IDLE,
+    APP_STATE_HDC302X_DRIVER_OPERATION,
+    APP_STATE_WAIT_FOR_FINISH_HDC302X_DRIVER_OPERATION,
+    APP_STATE_CAN0_DRIVER_OPERATION,
+    APP_STATE_WAIT_FOR_FINISH_CAN0_DRIVER_OPERATION,
+    APP_STATE_CONSOLE_DRIVER_OPERATION,
+    APP_STATE_WAIT_FOR_FINISH_CONSOLE_DRIVER_OPERATION,
 } APP_STATES;
 
-
 // *****************************************************************************
-/* Application Data
+
+/** Application Data
 
   Summary:
     Holds application data
@@ -86,8 +99,11 @@ typedef struct
     /* The application's current state */
     APP_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-
+    /* Application variables */
+    bool CAN0_ERROR;
+    bool I2C_ERROR;
+    bool SPI_ERROR;
+    bool UART_ERROR;
 } APP_DATA;
 
 // *****************************************************************************
@@ -95,8 +111,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -104,21 +120,17 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
+/**
   Function:
-    void APP_Initialize ( void )
+    void APP_Initialize(void)
 
   Summary:
      MPLAB Harmony application initialization routine.
 
   Description:
-    This function initializes the Harmony application.  It places the
+    This function initializes the Harmony application. It places the
     application in its initial state and prepares it to run so that its
     APP_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
 
   Parameters:
     None.
@@ -126,32 +138,21 @@ typedef struct
   Returns:
     None.
 
-  Example:
-    <code>
-    APP_Initialize();
-    </code>
-
   Remarks:
-    This routine must be called from the SYS_Initialize function.
-*/
+    None.
+ */
+void APP_Initialize(void);
 
-void APP_Initialize ( void );
-
-
-/*******************************************************************************
+/**
   Function:
-    void APP_Tasks ( void )
+    void APP_Tasks(void)
 
   Summary:
     MPLAB Harmony Demo application tasks function
 
   Description:
-    This routine is the Harmony Demo application's tasks function.  It
+    This routine is the Harmony Demo application's tasks function. It
     defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
 
   Parameters:
     None.
@@ -159,16 +160,178 @@ void APP_Initialize ( void );
   Returns:
     None.
 
-  Example:
-    <code>
-    APP_Tasks();
-    </code>
+  Remarks:
+    None.
+ */
+void APP_Tasks(void);
+
+/**
+  Function:
+    bool APP_Get_CAN0_Error_Status(void)
+
+  Summary:
+    Gets the error status of CAN0 peripheral.
+
+  Description:
+    This function retrieves the error status of the CAN0 peripheral.
+
+  Parameters:
+    None.
+
+  Returns:
+    @return bool - True if a CAN error is detected, false otherwise.
 
   Remarks:
-    This routine must be called from SYS_Tasks() routine.
+    None.
  */
+bool APP_Get_CAN0_Error_Status(void);
 
-void APP_Tasks( void );
+/**
+  Function:
+    void APP_Set_CAN0_Error_Status(bool STATUS)
+
+  Summary:
+    Sets the error status of CAN0 peripheral.
+
+  Description:
+    This function sets the error status of the CAN0 peripheral.
+
+  Parameters:
+    @param bool STATUS: bool - The desired error status to set. True indicates an error, false indicates no error.
+
+  Returns:
+    None.
+
+  Remarks:
+    None.
+ */
+void APP_Set_CAN0_Error_Status(bool STATUS);
+
+/**
+  Function:
+    bool APP_Get_I2C_Error_Status(void)
+
+  Summary:
+    Gets the error status of the I2C DRV.
+
+  Description:
+    This function retrieves the current error status of the I2C Core driver.
+
+  Parameters:
+    None.
+
+  Returns:
+    @return bool - True if an I2C error is detected, false otherwise.
+
+  Remarks:
+    None.
+ */
+bool APP_Get_I2C_Error_Status(void);
+
+/**
+  Function:
+    void APP_Set_I2C_Error_Status(bool STATUS)
+
+  Summary:
+    Sets the error status of the I2C Core driver.
+
+  Description:
+    This function sets the current error status of the I2C Core driver.
+
+  Parameters:
+    @param bool STATUS: - The desired error status to set. True indicates an error, false indicates no error.
+
+  Returns:
+    None.
+
+  Remarks:
+    None.
+ */
+void APP_Set_I2C_Error_Status(bool STATUS);
+
+/**
+  Function:
+    bool APP_Get_SPI_Error_Status(void)
+
+  Summary:
+    Gets the error status of the SPI Core driver.
+
+  Description:
+    This function retrieves the current error status of the SPI Core driver.
+
+  Parameters:
+    None.
+
+  Returns:
+    @return bool - True if an SPI error is detected, false otherwise.
+
+  Remarks:
+    None.
+ */
+bool APP_Get_SPI_Error_Status(void);
+
+/**
+  Function:
+    void APP_Set_SPI_Error_Status(bool STATUS)
+
+  Summary:
+    Sets the error status of the SPI Core driver.
+
+  Description:
+    This function sets the current error status of the SPI Core driver.
+
+  Parameters:
+    @param bool STATUS: - The desired error status to set. True indicates an error, false indicates no error.
+
+  Returns:
+    None.
+
+  Remarks:
+    None.
+ */
+void APP_Set_SPI_Error_Status(bool STATUS);
+
+/**
+  Function:
+    bool APP_Get_UART_Error_Status(void)
+
+  Summary:
+    Gets the error status of the UART Core driver.
+
+  Description:
+    This function retrieves the current error status of the UART Core driver.
+
+  Parameters:
+    None.
+
+  Returns:
+    @return bool - True if a UART error is detected, false otherwise.
+
+  Remarks:
+    None.
+ */
+bool APP_Get_UART_Error_Status(void);
+
+/**
+  Function:
+    void APP_Set_UART_Error_Status(bool STATUS)
+
+  Summary:
+    Sets the error status of the UART Core driver.
+
+  Description:
+    This function sets the current error status of the UART Core driver.
+
+  Parameters:
+    @param bool STATUS: The desired error status to set. True indicates an error, false indicates no error.
+
+  Returns:
+    None.
+
+  Remarks:
+    None.
+ */
+void APP_Set_UART_Error_Status(bool STATUS);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -181,4 +344,3 @@ void APP_Tasks( void );
 /*******************************************************************************
  End of File
  */
-

@@ -416,9 +416,9 @@ void SYS_Initialize ( void* data )
 
     SUPC_Initialize();
 
+    AC_Initialize();
     TC0_CaptureInitialize();
 
-    AC_Initialize();
     RTC_Initialize();
 
     FREQM_Initialize();
@@ -489,13 +489,14 @@ void SYS_Initialize ( void* data )
     FAN_DRIVER_Initialize();
     FCM360W_DRIVER_Initialize();
     HDC302X_DRIVER_Initialize();
-    LED_DRIVER_Initialize();
     MCP9808_DRIVER_Initialize();
     NTC_DRIVER_Initialize();
     RSTC_DRIVER_Initialize();
     RTC_DRIVER_Initialize();
+    SEN6X_DRIVER_Initialize();
     SHT4X_DRIVER_Initialize();
     TIMER_DRIVER_Initialize();
+    WS281X_DRIVER_Initialize();
     XM125_DRIVER_Initialize();
 
 

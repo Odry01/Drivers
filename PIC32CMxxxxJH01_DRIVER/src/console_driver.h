@@ -7,6 +7,9 @@
   File Name:
     console_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -50,9 +53,11 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -65,7 +70,8 @@ extern "C"
 typedef enum
 {
     CONSOLE_DRIVER_STATE_INIT = 0,
-    CONSOLE_DRIVER_STATE_SERVICE_TASKS,
+    CONSOLE_DRIVER_STATE_IDLE,
+    CONSOLE_DRIVER_STATE_PRINT_DATA,
 } CONSOLE_DRIVER_STATES;
 
 // *****************************************************************************
@@ -88,6 +94,9 @@ typedef struct
     CONSOLE_DRIVER_STATES state;
 
     /* Driver variables */
+    SYS_CONSOLE_HANDLE CONSOLE_HANDLE;
+    volatile bool CONSOLE_TASK_START;
+    volatile bool CONSOLE_TASK_COMPLETED;
 } CONSOLE_DRIVER_DATA;
 
 // *****************************************************************************
@@ -104,70 +113,17 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void CONSOLE_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    CONSOLE_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    CONSOLE_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void CONSOLE_DRIVER_Initialize(void);
 
-/*******************************************************************************
-  Function:
-    void CONSOLE_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    CONSOLE_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
-
 void CONSOLE_DRIVER_Tasks(void);
+
+bool CONSOLE_DRIVER_Get_Task_Start_Status(void);
+
+void CONSOLE_DRIVER_Set_Task_Start_Status(bool STATUS);
+
+bool CONSOLE_DRIVER_Get_Task_Completed_Status(void);
+
+void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

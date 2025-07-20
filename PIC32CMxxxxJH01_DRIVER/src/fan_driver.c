@@ -7,6 +7,9 @@
   File Name:
     fan_driver.c
 
+  Status:
+    In development
+ 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
 
@@ -48,7 +51,7 @@
     This structure should be initialized by the FAN_DRIVER_Initialize function.
 
     Application strings and buffers are be defined outside this structure.
-*/
+ */
 
 FAN_DRIVER_DATA fan_driverData;
 
@@ -58,8 +61,7 @@ FAN_DRIVER_DATA fan_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/* TODO:  Add any necessary callback functions.
-*/
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -68,9 +70,6 @@ FAN_DRIVER_DATA fan_driverData;
 // *****************************************************************************
 
 
-/* TODO:  Add any necessary local functions.
-*/
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -78,73 +77,32 @@ FAN_DRIVER_DATA fan_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void FAN_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in fan_driver.h.
- */
-
-void FAN_DRIVER_Initialize ( void )
+void FAN_DRIVER_Initialize(void)
 {
-    /* Place the App state machine in its initial state. */
     fan_driverData.state = FAN_DRIVER_STATE_INIT;
-
-
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
-
-/******************************************************************************
-  Function:
-    void FAN_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in fan_driver.h.
- */
-
-void FAN_DRIVER_Tasks ( void )
+void FAN_DRIVER_Tasks(void)
 {
-
-    /* Check the application's current state. */
-    switch ( fan_driverData.state )
+    switch (fan_driverData.state)
     {
-        /* Application's initial state. */
         case FAN_DRIVER_STATE_INIT:
         {
-            bool appInitialized = true;
-
-
-            if (appInitialized)
-            {
-
-                fan_driverData.state = FAN_DRIVER_STATE_SERVICE_TASKS;
-            }
+            fan_driverData.state = FAN_DRIVER_STATE_SERVICE_TASKS;
             break;
         }
 
         case FAN_DRIVER_STATE_SERVICE_TASKS:
         {
-
             break;
         }
 
-        /* TODO: implement your application state machine.*/
-
-
-        /* The default state should never be executed. */
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
-
 
 /*******************************************************************************
  End of File

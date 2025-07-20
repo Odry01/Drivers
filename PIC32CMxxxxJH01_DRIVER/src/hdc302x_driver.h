@@ -7,6 +7,9 @@
   File Name:
     hdc302x_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -50,103 +53,101 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define HDC302X_I2C_ADDRESS                 0x44
-
-#define HDC302X_MODE_TRIG_MSB               0x24
-#define HDC302X_MODE_TRIG_LPM0              0x00
-#define HDC302X_MODE_TRIG_LPM1              0x0B
-#define HDC302X_MODE_TRIG_LPM2              0x16
-#define HDC302X_MODE_TRIG_LPM3              0xFF
-#define HDC302X_MODE_A2S_MSB                0x20
-#define HDC302X_MODE_A2S_LPM0               0x32
-#define HDC302X_MODE_A2S_LPM1               0x24
-#define HDC302X_MODE_A2S_LPM2               0x2F
-#define HDC302X_MODE_A2S_LPM3               0xFF
-#define HDC302X_MODE_A1HZ_MSB               0x21
-#define HDC302X_MODE_A1HZ_LPM0              0x30
-#define HDC302X_MODE_A1HZ_LPM1              0x26
-#define HDC302X_MODE_A1HZ_LPM2              0x2D
-#define HDC302X_MODE_A1HZ_LPM3              0xFF
-#define HDC302X_MODE_A2HZ_MSB               0x22
-#define HDC302X_MODE_A2HZ_LPM0              0x36
-#define HDC302X_MODE_A2HZ_LPM1              0x20
-#define HDC302X_MODE_A2HZ_LPM2              0x2B
-#define HDC302X_MODE_A2HZ_LPM3              0xFF
-#define HDC302X_MODE_A4HZ_MSB               0x23
-#define HDC302X_MODE_A4HZ_LPM0              0x34
-#define HDC302X_MODE_A4HZ_LPM1              0x22
-#define HDC302X_MODE_A4HZ_LPM2              0x29
-#define HDC302X_MODE_A4HZ_LPM3              0xFF
-#define HDC302X_MODE_A10HZ_MSB              0x27
-#define HDC302X_MODE_A10HZ_LPM0             0x37
-#define HDC302X_MODE_A10HZ_LPM1             0x21
-#define HDC302X_MODE_A10HZ_LPM2             0x2A
-#define HDC302X_MODE_A10HZ_LPM3             0xFF
-#define HDC302X_MODE_READ_MSB               0xE0
-#define HDC302X_MODE_READ                   0x00
-#define HDC302X_MODE_READ_MIN_T             0x02
-#define HDC302X_MODE_READ_MAX_T             0x03
-#define HDC302X_MODE_READ_MIN_H             0x04
-#define HDC302X_MODE_READ_MAX_H             0x05
-#define HDC302X_WR_ALERT_MSB                0x61
-#define HDC302X_WR_ALERT_SET_LO             0x00
-#define HDC302X_WR_ALERT_SET_HI             0x1D
-#define HDC302X_WR_ALERT_CLR_LO             0x0B
-#define HDC302X_WR_ALERT_CLR_HI             0x16
-#define HDC302X_RD_ALERT_MSB                0xE1
-#define HDC302X_RD_ALERT_SET_LO             0x02
-#define HDC302X_RD_ALERT_SET_HI             0x1F
-#define HDC302X_RD_ALERT_CLR_LO             0x09
-#define HDC302X_RD_ALERT_CLR_HI             0x14
-#define HDC302X_HEATER_MSB                  0x30
-#define HDC302X_HEATER_ENABLE               0x6D
-#define HDC302X_HEATER_DISABLE              0x66
-#define HDC302X_HEATER_CFG                  0x6E
-#define HDC302X_STATUS_READ_MSB             0xF3
-#define HDC302X_STATUS_READ_LSB             0x2D
-#define HDC302X_STATUS_CLEAR_MSB            0x30
-#define HDC302X_STATUS_CLEAR_LSB            0x41
-#define HDC302X_OFFSET_MSB                  0xA0
-#define HDC302X_OFFSET_LSB                  0x04
-#define HDC302X_SOFT_RESET_MSB              0x30
-#define HDC302X_SOFT_RESET_LSB              0xA2
-#define HDC302X_RD_NIST_MSB                 0x36
-#define HDC302X_RD_NIST_3                   0x83
-#define HDC302X_RD_NIST_2                   0x84
-#define HDC302X_RD_NIST_1                   0x85
-#define HDC302X_RD_MID_MSB                  0x37
-#define HDC302X_RD_MID_LSB                  0x80
-#define HDC302X_WR_POR_MODE_MSB             0x61
-#define HDC302X_WR_POR_MODE_LSB             0xBB
-#define HDC302X_POR_MODE_MSB                0x00
-#define HDC302X_POR_MODE_A2S_LPM0           0x03
-#define HDC302X_POR_MODE_A2S_LPM1           0x13
-#define HDC302X_POR_MODE_A2S_LPM2           0x23
-#define HDC302X_POR_MODE_A2S_LPM3           0x33
-#define HDC302X_POR_MODE_A1HZ_LPM0          0x05
-#define HDC302X_POR_MODE_A1HZ_LPM1          0x15
-#define HDC302X_POR_MODE_A1HZ_LPM2          0x25
-#define HDC302X_POR_MODE_A1HZ_LPM3          0x35
-#define HDC302X_POR_MODE_A2HZ_LPM0          0x07
-#define HDC302X_POR_MODE_A2HZ_LPM1          0x17
-#define HDC302X_POR_MODE_A2HZ_LPM2          0x27
-#define HDC302X_POR_MODE_A2HZ_LPM3          0x37
-#define HDC302X_POR_MODE_A4HZ_LPM0          0x09
-#define HDC302X_POR_MODE_A4HZ_LPM1          0x19
-#define HDC302X_POR_MODE_A4HZ_LPM2          0x29
-#define HDC302X_POR_MODE_A4HZ_LPM3          0x39
-#define HDC302X_POR_MODE_A10HZ_LPM0         0x0B
-#define HDC302X_POR_MODE_A10HZ_LPM1         0x1B
-#define HDC302X_POR_MODE_A10HZ_LPM2         0x2B
-#define HDC302X_POR_MODE_A10HZ_LPM3         0x3B
-#define HDC302X_POR_MODE_SLEEP              0x00
+#define HDC302X_CMD_MODE_TRIG_MSB               0x24
+#define HDC302X_CMD_MODE_TRIG_LPM0              0x00
+#define HDC302X_CMD_MODE_TRIG_LPM1              0x0B
+#define HDC302X_CMD_MODE_TRIG_LPM2              0x16
+#define HDC302X_CMD_MODE_TRIG_LPM3              0xFF
+#define HDC302X_CMD_MODE_A2S_MSB                0x20
+#define HDC302X_CMD_MODE_A2S_LPM0               0x32
+#define HDC302X_CMD_MODE_A2S_LPM1               0x24
+#define HDC302X_CMD_MODE_A2S_LPM2               0x2F
+#define HDC302X_CMD_MODE_A2S_LPM3               0xFF
+#define HDC302X_CMD_MODE_A1HZ_MSB               0x21
+#define HDC302X_CMD_MODE_A1HZ_LPM0              0x30
+#define HDC302X_CMD_MODE_A1HZ_LPM1              0x26
+#define HDC302X_CMD_MODE_A1HZ_LPM2              0x2D
+#define HDC302X_CMD_MODE_A1HZ_LPM3              0xFF
+#define HDC302X_CMD_MODE_A2HZ_MSB               0x22
+#define HDC302X_CMD_MODE_A2HZ_LPM0              0x36
+#define HDC302X_CMD_MODE_A2HZ_LPM1              0x20
+#define HDC302X_CMD_MODE_A2HZ_LPM2              0x2B
+#define HDC302X_CMD_MODE_A2HZ_LPM3              0xFF
+#define HDC302X_CMD_MODE_A4HZ_MSB               0x23
+#define HDC302X_CMD_MODE_A4HZ_LPM0              0x34
+#define HDC302X_CMD_MODE_A4HZ_LPM1              0x22
+#define HDC302X_CMD_MODE_A4HZ_LPM2              0x29
+#define HDC302X_CMD_MODE_A4HZ_LPM3              0xFF
+#define HDC302X_CMD_MODE_A10HZ_MSB              0x27
+#define HDC302X_CMD_MODE_A10HZ_LPM0             0x37
+#define HDC302X_CMD_MODE_A10HZ_LPM1             0x21
+#define HDC302X_CMD_MODE_A10HZ_LPM2             0x2A
+#define HDC302X_CMD_MODE_A10HZ_LPM3             0xFF
+#define HDC302X_CMD_MODE_READ_MSB               0xE0
+#define HDC302X_CMD_MODE_READ                   0x00
+#define HDC302X_CMD_MODE_READ_MIN_T             0x02
+#define HDC302X_CMD_MODE_READ_MAX_T             0x03
+#define HDC302X_CMD_MODE_READ_MIN_H             0x04
+#define HDC302X_CMD_MODE_READ_MAX_H             0x05
+#define HDC302X_CMD_WR_ALERT_MSB                0x61
+#define HDC302X_CMD_WR_ALERT_SET_LO             0x00
+#define HDC302X_CMD_WR_ALERT_SET_HI             0x1D
+#define HDC302X_CMD_WR_ALERT_CLR_LO             0x0B
+#define HDC302X_CMD_WR_ALERT_CLR_HI             0x16
+#define HDC302X_CMD_RD_ALERT_MSB                0xE1
+#define HDC302X_CMD_RD_ALERT_SET_LO             0x02
+#define HDC302X_CMD_RD_ALERT_SET_HI             0x1F
+#define HDC302X_CMD_RD_ALERT_CLR_LO             0x09
+#define HDC302X_CMD_RD_ALERT_CLR_HI             0x14
+#define HDC302X_CMD_HEATER_MSB                  0x30
+#define HDC302X_CMD_HEATER_ENABLE               0x6D
+#define HDC302X_CMD_HEATER_DISABLE              0x66
+#define HDC302X_CMD_HEATER_CFG                  0x6E
+#define HDC302X_CMD_STATUS_READ_MSB             0xF3
+#define HDC302X_CMD_STATUS_READ_LSB             0x2D
+#define HDC302X_CMD_STATUS_CLEAR_MSB            0x30
+#define HDC302X_CMD_STATUS_CLEAR_LSB            0x41
+#define HDC302X_CMD_OFFSET_MSB                  0xA0
+#define HDC302X_CMD_OFFSET_LSB                  0x04
+#define HDC302X_CMD_SOFT_RESET_MSB              0x30
+#define HDC302X_CMD_SOFT_RESET_LSB              0xA2
+#define HDC302X_CMD_RD_NIST_MSB                 0x36
+#define HDC302X_CMD_RD_NIST_3                   0x83
+#define HDC302X_CMD_RD_NIST_2                   0x84
+#define HDC302X_CMD_RD_NIST_1                   0x85
+#define HDC302X_CMD_RD_MID_MSB                  0x37
+#define HDC302X_CMD_RD_MID_LSB                  0x80
+#define HDC302X_CMD_WR_POR_MODE_MSB             0x61
+#define HDC302X_CMD_WR_POR_MODE_LSB             0xBB
+#define HDC302X_CMD_POR_MODE_MSB                0x00
+#define HDC302X_CMD_POR_MODE_A2S_LPM0           0x03
+#define HDC302X_CMD_POR_MODE_A2S_LPM1           0x13
+#define HDC302X_CMD_POR_MODE_A2S_LPM2           0x23
+#define HDC302X_CMD_POR_MODE_A2S_LPM3           0x33
+#define HDC302X_CMD_POR_MODE_A1HZ_LPM0          0x05
+#define HDC302X_CMD_POR_MODE_A1HZ_LPM1          0x15
+#define HDC302X_CMD_POR_MODE_A1HZ_LPM2          0x25
+#define HDC302X_CMD_POR_MODE_A1HZ_LPM3          0x35
+#define HDC302X_CMD_POR_MODE_A2HZ_LPM0          0x07
+#define HDC302X_CMD_POR_MODE_A2HZ_LPM1          0x17
+#define HDC302X_CMD_POR_MODE_A2HZ_LPM2          0x27
+#define HDC302X_CMD_POR_MODE_A2HZ_LPM3          0x37
+#define HDC302X_CMD_POR_MODE_A4HZ_LPM0          0x09
+#define HDC302X_CMD_POR_MODE_A4HZ_LPM1          0x19
+#define HDC302X_CMD_POR_MODE_A4HZ_LPM2          0x29
+#define HDC302X_CMD_POR_MODE_A4HZ_LPM3          0x39
+#define HDC302X_CMD_POR_MODE_A10HZ_LPM0         0x0B
+#define HDC302X_CMD_POR_MODE_A10HZ_LPM1         0x1B
+#define HDC302X_CMD_POR_MODE_A10HZ_LPM2         0x2B
+#define HDC302X_CMD_POR_MODE_A10HZ_LPM3         0x3B
+#define HDC302X_CMD_POR_MODE_SLEEP              0x00
 
 #define HDC302X_I2C_RX_BUFFER_SIZE          8
 #define HDC302X_I2C_TX_BUFFER_SIZE          8
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -167,7 +168,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -191,6 +192,7 @@ typedef struct
     bool HDC302X_TASK_START;
     bool HDC302X_TASK_COMPLETED;
     bool HDC302X_ALERT;
+    uint8_t I2C_ADDRESS[4];
     uint8_t I2C_DATA_RECEIVE[HDC302X_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[HDC302X_I2C_TX_BUFFER_SIZE];
 } HDC302X_DRIVER_DATA;
@@ -254,68 +256,7 @@ void HDC302X_DRIVER_Temperature_Alert(uintptr_t CONTEXT);
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void HDC302X_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    HDC302X_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    HDC302X_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void HDC302X_DRIVER_Initialize(void);
-
-/*******************************************************************************
-  Function:
-    void HDC302X_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    HDC302X_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
 
 void HDC302X_DRIVER_Tasks(void);
 
@@ -326,6 +267,8 @@ void HDC302X_DRIVER_Set_Task_Start_Status(bool STATUS);
 bool HDC302X_DRIVER_Get_Task_Completed_Status(void);
 
 void HDC302X_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void HDC302X_DRIVER_Set_I2C_Address(void);
 
 void HDC302X_DRIVER_Set_Offset_Values(uint8_t I2C_ADDRESS);
 

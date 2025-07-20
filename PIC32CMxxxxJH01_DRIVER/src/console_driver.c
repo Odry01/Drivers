@@ -7,6 +7,9 @@
   File Name:
     console_driver.c
 
+  Status:
+    In development
+ 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
 
@@ -53,7 +56,25 @@ CONSOLE_DRIVER_DATA console_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
+bool CONSOLE_DRIVER_Get_Task_Start_Status(void)
+{
+    return (console_driverData.CONSOLE_TASK_START);
+}
 
+void CONSOLE_DRIVER_Set_Task_Start_Status(bool STATUS)
+{
+    console_driverData.CONSOLE_TASK_START = STATUS;
+}
+
+bool CONSOLE_DRIVER_Get_Task_Completed_Status(void)
+{
+    return (console_driverData.CONSOLE_TASK_COMPLETED);
+}
+
+void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS)
+{
+    console_driverData.CONSOLE_TASK_COMPLETED = STATUS;
+}
 
 // *****************************************************************************
 // *****************************************************************************
@@ -72,13 +93,28 @@ void CONSOLE_DRIVER_Tasks(void)
     {
         case CONSOLE_DRIVER_STATE_INIT:
         {
-            console_driverData.state = CONSOLE_DRIVER_STATE_SERVICE_TASKS;
+            console_driverData.state = CONSOLE_DRIVER_STATE_IDLE;
             break;
         }
 
-        case CONSOLE_DRIVER_STATE_SERVICE_TASKS:
+        case CONSOLE_DRIVER_STATE_IDLE:
         {
+            if (CONSOLE_DRIVER_Get_Task_Start_Status() == true)
+            {
+                console_driverData.state = CONSOLE_DRIVER_STATE_PRINT_DATA;
+            }
+            break;
+        }
 
+        case CONSOLE_DRIVER_STATE_PRINT_DATA:
+        {
+            CAN0_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
+            RTC_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
+            RSTC_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
+            HDC302X_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
+            SYS_CONSOLE_Message(console_driverData.CONSOLE_HANDLE, "\r\n");
+            CONSOLE_DRIVER_Set_Task_Completed_Status(true);
+            console_driverData.state = CONSOLE_DRIVER_STATE_IDLE;
             break;
         }
 

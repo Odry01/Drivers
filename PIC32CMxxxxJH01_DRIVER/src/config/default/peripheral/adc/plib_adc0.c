@@ -61,6 +61,7 @@
 // Section: Global Data
 // *****************************************************************************
 // *****************************************************************************
+static volatile ADC_CALLBACK_OBJ ADC0_CallbackObject;
 
 #define ADC0_LINEARITY_POS  (0U)
 #define ADC0_LINEARITY_Msk   (0x7UL << ADC0_LINEARITY_POS)
@@ -94,7 +95,7 @@ void ADC0_Initialize( void )
     /* Prescaler */
     ADC0_REGS->ADC_CTRLB = (uint8_t)ADC_CTRLB_PRESCALER_DIV8;
     /* Sampling length */
-    ADC0_REGS->ADC_SAMPCTRL = (uint8_t)ADC_SAMPCTRL_SAMPLEN(3UL);
+    ADC0_REGS->ADC_SAMPCTRL = (uint8_t)ADC_SAMPCTRL_SAMPLEN(17UL);
 
     /* Reference */
     ADC0_REGS->ADC_REFCTRL = (uint8_t)ADC_REFCTRL_REFSEL_INTREF | ADC_REFCTRL_REFCOMP_Msk;
@@ -103,11 +104,13 @@ void ADC0_Initialize( void )
     ADC0_REGS->ADC_INPUTCTRL = (uint16_t) ADC_POSINPUT_AIN0;
 
     /* Resolution & Operation Mode */
-    ADC0_REGS->ADC_CTRLC = (uint16_t)(ADC_CTRLC_RESSEL_12BIT | ADC_CTRLC_WINMODE(0UL) | ADC_CTRLC_FREERUN_Msk);
+    ADC0_REGS->ADC_CTRLC = (uint16_t)(ADC_CTRLC_RESSEL_12BIT | ADC_CTRLC_WINMODE(0UL) );
 
 
     /* Clear all interrupt flags */
     ADC0_REGS->ADC_INTFLAG = (uint8_t)ADC_INTFLAG_Msk;
+    /* Enable interrupts */
+    ADC0_REGS->ADC_INTENSET = (uint8_t)(ADC_INTENSET_RESRDY_Msk);
 
     while(0U != ADC0_REGS->ADC_SYNCBUSY)
     {
@@ -215,14 +218,24 @@ void ADC0_InterruptsDisable(ADC_STATUS interruptMask)
     ADC0_REGS->ADC_INTENCLR = (uint8_t)interruptMask;
 }
 
-/* Check whether result is ready */
-bool ADC0_ConversionStatusGet( void )
+/* Register callback function */
+void ADC0_CallbackRegister( ADC_CALLBACK callback, uintptr_t context )
 {
-    bool status;
-    status =  (((ADC0_REGS->ADC_INTFLAG & ADC_INTFLAG_RESRDY_Msk) >> ADC_INTFLAG_RESRDY_Pos) != 0U);
-    if (status == true)
+    ADC0_CallbackObject.callback = callback;
+
+    ADC0_CallbackObject.context = context;
+}
+
+
+void __attribute__((used)) ADC0_InterruptHandler( void )
+{
+    ADC_STATUS status;
+    status = ADC0_REGS->ADC_INTFLAG;
+    /* Clear interrupt flag */
+    ADC0_REGS->ADC_INTFLAG = (uint8_t)(ADC_INTENSET_RESRDY_Msk);
+    if (ADC0_CallbackObject.callback != NULL)
     {
-        ADC0_REGS->ADC_INTFLAG = (uint8_t)ADC_INTFLAG_RESRDY_Msk;
+        uintptr_t context = ADC0_CallbackObject.context;
+        ADC0_CallbackObject.callback(status, context);
     }
-    return status;
 }

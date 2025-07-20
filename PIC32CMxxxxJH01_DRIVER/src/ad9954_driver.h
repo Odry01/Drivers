@@ -7,6 +7,9 @@
   File Name:
     ad9954_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 

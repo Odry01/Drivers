@@ -7,6 +7,9 @@
   File Name:
     mcp9808_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -50,19 +53,18 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define MCP9808_I2C_ADDRESS                 0x18
-#define MCP9808_CONFIG_REGISTER             0x1
-#define MCP9808_TEMPERATURE_REGISTER        0x5
-#define MCP9808_MANUFACTURE_ID_REGISTER     0x6
-#define MCP9808_DEVICE_ID_REGISTER          0x7
-#define MCP9808_RESULT_RESOLUTION_REGISTER  0x8
+#define MCP9808_CMD_CONFIG_REGISTER             0x1
+#define MCP9808_CMD_TEMPERATURE_REGISTER        0x5
+#define MCP9808_CMD_MANUFACTURE_ID_REGISTER     0x6
+#define MCP9808_CMD_DEVICE_ID_REGISTER          0x7
+#define MCP9808_CMD_RESULT_RESOLUTION_REGISTER  0x8
 
 #define MCP9808_I2C_RX_BUFFER_SIZE          8
 #define MCP9808_I2C_TX_BUFFER_SIZE          8
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -103,7 +105,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -126,6 +128,7 @@ typedef struct
     bool I2C_TRANSFER_STATUS;
     bool MCP9808_TASK_START;
     bool MCP9808_TASK_COMPLETED;
+    uint8_t I2C_ADDRESS[8];
     uint8_t I2C_DATA_RECEIVE[MCP9808_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[MCP9808_I2C_TX_BUFFER_SIZE];
 } MCP9808_DRIVER_DATA;
@@ -158,68 +161,7 @@ void MCP9808_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void MCP9808_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    MCP9808_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    MCP9808_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void MCP9808_DRIVER_Initialize(void);
-
-/*******************************************************************************
-  Function:
-    void MCP9808_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    MCP9808_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
 
 void MCP9808_DRIVER_Tasks(void);
 
@@ -230,6 +172,8 @@ void MCP9808_DRIVER_Set_Task_Start_Status(bool STATUS);
 bool MCP9808_DRIVER_Get_Task_Completed_Status(void);
 
 void MCP9808_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void MCP9808_DRIVER_Set_I2C_Address(void);
 
 void MCP9808_DRIVER_Get_Sensor_Config(uint8_t I2C_ADDRESS);
 

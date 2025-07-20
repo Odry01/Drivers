@@ -53,7 +53,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define DMAC_CHANNELS_NUMBER        4U
+#define DMAC_CHANNELS_NUMBER        5U
 
 #define DMAC_CRC_CHANNEL_OFFSET     0x20U
 
@@ -154,6 +154,17 @@ void DMAC_Initialize( void )
     descriptor_section[3].DMAC_BTCTRL = (uint16_t)(DMAC_BTCTRL_BLOCKACT_INT | DMAC_BTCTRL_BEATSIZE_BYTE | DMAC_BTCTRL_VALID_Msk | DMAC_BTCTRL_DSTINC_Msk );
 
     dmacChannelObj[3].inUse = 1U;
+    DMAC_REGS->DMAC_CHINTENSET = (uint8_t)(DMAC_CHINTENSET_TERR_Msk | DMAC_CHINTENSET_TCMPL_Msk);
+
+    /***************** Configure DMA channel 4 ********************/
+
+    DMAC_REGS->DMAC_CHID = 4U;
+
+    DMAC_REGS->DMAC_CHCTRLB = DMAC_CHCTRLB_TRIGACT(2UL) | DMAC_CHCTRLB_TRIGSRC(21UL) | DMAC_CHCTRLB_LVL(0UL) ;
+
+    descriptor_section[4].DMAC_BTCTRL = (uint16_t)(DMAC_BTCTRL_BLOCKACT_INT | DMAC_BTCTRL_BEATSIZE_WORD | DMAC_BTCTRL_VALID_Msk | DMAC_BTCTRL_SRCINC_Msk );
+
+    dmacChannelObj[4].inUse = 1U;
     DMAC_REGS->DMAC_CHINTENSET = (uint8_t)(DMAC_CHINTENSET_TERR_Msk | DMAC_CHINTENSET_TCMPL_Msk);
 
     /* Enable the DMAC module & Priority Level x Enable */

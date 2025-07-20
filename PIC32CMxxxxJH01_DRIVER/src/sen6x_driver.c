@@ -5,7 +5,7 @@
     Odry01
 
   File Name:
-    rtc_driver.c
+    sen6x_driver.c
 
   Status:
     In development
@@ -30,7 +30,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include "rtc_driver.h"
+#include "sen6x_driver.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -40,7 +40,7 @@
 
 // *****************************************************************************
 
-RTC_DRIVER_DATA rtc_driverData;
+SEN6X_DRIVER_DATA sen6x_driverData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -48,17 +48,27 @@ RTC_DRIVER_DATA rtc_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-void RTC_DRIVER_Alarm_Callback(RTC_CLOCK_INT_MASK INT, uintptr_t CONTEXT)
+void SEN6X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT)
 {
-    if ((INT & RTC_CLOCK_INT_MASK_ALARM0) == RTC_CLOCK_INT_MASK_ALARM0)
+    switch (EVENT)
     {
-        rtc_driverData.RTC_ALARM = true;
-    }
-}
+        case DRV_I2C_TRANSFER_EVENT_COMPLETE:
+        {
+            sen6x_driverData.I2C_TRANSFER_STATUS = true;
+            break;
+        }
 
-void RTC_DRIVER_XOSC32K_Alert_Callback(uintptr_t CONTEXT)
-{
-    rtc_driverData.RTC_XOSC32K_ALERT = true;
+        case DRV_I2C_TRANSFER_EVENT_ERROR:
+        {
+            sen6x_driverData.I2C_TRANSFER_STATUS = false;
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
 }
 
 // *****************************************************************************
@@ -67,63 +77,30 @@ void RTC_DRIVER_XOSC32K_Alert_Callback(uintptr_t CONTEXT)
 // *****************************************************************************
 // *****************************************************************************
 
-bool RTC_DRIVER_Get_Task_Start_Status(void)
+bool SEN6X_DRIVER_Get_Task_Start_Status(void)
 {
-    return (rtc_driverData.RTC_TASK_START);
+    return (sen6x_driverData.SEN6X_TASK_START);
 }
 
-void RTC_DRIVER_Set_Task_Start_Status(bool STATUS)
+void SEN6X_DRIVER_Set_Task_Start_Status(bool STATUS)
 {
-    rtc_driverData.RTC_TASK_START = STATUS;
+    sen6x_driverData.SEN6X_TASK_START = STATUS;
 }
 
-bool RTC_DRIVER_Get_Task_Completed_Status(void)
+bool SEN6X_DRIVER_Get_Task_Completed_Status(void)
 {
-    return (rtc_driverData.RTC_TASK_COMPLETED);
+    return (sen6x_driverData.SEN6X_TASK_COMPLETED);
 }
 
-void RTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
+void SEN6X_DRIVER_Set_Task_Completed_Status(bool STATUS)
 {
-    rtc_driverData.RTC_TASK_COMPLETED = STATUS;
+    sen6x_driverData.SEN6X_TASK_COMPLETED = STATUS;
 }
 
-void RTC_DRIVER_Set_Init_Time()
+void SEN6X_DRIVER_Set_I2C_Address(void)
 {
-    rtc_driverData.INIT_TIME.tm_hour = 00;
-    rtc_driverData.INIT_TIME.tm_min = 00;
-    rtc_driverData.INIT_TIME.tm_sec = 00;
-    rtc_driverData.INIT_TIME.tm_mday = 1;
-    rtc_driverData.INIT_TIME.tm_mon = 1;
-    rtc_driverData.INIT_TIME.tm_year = 125;
-    RTC_RTCCTimeSet(&rtc_driverData.INIT_TIME);
-}
-
-void RTC_DRIVER_Set_Alarm_Time()
-{
-    rtc_driverData.ALARM_TIME.tm_hour = 0;
-    rtc_driverData.ALARM_TIME.tm_min = 0;
-    rtc_driverData.ALARM_TIME.tm_sec = 0;
-    rtc_driverData.ALARM_TIME.tm_mday = 0;
-    rtc_driverData.ALARM_TIME.tm_mon = 0;
-    rtc_driverData.ALARM_TIME.tm_year = 0;
-    RTC_RTCCAlarmSet(&rtc_driverData.ALARM_TIME, RTC_ALARM_MASK_SS);
-}
-
-void RTC_DRIVER_Get_System_Time()
-{
-    RTC_RTCCTimeGet(&rtc_driverData.SYSTEM_TIME);
-}
-
-void RTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
-{
-    SYS_CONSOLE_Print
-            (
-             CONSOLE_HANDLE,
-             "Time: %d:%d:%d\r\n"
-             "Date: %d.%d.%d\r\n",
-             rtc_driverData.SYSTEM_TIME.tm_hour, rtc_driverData.SYSTEM_TIME.tm_min, rtc_driverData.SYSTEM_TIME.tm_sec,
-             rtc_driverData.SYSTEM_TIME.tm_mday, (rtc_driverData.SYSTEM_TIME.tm_mon + 1), (1900 + rtc_driverData.SYSTEM_TIME.tm_year)
-             );
+    sen6x_driverData.I2C_ADDRESS[0] = 0x6C;
+    sen6x_driverData.I2C_ADDRESS[1] = 0x6F;
 }
 
 // *****************************************************************************
@@ -132,63 +109,61 @@ void RTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 // *****************************************************************************
 // *****************************************************************************
 
-void RTC_DRIVER_Initialize(void)
+void SEN6X_DRIVER_Initialize(void)
 {
-    rtc_driverData.state = RTC_DRIVER_STATE_INIT;
-    RTC_RTCCCallbackRegister(RTC_DRIVER_Alarm_Callback, 0);
-    OSC32KCTRL_CallbackRegister(RTC_DRIVER_XOSC32K_Alert_Callback, 0);
+    sen6x_driverData.state = SEN6X_DRIVER_STATE_INIT;
+    sen6x_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
+    sen6x_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
+    sen6x_driverData.I2C_TRANSFER_STATUS = false;
 }
 
-void RTC_DRIVER_Tasks(void)
+void SEN6X_DRIVER_Tasks(void)
 {
-    switch (rtc_driverData.state)
+    switch (sen6x_driverData.state)
     {
-        case RTC_DRIVER_STATE_INIT:
+        case SEN6X_DRIVER_STATE_INIT:
         {
-            rtc_driverData.state = RTC_DRIVER_STATE_IDLE;
+            sen6x_driverData.I2C_HANDLE = DRV_I2C_Open(DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE);
+            sen6x_driverData.state = SEN6X_DRIVER_STATE_I2C_HANDLER_REGISTER;
             break;
         }
 
-        case RTC_DRIVER_STATE_IDLE:
+        case SEN6X_DRIVER_STATE_I2C_HANDLER_REGISTER:
         {
-            if (RTC_DRIVER_Get_Task_Start_Status() == true)
+            if (sen6x_driverData.I2C_HANDLE == DRV_HANDLE_INVALID)
             {
-                rtc_driverData.state = RTC_DRIVER_STATE_GET_TIME;
-            }
-            break;
-        }
-
-        case RTC_DRIVER_STATE_CHECK_XOSC32K_ALERT:
-        {
-            if (rtc_driverData.RTC_XOSC32K_ALERT == true)
-            {
-                rtc_driverData.state = RTC_DRIVER_STATE_ERROR;
+                sen6x_driverData.state = SEN6X_DRIVER_STATE_ERROR;
             }
             else
             {
-                rtc_driverData.state = RTC_DRIVER_STATE_GET_TIME;
+                DRV_I2C_TransferEventHandlerSet(sen6x_driverData.I2C_HANDLE, SEN6X_DRIVER_I2C_Callback, (uintptr_t) & sen6x_driverData.I2C_TRANSFER_STATUS);
+                sen6x_driverData.state = SEN6X_DRIVER_STATE_IDLE;
             }
             break;
         }
 
-        case RTC_DRIVER_STATE_GET_TIME:
+        case SEN6X_DRIVER_STATE_IDLE:
         {
-            RTC_DRIVER_Get_System_Time();
-            rtc_driverData.state = RTC_DRIVER_STATE_STORE_TIME_VALUE;
+            if (SEN6X_DRIVER_Get_Task_Start_Status() == true)
+            {
+                sen6x_driverData.state = SEN6X_DRIVER_STATE_IDLE;
+            }
             break;
         }
 
-        case RTC_DRIVER_STATE_STORE_TIME_VALUE:
+        case SEN6X_DRIVER_STATE_TIMER_EXPIRED:
         {
-            RTC_DRIVER_Set_Task_Completed_Status(true);
-            rtc_driverData.state = RTC_DRIVER_STATE_IDLE;
+            DRV_I2C_Close(sen6x_driverData.I2C_HANDLE);
+            SEN6X_DRIVER_Set_Task_Completed_Status(true);
+            sen6x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;
         }
 
-        case RTC_DRIVER_STATE_ERROR:
+        case SEN6X_DRIVER_STATE_ERROR:
         {
-            RTC_DRIVER_Set_Task_Completed_Status(true);
-            rtc_driverData.state = RTC_DRIVER_STATE_IDLE;
+            DRV_I2C_Close(sen6x_driverData.I2C_HANDLE);
+            SEN6X_DRIVER_Set_Task_Completed_Status(true);
+            sen6x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;
         }
 
