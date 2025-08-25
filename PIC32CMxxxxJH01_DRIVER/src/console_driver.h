@@ -76,7 +76,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data

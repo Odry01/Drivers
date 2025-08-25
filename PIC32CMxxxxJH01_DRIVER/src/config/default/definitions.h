@@ -50,13 +50,13 @@
 #include <stdbool.h>
 #include "peripheral/nvmctrl/plib_nvmctrl.h"
 #include "peripheral/supc/plib_supc.h"
-#include "peripheral/ac/plib_ac.h"
 #include "peripheral/tc/plib_tc0.h"
 #include "peripheral/rtc/plib_rtc.h"
+#include "peripheral/ac/plib_ac.h"
 #include "peripheral/freqm/plib_freqm.h"
 #include "driver/i2c/drv_i2c.h"
-#include "system/time/sys_time.h"
 #include "peripheral/pdec/plib_pdec.h"
+#include "system/time/sys_time.h"
 #include "peripheral/adc/plib_adc0.h"
 #include "driver/spi/drv_spi.h"
 #include "peripheral/divas/plib_divas.h"
@@ -102,6 +102,7 @@
 #include "sen6x_driver.h"
 #include "sht4x_driver.h"
 #include "timer_driver.h"
+#include "vcnl4200_driver.h"
 #include "ws281x_driver.h"
 #include "xm125_driver.h"
 

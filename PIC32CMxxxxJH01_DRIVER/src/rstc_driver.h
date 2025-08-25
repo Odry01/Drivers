@@ -99,8 +99,8 @@ typedef struct
     RSTC_DRIVER_STATES state;
 
     /* Driver variables */
-    bool RSTC_TASK_START;
-    bool RSTC_TASK_COMPLETED;
+    volatile bool RSTC_TASK_START;
+    volatile bool RSTC_TASK_COMPLETED;
     uint8_t RESET_REASON;
 } RSTC_DRIVER_DATA;
 
@@ -118,68 +118,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void RSTC_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    RSTC_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    RSTC_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void RSTC_DRIVER_Initialize(void);
-
-/*******************************************************************************
-  Function:
-    void RSTC_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    RSTC_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
 
 void RSTC_DRIVER_Tasks(void);
 

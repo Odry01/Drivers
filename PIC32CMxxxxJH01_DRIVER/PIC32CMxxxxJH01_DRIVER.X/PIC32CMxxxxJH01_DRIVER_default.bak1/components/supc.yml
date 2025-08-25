@@ -1,0 +1,51 @@
+configVersion: 1.0.0
+componentName: supc
+coreVersion: 5.8.2
+device: PIC32CM5164JH01032
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: supc
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.22.4
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: supc
+          x: '789'
+          y: '515'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SUPC_VREF_SEL:
+      attributes:
+        id: SUPC_VREF_SEL
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
+    SUPC_VREF_VREFOE:
+      attributes:
+        id: SUPC_VREF_VREFOE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+  userData: {}

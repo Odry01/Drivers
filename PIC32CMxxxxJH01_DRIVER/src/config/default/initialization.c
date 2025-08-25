@@ -416,11 +416,11 @@ void SYS_Initialize ( void* data )
 
     SUPC_Initialize();
 
-    AC_Initialize();
     TC0_CaptureInitialize();
 
     RTC_Initialize();
 
+    AC_Initialize();
     FREQM_Initialize();
 
     PDEC_QDECInitialize();
@@ -496,6 +496,7 @@ void SYS_Initialize ( void* data )
     SEN6X_DRIVER_Initialize();
     SHT4X_DRIVER_Initialize();
     TIMER_DRIVER_Initialize();
+    VCNL4200_DRIVER_Initialize();
     WS281X_DRIVER_Initialize();
     XM125_DRIVER_Initialize();
 

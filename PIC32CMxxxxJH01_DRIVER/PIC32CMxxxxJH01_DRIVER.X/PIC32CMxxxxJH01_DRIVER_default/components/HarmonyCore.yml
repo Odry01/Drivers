@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: core
   type: package
-  version: v3.15.2
+  version: v3.15.3
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -259,7 +259,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.c
+            value: vcnl4200_driver.c
           type: String
         type: Attributes
       type: File
@@ -278,7 +278,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.h
+            value: vcnl4200_driver.h
           type: String
         type: Attributes
       type: File
@@ -854,7 +854,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '17'
+            value: '18'
           type: User
         type: Values
       type: Integer
@@ -924,7 +924,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ws281x_driver
+            value: vcnl4200_driver
           type: User
         type: Values
       type: String
@@ -1281,7 +1281,7 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.c
+            value: ws281x_driver.c
           type: String
         type: Attributes
       type: File
@@ -1300,13 +1300,61 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.h
+            value: ws281x_driver.h
           type: String
         type: Attributes
       type: File
     GEN_APP_TASK_NAME_16:
       attributes:
         id: GEN_APP_TASK_NAME_16
+      children:
+      - children:
+        - attributes:
+            value: ws281x_driver
+          type: User
+        type: Values
+      type: String
+    APP17_C:
+      attributes:
+        id: APP17_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP17_H:
+      attributes:
+        id: APP17_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.h
+          type: String
+        type: Attributes
+      type: File
+    GEN_APP_TASK_NAME_17:
+      attributes:
+        id: GEN_APP_TASK_NAME_17
       children:
       - children:
         - attributes:

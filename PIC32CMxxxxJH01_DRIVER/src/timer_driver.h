@@ -59,7 +59,7 @@ extern "C"
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -99,37 +99,6 @@ void Wait_TMR_Callback(uintptr_t CONTEXT);
 // Section: Application Initialization and State Machine Functions
 // *****************************************************************************
 // *****************************************************************************
-
-/*******************************************************************************
-  Function:
-    void TIMER_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    TIMER_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    TIMER_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
 
 void TIMER_DRIVER_Initialize(void);
 

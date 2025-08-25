@@ -125,9 +125,10 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    bool I2C_TRANSFER_STATUS;
-    bool MCP9808_TASK_START;
-    bool MCP9808_TASK_COMPLETED;
+    volatile bool I2C_TRANSFER_STATUS;
+    volatile bool MCP9808_TASK_START;
+    volatile bool MCP9808_TASK_COMPLETED;
+    volatile bool MCP9808_ALERT;
     uint8_t I2C_ADDRESS[8];
     uint8_t I2C_DATA_RECEIVE[MCP9808_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[MCP9808_I2C_TX_BUFFER_SIZE];

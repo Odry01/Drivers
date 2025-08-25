@@ -55,8 +55,7 @@ extern "C"
 
 #define LED_DATA_WIDTH      24
 #define NUMBER_OF_LEDS      20
-#define NUMBER_OF_BUFFER    1
-#define BUFFER_SIZE         (LED_DATA_WIDTH * NUMBER_OF_LEDS * 4)
+#define BUFFER_SIZE         LED_DATA_WIDTH * NUMBER_OF_LEDS
 #define T1H                 20
 #define T1L                 9
 
@@ -79,7 +78,6 @@ typedef enum
     WS281X_DRIVER_STATE_SET_COLOR,
     WS281X_DRIVER_STATE_SET_LED_STRIP_DATA,
     WS281X_DRIVER_STATE_SEND_LED_STRIP_DATA,
-    WS281X_DRIVER_STATE_SEND_LED_STRIP_DATA_WAIT_FOR_TRANSFER,
 } WS281X_DRIVER_STATES;
 
 // *****************************************************************************
@@ -102,13 +100,12 @@ typedef struct
     WS281X_DRIVER_STATES state;
 
     /* Driver variables */
-    bool WS281X_TASK_START;
-    bool WS281X_TASK_COMPLETED;
-    bool DMAC_CH4_TRANSFER_STATUS;
+    volatile bool WS281X_TASK_START;
+    volatile bool WS281X_TASK_COMPLETED;
     uint8_t RED_LED;
     uint8_t GREEN_LED;
     uint8_t BLUE_LED;
-    uint32_t DMAC_CH4_BUFFER[NUMBER_OF_BUFFER][NUMBER_OF_LEDS][LED_DATA_WIDTH];
+    uint8_t DMAC_CH4_BUFFER[NUMBER_OF_LEDS][LED_DATA_WIDTH];
 } WS281X_DRIVER_DATA;
 
 // *****************************************************************************

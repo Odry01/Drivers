@@ -143,7 +143,7 @@ extern "C"
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -164,7 +164,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -184,9 +184,9 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    bool I2C_TRANSFER_STATUS;
-    bool SEN6X_TASK_START;
-    bool SEN6X_TASK_COMPLETED;
+    volatile bool I2C_TRANSFER_STATUS;
+    volatile bool SEN6X_TASK_START;
+    volatile bool SEN6X_TASK_COMPLETED;
     uint8_t I2C_ADDRESS[2];
     uint8_t I2C_DATA_RECEIVE[SEN6X_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[SEN6X_I2C_TX_BUFFER_SIZE];

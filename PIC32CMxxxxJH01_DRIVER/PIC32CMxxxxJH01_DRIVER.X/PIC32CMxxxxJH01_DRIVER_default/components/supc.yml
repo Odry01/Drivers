@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.22.4
+  version: v3.22.6
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -27,25 +27,5 @@ data:
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
-  symbols:
-    SUPC_VREF_SEL:
-      attributes:
-        id: SUPC_VREF_SEL
-      children:
-      - children:
-        - attributes:
-            value: '1'
-          type: User
-        type: Values
-      type: KeyValueSet
-    SUPC_VREF_VREFOE:
-      attributes:
-        id: SUPC_VREF_VREFOE
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
-      type: Boolean
+  symbols: {}
   userData: {}

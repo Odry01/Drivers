@@ -188,10 +188,10 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    bool I2C_TRANSFER_STATUS;
-    bool HDC302X_TASK_START;
-    bool HDC302X_TASK_COMPLETED;
-    bool HDC302X_ALERT;
+    volatile bool I2C_TRANSFER_STATUS;
+    volatile bool HDC302X_TASK_START;
+    volatile bool HDC302X_TASK_COMPLETED;
+    volatile bool HDC302X_ALERT;
     uint8_t I2C_ADDRESS[4];
     uint8_t I2C_DATA_RECEIVE[HDC302X_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[HDC302X_I2C_TX_BUFFER_SIZE];
@@ -222,7 +222,7 @@ typedef struct
     float CELSIUS_TEMPERATURE;
     float FAHRENHEIT_TEMPERATURE;
     float HUMIDITY;
-} HDC302X_DRIVER_SENSOR_DATA;
+} HDC302X_SENSOR_DATA;
 
 typedef struct
 {
@@ -238,7 +238,7 @@ typedef struct
     uint8_t SET_LOW_ALERT_LSB;
     uint8_t CLEAR_LOW_ALERT_MSB;
     uint8_t CLEAR_LOW_ALERT_LSB;
-} HDC302X_DRIVER_SENSOR_SETTINGS;
+} HDC302X_SENSOR_SETTINGS;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -248,7 +248,7 @@ typedef struct
 
 void HDC302X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT);
 
-void HDC302X_DRIVER_Temperature_Alert(uintptr_t CONTEXT);
+void HDC302X_DRIVER_Alert(uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -270,35 +270,35 @@ void HDC302X_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 void HDC302X_DRIVER_Set_I2C_Address(void);
 
-void HDC302X_DRIVER_Set_Offset_Values(uint8_t I2C_ADDRESS);
-
-void HDC302X_DRIVER_Set_Set_High_Alert(uint8_t I2C_ADDRESS);
-
-void HDC302X_DRIVER_Set_Clear_High_Alert(uint8_t I2C_ADDRESS);
-
-void HDC302X_DRIVER_Set_Set_Low_Alert(uint8_t I2C_ADDRESS);
-
-void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS);
-
 void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Offset_Values(void);
+
+void HDC302X_DRIVER_Set_Offset_Values(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Get_Set_High_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Set_High_Alert(void);
 
+void HDC302X_DRIVER_Set_Set_High_Alert(uint8_t I2C_ADDRESS);
+
 void HDC302X_DRIVER_Get_Clear_High_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Clear_High_Alert(void);
+
+void HDC302X_DRIVER_Set_Clear_High_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Get_Set_Low_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Set_Low_Alert(void);
 
+void HDC302X_DRIVER_Set_Set_Low_Alert(uint8_t I2C_ADDRESS);
+
 void HDC302X_DRIVER_Get_Clear_Low_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Store_Clear_Low_Alert(void);
+
+void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS);
 
 void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS);
 

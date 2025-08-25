@@ -53,8 +53,6 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define BME690_I2C_ADDRESS                              0x44    
-
 #define BME690_CMD_STATUS_REGISTER                          0x73
 #define BME690_CMD_VARIANT_ID_REGISTER                      0xF0
 #define BME690_CMD_RESET_REGISTER                           0xE0
@@ -147,7 +145,7 @@ extern "C"
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -168,7 +166,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -188,10 +186,11 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    bool I2C_TRANSFER_STATUS;
-    bool BME690_TASK_START;
-    bool BME690_TASK_COMPLETED;
-    bool BME690_ALERT;
+    volatile bool I2C_TRANSFER_STATUS;
+    volatile bool BME690_TASK_START;
+    volatile bool BME690_TASK_COMPLETED;
+    volatile bool BME690_ALERT;
+    uint8_t I2C_ADDRESS[1];
     uint8_t I2C_DATA_RECEIVE[BME690_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[BME690_I2C_TX_BUFFER_SIZE];
 } BME690_DRIVER_DATA;
@@ -288,70 +287,11 @@ void BME690_DRIVER_Alert(uintptr_t CONTEXT);
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void BME690_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    BME690_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    BME690_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void BME690_DRIVER_Initialize(void);
 
-/*******************************************************************************
-  Function:
-    void BME690_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    BME690_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
-
 void BME690_DRIVER_Tasks(void);
+
+void BME690_DRIVER_Set_I2C_Address(void);
 
 void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 

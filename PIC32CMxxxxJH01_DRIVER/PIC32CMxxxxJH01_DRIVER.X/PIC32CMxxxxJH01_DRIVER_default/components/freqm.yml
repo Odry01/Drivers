@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.22.4
+  version: v3.22.6
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -46,8 +46,28 @@ data:
       - children:
         - attributes:
             id: freqm
-            value: '0'
+            value: '4'
           type: Dynamic
         type: Values
       type: Integer
+    FREQM_REF_CLK_CYCLES:
+      attributes:
+        id: FREQM_REF_CLK_CYCLES
+      children:
+      - children:
+        - attributes:
+            value: '4'
+          type: User
+        type: Values
+      type: KeyValueSet
+    FREQM_INTERRUPT_MODE:
+      attributes:
+        id: FREQM_INTERRUPT_MODE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
   userData: {}

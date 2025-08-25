@@ -181,6 +181,7 @@
         <itemPath>../src/xm125_driver.h</itemPath>
         <itemPath>../src/sen6x_driver.h</itemPath>
         <itemPath>../src/ws281x_driver.h</itemPath>
+        <itemPath>../src/vcnl4200_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="PIC32CM5164JH01032_DFP"
@@ -486,6 +487,7 @@
         <itemPath>../src/xm125_driver.c</itemPath>
         <itemPath>../src/sen6x_driver.c</itemPath>
         <itemPath>../src/ws281x_driver.c</itemPath>
+        <itemPath>../src/vcnl4200_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>

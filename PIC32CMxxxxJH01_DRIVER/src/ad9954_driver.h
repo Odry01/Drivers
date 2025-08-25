@@ -53,29 +53,29 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define AD9954_CFR1_ADDRESS     0x00
-#define AD9954_CFR2_ADDRESS     0x01
-#define AD9954_ASF_ADDRESS      0x02
-#define AD9954_ARR_ADDRESS      0x03
-#define AD9954_FTW0_ADDRESS     0x04
-#define AD9954_POW0_ADDRESS     0x05
-#define AD9954_FTW1_ADDRESS     0x06
-#define AD9954_RSCW0_ADDRESS    0x07
-#define AD9954_RSCW1_ADDRESS    0x08
-#define AD9954_RSCW2_ADDRESS    0x08
-#define AD9954_RSCW3_ADDRESS    0x08
-#define AD9954_RAM_ADDRESS      0x0B
-#define AD9954_NLSCW_ADDRESS    0x07
-#define AD9954_PLSCW_ADDRESS    0x08
+#define AD9954_CMD_CFR1_ADDRESS     0x00
+#define AD9954_CMD_CFR2_ADDRESS     0x01
+#define AD9954_CMD_ASF_ADDRESS      0x02
+#define AD9954_CMD_ARR_ADDRESS      0x03
+#define AD9954_CMD_FTW0_ADDRESS     0x04
+#define AD9954_CMD_POW0_ADDRESS     0x05
+#define AD9954_CMD_FTW1_ADDRESS     0x06
+#define AD9954_CMD_RSCW0_ADDRESS    0x07
+#define AD9954_CMD_RSCW1_ADDRESS    0x08
+#define AD9954_CMD_RSCW2_ADDRESS    0x08
+#define AD9954_CMD_RSCW3_ADDRESS    0x08
+#define AD9954_CMD_RAM_ADDRESS      0x0B
+#define AD9954_CMD_NLSCW_ADDRESS    0x07
+#define AD9954_CMD_PLSCW_ADDRESS    0x08
 
-#define AD9954_RW_BIT_SET       0x80
+#define AD9954_RW_BIT               0x80
 
-#define AD9954_SPI_DATA_RX      32
-#define AD9954_SPI_DATA_TX      32
+#define AD9954_SPI_DATA_RX          32
+#define AD9954_SPI_DATA_TX          32
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -111,7 +111,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -131,9 +131,9 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE SPI_HANDLE;
     DRV_SPI_TRANSFER_HANDLE SPI_TRANSFER_HANDLE;
-    bool SPI_TRANSFER_STATUS;
-    bool AD9954_TASK_START;
-    bool AD9954_TASK_COMPLETED;
+    volatile bool SPI_TRANSFER_STATUS;
+    volatile bool AD9954_TASK_START;
+    volatile bool AD9954_TASK_COMPLETED;
     uint8_t SPI_DATA_RECEIVE[AD9954_SPI_DATA_RX];
     uint8_t SPI_DATA_TRANSMIT[AD9954_SPI_DATA_TX];
 } AD9954_DRIVER_DATA;
@@ -177,68 +177,7 @@ void AD9954_DRIVER_SPI_Callback(DRV_SPI_TRANSFER_EVENT EVENT, DRV_SPI_TRANSFER_H
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void AD9954_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    AD9954_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    AD9954_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void AD9954_DRIVER_Initialize(void);
-
-/*******************************************************************************
-  Function:
-    void AD9954_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    AD9954_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
 
 void AD9954_DRIVER_Tasks(void);
 

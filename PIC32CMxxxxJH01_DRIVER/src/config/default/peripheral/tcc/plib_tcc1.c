@@ -66,7 +66,7 @@ void TCC1_PWMInitialize(void)
         /* Wait for sync */
     }
     /* Clock prescaler */
-    TCC1_REGS->TCC_CTRLA = TCC_CTRLA_PRESCALER_DIV2
+    TCC1_REGS->TCC_CTRLA = TCC_CTRLA_PRESCALER_DIV1
                             | TCC_CTRLA_PRESCSYNC_PRESC ;
 
     TCC1_REGS->TCC_WAVE = TCC_WAVE_WAVEGEN_NPWM | TCC_WAVE_RAMP_RAMP1;

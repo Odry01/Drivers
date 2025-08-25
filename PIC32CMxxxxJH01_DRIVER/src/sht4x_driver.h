@@ -53,24 +53,24 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define SHT4X_I2C_ADDRESS                               0x44
-#define SHT4X_MEASURE_TEMP_HUM_HIGH_PRECISION           0xFD
-#define SHT4X_MEASURE_TEMP_HUM_MEDIUM_PRECISION         0xF6
-#define SHT4X_MEASURE_TEMP_HUM_LOW_PRECISION            0xF0
-#define SHT4X_SERIAL_NUMBER                             0x89
-#define SHT4X_SOFT_RESET                                0x94
-#define SHT4X_ACTIVATE_HEATER_200mW_1s                  0x39
-#define SHT4X_ACTIVATE_HEATER_200mW_100ms               0x32
-#define SHT4X_ACTIVATE_HEATER_110mW_1s                  0x2F
-#define SHT4X_ACTIVATE_HEATER_110mW_100ms               0x24
-#define SHT4X_ACTIVATE_HEATER_20mW_1s                   0x1E
-#define SHT4X_ACTIVATE_HEATER_20mW_100ms                0x15
-#define SHT4X_I2C_RX_BUFFER_SIZE                        8
-#define SHT4X_I2C_TX_BUFFER_SIZE                        8
+#define SHT4X_CMD_MEASURE_TEMP_HUM_HIGH_PRECISION           0xFD
+#define SHT4X_CMD_MEASURE_TEMP_HUM_MEDIUM_PRECISION         0xF6
+#define SHT4X_CMD_MEASURE_TEMP_HUM_LOW_PRECISION            0xF0
+#define SHT4X_CMD_SERIAL_NUMBER                             0x89
+#define SHT4X_CMD_SOFT_RESET                                0x94
+#define SHT4X_CMD_ACTIVATE_HEATER_200mW_1s                  0x39
+#define SHT4X_CMD_ACTIVATE_HEATER_200mW_100ms               0x32
+#define SHT4X_CMD_ACTIVATE_HEATER_110mW_1s                  0x2F
+#define SHT4X_CMD_ACTIVATE_HEATER_110mW_100ms               0x24
+#define SHT4X_CMD_ACTIVATE_HEATER_20mW_1s                   0x1E
+#define SHT4X_CMD_ACTIVATE_HEATER_20mW_100ms                0x15
+
+#define SHT4X_I2C_RX_BUFFER_SIZE                            8
+#define SHT4X_I2C_TX_BUFFER_SIZE                            8
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -100,7 +100,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -120,9 +120,10 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    bool I2C_TRANSFER_STATUS;
-    bool SHT4X_TASK_START;
-    bool SHT4X_TASK_COMPLETED;
+    volatile bool I2C_TRANSFER_STATUS;
+    volatile bool SHT4X_TASK_START;
+    volatile bool SHT4X_TASK_COMPLETED;
+    uint8_t I2C_ADDRESS[3];
     uint8_t I2C_DATA_RECEIVE[SHT4X_I2C_RX_BUFFER_SIZE];
     uint8_t I2C_DATA_TRANSMIT[SHT4X_I2C_TX_BUFFER_SIZE];
 } SHT4X_DRIVER_DATA;
@@ -151,68 +152,7 @@ void SHT4X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HA
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void SHT4X_DRIVER_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    SHT4X_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    SHT4X_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
- */
-
 void SHT4X_DRIVER_Initialize(void);
-
-/*******************************************************************************
-  Function:
-    void SHT4X_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    SHT4X_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
 
 void SHT4X_DRIVER_Tasks(void);
 
@@ -223,6 +163,8 @@ void SHT4X_DRIVER_Set_Task_Start_Status(bool STATUS);
 bool SHT4X_DRIVER_Get_Task_Completed_Status(void);
 
 void SHT4X_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void SHT4X_DRIVER_Set_I2C_Address(void);
 
 void SHT4X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER);
 

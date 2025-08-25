@@ -84,6 +84,7 @@
 
 typedef uint32_t FREQM_ERROR;
 
+typedef void (*FREQM_CALLBACK)(uintptr_t context);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -101,6 +102,7 @@ uint32_t FREQM_FrequencyGet(void);
 
 bool FREQM_IsBusy(void);
 
+void FREQM_CallbackRegister(FREQM_CALLBACK freqmCallback, uintptr_t context);
 
 #ifdef __cplusplus // Provide C++ Compatibility
 

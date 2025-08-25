@@ -164,7 +164,7 @@ extern "C"
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -195,7 +195,7 @@ typedef enum
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -218,7 +218,7 @@ typedef struct
     volatile bool USART_TRANSFER_STATUS;
     volatile bool FCM360W_TASK_START;
     volatile bool FCM360W_TASK_COMPLETED;
-    bool FCM360W_RESPONSE_STATUS;
+    volatile bool FCM360W_RESPONSE_STATUS;
     char RX_BYTE;
     char RX_BUFFER[FCM360W_RX_DATA_SIZE];
     char TX_BUFFER[FCM360W_TX_DATA_SIZE];

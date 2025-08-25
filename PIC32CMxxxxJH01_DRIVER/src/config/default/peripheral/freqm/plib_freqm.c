@@ -58,6 +58,15 @@
 // *****************************************************************************
 // *****************************************************************************
 
+typedef struct
+{
+    FREQM_CALLBACK callback;
+
+    uintptr_t context;
+
+} FREQM_OBJECT;
+
+static volatile FREQM_OBJECT freqmObj;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -67,7 +76,10 @@
 
 void FREQM_Initialize(void)
 {
-    FREQM_REGS->FREQM_CFGA = (uint16_t)(FREQM_CFGA_REFNUM(1UL) );
+    FREQM_REGS->FREQM_CFGA = (uint16_t)(FREQM_CFGA_REFNUM(16UL) );
+
+    /* Enable DONE Interrupt */
+    FREQM_REGS->FREQM_INTENSET = (uint8_t)FREQM_INTENSET_DONE_Msk;
 
     /* Enable FREQM */
     FREQM_REGS->FREQM_CTRLA = (uint8_t)FREQM_CTRLA_ENABLE_Msk;
@@ -132,9 +144,28 @@ uint32_t FREQM_FrequencyGet(void)
 
     result = FREQM_Mul32x32(FREQM_REGS->FREQM_VALUE, 48000000UL);
 
-    result = (result >> 0);
+    result = (result >> 4);
 
     return (uint32_t)result;
 }
 
+void FREQM_CallbackRegister(FREQM_CALLBACK freqmCallback, uintptr_t context)
+{
+    freqmObj.callback = freqmCallback;
+
+    freqmObj.context = context;
+}
+
+void __attribute__((used)) FREQM_InterruptHandler(void)
+{
+    uintptr_t context_var;
+
+    FREQM_REGS->FREQM_INTFLAG = (uint8_t)FREQM_INTFLAG_DONE_Msk;
+
+    if(freqmObj.callback != NULL)
+    {
+        context_var = freqmObj.context;
+        freqmObj.callback(context_var);
+    }
+}
 

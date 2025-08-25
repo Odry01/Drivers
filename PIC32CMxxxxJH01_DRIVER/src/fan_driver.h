@@ -1,8 +1,8 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     fan_driver.h
@@ -19,7 +19,7 @@
     "FAN_DRIVER_Initialize" and "FAN_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "FAN_DRIVER_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _FAN_DRIVER_H
 #define _FAN_DRIVER_H
@@ -34,12 +34,15 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -50,8 +53,11 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
-/* Application states
+
+/** Application states
 
   Summary:
     Application states enumeration
@@ -59,20 +65,17 @@ extern "C" {
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
+ */
 
 typedef enum
 {
-    /* Application's state machine's initial state. */
-    FAN_DRIVER_STATE_INIT=0,
+    FAN_DRIVER_STATE_INIT = 0,
     FAN_DRIVER_STATE_SERVICE_TASKS,
-    /* TODO: Define states used by the application state machine. */
-
 } FAN_DRIVER_STATES;
 
-
 // *****************************************************************************
-/* Application Data
+
+/** Application Data
 
   Summary:
     Holds application data
@@ -89,8 +92,9 @@ typedef struct
     /* The application's current state */
     FAN_DRIVER_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-
+    /* Driver variables */
+    volatile bool FAN_TASK_START;
+    volatile bool FAN_TASK_COMPLETED;
 } FAN_DRIVER_DATA;
 
 // *****************************************************************************
@@ -98,8 +102,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -107,71 +111,9 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void FAN_DRIVER_Initialize ( void )
+void FAN_DRIVER_Initialize(void);
 
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    FAN_DRIVER_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    FAN_DRIVER_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
-*/
-
-void FAN_DRIVER_Initialize ( void );
-
-
-/*******************************************************************************
-  Function:
-    void FAN_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    FAN_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
-
-void FAN_DRIVER_Tasks( void );
+void FAN_DRIVER_Tasks(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -184,4 +126,3 @@ void FAN_DRIVER_Tasks( void );
 /*******************************************************************************
  End of File
  */
-

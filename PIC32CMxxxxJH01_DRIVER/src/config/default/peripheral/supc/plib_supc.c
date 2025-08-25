@@ -86,7 +86,7 @@ void SUPC_Initialize( void )
     }
 
     /* Configure VREF */
-    SUPC_REGS->SUPC_VREF = SUPC_VREF_SEL(0x2UL) | SUPC_VREF_VREFOE_Msk;
+    SUPC_REGS->SUPC_VREF = SUPC_VREF_SEL(0x0UL);
 
 }
 

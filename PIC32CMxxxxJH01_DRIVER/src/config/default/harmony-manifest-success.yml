@@ -4,7 +4,7 @@
 
 
 project: PIC32CMxxxxJH01_DRIVER
-creation_date: 2025-07-20T14:18:45.693+02:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2025-08-01T11:15:30.787+02:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
 mcc_version: v5.6.2
@@ -14,8 +14,8 @@ harmony_version: v5.6.2
 compiler: XC32 4.60
 
 modules:
-    - {name: "csp", version: "v3.22.4"}
-    - {name: "core", version: "v3.15.2"}
+    - {name: "csp", version: "v3.22.6"}
+    - {name: "core", version: "v3.15.3"}
     - {name: "CMSIS_5", version: "5.9.0"}
 
 packs:

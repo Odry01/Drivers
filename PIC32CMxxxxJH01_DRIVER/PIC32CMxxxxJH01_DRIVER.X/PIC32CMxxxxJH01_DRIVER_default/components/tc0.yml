@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.22.4
+  version: v3.22.6
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -197,4 +197,17 @@ data:
           type: Dynamic
         type: Values
       type: Long
+    TC_TIMER_TIME_MS:
+      attributes:
+        id: TC_TIMER_TIME_MS
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '1.3653333'
+          type: Float
+        type: Attributes
+      type: Float
   userData: {}

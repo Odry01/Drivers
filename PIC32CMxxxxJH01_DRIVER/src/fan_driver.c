@@ -39,19 +39,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the FAN_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
- */
 
 FAN_DRIVER_DATA fan_driverData;
 

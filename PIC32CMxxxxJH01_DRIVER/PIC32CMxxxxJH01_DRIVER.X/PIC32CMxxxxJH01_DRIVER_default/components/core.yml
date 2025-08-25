@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.22.4
+  version: v3.22.6
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -912,7 +912,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '48000000'
+            value: '24000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -1858,7 +1858,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '48000000'
+            value: '24000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -1880,7 +1880,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '48000000'
+            value: '24000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -2383,7 +2383,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: '0'
+            value: '24000000'
           type: Dynamic
         type: Values
       type: Integer
@@ -2747,6 +2747,155 @@ data:
           type: Dynamic
         type: Values
       type: String
+    GCLK_ID_30_GENSEL:
+      attributes:
+        id: GCLK_ID_30_GENSEL
+      children:
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
+    GCLK_ID_28_GENSEL:
+      attributes:
+        id: GCLK_ID_28_GENSEL
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
+    GCLK_CYCLE_FORMED:
+      attributes:
+        id: GCLK_CYCLE_FORMED
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    GCLK_INST_NUM1:
+      attributes:
+        id: GCLK_INST_NUM1
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    GCLK_1_DIVIDER_VALUE:
+      attributes:
+        id: GCLK_1_DIVIDER_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '2'
+          type: Dynamic
+        type: Values
+      type: Integer
+    GCLK_1_DIV:
+      attributes:
+        id: GCLK_1_DIV
+      children:
+      - children:
+        - attributes:
+            value: '2'
+          type: User
+        type: Values
+      type: Integer
+    FREQM_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: FREQM_INTERRUPT_ENABLE_UPDATE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_4_0_ENABLE:
+      attributes:
+        id: NVIC_4_0_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    FREQM_INTERRUPT_ENABLE:
+      attributes:
+        id: FREQM_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            id: freqm
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_4_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_4_0_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    FREQM_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: FREQM_INTERRUPT_HANDLER_LOCK
+      children:
+      - children:
+        - attributes:
+            id: freqm
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_4_0_HANDLER:
+      attributes:
+        id: NVIC_4_0_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: FREQM_InterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    FREQM_INTERRUPT_HANDLER:
+      attributes:
+        id: FREQM_INTERRUPT_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: freqm
+            value: FREQM_InterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    DMAC_BTCTRL_BEATSIZE_CH_4:
+      attributes:
+        id: DMAC_BTCTRL_BEATSIZE_CH_4
+      children:
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
   userData:
     children:
     - attributes:
