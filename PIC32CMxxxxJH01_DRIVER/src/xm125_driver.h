@@ -53,11 +53,12 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-
+#define XM125_I2C_RX_BUFFER_SIZE     8
+#define XM125_I2C_TX_BUFFER_SIZE     8
 
 // *****************************************************************************
 
-/* Application states
+/** Application states
 
   Summary:
     Application states enumeration
@@ -70,12 +71,15 @@ extern "C"
 typedef enum
 {
     XM125_DRIVER_STATE_INIT = 0,
-    XM125_DRIVER_STATE_SERVICE_TASKS,
+    XM125_DRIVER_STATE_CHECK_I2C_HANDLER,
+    XM125_DRIVER_STATE_IDLE,
+    XM125_DRIVER_STATE_TIMER_EXPIRED,
+    XM125_DRIVER_STATE_ERROR,
 } XM125_DRIVER_STATES;
 
 // *****************************************************************************
 
-/* Application Data
+/** Application Data
 
   Summary:
     Holds application data
@@ -93,6 +97,14 @@ typedef struct
     XM125_DRIVER_STATES state;
 
     /* Driver variables */
+    DRV_HANDLE I2C_HANDLE;
+    DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
+    volatile bool XM125_TASK_START;
+    volatile bool XM125_TASK_COMPLETED;
+    volatile bool XM125_ALERT;
+    uint8_t I2C_ADDRESS[1];
+    uint8_t I2C_DATA_RECEIVE[XM125_I2C_RX_BUFFER_SIZE];
+    uint8_t I2C_DATA_TRANSMIT[XM125_I2C_TX_BUFFER_SIZE];
 } XM125_DRIVER_DATA;
 
 // *****************************************************************************
@@ -101,7 +113,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-
+void XM125_DRIVER_Alert(uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************

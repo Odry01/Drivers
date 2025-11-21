@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: HarmonyCore
-coreVersion: 5.8.2
+coreVersion: 5.8.3
 device: PIC32CM5164JH01032
 library: []
 dependency:
@@ -145,7 +145,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sen6x_driver.c
+            value: sen63c_driver.c
           type: String
         type: Attributes
       type: File
@@ -164,7 +164,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sen6x_driver.h
+            value: sen63c_driver.h
           type: String
         type: Attributes
       type: File
@@ -221,7 +221,7 @@ data:
             id: name
           children:
           - type: Value
-            value: timer_driver.c
+            value: ssd1306_driver.c
           type: String
         type: Attributes
       type: File
@@ -240,7 +240,7 @@ data:
             id: name
           children:
           - type: Value
-            value: timer_driver.h
+            value: ssd1306_driver.h
           type: String
         type: Attributes
       type: File
@@ -259,7 +259,7 @@ data:
             id: name
           children:
           - type: Value
-            value: vcnl4200_driver.c
+            value: timer_driver.c
           type: String
         type: Attributes
       type: File
@@ -278,7 +278,7 @@ data:
             id: name
           children:
           - type: Value
-            value: vcnl4200_driver.h
+            value: timer_driver.h
           type: String
         type: Attributes
       type: File
@@ -854,7 +854,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '18'
+            value: '19'
           type: User
         type: Values
       type: Integer
@@ -894,7 +894,7 @@ data:
       children:
       - children:
         - attributes:
-            value: sen6x_driver
+            value: sen63c_driver
           type: User
         type: Values
       type: String
@@ -914,7 +914,7 @@ data:
       children:
       - children:
         - attributes:
-            value: timer_driver
+            value: ssd1306_driver
           type: User
         type: Values
       type: String
@@ -924,7 +924,7 @@ data:
       children:
       - children:
         - attributes:
-            value: vcnl4200_driver
+            value: timer_driver
           type: User
         type: Values
       type: String
@@ -1281,7 +1281,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.c
+            value: vcnl4200_driver.c
           type: String
         type: Attributes
       type: File
@@ -1300,7 +1300,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.h
+            value: vcnl4200_driver.h
           type: String
         type: Attributes
       type: File
@@ -1310,7 +1310,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ws281x_driver
+            value: vcnl4200_driver
           type: User
         type: Values
       type: String
@@ -1329,7 +1329,7 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.c
+            value: ws281x_driver.c
           type: String
         type: Attributes
       type: File
@@ -1348,13 +1348,61 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.h
+            value: ws281x_driver.h
           type: String
         type: Attributes
       type: File
     GEN_APP_TASK_NAME_17:
       attributes:
         id: GEN_APP_TASK_NAME_17
+      children:
+      - children:
+        - attributes:
+            value: ws281x_driver
+          type: User
+        type: Values
+      type: String
+    APP18_C:
+      attributes:
+        id: APP18_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP18_H:
+      attributes:
+        id: APP18_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.h
+          type: String
+        type: Attributes
+      type: File
+    GEN_APP_TASK_NAME_18:
+      attributes:
+        id: GEN_APP_TASK_NAME_18
       children:
       - children:
         - attributes:

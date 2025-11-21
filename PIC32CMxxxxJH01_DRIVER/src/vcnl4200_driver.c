@@ -50,29 +50,6 @@ VCNL4200_SENSOR_DATA vcnl4200_sensorData;
 // *****************************************************************************
 // *****************************************************************************
 
-void VCNL4200_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT)
-{
-    switch (EVENT)
-    {
-        case DRV_I2C_TRANSFER_EVENT_COMPLETE:
-        {
-            vcnl4200_driverData.I2C_TRANSFER_STATUS = true;
-            break;
-        }
-
-        case DRV_I2C_TRANSFER_EVENT_ERROR:
-        {
-            vcnl4200_driverData.I2C_TRANSFER_STATUS = false;
-            break;
-        }
-
-        default:
-        {
-            break;
-        }
-    }
-}
-
 void VCNL4200_DRIVER_Alert(uintptr_t CONTEXT)
 {
     vcnl4200_driverData.VCNL4200_ALERT = true;
@@ -279,8 +256,7 @@ void VCNL4200_DRIVER_Initialize(void)
     vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_INIT;
     vcnl4200_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
     vcnl4200_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
-    vcnl4200_driverData.I2C_TRANSFER_STATUS = false;
-    EIC_CallbackRegister(EIC_PIN_0, VCNL4200_DRIVER_I2C_Callback, 0);
+    EIC_CallbackRegister(EIC_PIN_0, VCNL4200_DRIVER_Alert, 0);
 }
 
 void VCNL4200_DRIVER_Tasks(void)
@@ -289,13 +265,13 @@ void VCNL4200_DRIVER_Tasks(void)
     {
         case VCNL4200_DRIVER_STATE_INIT:
         {
-            vcnl4200_driverData.I2C_HANDLE = DRV_I2C_Open(DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE);
             VCNL4200_DRIVER_Set_I2C_Address();
-            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_I2C_HANDLER_REGISTER;
+            vcnl4200_driverData.I2C_HANDLE = DRV_I2C_Open(DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE);
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_CHECK_I2C_HANDLER;
             break;
         }
 
-        case VCNL4200_DRIVER_STATE_I2C_HANDLER_REGISTER:
+        case VCNL4200_DRIVER_STATE_CHECK_I2C_HANDLER:
         {
             if (vcnl4200_driverData.I2C_HANDLE == DRV_HANDLE_INVALID)
             {
@@ -303,7 +279,6 @@ void VCNL4200_DRIVER_Tasks(void)
             }
             else
             {
-                DRV_I2C_TransferEventHandlerSet(vcnl4200_driverData.I2C_HANDLE, VCNL4200_DRIVER_I2C_Callback, (uintptr_t) & vcnl4200_driverData.I2C_TRANSFER_STATUS);
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             }
             break;

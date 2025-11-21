@@ -418,9 +418,9 @@ void SYS_Initialize ( void* data )
 
     TC0_CaptureInitialize();
 
+    AC_Initialize();
     RTC_Initialize();
 
-    AC_Initialize();
     FREQM_Initialize();
 
     PDEC_QDECInitialize();
@@ -434,9 +434,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_USART_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_USART_Initialize();
+
+    EVSYS_Initialize();
 
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
@@ -493,8 +493,9 @@ void SYS_Initialize ( void* data )
     NTC_DRIVER_Initialize();
     RSTC_DRIVER_Initialize();
     RTC_DRIVER_Initialize();
-    SEN6X_DRIVER_Initialize();
+    SEN63C_DRIVER_Initialize();
     SHT4X_DRIVER_Initialize();
+    SSD1306_DRIVER_Initialize();
     TIMER_DRIVER_Initialize();
     VCNL4200_DRIVER_Initialize();
     WS281X_DRIVER_Initialize();

@@ -119,14 +119,14 @@ void SYS_Tasks ( void )
     /* Call Application task RTC_DRIVER. */
     RTC_DRIVER_Tasks();
 
-    /* Call Application task SEN6X_DRIVER. */
-    SEN6X_DRIVER_Tasks();
+    /* Call Application task SEN63C_DRIVER. */
+    SEN63C_DRIVER_Tasks();
 
     /* Call Application task SHT4X_DRIVER. */
     SHT4X_DRIVER_Tasks();
 
-    /* Call Application task TIMER_DRIVER. */
-    TIMER_DRIVER_Tasks();
+    /* Call Application task SSD1306_DRIVER. */
+    SSD1306_DRIVER_Tasks();
 
     /* Call Application task VCNL4200_DRIVER. */
     VCNL4200_DRIVER_Tasks();

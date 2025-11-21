@@ -83,15 +83,15 @@ extern "C"
 typedef enum
 {
     SHT4X_DRIVER_STATE_INIT = 0,
-    SHT4X_DRIVER_STATE_I2C_HANDLER_REGISTER,
+    SHT4X_DRIVER_STATE_CHECK_I2C_HANDLER,
     SHT4X_DRIVER_STATE_IDLE,
     SHT4X_DRIVER_STATE_START_MEASURE,
-    SHT4X_DRIVER_STATE_START_MEASURE_ACK,
     SHT4X_DRIVER_STATE_START_MEASURE_WAIT_FOR_TRANSFER,
+    SHT4X_DRIVER_STATE_START_WAIT_TIMER,
     SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE,
     SHT4X_DRIVER_STATE_GET_MEASURE_DATA,
-    SHT4X_DRIVER_STATE_GET_MEASURE_DATA_ACK,
     SHT4X_DRIVER_STATE_GET_MEASURE_DATA_WAIT_FOR_TRANSFER,
+    SHT4X_DRIVER_STATE_STORE_MEASURED_VALUES,
     SHT4X_DRIVER_STATE_CALCULATE_DATA,
     SHT4X_DRIVER_STATE_STORE_DATA,
     SHT4X_DRIVER_STATE_TIMER_EXPIRED,
@@ -120,7 +120,6 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    volatile bool I2C_TRANSFER_STATUS;
     volatile bool SHT4X_TASK_START;
     volatile bool SHT4X_TASK_COMPLETED;
     uint8_t I2C_ADDRESS[3];
@@ -144,7 +143,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-void SHT4X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT);
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -170,7 +169,7 @@ void SHT4X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER)
 
 void SHT4X_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS);
 
-void SHT4X_DRIVER_Store_Measure_Values(void);
+void SHT4X_DRIVER_Store_Measured_Values(void);
 
 void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS);
 

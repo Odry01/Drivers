@@ -136,7 +136,7 @@ void WS281X_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 void WS281X_DRIVER_Set_Color(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
 
-void WS281X_DRIVER_Set_LED_Strip_Data(uint8_t BUFFER_INDEX, uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
+void WS281X_DRIVER_Set_LED_Strip_Data(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
 
 void WS281X_DRIVER_Send_LED_Strip_Data(void);
 

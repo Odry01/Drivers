@@ -54,29 +54,6 @@ BME690_DRIVER_CAL_DATA bme690_calData;
 // *****************************************************************************
 // *****************************************************************************
 
-void BME690_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT)
-{
-    switch (EVENT)
-    {
-        case DRV_I2C_TRANSFER_EVENT_COMPLETE:
-        {
-            bme690_driverData.I2C_TRANSFER_STATUS = true;
-            break;
-        }
-
-        case DRV_I2C_TRANSFER_EVENT_ERROR:
-        {
-            bme690_driverData.I2C_TRANSFER_STATUS = false;
-            break;
-        }
-
-        default:
-        {
-            break;
-        }
-    }
-}
-
 void BME690_DRIVER_Alert(uintptr_t CONTEXT)
 {
     bme690_driverData.BME690_ALERT = true;
@@ -756,7 +733,6 @@ void BME690_DRIVER_Initialize(void)
     bme690_driverData.state = BME690_DRIVER_STATE_INIT;
     bme690_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
     bme690_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
-    bme690_driverData.I2C_TRANSFER_STATUS = false;
     EIC_CallbackRegister(EIC_PIN_0, BME690_DRIVER_Alert, 0);
 }
 
@@ -766,13 +742,14 @@ void BME690_DRIVER_Tasks(void)
     {
         case BME690_DRIVER_STATE_INIT:
         {
+            BME690_DRIVER_Set_I2C_Address();
+            //            BME690_DRIVER_Set_Measure_Registers();
             bme690_driverData.I2C_HANDLE = DRV_I2C_Open(DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE);
-            //            BME690_DRIVER_Set_Register_Data();
-            bme690_driverData.state = BME690_DRIVER_STATE_I2C_HANDLER_REGISTER;
+            bme690_driverData.state = BME690_DRIVER_STATE_CHECK_I2C_HANDLER;
             break;
         }
 
-        case BME690_DRIVER_STATE_I2C_HANDLER_REGISTER:
+        case BME690_DRIVER_STATE_CHECK_I2C_HANDLER:
         {
             if (bme690_driverData.I2C_HANDLE == DRV_HANDLE_INVALID)
             {
@@ -780,7 +757,6 @@ void BME690_DRIVER_Tasks(void)
             }
             else
             {
-                DRV_I2C_TransferEventHandlerSet(bme690_driverData.I2C_HANDLE, BME690_DRIVER_I2C_Callback, (uintptr_t) & bme690_driverData.I2C_TRANSFER_STATUS);
                 bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             }
             break;

@@ -142,8 +142,8 @@ extern "C"
 #define HDC302X_CMD_POR_MODE_A10HZ_LPM3         0x3B
 #define HDC302X_CMD_POR_MODE_SLEEP              0x00
 
-#define HDC302X_I2C_RX_BUFFER_SIZE          8
-#define HDC302X_I2C_TX_BUFFER_SIZE          8
+#define HDC302X_I2C_RX_BUFFER_SIZE              8
+#define HDC302X_I2C_TX_BUFFER_SIZE              8
 
 // *****************************************************************************
 
@@ -160,7 +160,7 @@ extern "C"
 typedef enum
 {
     HDC302X_DRIVER_STATE_INIT = 0,
-    HDC302X_DRIVER_STATE_I2C_HANDLER_REGISTER,
+    HDC302X_DRIVER_STATE_CHECK_I2C_HANDLER,
     HDC302X_DRIVER_STATE_IDLE,
     HDC302X_DRIVER_STATE_TIMER_EXPIRED,
     HDC302X_DRIVER_STATE_ERROR,
@@ -188,7 +188,6 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    volatile bool I2C_TRANSFER_STATUS;
     volatile bool HDC302X_TASK_START;
     volatile bool HDC302X_TASK_COMPLETED;
     volatile bool HDC302X_ALERT;
@@ -199,24 +198,18 @@ typedef struct
 
 typedef struct
 {
-    uint8_t OFFSET_MSB;
-    uint8_t OFFSET_LSB;
-    uint8_t SET_HIGH_ALERT_MSB;
-    uint8_t SET_HIGH_ALERT_LSB;
-    uint8_t CLEAR_HIGH_ALERT_MSB;
-    uint8_t CLEAR_HIGH_ALERT_LSB;
-    uint8_t SET_LOW_ALERT_MSB;
-    uint8_t SET_LOW_ALERT_LSB;
-    uint8_t CLEAR_LOW_ALERT_MSB;
-    uint8_t CLEAR_LOW_ALERT_LSB;
-    uint8_t STATUS_MSB;
-    uint8_t STATUS_LSB;
     uint8_t NIST_VALUE_5;
     uint8_t NIST_VALUE_4;
     uint8_t NIST_VALUE_3;
     uint8_t NIST_VALUE_2;
     uint8_t NIST_VALUE_1;
     uint8_t NIST_VALUE_0;
+    uint16_t OFFSET;
+    uint16_t SET_HIGH_ALERT;
+    uint16_t CLEAR_HIGH_ALERT;
+    uint16_t SET_LOW_ALERT;
+    uint16_t CLEAR_LOW_ALERT;
+    uint16_t STATUS;
     uint16_t T_VALUE;
     uint16_t H_VALUE;
     float CELSIUS_TEMPERATURE;
@@ -245,8 +238,6 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-
-void HDC302X_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT);
 
 void HDC302X_DRIVER_Alert(uintptr_t CONTEXT);
 
@@ -362,7 +353,7 @@ uint8_t HDC302X_DRIVER_Calculation_Array_CRC(uint8_t MESSAGE_0, uint8_t MESSAGE_
 
 uint16_t HDC302X_DRIVER_Set_Offset_Code(uint16_t TEMPERATURE, uint16_t HUMIDITY);
 
-uint16_t HDC302X_DRIVER_Set_ALERT_Code(uint16_t TEMPERATURE, uint16_t HUMIDITY);
+uint16_t HDC302X_DRIVER_Set_Alert_Code(uint16_t TEMPERATURE, uint16_t HUMIDITY);
 
 void HDC302X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 

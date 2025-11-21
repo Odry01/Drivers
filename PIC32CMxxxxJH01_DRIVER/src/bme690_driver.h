@@ -158,7 +158,7 @@ extern "C"
 typedef enum
 {
     BME690_DRIVER_STATE_INIT = 0,
-    BME690_DRIVER_STATE_I2C_HANDLER_REGISTER,
+    BME690_DRIVER_STATE_CHECK_I2C_HANDLER,
     BME690_DRIVER_STATE_IDLE,
     BME690_DRIVER_STATE_TIMER_EXPIRED,
     BME690_DRIVER_STATE_ERROR,
@@ -186,7 +186,6 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    volatile bool I2C_TRANSFER_STATUS;
     volatile bool BME690_TASK_START;
     volatile bool BME690_TASK_COMPLETED;
     volatile bool BME690_ALERT;
@@ -276,8 +275,6 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-
-void BME690_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT);
 
 void BME690_DRIVER_Alert(uintptr_t CONTEXT);
 

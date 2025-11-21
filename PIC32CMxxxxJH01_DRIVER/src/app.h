@@ -121,214 +121,236 @@ typedef struct
 // *****************************************************************************
 
 /**
-  Function:
+    Function:
     void APP_Initialize(void)
 
-  Summary:
-     MPLAB Harmony application initialization routine.
+    Summary:
+    Initializes the application.
 
-  Description:
-    This function initializes the Harmony application. It places the
-    application in its initial state and prepares it to run so that its
-    APP_Tasks function can be called.
+    Description:
+    This routine performs all one‑time setup required by the application.  
+    It places the program in its initial state, configures peripheral error flags,
+    and prepares any global data structures so that subsequent calls to
+    APP_Tasks() will run correctly.
 
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
+    Returns:
     None.
 
-  Remarks:
+    Remarks:
     None.
  */
 void APP_Initialize(void);
 
 /**
-  Function:
+    Function:
     void APP_Tasks(void)
 
-  Summary:
-    MPLAB Harmony Demo application tasks function
+    Summary:
+    Main application task routine.
 
-  Description:
-    This routine is the Harmony Demo application's tasks function. It
-    defines the application's state machine and core logic.
+    Description:
+    This function contains the core logic of the application.  
+    It is typically called repeatedly from the main loop and performs
+    periodic checks, state machine updates, and peripheral error handling.
+    The routine may read or clear the error status bits set by the
+    hardware drivers and take appropriate action (e.g., reset a module,
+    log an event, etc.).
 
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
+    Returns:
     None.
 
-  Remarks:
+    Remarks:
     None.
  */
 void APP_Tasks(void);
 
 /**
-  Function:
+    Function:
     bool APP_Get_CAN0_Error_Status(void)
 
-  Summary:
-    Gets the error status of CAN0 peripheral.
+    Summary:
+    Retrieves the current CAN0 error flag.
 
-  Description:
-    This function retrieves the error status of the CAN0 peripheral.
+    Description:
+    This function returns whether an error has been detected on the
+    CAN0 peripheral.  The value is set by the driver or cleared by the
+    application logic when the error condition is handled.
 
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
-    @return bool - True if a CAN error is detected, false otherwise.
+    Returns:
+    @return bool – `true` if a CAN error is currently flagged, otherwise `false`.
 
-  Remarks:
+    Remarks:
     None.
  */
 bool APP_Get_CAN0_Error_Status(void);
 
 /**
-  Function:
+    Function:
     void APP_Set_CAN0_Error_Status(bool STATUS)
 
-  Summary:
-    Sets the error status of CAN0 peripheral.
+    Summary:
+    Sets the CAN0 error flag.
 
-  Description:
-    This function sets the error status of the CAN0 peripheral.
+    Description:
+    This routine allows the application to explicitly set or clear the
+    CAN0 error status.  Passing `true` indicates that an error has been
+    detected; passing `false` clears the flag so that normal operation can
+    resume.
 
-  Parameters:
-    @param bool STATUS: bool - The desired error status to set. True indicates an error, false indicates no error.
+    Parameters:
+    @param bool STATUS – The desired error state (`true` = error, `false` = no error).
 
-  Returns:
+    Returns:
     None.
 
-  Remarks:
+    Remarks:
     None.
  */
 void APP_Set_CAN0_Error_Status(bool STATUS);
 
 /**
-  Function:
+    Function:
     bool APP_Get_I2C_Error_Status(void)
 
-  Summary:
-    Gets the error status of the I2C DRV.
+    Summary:
+    Retrieves the current I2C error flag.
 
-  Description:
-    This function retrieves the current error status of the I2C Core driver.
+    Description:
+    This function returns whether an error has been detected on the
+    I2C peripheral.  The status is updated by the driver and can be cleared
+    by the application when the condition is resolved.
 
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
-    @return bool - True if an I2C error is detected, false otherwise.
+    Returns:
+    @return bool – `true` if an I2C error is flagged, otherwise `false`.
 
-  Remarks:
+    Remarks:
     None.
  */
 bool APP_Get_I2C_Error_Status(void);
 
 /**
-  Function:
+    Function:
     void APP_Set_I2C_Error_Status(bool STATUS)
 
-  Summary:
-    Sets the error status of the I2C Core driver.
+    Summary:
+    Sets the I2C error flag.
 
-  Description:
-    This function sets the current error status of the I2C Core driver.
+    Description:
+    Explicitly sets or clears the I2C error status.  Use this when the
+    application detects an error condition that is not automatically
+    reported by the driver, or to acknowledge a handled error.
 
-  Parameters:
-    @param bool STATUS: - The desired error status to set. True indicates an error, false indicates no error.
+    Parameters:
+    @param bool STATUS – Desired error state (`true` = error, `false` = no error).
 
-  Returns:
+    Returns:
     None.
 
-  Remarks:
+    Remarks:
     None.
  */
 void APP_Set_I2C_Error_Status(bool STATUS);
 
 /**
-  Function:
+    Function:
     bool APP_Get_SPI_Error_Status(void)
 
-  Summary:
-    Gets the error status of the SPI Core driver.
+    Summary:
+    Retrieves the current SPI error flag.
 
-  Description:
-    This function retrieves the current error status of the SPI Core driver.
+    Description:
+    This function reports whether an error has been detected on the
+    SPI peripheral.  The driver updates this status, and the application
+    may clear it after handling the fault.
 
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
-    @return bool - True if an SPI error is detected, false otherwise.
+    Returns:
+    @return bool – `true` if an SPI error is flagged, otherwise `false`.
 
-  Remarks:
+    Remarks:
     None.
  */
 bool APP_Get_SPI_Error_Status(void);
 
 /**
-  Function:
+    Function:
     void APP_Set_SPI_Error_Status(bool STATUS)
 
-  Summary:
-    Sets the error status of the SPI Core driver.
+    Summary:
+    Sets the SPI error flag.
 
-  Description:
-    This function sets the current error status of the SPI Core driver.
+    Description:
+    Allows the application to manually set or clear the SPI error
+    status.  This can be used for software‑generated error states or to
+    acknowledge a handled fault.
 
-  Parameters:
-    @param bool STATUS: - The desired error status to set. True indicates an error, false indicates no error.
+    Parameters:
+    @param bool STATUS – Desired error state (`true` = error, `false` = no error).
 
-  Returns:
+    Returns:
     None.
 
-  Remarks:
+    Remarks:
     None.
  */
 void APP_Set_SPI_Error_Status(bool STATUS);
 
 /**
-  Function:
+    Function:
     bool APP_Get_UART_Error_Status(void)
 
-  Summary:
-    Gets the error status of the UART Core driver.
+    Summary:
+    Retrieves the current UART error flag.
 
-  Description:
-    This function retrieves the current error status of the UART Core driver.
+    Description:
+    This function returns whether an error has been detected on the
+    UART peripheral.  The status is maintained by the driver and can be
+    cleared by the application once the fault has been resolved.
 
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
-    @return bool - True if a UART error is detected, false otherwise.
+    Returns:
+    @return bool – `true` if a UART error is flagged, otherwise `false`.
 
-  Remarks:
+    Remarks:
     None.
  */
 bool APP_Get_UART_Error_Status(void);
 
 /**
-  Function:
+    Function:
     void APP_Set_UART_Error_Status(bool STATUS)
 
-  Summary:
-    Sets the error status of the UART Core driver.
+    Summary:
+    Sets the UART error flag.
 
-  Description:
-    This function sets the current error status of the UART Core driver.
+    Description:
+    Explicitly sets or clears the UART error status.  The application
+    can use this to indicate an error condition that was not reported by
+    the driver, or to acknowledge a handled error.
 
-  Parameters:
-    @param bool STATUS: The desired error status to set. True indicates an error, false indicates no error.
+    Parameters:
+    @param bool STATUS – Desired error state (`true` = error, `false` = no error).
 
-  Returns:
+    Returns:
     None.
 
-  Remarks:
+    Remarks:
     None.
  */
 void APP_Set_UART_Error_Status(bool STATUS);

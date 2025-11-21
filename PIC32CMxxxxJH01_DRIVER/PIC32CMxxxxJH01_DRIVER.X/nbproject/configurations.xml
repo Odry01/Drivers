@@ -179,9 +179,10 @@
         <itemPath>../src/sht4x_driver.h</itemPath>
         <itemPath>../src/timer_driver.h</itemPath>
         <itemPath>../src/xm125_driver.h</itemPath>
-        <itemPath>../src/sen6x_driver.h</itemPath>
         <itemPath>../src/ws281x_driver.h</itemPath>
         <itemPath>../src/vcnl4200_driver.h</itemPath>
+        <itemPath>../src/sen63c_driver.h</itemPath>
+        <itemPath>../src/ssd1306_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="PIC32CM5164JH01032_DFP"
@@ -485,14 +486,18 @@
         <itemPath>../src/ntc_driver.c</itemPath>
         <itemPath>../src/timer_driver.c</itemPath>
         <itemPath>../src/xm125_driver.c</itemPath>
-        <itemPath>../src/sen6x_driver.c</itemPath>
         <itemPath>../src/ws281x_driver.c</itemPath>
         <itemPath>../src/vcnl4200_driver.c</itemPath>
+        <itemPath>../src/sen63c_driver.c</itemPath>
+        <itemPath>../src/ssd1306_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>../src/libraries/fonts</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
@@ -503,7 +508,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>noID</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.60</languageToolchainVersion>
+        <languageToolchainVersion>5.00</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>

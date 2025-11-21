@@ -56,10 +56,10 @@ extern "C"
 #define VCNL4200_CMD_ALS_CFG            0x0
 #define VCNL4200_CMD_ALS_THDH           0x1
 #define VCNL4200_CMD_ALS_THDL           0x2
-#define VCNL4200_CMD_PS_CFG1            0x3    /**/
-#define VCNL4200_CMD_PS_CFG2            0x3    /**/
-#define VCNL4200_CMD_PS_CFG3            0x4    /**/
-#define VCNL4200_CMD_PS_MS              0x4    /**/
+#define VCNL4200_CMD_PS_CFG1            0x3
+#define VCNL4200_CMD_PS_CFG2            0x3
+#define VCNL4200_CMD_PS_CFG3            0x4
+#define VCNL4200_CMD_PS_MS              0x4
 #define VCNL4200_CMD_PS_CANC            0x5
 #define VCNL4200_CMD_PS_THDL            0x6
 #define VCNL4200_CMD_PS_THDH            0x7
@@ -87,7 +87,7 @@ extern "C"
 typedef enum
 {
     VCNL4200_DRIVER_STATE_INIT = 0,
-    VCNL4200_DRIVER_STATE_I2C_HANDLER_REGISTER,
+    VCNL4200_DRIVER_STATE_CHECK_I2C_HANDLER,
     VCNL4200_DRIVER_STATE_IDLE,
     VCNL4200_DRIVER_STATE_TIMER_EXPIRED,
     VCNL4200_DRIVER_STATE_ERROR,
@@ -115,7 +115,6 @@ typedef struct
     /* Driver variables */
     DRV_HANDLE I2C_HANDLE;
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
-    volatile bool I2C_TRANSFER_STATUS;
     volatile bool VCNL4200_TASK_START;
     volatile bool VCNL4200_TASK_COMPLETED;
     volatile bool VCNL4200_ALERT;
@@ -157,8 +156,6 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-
-void VCNL4200_DRIVER_I2C_Callback(DRV_I2C_TRANSFER_EVENT EVENT, DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE, uintptr_t CONTEXT);
 
 void VCNL4200_DRIVER_Alert(uintptr_t CONTEXT);
 
