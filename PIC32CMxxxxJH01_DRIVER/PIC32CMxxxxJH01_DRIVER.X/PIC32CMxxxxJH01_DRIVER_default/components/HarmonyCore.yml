@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: core
   type: package
-  version: v3.15.3
+  version: v3.16.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -69,7 +69,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rstc_driver.c
+            value: ntc_driver.c
           type: String
         type: Attributes
       type: File
@@ -88,7 +88,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rstc_driver.h
+            value: ntc_driver.h
           type: String
         type: Attributes
       type: File
@@ -107,7 +107,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rtc_driver.c
+            value: rstc_driver.c
           type: String
         type: Attributes
       type: File
@@ -126,7 +126,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rtc_driver.h
+            value: rstc_driver.h
           type: String
         type: Attributes
       type: File
@@ -145,7 +145,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sen63c_driver.c
+            value: rtc_driver.c
           type: String
         type: Attributes
       type: File
@@ -164,7 +164,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sen63c_driver.h
+            value: rtc_driver.h
           type: String
         type: Attributes
       type: File
@@ -183,7 +183,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sht4x_driver.c
+            value: sen63c_driver.c
           type: String
         type: Attributes
       type: File
@@ -202,7 +202,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sht4x_driver.h
+            value: sen63c_driver.h
           type: String
         type: Attributes
       type: File
@@ -221,7 +221,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ssd1306_driver.c
+            value: sht4x_driver.c
           type: String
         type: Attributes
       type: File
@@ -240,7 +240,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ssd1306_driver.h
+            value: sht4x_driver.h
           type: String
         type: Attributes
       type: File
@@ -259,7 +259,7 @@ data:
             id: name
           children:
           - type: Value
-            value: timer_driver.c
+            value: ssd1306_driver.c
           type: String
         type: Attributes
       type: File
@@ -278,7 +278,7 @@ data:
             id: name
           children:
           - type: Value
-            value: timer_driver.h
+            value: ssd1306_driver.h
           type: String
         type: Attributes
       type: File
@@ -373,7 +373,7 @@ data:
             id: name
           children:
           - type: Value
-            value: can0_driver.c
+            value: bmp585_driver.c
           type: String
         type: Attributes
       type: File
@@ -392,7 +392,7 @@ data:
             id: name
           children:
           - type: Value
-            value: can0_driver.h
+            value: bmp585_driver.h
           type: String
         type: Attributes
       type: File
@@ -411,7 +411,7 @@ data:
             id: name
           children:
           - type: Value
-            value: console_driver.c
+            value: can0_driver.c
           type: String
         type: Attributes
       type: File
@@ -430,7 +430,7 @@ data:
             id: name
           children:
           - type: Value
-            value: console_driver.h
+            value: can0_driver.h
           type: String
         type: Attributes
       type: File
@@ -449,7 +449,7 @@ data:
             id: name
           children:
           - type: Value
-            value: fan_driver.c
+            value: console_driver.c
           type: String
         type: Attributes
       type: File
@@ -468,7 +468,7 @@ data:
             id: name
           children:
           - type: Value
-            value: fan_driver.h
+            value: console_driver.h
           type: String
         type: Attributes
       type: File
@@ -487,7 +487,7 @@ data:
             id: name
           children:
           - type: Value
-            value: fcm360w_driver.c
+            value: fan_driver.c
           type: String
         type: Attributes
       type: File
@@ -506,7 +506,7 @@ data:
             id: name
           children:
           - type: Value
-            value: fcm360w_driver.h
+            value: fan_driver.h
           type: String
         type: Attributes
       type: File
@@ -525,7 +525,7 @@ data:
             id: name
           children:
           - type: Value
-            value: hdc302x_driver.c
+            value: fcm360w_driver.c
           type: String
         type: Attributes
       type: File
@@ -544,7 +544,7 @@ data:
             id: name
           children:
           - type: Value
-            value: hdc302x_driver.h
+            value: fcm360w_driver.h
           type: String
         type: Attributes
       type: File
@@ -563,7 +563,7 @@ data:
             id: name
           children:
           - type: Value
-            value: mcp9808_driver.c
+            value: hdc302x_driver.c
           type: String
         type: Attributes
       type: File
@@ -582,7 +582,7 @@ data:
             id: name
           children:
           - type: Value
-            value: mcp9808_driver.h
+            value: hdc302x_driver.h
           type: String
         type: Attributes
       type: File
@@ -601,7 +601,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ntc_driver.c
+            value: mcp9808_driver.c
           type: String
         type: Attributes
       type: File
@@ -620,7 +620,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ntc_driver.h
+            value: mcp9808_driver.h
           type: String
         type: Attributes
       type: File
@@ -854,7 +854,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '19'
+            value: '21'
           type: User
         type: Values
       type: Integer
@@ -874,7 +874,7 @@ data:
       children:
       - children:
         - attributes:
-            value: rstc_driver
+            value: ntc_driver
           type: User
         type: Values
       type: String
@@ -884,7 +884,7 @@ data:
       children:
       - children:
         - attributes:
-            value: rtc_driver
+            value: rstc_driver
           type: User
         type: Values
       type: String
@@ -894,7 +894,7 @@ data:
       children:
       - children:
         - attributes:
-            value: sen63c_driver
+            value: rtc_driver
           type: User
         type: Values
       type: String
@@ -904,7 +904,7 @@ data:
       children:
       - children:
         - attributes:
-            value: sht4x_driver
+            value: sen63c_driver
           type: User
         type: Values
       type: String
@@ -914,7 +914,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ssd1306_driver
+            value: sht4x_driver
           type: User
         type: Values
       type: String
@@ -924,7 +924,7 @@ data:
       children:
       - children:
         - attributes:
-            value: timer_driver
+            value: ssd1306_driver
           type: User
         type: Values
       type: String
@@ -944,7 +944,7 @@ data:
       children:
       - children:
         - attributes:
-            value: can0_driver
+            value: bmp585_driver
           type: User
         type: Values
       type: String
@@ -954,7 +954,7 @@ data:
       children:
       - children:
         - attributes:
-            value: console_driver
+            value: can0_driver
           type: User
         type: Values
       type: String
@@ -964,7 +964,7 @@ data:
       children:
       - children:
         - attributes:
-            value: fan_driver
+            value: console_driver
           type: User
         type: Values
       type: String
@@ -974,7 +974,7 @@ data:
       children:
       - children:
         - attributes:
-            value: fcm360w_driver
+            value: fan_driver
           type: User
         type: Values
       type: String
@@ -984,7 +984,7 @@ data:
       children:
       - children:
         - attributes:
-            value: hdc302x_driver
+            value: fcm360w_driver
           type: User
         type: Values
       type: String
@@ -994,7 +994,7 @@ data:
       children:
       - children:
         - attributes:
-            value: mcp9808_driver
+            value: hdc302x_driver
           type: User
         type: Values
       type: String
@@ -1004,7 +1004,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ntc_driver
+            value: mcp9808_driver
           type: User
         type: Values
       type: String
@@ -1281,7 +1281,7 @@ data:
             id: name
           children:
           - type: Value
-            value: vcnl4200_driver.c
+            value: stcc4_driver.c
           type: String
         type: Attributes
       type: File
@@ -1300,7 +1300,7 @@ data:
             id: name
           children:
           - type: Value
-            value: vcnl4200_driver.h
+            value: stcc4_driver.h
           type: String
         type: Attributes
       type: File
@@ -1310,7 +1310,7 @@ data:
       children:
       - children:
         - attributes:
-            value: vcnl4200_driver
+            value: stcc4_driver
           type: User
         type: Values
       type: String
@@ -1329,7 +1329,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.c
+            value: timer_driver.c
           type: String
         type: Attributes
       type: File
@@ -1348,7 +1348,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.h
+            value: timer_driver.h
           type: String
         type: Attributes
       type: File
@@ -1358,7 +1358,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ws281x_driver
+            value: timer_driver
           type: User
         type: Values
       type: String
@@ -1377,7 +1377,7 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.c
+            value: vcnl4200_driver.c
           type: String
         type: Attributes
       type: File
@@ -1396,7 +1396,7 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.h
+            value: vcnl4200_driver.h
           type: String
         type: Attributes
       type: File
@@ -1406,7 +1406,103 @@ data:
       children:
       - children:
         - attributes:
+            value: vcnl4200_driver
+          type: User
+        type: Values
+      type: String
+    APP19_C:
+      attributes:
+        id: APP19_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ws281x_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP20_C:
+      attributes:
+        id: APP20_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP19_H:
+      attributes:
+        id: APP19_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ws281x_driver.h
+          type: String
+        type: Attributes
+      type: File
+    APP20_H:
+      attributes:
+        id: APP20_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.h
+          type: String
+        type: Attributes
+      type: File
+    GEN_APP_TASK_NAME_20:
+      attributes:
+        id: GEN_APP_TASK_NAME_20
+      children:
+      - children:
+        - attributes:
             value: xm125_driver
+          type: User
+        type: Values
+      type: String
+    GEN_APP_TASK_NAME_19:
+      attributes:
+        id: GEN_APP_TASK_NAME_19
+      children:
+      - children:
+        - attributes:
+            value: ws281x_driver
           type: User
         type: Values
       type: String

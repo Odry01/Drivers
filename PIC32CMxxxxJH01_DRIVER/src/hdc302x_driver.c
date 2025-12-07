@@ -38,6 +38,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
 
 HDC302X_DRIVER_DATA hdc302x_driverData;
@@ -500,7 +502,7 @@ void HDC302X_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(hdc302x_driverData.I2C_HANDLE);
             HDC302X_DRIVER_Set_Task_Completed_Status(true);
-            hdc302x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            hdc302x_driverData.state = HDC302X_DRIVER_STATE_IDLE;
             break;
         }
 
@@ -508,7 +510,7 @@ void HDC302X_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(hdc302x_driverData.I2C_HANDLE);
             HDC302X_DRIVER_Set_Task_Completed_Status(true);
-            hdc302x_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            hdc302x_driverData.state = HDC302X_DRIVER_STATE_IDLE;
             break;
         }
 

@@ -183,8 +183,28 @@
         <itemPath>../src/vcnl4200_driver.h</itemPath>
         <itemPath>../src/sen63c_driver.h</itemPath>
         <itemPath>../src/ssd1306_driver.h</itemPath>
+        <itemPath>../src/stcc4_driver.h</itemPath>
+        <itemPath>../src/bmp585_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
+        <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+          <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+            <logicalFolder name="Core" displayName="Core" projectFiles="true">
+              <logicalFolder name="Include" displayName="Include" projectFiles="true">
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_version.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_iccarm.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_gcc.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armcc.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang_ltm.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/core_cm0plus.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/mpu_armv7.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cachel1_armv7.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
         <logicalFolder name="PIC32CM5164JH01032_DFP"
                        displayName="PIC32CM5164JH01032_DFP"
                        projectFiles="true">
@@ -490,6 +510,8 @@
         <itemPath>../src/vcnl4200_driver.c</itemPath>
         <itemPath>../src/sen63c_driver.c</itemPath>
         <itemPath>../src/ssd1306_driver.c</itemPath>
+        <itemPath>../src/stcc4_driver.c</itemPath>
+        <itemPath>../src/bmp585_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>
@@ -512,8 +534,8 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="CMSIS" vendor="ARM" version="6.1.0"/>
-        <pack name="PIC32CM-JH_DFP" vendor="Microchip" version="1.4.224"/>
+        <pack name="PIC32CM-JH_DFP" vendor="Microchip" version="1.5.236"/>
+        <pack name="CMSIS" vendor="ARM" version="6.2.0"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

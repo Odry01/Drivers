@@ -153,300 +153,316 @@ typedef union
 // *****************************************************************************
 
 /**
-    Function:
-    void CAN0_DRIVER_Initialize(void)
+   Function:
+   CAN0_DRIVER_Initialize
 
-    Summary:
-    Initializes the CAN0 driver module.
+   Summary:
+   Performs one‑time initialization of the CAN‑0 driver.
 
-    Description:
-    This routine performs all one‑time configuration required for the
-    CAN0 peripheral.  It sets up the hardware registers, configures
-    interrupts, and clears any pending status flags so that
-    CAN0_DRIVER_Tasks() can operate correctly.
+   Description:
+   This routine configures the underlying CAN peripheral, sets up
+   interrupts or DMA if used, and clears all internal status flags.
+   It must be called once during system boot before any other
+   CAN0_DRIVER_* functions are invoked.
 
-    Parameters:
-    None.
+   Parameters:
+   None.
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    None.
+   Remarks:
+   None.
  */
 void CAN0_DRIVER_Initialize(void);
 
 /**
-    Function:
-    void CAN0_DRIVER_Tasks(void)
+   Function:
+   CAN0_DRIVER_Tasks
 
-    Summary:
-    Main task routine for the CAN0 driver.
+   Summary:
+   Executes periodic driver tasks; should be called repeatedly.
 
-    Description:
-    This function contains the state‑machine that manages all CAN0
-    operations.  It polls for new messages, handles transmission,
-    updates status flags and performs any necessary error handling.
-    It is intended to be called repeatedly from the application loop.
+   Description:
+   The routine checks the CAN controller for new messages, handles
+   transmission completions, and updates internal status flags.
+   It is typically invoked from the main loop or a scheduler tick.
 
-    Parameters:
-    None.
+   Parameters:
+   None.
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    None.
+   Remarks:
+   None.
  */
 void CAN0_DRIVER_Tasks(void);
 
 /**
-    Function:
-    bool CAN0_DRIVER_Get_Task_Start_Status(void)
+   Function:
+   CAN0_DRIVER_Get_Task_Start_Status
 
-    Summary:
-    Retrieves the current “task start” flag for CAN0.
+   Summary:
+   Retrieves the “task start” flag for the driver.
 
-    Description:
-    Indicates whether a new CAN operation has been requested.  
-    The application sets this flag via
-    CAN0_DRIVER_Set_Task_Start_Status(true) and clears it when processing is finished.
+   Description:
+   The flag is set when a new message or configuration has been
+   queued and cleared once the driver starts processing it.
+   Application code can poll this flag to decide whether to
+   issue another operation.
 
-    Parameters:
-    None.
+   Parameters:
+   None.
 
-    Returns:
-    @return bool – `true` if a task is pending, otherwise `false`.
+   Returns:
+   @return bool - true if a task has been requested but not yet started
 
-    Remarks:
-    None.
+   Remarks:
+   None.
  */
 bool CAN0_DRIVER_Get_Task_Start_Status(void);
 
 /**
-    Function:
-    void CAN0_DRIVER_Set_Task_Start_Status(bool STATUS)
+   Function:
+   CAN0_DRIVER_Set_Task_Start_Status
 
-    Summary:
-    Sets the “task start” flag for CAN0.
+   Summary:
+   Sets the “task start” flag for the driver.
 
-    Description:
-    Allows the application to signal that a new CAN transaction should begin.  
-    The driver will act on this flag during its next call to
-    CAN0_DRIVER_Tasks().
+   Description:
+   Passing `true` queues a new task; passing `false`
+   clears the flag.  The driver will act on this flag during its
+   next call to *CAN0_DRIVER_Tasks()*.
 
-    Parameters:
-    @param bool STATUS – Desired state of the task‑start flag (`true` = pending, `false` = cleared).
+   Parameters:
+   @param STATUS - desired state of the task‑start flag
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    None.
+   Remarks:
+   None.
  */
 void CAN0_DRIVER_Set_Task_Start_Status(bool STATUS);
 
 /**
-    Function:
-    bool CAN0_DRIVER_Get_Task_Completed_Status(void)
+   Function:
+   CAN0_DRIVER_Get_Task_Completed_Status
 
-    Summary:
-    Retrieves the current “task completed” flag for CAN0.
+   Summary:
+   Retrieves the “task completed” flag for the driver.
 
-    Description:
-    Indicates whether the most recent CAN transaction has finished
-    successfully.  The driver sets this flag when all messages have been
-    sent or received and processed.
+   Description:
+   The flag is set to `true` when a queued operation (e.g. message
+   transmission) finishes successfully.  Polling this flag allows
+   the application to know when it can safely issue another task.
 
-    Parameters:
-    None.
+   Parameters:
+   None.
 
-    Returns:
-    @return bool – `true` if the last task is complete, otherwise `false`.
+   Returns:
+   @return bool - true if the most recent task has finished
 
-    Remarks:
-    None.
+   Remarks:
+   None.
  */
 bool CAN0_DRIVER_Get_Task_Completed_Status(void);
 
 /**
-    Function:
-    void CAN0_DRIVER_Set_Task_Completed_Status(bool STATUS)
+   Function:
+   CAN0_DRIVER_Set_Task_Completed_Status
 
-    Summary:
-    Sets the “task completed” flag for CAN0.
+   Summary:
+   Sets the “task completed” flag for the driver.
 
-    Description:
-    Allows the driver to mark a CAN transaction as finished.  
-    The application may clear this flag when it is ready for another
-    operation.
+   Description:
+   Passing `true` indicates that a configuration or transmission
+   operation has finished; passing `false` clears the flag so
+   the next operation can be started.  The flag is normally cleared
+   automatically by the driver, but this setter allows manual control.
 
-    Parameters:
-    @param bool STATUS – Desired state of the task‑completed flag (`true` = complete, `false` = not yet).
+   Parameters:
+   @param STATUS - desired state of the task‑completed flag
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    None.
+   Remarks:
+   None.
  */
 void CAN0_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 /**
-    Function:
-    void CAN0_DRIVER_Set_Message_Content(uint32_t ID)
+   Function:
+   CAN0_DRIVER_Set_Message_Content
 
-    Summary:
-    Sets the identifier for a CAN message to be transmitted.
+   Summary:
+   Sets the CAN identifier for the next message to transmit.
 
-    Description:
-    The routine stores the supplied 11‑bit or 29‑bit identifier into
-    the driver’s transmit buffer.  The actual transmission occurs when
-    CAN0_DRIVER_Tasks() processes the queued message.
+   Description:
+   The `ID` parameter is a standard (11‑bit) or extended
+   (29‑bit) CAN ID.  It is stored in an internal transmit buffer
+   and will be used by *CAN0_DRIVER_Tasks()* when sending the
+   message.
 
-    Parameters:
-    @param uint32_t ID – CAN identifier (11‑bit standard or 29‑bit extended).
+   Parameters:
+   @param ID - 32‑bit identifier (only lower 11 or 29 bits are used)
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    The caller should ensure that `ID` conforms to the CAN framing rules
-    for the selected frame type.
+   Remarks:
+   The driver automatically clears the “task start” flag once the
+   transmission begins.
  */
 void CAN0_DRIVER_Set_Message_Content(uint32_t ID);
 
 /**
-    Function:
-    void CAN0_DRIVER_Get_Received_Data(uint8_t NUMBER_OF_MESSAGES, CAN_RX_BUFFER *RX_BUFFER, uint8_t LENGTH_OF_RX_BUFFER)
+   Function:
+   CAN0_DRIVER_Get_Received_Data
 
-    Summary:
-    Copies received CAN data into a user‑supplied buffer.
+   Summary:
+   Copies received CAN frames into a user‑supplied buffer.
 
-    Description:
-    This routine reads up to `NUMBER_OF_MESSAGES` from the driver’s
-    receive queue and copies them into the array pointed to by
-    `RX_BUFFER`.  The caller must allocate at least
-    `LENGTH_OF_RX_BUFFER` entries; if more messages are pending,
-    the excess will be discarded.  Each entry in `CAN_RX_BUFFER`
-    contains the message identifier, data length code (DLC), and payload.
+   Description:
+   The routine reads up to `NUMBER_OF_MESSAGES` frames from the
+   driver’s receive FIFO, stores them in `RX_BUFFER`, and returns
+   the actual number of frames copied.  `LENGTH_OF_RX_BUFFER`
+   specifies how many entries are available in `RX_BUFFER` to avoid
+   overruns.  Each element of `CAN_RX_BUFFER` should contain at
+   least: ID, DLC, data[8], and a timestamp (if used).
 
-    Parameters:
-    @param uint8_t NUMBER_OF_MESSAGES – Maximum number of messages to retrieve.
-    @param CAN_RX_BUFFER *RX_BUFFER – Pointer to an array that will receive the data.
-    @param uint8_t LENGTH_OF_RX_BUFFER – Size of the `RX_BUFFER` array in elements.
+   Parameters:
+   @param NUMBER_OF_MESSAGES - maximum frames to copy
+   @param RX_BUFFER          - pointer to caller‑allocated buffer
+   @param LENGTH_OF_RX_BUFFER- size of the supplied buffer in entries
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    The function does not return a status; it is the caller’s
-    responsibility to verify that enough space was provided.
+   Remarks:
+   If more messages are pending than `LENGTH_OF_RX_BUFFER`,
+   excess frames are discarded and an error flag may be set.
  */
-void CAN0_DRIVER_Get_Received_Data(uint8_t NUMBER_OF_MESSAGES, CAN_RX_BUFFER *RX_BUFFER, uint8_t LENGTH_OF_RX_BUFFER);
+void CAN0_DRIVER_Get_Received_Data(uint8_t NUMBER_OF_MESSAGES,
+                                   CAN_RX_BUFFER *RX_BUFFER,
+                                   uint8_t LENGTH_OF_RX_BUFFER);
 
 /**
-    Function:
-    uint8_t CAN0_DRIVER_Set_DLC(uint8_t LENGTH)
+   Function:
+   CAN0_DRIVER_Set_DLC
 
-    Summary:
-    Sets the Data Length Code (DLC) for a CAN message.
+   Summary:
+   Sets the Data Length Code (DLC) for a transmit frame.
 
-    Description:
-    The routine validates `LENGTH` (0‑8 bytes for standard frames, 0‑64 for extended
-    frames) and stores it in the driver’s transmit buffer.  It returns the
-    actual DLC value that will be transmitted (which may be truncated if
-    invalid).
+   Description:
+   `LENGTH` must be in the range 0‑8.  The function stores the
+   value internally and returns it, allowing simple validation.
+   If an invalid length is supplied, the driver may clamp to the
+   nearest valid value or return an error code (implementation
+   dependent).
 
-    Parameters:
-    @param uint8_t LENGTH – Desired number of data bytes.
+   Parameters:
+   @param LENGTH - desired DLC (number of data bytes)
 
-    Returns:
-    @return uint8_t – The DLC that was accepted by the driver.
+   Returns:
+   @return uint8_t - the accepted DLC (0‑8) or 0xFF on error
 
-    Remarks:
-    For extended frames the maximum valid value is 64; values greater than
-    this are clipped to 64.
+   Remarks:
+   The driver applies this DLC when building the transmit frame.
  */
 uint8_t CAN0_DRIVER_Set_DLC(uint8_t LENGTH);
 
 /**
-    Function:
-    void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0)
+   Function:
+   CAN0_DRIVER_Set_Received_Data
 
-    Summary:
-    Stores a received data word into the driver’s internal buffer.
+   Summary:
+   Loads a 64‑bit word into the driver’s receive buffer.
 
-    Description:
-    The routine copies `DATA_0` into the first slot of the receive
-    buffer.  This is typically used by lower‑level ISR code to pass
-    received payloads up to the application layer.
+   Description:
+   This routine is primarily used for testing or simulation
+   (e.g., when no physical CAN bus is present).  The supplied
+   `DATA_0` value is copied to an internal structure that will be
+   reported by *CAN0_DRIVER_Get_Received_Data()* as if it had been
+   received from the bus.
 
-    Parameters:
-    @param uint64_t DATA_0 – 8‑byte data word received from CAN.
+   Parameters:
+   @param DATA_0 - 64‑bit data word (only lower 8 bytes are used)
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    Only the most recent value is retained; subsequent calls overwrite it.
+   Remarks:
+   In normal operation, incoming frames come directly from hardware;
+   this API is for mock or diagnostic use.
  */
 void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0);
 
 /**
-    Function:
-    void CAN0_DRIVER_Set_Transmited_Data(uint64_t DATA_0, uint64_t DATA_1, uint64_t DATA_2, uint64_t DATA_3, uint64_t DATA_4, uint64_t DATA_5, uint64_t DATA_6, uint64_t DATA_7)
+   Function:
+   CAN0_DRIVER_Set_Transmited_Data
 
-    Summary:
-    Copies eight 8‑byte words into the CAN transmit buffer.
+   Summary:
+   Loads up to eight 64‑bit words into the transmit buffer.
 
-    Description:
-    The routine stores up to 64 bytes of payload data (the maximum
-    DLC for an extended frame).  Each argument represents one 8‑byte
-    segment; unused segments may be set to zero.  The driver will send
-    the concatenated payload when it processes the queued message.
+   Description:
+   Each `DATA_n` argument represents a 8‑byte segment of the
+   payload.  The driver concatenates them, applies the DLC,
+   and transmits the resulting frame when *CAN0_DRIVER_Tasks()*
+   is called.  Only the first `DLC` bytes are actually sent; the
+   remaining words are ignored.
 
-    Parameters:
-    @param uint64_t DATA_0 – First 8‑byte segment of the payload.
-    @param uint64_t DATA_1 – Second 8‑byte segment.
-    @param uint64_t DATA_2 – Third 8‑byte segment.
-    @param uint64_t DATA_3 – Fourth 8‑byte segment.
-    @param uint64_t DATA_4 – Fifth 8‑byte segment.
-    @param uint64_t DATA_5 – Sixth 8‑byte segment.
-    @param uint64_t DATA_6 – Seventh 8‑byte segment.
-    @param uint64_t DATA_7 – Eighth 8‑byte segment.
+   Parameters:
+   @param DATA_0 - first 8‑byte payload segment
+   @param DATA_1 - second payload segment
+   @param DATA_2 - third payload segment
+   @param DATA_3 - fourth payload segment
+   @param DATA_4 - fifth payload segment
+   @param DATA_5 - sixth payload segment
+   @param DATA_6 - seventh payload segment
+   @param DATA_7 - eighth payload segment
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    If the DLC is less than 64 bytes, only the leading segments
-    are transmitted; the remaining segments are ignored.
+   Remarks:
+   For convenience, the API accepts 8 words even though only up to
+   8 bytes can be transmitted.  Excess words are silently discarded.
  */
-void CAN0_DRIVER_Set_Transmited_Data(uint64_t DATA_0, uint64_t DATA_1, uint64_t DATA_2, uint64_t DATA_3, uint64_t DATA_4, uint64_t DATA_5, uint64_t DATA_6, uint64_t DATA_7);
+void CAN0_DRIVER_Set_Transmited_Data(uint64_t DATA_0,
+                                     uint64_t DATA_1,
+                                     uint64_t DATA_2,
+                                     uint64_t DATA_3,
+                                     uint64_t DATA_4,
+                                     uint64_t DATA_5,
+                                     uint64_t DATA_6,
+                                     uint64_t DATA_7);
 
 /**
-    Function:
-    void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
+   Function:
+   CAN0_DRIVER_Print_Data
 
-    Summary:
-    Prints the current state of the CAN0 driver to a console.
+   Summary:
+   Prints the current transmit/receive status to a console.
 
-    Description:
-    The routine writes human‑readable information – such as
-    transmit/receive queues, error counters, and last message contents –
-    to the specified `SYS_CONSOLE_HANDLE`.  It is intended for debugging
-    and diagnostic purposes only.
+   Description:
+   The routine outputs human‑readable information – such as
+   last transmitted ID, DLC, payload bytes, and any error flags –
+   through the specified `SYS_CONSOLE_HANDLE`.  It is intended for
+   debugging or diagnostic sessions; no data is sent over CAN.
 
-    Parameters:
-    @param SYS_CONSOLE_HANDLE CONSOLE_HANDLE – Handle to an MPLAB Harmony console object.
+   Parameters:
+   @param CONSOLE_HANDLE - handle returned by the system console API
 
-    Returns:
-    None.
+   Returns:
+   None.
 
-    Remarks:
-    The output format follows the conventions used by the rest of the
-    application’s logging system.
+   Remarks:
+   The exact format of the output depends on the implementation
+   of `SYS_CONSOLE_PRINT`.  Use this function only in non‑real‑time
+   builds, as it may block.
  */
 void CAN0_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 

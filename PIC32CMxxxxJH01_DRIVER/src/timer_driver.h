@@ -53,6 +53,7 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
+#define START_UP_TIMER      10000
 #define MAIN_TIMER          5000
 #define BUS_TIMER           500
 #define WAIT_TIMER          10
@@ -74,9 +75,11 @@ extern "C"
 typedef struct
 {
     /* Driver variables */
+    SYS_TIME_HANDLE START_UP_TMR;
     SYS_TIME_HANDLE MAIN_TMR;
     SYS_TIME_HANDLE BUS_TMR;
     SYS_TIME_HANDLE WAIT_TMR;
+    volatile bool START_UP_TMR_EXPIRED;
     volatile bool MAIN_TMR_EXPIRED;
     volatile bool BUS_TMR_EXPIRED;
     volatile bool WAIT_TMR_EXPIRED;
@@ -87,6 +90,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
+
+void Start_Up_TMR_Callback(uintptr_t CONTEXT);
 
 void Main_TMR_Callback(uintptr_t CONTEXT);
 
@@ -105,14 +110,11 @@ void Wait_TMR_Callback(uintptr_t CONTEXT);
     void TIMER_DRIVER_Initialize(void)
 
     Summary:
-    Initializes the Timer driver module.
+    Performs initialization of the timer subsystem.
 
     Description:
-    This routine performs all one‑time configuration required for the
-    three software timers.  It sets up the hardware
-    timer peripheral(s), configures prescalers, clears pending status
-    flags and prepares internal state variables so that timer start/stop
-    operations work correctly.
+    Initialize all defined timers, configure callbacks for each timer,
+    and set the timer periods. Finally, stop all defined timers.
 
     Parameters:
     None.
@@ -127,25 +129,108 @@ void TIMER_DRIVER_Initialize(void);
 
 /**
     Function:
+    bool TIMER_DRIVER_Get_Start_Up_TMR_Status(void)
+
+    Summary:
+    Retrieves the current status of the start-up timer.
+
+    Description:
+    Returns "true" if the start-up timer is finished, otherwise returns "false".
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - true if the start-up timer is finished otherwise false
+
+    Remarks:
+    Use this timer after MCU boot. You can wait for initialize peripheral. 
+ */
+bool TIMER_DRIVER_Get_Start_Up_TMR_Status(void);
+
+/**
+    Function:
+    void TIMER_DRIVER_Set_Start_Up_TMR_Status(bool STATUS)
+
+    Summary:
+    Sets the status flag for the start-up timer.
+
+    Description:
+    When start-up timer didn't finished function return "false", 
+    after timer expired function return "true".
+
+    Parameters:
+    @param STATUS - status of start-up timer
+
+    Returns:
+    None.
+
+    Remarks:
+    Use this timer after MCU boot. You can wait for initialize peripheral.
+ */
+void TIMER_DRIVER_Set_Start_Up_TMR_Status(bool STATUS);
+
+/**
+    Function:
+    void TIMER_DRIVER_Start_Start_Up_TMR(void)
+
+    Summary:
+    Starts the start-up timer.
+
+    Description:
+    Starts the start-up timer for desired time.
+
+    Parameters:
+    None.
+
+    Returns:
+    None.
+
+    Remarks:
+    Use this timer after MCU boot. You can wait for initialize peripheral. 
+ */
+void TIMER_DRIVER_Start_Start_Up_TMR(void);
+
+/**
+    Function:
+    void TIMER_DRIVER_Stop_Start_Up_TMR(void)
+
+    Summary:
+    Stops the start-up timer.
+
+    Description:
+    Stops the start-up timer. 
+
+    Parameters:
+    None.
+
+    Returns:
+    None.
+
+    Remarks:
+    When the timer is not stopped, timer will be renewed.
+    Use this timer after MCU boot. You can wait for initialize peripheral. 
+ */
+void TIMER_DRIVER_Stop_Start_Up_TMR(void);
+
+/**
+    Function:
     bool TIMER_DRIVER_Get_Main_TMR_Status(void)
 
     Summary:
     Retrieves the current status of the main timer.
 
     Description:
-    Indicates whether the main timer is currently running.  The
-    function returns `true` if the timer has been started and not yet stopped,
-    otherwise it returns `false`.
+    Returns "true" if the main timer is finished, otherwise returns "false".
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` when the main timer is active, otherwise `false`.
+    @return bool - true if the main timer is finished otherwise false
 
     Remarks:
-    The status reflects only the software flag; the hardware counter may be
-    running even after a logical stop depending on the implementation.
+    None.
  */
 bool TIMER_DRIVER_Get_Main_TMR_Status(void);
 
@@ -154,22 +239,20 @@ bool TIMER_DRIVER_Get_Main_TMR_Status(void);
     void TIMER_DRIVER_Set_Main_TMR_Status(bool STATUS)
 
     Summary:
-    Sets the internal status flag for the main timer.
+    Sets the status flag for the main timer.
 
     Description:
-    Allows other modules to override the main timer’s running state
-    (e.g., during initialization or error handling).  The driver will
-    respect this flag when performing start/stop operations.
+    When main timer didn't finished function return "false", 
+    after timer expired function return "true".
 
     Parameters:
-    @param bool STATUS – Desired running state (`true` = running, `false` = stopped).
+    @param STATUS - status of main timer
 
     Returns:
     None.
 
     Remarks:
-    This function does not modify the hardware counter; it only updates
-    the internal status variable.
+    None.
  */
 void TIMER_DRIVER_Set_Main_TMR_Status(bool STATUS);
 
@@ -181,9 +264,7 @@ void TIMER_DRIVER_Set_Main_TMR_Status(bool STATUS);
     Starts the main timer.
 
     Description:
-    Initializes the underlying hardware timer, clears any previous count,
-    and sets the running flag to `true`.  The timer then counts
-    periodically according to its configured prescaler and period.
+    Starts the main timer for desired time.
 
     Parameters:
     None.
@@ -192,7 +273,7 @@ void TIMER_DRIVER_Set_Main_TMR_Status(bool STATUS);
     None.
 
     Remarks:
-    If the timer is already running this call has no effect.
+    None.
  */
 void TIMER_DRIVER_Start_Main_TMR(void);
 
@@ -204,8 +285,7 @@ void TIMER_DRIVER_Start_Main_TMR(void);
     Stops the main timer.
 
     Description:
-    Disables the underlying hardware timer and clears the running flag
-    to `false`.  The current count value may be retained for later use.
+    Stops the main timer. 
 
     Parameters:
     None.
@@ -214,7 +294,7 @@ void TIMER_DRIVER_Start_Main_TMR(void);
     None.
 
     Remarks:
-    If the timer is already stopped this call has no effect.
+    When the timer is not stopped, timer will be renewed.
  */
 void TIMER_DRIVER_Stop_Main_TMR(void);
 
@@ -226,19 +306,16 @@ void TIMER_DRIVER_Stop_Main_TMR(void);
     Retrieves the current status of the bus timer.
 
     Description:
-    Indicates whether the bus timer is currently running.  The
-    function returns `true` if the timer has been started and not yet stopped,
-    otherwise it returns `false`.
+    Returns "true" if the bus timer is finished, otherwise returns "false".
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` when the bus timer is active, otherwise `false`.
+    @return bool - true if the bus timer is finished
 
     Remarks:
-    The status reflects only the software flag; the hardware counter may be
-    running even after a logical stop depending on the implementation.
+    Use this timer when you start communication on UART/SPI/I2C.
  */
 bool TIMER_DRIVER_Get_Bus_TMR_Status(void);
 
@@ -247,22 +324,20 @@ bool TIMER_DRIVER_Get_Bus_TMR_Status(void);
     void TIMER_DRIVER_Set_Bus_TMR_Status(bool STATUS)
 
     Summary:
-    Sets the internal status flag for the bus timer.
+    Sets the status flag for the bus communication timer.
 
     Description:
-    Allows other modules to override the bus timer’s running state
-    (e.g., during initialization or error handling).  The driver will
-    respect this flag when performing start/stop operations.
+    When bus timer didn't finished function return "false", 
+    after timer expired function return "true".
 
     Parameters:
-    @param bool STATUS – Desired running state (`true` = running, `false` = stopped).
+    @param STATUS - desired state of the bus timer flag
 
     Returns:
     None.
 
     Remarks:
-    This function does not modify the hardware counter; it only updates
-    the internal status variable.
+    Use this timer when you start communication on UART/SPI/I2C.
  */
 void TIMER_DRIVER_Set_Bus_TMR_Status(bool STATUS);
 
@@ -271,12 +346,10 @@ void TIMER_DRIVER_Set_Bus_TMR_Status(bool STATUS);
     void TIMER_DRIVER_Start_Bus_TMR(void)
 
     Summary:
-    Starts the bus timer.
+    Starts the bus communication timer.
 
     Description:
-    Initializes the underlying hardware timer, clears any previous count,
-    and sets the running flag to `true`.  The timer then counts
-    periodically according to its configured prescaler and period.
+    Starts the bus timer for desired time.
 
     Parameters:
     None.
@@ -285,7 +358,7 @@ void TIMER_DRIVER_Set_Bus_TMR_Status(bool STATUS);
     None.
 
     Remarks:
-    If the timer is already running this call has no effect.
+    Use this timer when you start communication on UART/SPI/I2C.
  */
 void TIMER_DRIVER_Start_Bus_TMR(void);
 
@@ -297,8 +370,7 @@ void TIMER_DRIVER_Start_Bus_TMR(void);
     Stops the bus timer.
 
     Description:
-    Disables the underlying hardware timer and clears the running flag
-    to `false`.  The current count value may be retained for later use.
+    Stops the bus timer. 
 
     Parameters:
     None.
@@ -307,7 +379,8 @@ void TIMER_DRIVER_Start_Bus_TMR(void);
     None.
 
     Remarks:
-    If the timer is already stopped this call has no effect.
+    Use this timer when you start communication on UART/SPI/I2C. 
+    When the timer is not stopped, timer will be renewed.
  */
 void TIMER_DRIVER_Stop_Bus_TMR(void);
 
@@ -316,22 +389,19 @@ void TIMER_DRIVER_Stop_Bus_TMR(void);
     bool TIMER_DRIVER_Get_Wait_TMR_Status(void)
 
     Summary:
-    Retrieves the current status of the wait timer.
+    Indicate the current status of the wait timer.
 
     Description:
-    Indicates whether the wait timer is currently running.  The
-    function returns `true` if the timer has been started and not yet stopped,
-    otherwise it returns `false`.
+    Returns "true" if the wait timer is finished, otherwise returns "false".
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` when the wait timer is active, otherwise `false`.
+    @return bool - true if the wait timer is finished
 
     Remarks:
-    The status reflects only the software flag; the hardware counter may be
-    running even after a logical stop depending on the implementation.
+    Use when you won't use delay function.
  */
 bool TIMER_DRIVER_Get_Wait_TMR_Status(void);
 
@@ -340,22 +410,20 @@ bool TIMER_DRIVER_Get_Wait_TMR_Status(void);
     void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS)
 
     Summary:
-    Sets the internal status flag for the wait timer.
+    Sets the status flag for the wait timer.
 
     Description:
-    Allows other modules to override the wait timer’s running state
-    (e.g., during initialization or error handling).  The driver will
-    respect this flag when performing start/stop operations.
+    When wait timer didn't finished function return "false", 
+    after timer expired function return "true".
 
     Parameters:
-    @param bool STATUS – Desired running state (`true` = running, `false` = stopped).
+    @param STATUS - desired state of the wait timer flag
 
     Returns:
     None.
 
     Remarks:
-    This function does not modify the hardware counter; it only updates
-    the internal status variable.
+    Use when you won't use delay function.
  */
 void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS);
 
@@ -367,9 +435,7 @@ void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS);
     Starts the wait timer.
 
     Description:
-    Initializes the underlying hardware timer, clears any previous count,
-    and sets the running flag to `true`.  The timer then counts
-    periodically according to its configured prescaler and period.
+    Starts the wait timer for desired time.
 
     Parameters:
     None.
@@ -378,7 +444,7 @@ void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS);
     None.
 
     Remarks:
-    If the timer is already running this call has no effect.
+    Use when you won't use delay function.
  */
 void TIMER_DRIVER_Start_Wait_TMR(void);
 
@@ -390,8 +456,7 @@ void TIMER_DRIVER_Start_Wait_TMR(void);
     Stops the wait timer.
 
     Description:
-    Disables the underlying hardware timer and clears the running flag
-    to `false`.  The current count value may be retained for later use.
+    Stops the main timer.
 
     Parameters:
     None.
@@ -400,7 +465,8 @@ void TIMER_DRIVER_Start_Wait_TMR(void);
     None.
 
     Remarks:
-    If the timer is already stopped this call has no effect.
+    Use when you won't use delay function.
+    When the timer is not stopped, timer will be renewed.
  */
 void TIMER_DRIVER_Stop_Wait_TMR(void);
 

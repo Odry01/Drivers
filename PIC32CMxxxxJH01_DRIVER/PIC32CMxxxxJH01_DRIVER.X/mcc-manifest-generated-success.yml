@@ -2,7 +2,7 @@
 
 manifest_file_version: 1.0.0
 project: PIC32CMxxxxJH01_DRIVER
-creation_date: 2025-11-20T20:26:27.968+01:00[Europe/Prague]
+creation_date: 2025-12-05T19:04:58.178+01:00[Europe/Prague]
 operating_system: Windows 11
 mcc_mode: IDE
 mcc_mode_version: v6.25
@@ -16,8 +16,8 @@ is_using_prerelease_versions: false
 mcc_content_registries: https://registry.npmjs.org/
 device_library: {library_class: com.microchip.mcc.harmony.Harmony3Library, name: Bundled,
   version: Bundled}
-packs: {name: PIC32CM-JH_DFP, version: 1.4.224}
+packs: {name: PIC32CM-JH_DFP, version: 1.5.236}
 modules:
-- {name: csp, type: HARMONY, version: v3.22.6}
-- {name: core, type: HARMONY, version: v3.15.3}
+- {name: csp, type: HARMONY, version: v3.24.0}
+- {name: core, type: HARMONY, version: v3.16.0}
 - {name: CMSIS_5, type: HARMONY, version: 5.9.0}

@@ -125,16 +125,13 @@ void NTC_DRIVER_Callback(ADC_STATUS STATUS, uintptr_t CONTEXT);
 
 /**
     Function:
-    void NTC_DRIVER_Initialize(void)
+    NTC_DRIVER_Initialize
 
     Summary:
-    Initializes the NTC driver module.
+    Performs initialization of driver for NTC temperature sensor.
 
     Description:
-    This routine performs all one‑time configuration required for the
-    NTC thermistor interface (typically an ADC channel).  It sets up the
-    hardware registers, configures sample buffers, and clears any pending
-    status flags so that NTC_DRIVER_Tasks() can operate correctly.
+    The routine register ADC callback and enable ADC peripheral.
 
     Parameters:
     None.
@@ -144,21 +141,19 @@ void NTC_DRIVER_Callback(ADC_STATUS STATUS, uintptr_t CONTEXT);
 
     Remarks:
     None.
-*/
+ */
 void NTC_DRIVER_Initialize(void);
 
 /**
     Function:
-    void NTC_DRIVER_Tasks(void)
+    NTC_DRIVER_Tasks
 
     Summary:
-    Main task routine for the NTC driver.
+    Executes periodic driver tasks.
 
     Description:
-    This function contains the state‑machine that handles all NTC
-    operations.  It polls the ADC, triggers conversions, updates
-    status flags and performs any necessary error handling.
-    It is intended to be called repeatedly from the application loop.
+    The routine measure temperature via ADC peripheral. It use a state machine
+    for performing measurement.
 
     Parameters:
     None.
@@ -168,7 +163,7 @@ void NTC_DRIVER_Initialize(void);
 
     Remarks:
     None.
-*/
+ */
 void NTC_DRIVER_Tasks(void);
 
 /**
@@ -176,22 +171,20 @@ void NTC_DRIVER_Tasks(void);
     bool NTC_DRIVER_Get_Task_Start_Status(void)
 
     Summary:
-    Retrieves the current “task start” flag for the NTC driver.
+    Retrieves the "TASK START" flag.
 
     Description:
-    Indicates whether a new temperature measurement has been requested.  
-    The application sets this flag via NTC_DRIVER_Set_Task_Start_Status(true)
-    and clears it when processing is finished.
+    This function retrieve "TASK START" flag.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if a task is pending, otherwise `false`.
+    @return bool - true if a task has been started otherwise is not
 
     Remarks:
     None.
-*/
+ */
 bool NTC_DRIVER_Get_Task_Start_Status(void);
 
 /**
@@ -199,22 +192,20 @@ bool NTC_DRIVER_Get_Task_Start_Status(void);
     void NTC_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the “task start” flag for the NTC driver.
+    Sets the "TASK START" flag
 
     Description:
-    Allows the application to signal that a new temperature measurement should begin.  
-    The driver will act on this flag during its next call to
-    NTC_DRIVER_Tasks().
+    Set "TASK START" flag. It is used for start state machine in idle state.
 
     Parameters:
-    @param bool STATUS – Desired state of the task‑start flag (`true` = pending, `false` = cleared).
+    @param STATUS - desired state of the "TASK START" flag
 
     Returns:
     None.
 
     Remarks:
     None.
-*/
+ */
 void NTC_DRIVER_Set_Task_Start_Status(bool STATUS);
 
 /**
@@ -222,22 +213,20 @@ void NTC_DRIVER_Set_Task_Start_Status(bool STATUS);
     bool NTC_DRIVER_Get_Task_Completed_Status(void)
 
     Summary:
-    Retrieves the current “task completed” flag for the NTC driver.
+    Retrieves the "TASK COMPLETED" flag.
 
     Description:
-    Indicates whether the most recent temperature measurement has finished
-    successfully.  The driver sets this flag when the ADC conversion is complete and the result
-    has been processed.
+    This function retrieve "TASK COMPLETED" flag.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if the last task is complete, otherwise `false`.
+    @return bool - true if a task has been completed otherwise is not
 
     Remarks:
     None.
-*/
+ */
 bool NTC_DRIVER_Get_Task_Completed_Status(void);
 
 /**
@@ -245,22 +234,20 @@ bool NTC_DRIVER_Get_Task_Completed_Status(void);
     void NTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the “task completed” flag for the NTC driver.
+    Sets the "TASK COMPLETED" flag
 
     Description:
-    Allows the driver to mark a temperature measurement as finished.  
-    The application may clear this flag when it is ready for another
-    measurement.
+    Set "TASK COMPLETED" flag. It is used for end state machine in last state.
 
     Parameters:
-    @param bool STATUS – Desired state of the task‑completed flag (`true` = complete, `false` = not yet).
+    @param STATUS - desired state of the "TASK COMPLETED" flag
 
     Returns:
     None.
 
     Remarks:
     None.
-*/
+ */
 void NTC_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 /**
@@ -268,23 +255,21 @@ void NTC_DRIVER_Set_Task_Completed_Status(bool STATUS);
     void NTC_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
 
     Summary:
-    Calculates temperature from a raw ADC value.
+    Converts the raw temperature value to degrees Celsius.
 
     Description:
-    The routine applies the Steinhart–Hart or lookup‑table algorithm to
-    convert the 12/10‑bit `T_VALUE` (raw ADC reading) into a temperature
-    in degrees Celsius.  The result is stored in an internal variable that
-    can be retrieved by other parts of the application.
+    Converts the raw temperature value to degrees Celsius.
+    Equation you will find in NTC datasheet.
 
     Parameters:
-    @param uint16_t T_VALUE – Raw ADC value from the NTC sensor channel.
+    @param T_VALUE - raw ADC value from the NTC sensor
 
     Returns:
     None.
 
     Remarks:
     None.
-*/
+ */
 void NTC_DRIVER_Calculation_Temperature(uint16_t T_VALUE);
 
 /**
@@ -292,23 +277,20 @@ void NTC_DRIVER_Calculation_Temperature(uint16_t T_VALUE);
     void NTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 
     Summary:
-    Prints the current state of the NTC driver to a console.
+    Prints the text to a console.
 
     Description:
-    The routine writes human‑readable information – such as the last
-    raw ADC value, the computed temperature, and any error counters –
-    to the specified `SYS_CONSOLE_HANDLE`.  It is intended for debugging
-    and diagnostic purposes only.
+    Prints formatted text to console. You can use it for debug messages.
 
     Parameters:
-    @param SYS_CONSOLE_HANDLE CONSOLE_HANDLE – Handle to an MPLAB Harmony console object.
+    @param CONSOLE_HANDLE - console handle returned by the library
 
     Returns:
     None.
 
     Remarks:
-    None.
-*/
+    For reading a text use TeraTerm, CoolTerm, etc.
+ */
 void NTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN

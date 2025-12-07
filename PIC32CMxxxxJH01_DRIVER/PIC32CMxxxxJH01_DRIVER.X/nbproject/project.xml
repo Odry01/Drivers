@@ -6,7 +6,7 @@
             <name>PIC32CMxxxxJH01_DRIVER</name>
             <creation-uuid>ebca94fb-585e-4c88-9829-cea480303085</creation-uuid>
             <make-project-type>0</make-project-type>
-            <sourceEncoding>UTF-8</sourceEncoding>
+            <sourceEncoding>windows-1250</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../src/libraries/fonts</sourceRootElem>

@@ -418,9 +418,9 @@ void SYS_Initialize ( void* data )
 
     TC0_CaptureInitialize();
 
-    AC_Initialize();
     RTC_Initialize();
 
+    AC_Initialize();
     FREQM_Initialize();
 
     PDEC_QDECInitialize();
@@ -484,6 +484,7 @@ void SYS_Initialize ( void* data )
     APP_Initialize();
     AD9954_DRIVER_Initialize();
     BME690_DRIVER_Initialize();
+    BMP585_DRIVER_Initialize();
     CAN0_DRIVER_Initialize();
     CONSOLE_DRIVER_Initialize();
     FAN_DRIVER_Initialize();
@@ -496,6 +497,7 @@ void SYS_Initialize ( void* data )
     SEN63C_DRIVER_Initialize();
     SHT4X_DRIVER_Initialize();
     SSD1306_DRIVER_Initialize();
+    STCC4_DRIVER_Initialize();
     TIMER_DRIVER_Initialize();
     VCNL4200_DRIVER_Initialize();
     WS281X_DRIVER_Initialize();

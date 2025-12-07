@@ -92,6 +92,9 @@ void SYS_Tasks ( void )
     /* Call Application task BME690_DRIVER. */
     BME690_DRIVER_Tasks();
 
+    /* Call Application task BMP585_DRIVER. */
+    BMP585_DRIVER_Tasks();
+
     /* Call Application task CAN0_DRIVER. */
     CAN0_DRIVER_Tasks();
 
@@ -127,6 +130,9 @@ void SYS_Tasks ( void )
 
     /* Call Application task SSD1306_DRIVER. */
     SSD1306_DRIVER_Tasks();
+
+    /* Call Application task STCC4_DRIVER. */
+    STCC4_DRIVER_Tasks();
 
     /* Call Application task VCNL4200_DRIVER. */
     VCNL4200_DRIVER_Tasks();

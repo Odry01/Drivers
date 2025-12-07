@@ -188,7 +188,7 @@ void MCP9808_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
              "Manufacturer ID: %X%X\r\n"
              "Device ID: %X\r\n"
              "Device version: %d\r\n"
-             "Temperature: %.2f Â°C\r\n",
+             "Temperature: %.2f °C\r\n",
              mcp9808_sensorData.MANUFACTURER_ID_MSB, mcp9808_sensorData.MANUFACTURER_ID_LSB,
              mcp9808_sensorData.DEVICE_ID, mcp9808_sensorData.DEVICE_REVISION,
              mcp9808_sensorData.CELSIUS_TEMPERATURE

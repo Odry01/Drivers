@@ -125,13 +125,14 @@ typedef struct
     void APP_Initialize(void)
 
     Summary:
-    Initializes the application.
+    Performs one‑time initialization of all application modules and hardware
+    peripherals.
 
     Description:
-    This routine performs all one‑time setup required by the application.  
-    It places the program in its initial state, configures peripheral error flags,
-    and prepares any global data structures so that subsequent calls to
-    APP_Tasks() will run correctly.
+    This routine configures the device drivers, clears all error flags,
+    registers callbacks, and puts the system into a known “idle” state.
+    It must be called once during boot (e.g., from main() or before any
+    other APP_* functions are used).
 
     Parameters:
     None.
@@ -149,15 +150,13 @@ void APP_Initialize(void);
     void APP_Tasks(void)
 
     Summary:
-    Main application task routine.
+    Executes the main application task loop; should be called repeatedly.
 
     Description:
-    This function contains the core logic of the application.  
-    It is typically called repeatedly from the main loop and performs
-    periodic checks, state machine updates, and peripheral error handling.
-    The routine may read or clear the error status bits set by the
-    hardware drivers and take appropriate action (e.g., reset a module,
-    log an event, etc.).
+    This function is intended to be invoked from the system scheduler
+    or main loop.  It performs any pending work such as polling sensors,
+    handling communication, and updating state machines.  The routine
+    returns immediately after completing all queued tasks.
 
     Parameters:
     None.
@@ -175,18 +174,18 @@ void APP_Tasks(void);
     bool APP_Get_CAN0_Error_Status(void)
 
     Summary:
-    Retrieves the current CAN0 error flag.
+    Retrieves the current error status flag for CAN0.
 
     Description:
-    This function returns whether an error has been detected on the
-    CAN0 peripheral.  The value is set by the driver or cleared by the
-    application logic when the error condition is handled.
+    The function returns "true" if a CAN0 communication error has been
+    detected since the last call to *APP_Set_CAN0_Error_Status(false)*.
+    It does not clear or modify the flag.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if a CAN error is currently flagged, otherwise `false`.
+    @return bool - current status of the CAN0 error flag (true = error pending)
 
     Remarks:
     None.
@@ -198,16 +197,15 @@ bool APP_Get_CAN0_Error_Status(void);
     void APP_Set_CAN0_Error_Status(bool STATUS)
 
     Summary:
-    Sets the CAN0 error flag.
+    Sets or clears the CAN0 error status flag.
 
     Description:
-    This routine allows the application to explicitly set or clear the
-    CAN0 error status.  Passing `true` indicates that an error has been
-    detected; passing `false` clears the flag so that normal operation can
-    resume.
+    Passing "true" indicates that an error has occurred; passing
+    "false" clears the flag.  The flag is used by other parts of the
+    application to trigger recovery actions (e.g., re‑initializing the bus).
 
     Parameters:
-    @param bool STATUS – The desired error state (`true` = error, `false` = no error).
+    @param STATUS - desired state of the CAN0 error flag
 
     Returns:
     None.
@@ -222,18 +220,18 @@ void APP_Set_CAN0_Error_Status(bool STATUS);
     bool APP_Get_I2C_Error_Status(void)
 
     Summary:
-    Retrieves the current I2C error flag.
+    Retrieves the current error status flag for I²C.
 
     Description:
-    This function returns whether an error has been detected on the
-    I2C peripheral.  The status is updated by the driver and can be cleared
-    by the application when the condition is resolved.
+    Returns "true" if an I²C communication error has been flagged
+    since the last reset of the flag.  The function does not alter
+    any internal state.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if an I2C error is flagged, otherwise `false`.
+    @return bool - current status of the I²C error flag (true = error pending)
 
     Remarks:
     None.
@@ -245,15 +243,15 @@ bool APP_Get_I2C_Error_Status(void);
     void APP_Set_I2C_Error_Status(bool STATUS)
 
     Summary:
-    Sets the I2C error flag.
+    Sets or clears the I²C error status flag.
 
     Description:
-    Explicitly sets or clears the I2C error status.  Use this when the
-    application detects an error condition that is not automatically
-    reported by the driver, or to acknowledge a handled error.
+    When "STATUS" is "true", an I²C error condition is recorded.
+    Setting it to "false" clears that record, typically after
+    recovery logic has been executed.
 
     Parameters:
-    @param bool STATUS – Desired error state (`true` = error, `false` = no error).
+    @param STATUS - desired state of the I²C error flag
 
     Returns:
     None.
@@ -268,18 +266,17 @@ void APP_Set_I2C_Error_Status(bool STATUS);
     bool APP_Get_SPI_Error_Status(void)
 
     Summary:
-    Retrieves the current SPI error flag.
+    Retrieves the current error status flag for SPI.
 
     Description:
-    This function reports whether an error has been detected on the
-    SPI peripheral.  The driver updates this status, and the application
-    may clear it after handling the fault.
+    The function returns "true" if an SPI communication error has
+    been flagged since the last reset.  It does not modify any flags.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if an SPI error is flagged, otherwise `false`.
+    @return bool - current status of the SPI error flag (true = error pending)
 
     Remarks:
     None.
@@ -291,15 +288,16 @@ bool APP_Get_SPI_Error_Status(void);
     void APP_Set_SPI_Error_Status(bool STATUS)
 
     Summary:
-    Sets the SPI error flag.
+    Sets or clears the SPI error status flag.
 
     Description:
-    Allows the application to manually set or clear the SPI error
-    status.  This can be used for software‑generated error states or to
-    acknowledge a handled fault.
+    A value of "true" records an error condition; "false"
+    clears it.  This allows other modules to detect when
+    the SPI bus needs re‑initialization or a fault handler
+    has been invoked.
 
     Parameters:
-    @param bool STATUS – Desired error state (`true` = error, `false` = no error).
+    @param STATUS - desired state of the SPI error flag
 
     Returns:
     None.
@@ -314,18 +312,18 @@ void APP_Set_SPI_Error_Status(bool STATUS);
     bool APP_Get_UART_Error_Status(void)
 
     Summary:
-    Retrieves the current UART error flag.
+    Retrieves the current error status flag for UART.
 
     Description:
-    This function returns whether an error has been detected on the
-    UART peripheral.  The status is maintained by the driver and can be
-    cleared by the application once the fault has been resolved.
+    Returns "true" if a UART communication error has been
+    detected since the last call to *APP_Set_UART_Error_Status(false)*.
+    The function does not alter any internal state.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if a UART error is flagged, otherwise `false`.
+    @return bool - current status of the UART error flag (true = error pending)
 
     Remarks:
     None.
@@ -337,15 +335,15 @@ bool APP_Get_UART_Error_Status(void);
     void APP_Set_UART_Error_Status(bool STATUS)
 
     Summary:
-    Sets the UART error flag.
+    Sets or clears the UART error status flag.
 
     Description:
-    Explicitly sets or clears the UART error status.  The application
-    can use this to indicate an error condition that was not reported by
-    the driver, or to acknowledge a handled error.
+    When "STATUS" is set to "true", a UART error condition
+    is recorded.  Setting it to "false" clears that record,
+    typically after the application has handled the fault.
 
     Parameters:
-    @param bool STATUS – Desired error state (`true` = error, `false` = no error).
+    @param STATUS - desired state of the UART error flag
 
     Returns:
     None.

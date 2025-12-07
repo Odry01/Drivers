@@ -87,7 +87,17 @@ void RTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
     rtc_driverData.RTC_TASK_COMPLETED = STATUS;
 }
 
-void RTC_DRIVER_Set_Init_Time()
+bool RTC_DRIVER_Get_Alarm_Status(void)
+{
+    return (rtc_driverData.RTC_ALARM);
+}
+
+void RTC_DRIVER_Set_Alarm_Status(bool STATUS)
+{
+    rtc_driverData.RTC_ALARM = STATUS;
+}
+
+void RTC_DRIVER_Set_Init_Time(void)
 {
     rtc_driverData.INIT_TIME.tm_hour = 00;
     rtc_driverData.INIT_TIME.tm_min = 00;
@@ -98,7 +108,7 @@ void RTC_DRIVER_Set_Init_Time()
     RTC_RTCCTimeSet(&rtc_driverData.INIT_TIME);
 }
 
-void RTC_DRIVER_Set_Alarm_Time()
+void RTC_DRIVER_Set_Alarm_Time(void)
 {
     rtc_driverData.ALARM_TIME.tm_hour = 0;
     rtc_driverData.ALARM_TIME.tm_min = 0;

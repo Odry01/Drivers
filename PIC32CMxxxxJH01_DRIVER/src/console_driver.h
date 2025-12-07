@@ -118,13 +118,10 @@ typedef struct
     void CONSOLE_DRIVER_Initialize(void)
 
     Summary:
-    Initializes the console driver module.
+    Performs initialization of driver for console.
 
     Description:
-    This routine performs all one‑time configuration required for the
-    console peripheral (UART, USB CDC, or other interface).  It sets up
-    hardware registers, configures buffers, and clears any pending status
-    flags so that CONSOLE_DRIVER_Tasks() can operate correctly.
+    The routine sets initial state of state machine. 
 
     Parameters:
     None.
@@ -134,7 +131,7 @@ typedef struct
 
     Remarks:
     None.
-*/
+ */
 void CONSOLE_DRIVER_Initialize(void);
 
 /**
@@ -142,13 +139,10 @@ void CONSOLE_DRIVER_Initialize(void);
     void CONSOLE_DRIVER_Tasks(void)
 
     Summary:
-    Main task routine for the console driver.
+    Executes periodic tasks.
 
     Description:
-    This function contains the state‑machine that handles all console
-    operations.  It polls for new input, processes outgoing data,
-    updates status flags and performs any necessary error handling.
-    It is intended to be called repeatedly from the application loop.
+    Function where is running state machine.
 
     Parameters:
     None.
@@ -158,7 +152,7 @@ void CONSOLE_DRIVER_Initialize(void);
 
     Remarks:
     None.
-*/
+ */
 void CONSOLE_DRIVER_Tasks(void);
 
 /**
@@ -166,22 +160,20 @@ void CONSOLE_DRIVER_Tasks(void);
     bool CONSOLE_DRIVER_Get_Task_Start_Status(void)
 
     Summary:
-    Retrieves the current “task start” flag for the console driver.
+    Retrieves the "TASK START" flag.
 
     Description:
-    Indicates whether a new console transaction has been requested.  
-    The application sets this flag via
-    CONSOLE_DRIVER_Set_Task_Start_Status(true) and clears it when processing is finished.
+    This function retrieve "TASK START" flag.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if a task is pending, otherwise `false`.
+    @return bool - true if a task has been started otherwise is not
 
     Remarks:
     None.
-*/
+ */
 bool CONSOLE_DRIVER_Get_Task_Start_Status(void);
 
 /**
@@ -189,22 +181,20 @@ bool CONSOLE_DRIVER_Get_Task_Start_Status(void);
     void CONSOLE_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the “task start” flag for the console driver.
+    Sets the "TASK START" flag
 
     Description:
-    Allows the application to signal that a new console operation should begin.  
-    The driver will act on this flag during its next call to
-    CONSOLE_DRIVER_Tasks().
+    Set "TASK START" flag. It is used for start state machine in idle state.
 
     Parameters:
-    @param bool STATUS – Desired state of the task‑start flag (`true` = pending, `false` = cleared).
+    @param STATUS - desired state of the "TASK START" flag
 
     Returns:
     None.
 
     Remarks:
     None.
-*/
+ */
 void CONSOLE_DRIVER_Set_Task_Start_Status(bool STATUS);
 
 /**
@@ -212,21 +202,20 @@ void CONSOLE_DRIVER_Set_Task_Start_Status(bool STATUS);
     bool CONSOLE_DRIVER_Get_Task_Completed_Status(void)
 
     Summary:
-    Retrieves the current “task completed” flag for the console driver.
+    Retrieves the "TASK COMPLETED" flag.
 
     Description:
-    Indicates whether the most recent console transaction has finished
-    successfully.  The driver sets this flag when all data have been sent or received and processed.
+    This function retrieve "TASK COMPLETED" flag.
 
     Parameters:
     None.
 
     Returns:
-    @return bool – `true` if the last task is complete, otherwise `false`.
+    @return bool - true if a task has been completed otherwise is not
 
     Remarks:
     None.
-*/
+ */
 bool CONSOLE_DRIVER_Get_Task_Completed_Status(void);
 
 /**
@@ -234,22 +223,20 @@ bool CONSOLE_DRIVER_Get_Task_Completed_Status(void);
     void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the “task completed” flag for the console driver.
+    Sets the "TASK COMPLETED" flag
 
     Description:
-    Allows the driver to mark a console transaction as finished.  
-    The application may clear this flag when it is ready for another
-    operation.
+    Set "TASK COMPLETED" flag. It is used for end state machine in last state.
 
     Parameters:
-    @param bool STATUS – Desired state of the task‑completed flag (`true` = complete, `false` = not yet).
+    @param STATUS - desired state of the "TASK COMPLETED" flag
 
     Returns:
     None.
 
     Remarks:
     None.
-*/
+ */
 void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 //DOM-IGNORE-BEGIN
