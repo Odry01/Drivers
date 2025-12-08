@@ -54,7 +54,7 @@ BMP585_SENSOR_DATA bmp585_sensorData;
 
 void BMP585_DRIVER_Alert(uintptr_t CONTEXT)
 {
-    bmp585_driverData.BMP585_ALERT = true;
+    BMP585_DRIVER_Set_Alert_Status(true);
 }
 
 // *****************************************************************************
@@ -81,6 +81,16 @@ bool BMP585_DRIVER_Get_Task_Completed_Status(void)
 void BMP585_DRIVER_Set_Task_Completed_Status(bool STATUS)
 {
     bmp585_driverData.BMP585_TASK_COMPLETED = STATUS;
+}
+
+bool BMP585_DRIVER_Get_Alert_Status(void)
+{
+    return (bmp585_driverData.BMP585_ALERT);
+}
+
+void BMP585_DRIVER_Set_Alert_Status(bool STATUS)
+{
+    bmp585_driverData.BMP585_ALERT = STATUS;
 }
 
 void BMP585_DRIVER_Set_I2C_Address(void)
@@ -137,7 +147,7 @@ void BMP585_DRIVER_Set_Drive_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_DRIVE_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_INT_Config(uint8_t I2C_ADDRESS)
@@ -155,7 +165,7 @@ void BMP585_DRIVER_Set_INT_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_INT_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_INT_Source(uint8_t I2C_ADDRESS)
@@ -173,7 +183,7 @@ void BMP585_DRIVER_Set_INT_Source(uint8_t I2C_ADDRESS, uint8_t SOURCE)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_INT_SOURCE;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = SOURCE;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_FIFO_Config(uint8_t I2C_ADDRESS)
@@ -191,7 +201,7 @@ void BMP585_DRIVER_Set_FIFO_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_FIFO_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_FIFO_Count(uint8_t I2C_ADDRESS)
@@ -220,73 +230,23 @@ void BMP585_DRIVER_Set_FIFO_Select(uint8_t I2C_ADDRESS, uint8_t SELECT)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_FIFO_SEL;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = SELECT;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BMP585_DRIVER_Get_Temperature_Value_XLSB(uint8_t I2C_ADDRESS)
+void BMP585_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_TEMP_DATA_XLSB;
-    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 6, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BMP585_DRIVER_Store_Temperature_Value_XLSB(void)
+void BMP585_DRIVER_Store_Measured_Values(void)
 {
     bmp585_sensorData.T_VALUE_XLSB = bmp585_driverData.I2C_DATA_RECEIVE[0];
-}
-
-void BMP585_DRIVER_Get_Temperature_Value_LSB(uint8_t I2C_ADDRESS)
-{
-    bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_TEMP_DATA_LSB;
-    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
-}
-
-void BMP585_DRIVER_Store_Temperature_Value_LSB(void)
-{
-    bmp585_sensorData.T_VALUE_LSB = bmp585_driverData.I2C_DATA_RECEIVE[0];
-}
-
-void BMP585_DRIVER_Get_Temperature_Value_MSB(uint8_t I2C_ADDRESS)
-{
-    bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_TEMP_DATA_MSB;
-    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
-}
-
-void BMP585_DRIVER_Store_Temperature_Value_MSB(void)
-{
-    bmp585_sensorData.T_VALUE_MSB = bmp585_driverData.I2C_DATA_RECEIVE[0];
-}
-
-void BMP585_DRIVER_Get_Pressure_Value_XLSB(uint8_t I2C_ADDRESS)
-{
-    bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_PRESS_DATA_XLSB;
-    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
-}
-
-void BMP585_DRIVER_Store_Pressure_Value_XLSB(void)
-{
-    bmp585_sensorData.P_VALUE_XLSB = bmp585_driverData.I2C_DATA_RECEIVE[0];
-}
-
-void BMP585_DRIVER_Get_Pressure_Value_LSB(uint8_t I2C_ADDRESS)
-{
-    bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_PRESS_DATA_LSB;
-    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
-}
-
-void BMP585_DRIVER_Store_Pressure_Value_LSB(void)
-{
-    bmp585_sensorData.P_VALUE_LSB = bmp585_driverData.I2C_DATA_RECEIVE[0];
-}
-
-void BMP585_DRIVER_Get_Pressure_Value_MSB(uint8_t I2C_ADDRESS)
-{
-    bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_PRESS_DATA_MSB;
-    DRV_I2C_WriteReadTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bmp585_driverData.I2C_DATA_RECEIVE, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
-}
-
-void BMP585_DRIVER_Store_Pressure_Value_MSB(void)
-{
-    bmp585_sensorData.P_VALUE_MSB = bmp585_driverData.I2C_DATA_RECEIVE[0];
+    bmp585_sensorData.T_VALUE_LSB = bmp585_driverData.I2C_DATA_RECEIVE[1];
+    bmp585_sensorData.T_VALUE_MSB = bmp585_driverData.I2C_DATA_RECEIVE[2];
+    bmp585_sensorData.P_VALUE_XLSB = bmp585_driverData.I2C_DATA_RECEIVE[3];
+    bmp585_sensorData.P_VALUE_LSB = bmp585_driverData.I2C_DATA_RECEIVE[4];
+    bmp585_sensorData.P_VALUE_MSB = bmp585_driverData.I2C_DATA_RECEIVE[5];
 }
 
 void BMP585_DRIVER_Get_INT_Status(uint8_t I2C_ADDRESS)
@@ -337,7 +297,7 @@ void BMP585_DRIVER_Set_NVM_Address(uint8_t I2C_ADDRESS, uint8_t ADDRESS)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_NVM_ADDR;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = ADDRESS;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_NVM_Data_LSB(uint8_t I2C_ADDRESS)
@@ -355,7 +315,7 @@ void BMP585_DRIVER_Set_NVM_Data_LSB(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_NVM_DATA_LSB;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_NVM_Data_MSB(uint8_t I2C_ADDRESS)
@@ -373,7 +333,7 @@ void BMP585_DRIVER_Set_NVM_Data_MSB(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_NVM_DATA_MSB;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_DSP_Config(uint8_t I2C_ADDRESS)
@@ -391,7 +351,7 @@ void BMP585_DRIVER_Set_DSP_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_DSP_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_DSP_IIR(uint8_t I2C_ADDRESS)
@@ -409,7 +369,7 @@ void BMP585_DRIVER_Set_DSP_IIR(uint8_t I2C_ADDRESS, uint8_t IIR)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_DSP_IIR;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = IIR;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_OOR_P_LSB(uint8_t I2C_ADDRESS)
@@ -427,7 +387,7 @@ void BMP585_DRIVER_Set_OOR_P_LSB(uint8_t I2C_ADDRESS, uint8_t OOR)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_OOR_THR_P_LSB;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = OOR;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_OOR_P_MSB(uint8_t I2C_ADDRESS)
@@ -445,7 +405,7 @@ void BMP585_DRIVER_Set_OOR_P_MSB(uint8_t I2C_ADDRESS, uint8_t OOR)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_OOR_THR_P_MSB;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = OOR;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_OOR_Range(uint8_t I2C_ADDRESS)
@@ -463,7 +423,7 @@ void BMP585_DRIVER_Set_OOR_Range(uint8_t I2C_ADDRESS, uint8_t RANGE)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_OOR_RANGE;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = RANGE;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_OOR_Config(uint8_t I2C_ADDRESS)
@@ -481,7 +441,7 @@ void BMP585_DRIVER_Set_OOR_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_OOR_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_OSR_Config(uint8_t I2C_ADDRESS)
@@ -499,7 +459,7 @@ void BMP585_DRIVER_Set_OSR_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_OSR_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_ODR_Config(uint8_t I2C_ADDRESS)
@@ -517,7 +477,7 @@ void BMP585_DRIVER_Set_ODR_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_ODR_CONFIG;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = CONFIG;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Get_OSR_Eff(uint8_t I2C_ADDRESS)
@@ -535,19 +495,19 @@ void BMP585_DRIVER_Set_OSR_Eff(uint8_t I2C_ADDRESS, uint8_t EFF)
 {
     bmp585_driverData.I2C_DATA_TRANSMIT[0] = BMP585_CMD_OSR_EFF;
     bmp585_driverData.I2C_DATA_TRANSMIT[1] = EFF;
-    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 1, &bmp585_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bmp585_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bmp585_driverData.I2C_DATA_TRANSMIT, 2, &bmp585_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BMP585_DRIVER_Calculate_Temperature(void)
 {
-    int32_t T_VALUE = (int32_t) bmp585_sensorData.T_VALUE_MSB << 16 | (int32_t) bmp585_sensorData.T_VALUE_LSB << 8 | (int32_t) bmp585_sensorData.T_VALUE_XLSB;
-    bmp585_sensorData.CELSIUS_TEMPERATURE = ((float) T_VALUE) / 65536;
+    bmp585_sensorData.T_VALUE = (int32_t) bmp585_sensorData.T_VALUE_MSB << 16 | (int32_t) bmp585_sensorData.T_VALUE_LSB << 8 | (int32_t) bmp585_sensorData.T_VALUE_XLSB;
+    bmp585_sensorData.CELSIUS_TEMPERATURE = ((float) bmp585_sensorData.T_VALUE) / 65536;
 }
 
 void BMP585_DRIVER_Calculate_Pressure(void)
 {
-    uint32_t P_VALUE = (uint32_t) bmp585_sensorData.P_VALUE_MSB << 16 | (uint32_t) bmp585_sensorData.P_VALUE_LSB << 8 | (uint32_t) bmp585_sensorData.P_VALUE_XLSB;
-    bmp585_sensorData.PA_PRESSURE = ((float) P_VALUE) / 64;
+    bmp585_sensorData.P_VALUE = (uint32_t) bmp585_sensorData.P_VALUE_MSB << 16 | (uint32_t) bmp585_sensorData.P_VALUE_LSB << 8 | (uint32_t) bmp585_sensorData.P_VALUE_XLSB;
+    bmp585_sensorData.PA_PRESSURE = ((float) bmp585_sensorData.P_VALUE) / 64;
 }
 
 void BMP585_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -556,7 +516,7 @@ void BMP585_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
             (
              CONSOLE_HANDLE,
              "Temperature: %.2f °C\r\n"
-             "Pressure: %.2f hPa\r\n",
+             "Pressure: %.2f Pa\r\n",
              bmp585_sensorData.CELSIUS_TEMPERATURE,
              bmp585_sensorData.PA_PRESSURE
              );
@@ -596,7 +556,117 @@ void BMP585_DRIVER_Tasks(void)
             }
             else
             {
+                bmp585_driverData.state = BMP585_DRIVER_STATE_GET_CHIP_ID;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_CHIP_ID:
+        {
+            BMP585_DRIVER_Get_Chip_ID(bmp585_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_GET_CHIP_ID_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_CHIP_ID_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_STORE_CHIP_ID;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_STORE_CHIP_ID:
+        {
+            BMP585_DRIVER_Store_Chip_ID();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_GET_REVISION_ID;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_REVISION_ID:
+        {
+            BMP585_DRIVER_Get_Revision_ID(bmp585_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_GET_REVISION_ID_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_REVISION_ID_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_STORE_REVISION_ID;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_STORE_REVISION_ID:
+        {
+            BMP585_DRIVER_Store_Revision_ID();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_SET_INT_SOURCE;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_SET_INT_SOURCE:
+        {
+            BMP585_DRIVER_Set_INT_Source(bmp585_driverData.I2C_ADDRESS[0], 0b00000001);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_SET_INT_SOURCE_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_SET_INT_SOURCE_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_SET_OSR_CFG;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_SET_OSR_CFG:
+        {
+            BMP585_DRIVER_Set_OSR_Config(bmp585_driverData.I2C_ADDRESS[0], 0b01000000);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_SET_OSR_CFG_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_SET_OSR_CFG_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 bmp585_driverData.state = BMP585_DRIVER_STATE_IDLE;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
         }
@@ -605,8 +675,123 @@ void BMP585_DRIVER_Tasks(void)
         {
             if (BMP585_DRIVER_Get_Task_Start_Status() == true)
             {
-                bmp585_driverData.state = BMP585_DRIVER_STATE_IDLE;
+                bmp585_driverData.state = BMP585_DRIVER_STATE_START_MEASUREMENT;
             }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_START_MEASUREMENT:
+        {
+            BMP585_DRIVER_Set_ODR_Config(bmp585_driverData.I2C_ADDRESS[0], 0b00000010);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_START_MEASUREMENT_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_START_MEASUREMENT_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_GET_INT_STATUS;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_INT_STATUS:
+        {
+            BMP585_DRIVER_Get_INT_Status(bmp585_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_GET_INT_STATUS_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_INT_STATUS_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_STORE_INT_STATUS;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_STORE_INT_STATUS:
+        {
+            BMP585_DRIVER_Store_INT_Status();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_CHECK_INT_STATUS;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_CHECK_INT_STATUS:
+        {
+            if (bmp585_sensorData.INT_STATUS == 1)
+            {
+                bmp585_driverData.state = BMP585_DRIVER_STATE_GET_MEASURED_VALUES;
+            }
+            else
+            {
+                bmp585_driverData.state = BMP585_DRIVER_STATE_GET_INT_STATUS;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_MEASURED_VALUES:
+        {
+            BMP585_DRIVER_Get_Measured_Values(bmp585_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_GET_MEASURED_VALUES_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_GET_MEASURED_VALUES_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bmp585_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_STORE_MEASURED_VALUES;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bmp585_driverData.state = BMP585_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_STORE_MEASURED_VALUES:
+        {
+            BMP585_DRIVER_Store_Measured_Values();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_CALCULATE_DATA;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_CALCULATE_DATA:
+        {
+            BMP585_DRIVER_Calculate_Temperature();
+            BMP585_DRIVER_Calculate_Pressure();
+            bmp585_driverData.state = BMP585_DRIVER_STATE_STORE_DATA;
+            break;
+        }
+
+        case BMP585_DRIVER_STATE_STORE_DATA:
+        {
+            /* Add function for storing temperature */
+            BMP585_DRIVER_Set_Task_Completed_Status(true);
+            bmp585_driverData.state = BMP585_DRIVER_STATE_IDLE;
             break;
         }
 

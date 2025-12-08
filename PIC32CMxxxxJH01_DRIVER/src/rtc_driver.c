@@ -52,7 +52,7 @@ void RTC_DRIVER_Alarm_Callback(RTC_CLOCK_INT_MASK INT, uintptr_t CONTEXT)
 {
     if ((INT & RTC_CLOCK_INT_MASK_ALARM0) == RTC_CLOCK_INT_MASK_ALARM0)
     {
-        rtc_driverData.RTC_ALARM = true;
+        RTC_DRIVER_Set_Alarm_Status(true);
     }
 }
 

@@ -50,7 +50,7 @@ XM125_DRIVER_DATA xm125_driverData;
 
 void XM125_DRIVER_Alert(uintptr_t CONTEXT)
 {
-    xm125_driverData.XM125_ALERT = true;
+    XM125_DRIVER_Set_Alert_Status(true);
 }
 
 // *****************************************************************************
@@ -77,6 +77,16 @@ bool XM125_DRIVER_Get_Task_Completed_Status(void)
 void XM125_DRIVER_Set_Task_Completed_Status(bool STATUS)
 {
     xm125_driverData.XM125_TASK_COMPLETED = STATUS;
+}
+
+bool XM125_DRIVER_Get_Alert_Status(void)
+{
+    return (xm125_driverData.XM125_ALERT);
+}
+
+void XM125_DRIVER_Set_Alert_Status(bool STATUS)
+{
+    xm125_driverData.XM125_ALERT = STATUS;
 }
 
 void XM125_DRIVER_Set_I2C_Address(void)

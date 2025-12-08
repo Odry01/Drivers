@@ -158,7 +158,7 @@ typedef struct
 
 /**
    Function:
-   MCP9808_DRIVER_Initialize
+   void MCP9808_DRIVER_Initialize(void)
 
    Summary:
    Performs initialization of the MCP9808 driver.
@@ -180,7 +180,7 @@ void MCP9808_DRIVER_Initialize(void);
 
 /**
    Function:
-   MCP9808_DRIVER_Tasks
+   void MCP9808_DRIVER_Tasks(void)
 
    Summary:
    Executes periodic driver tasks.
@@ -204,10 +204,10 @@ void MCP9808_DRIVER_Tasks(void);
     bool MCP9808_DRIVER_Get_Task_Start_Status(void)
 
     Summary:
-    Retrieves the "TASK START" flag.
+    Retrieves the "TASK_START" flag.
 
     Description:
-    This function retrieve "TASK START" flag.
+    This function retrieve "TASK_START" flag.
 
     Parameters:
     None.
@@ -225,13 +225,13 @@ bool MCP9808_DRIVER_Get_Task_Start_Status(void);
     void MCP9808_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK START" flag
+    Sets the "TASK_START" flag
 
     Description:
-    Set "TASK START" flag. It is used for start state machine in idle state.
+    Set "TASK_START" flag. It is used for start state machine in idle state.
 
     Parameters:
-    @param STATUS - desired state of the "TASK START" flag
+    @param STATUS - desired state of the "TASK_START" flag
 
     Returns:
     None.
@@ -246,10 +246,10 @@ void MCP9808_DRIVER_Set_Task_Start_Status(bool STATUS);
     bool MCP9808_DRIVER_Get_Task_Completed_Status(void)
 
     Summary:
-    Retrieves the "TASK COMPLETED" flag.
+    Retrieves the "TASK_COMPLETED" flag.
 
     Description:
-    This function retrieve "TASK COMPLETED" flag.
+    This function retrieve "TASK_COMPLETED" flag.
 
     Parameters:
     None.
@@ -267,13 +267,13 @@ bool MCP9808_DRIVER_Get_Task_Completed_Status(void);
     void MCP9808_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag
 
     Description:
-    Set "TASK COMPLETED" flag. It is used for end state machine in last state.
+    Set "TASK_COMPLETED" flag. It is used for end state machine in last state.
 
     Parameters:
-    @param STATUS - desired state of the "TASK COMPLETED" flag
+    @param STATUS - desired state of the "TASK_COMPLETED" flag
 
     Returns:
     None.
@@ -282,6 +282,48 @@ bool MCP9808_DRIVER_Get_Task_Completed_Status(void);
     None.
  */
 void MCP9808_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+/**
+    Function:
+    bool MCP9808_DRIVER_Get_Alert_Status(void)
+
+    Summary:
+    Retrieves the "MCP9808_ALERT" flag.
+
+    Description:
+    This function retrieve "MCP9808_ALERT" flag.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - true if a alert has been ocured otherwise is not
+
+    Remarks:
+    None.
+ */
+bool MCP9808_DRIVER_Get_Alert_Status(void);
+
+/**
+    Function:
+    void MCP9808_DRIVER_Set_Alert_Status(bool STATUS)
+
+    Summary:
+    Sets the "MCP9808_ALERT" flag
+
+    Description:
+    Set "MCP9808_ALERT" flag. It is used for end state machine in last state.
+
+    Parameters:
+    @param STATUS - desired state of the "MCP9808_ALERT" flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void MCP9808_DRIVER_Set_Alert_Status(bool STATUS);
 
 /**
     Function:

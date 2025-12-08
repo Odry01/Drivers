@@ -52,7 +52,7 @@ VCNL4200_SENSOR_DATA vcnl4200_sensorData;
 
 void VCNL4200_DRIVER_Alert(uintptr_t CONTEXT)
 {
-    vcnl4200_driverData.VCNL4200_ALERT = true;
+    VCNL4200_DRIVER_Set_Alert_Status(true);
 }
 
 // *****************************************************************************
@@ -79,6 +79,16 @@ bool VCNL4200_DRIVER_Get_Task_Completed_Status(void)
 void VCNL4200_DRIVER_Set_Task_Completed_Status(bool STATUS)
 {
     vcnl4200_driverData.VCNL4200_TASK_COMPLETED = STATUS;
+}
+
+bool VCNL4200_DRIVER_Get_Alert_Status(void)
+{
+    return (vcnl4200_driverData.VCNL4200_ALERT);
+}
+
+void VCNL4200_DRIVER_Set_Alert_Status(bool STATUS)
+{
+    vcnl4200_driverData.VCNL4200_ALERT = STATUS;
 }
 
 void VCNL4200_DRIVER_Set_I2C_Address(void)

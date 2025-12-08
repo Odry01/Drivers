@@ -295,10 +295,10 @@ void HDC302X_DRIVER_Tasks(void);
     bool HDC302X_DRIVER_Get_Task_Start_Status(void)
 
     Summary:
-    Retrieves the "TASK START" flag.
+    Retrieves the "TASK_START" flag.
 
     Description:
-    This function retrieve "TASK START" flag.
+    This function retrieve "TASK_START" flag.
 
     Parameters:
     None.
@@ -316,13 +316,13 @@ bool HDC302X_DRIVER_Get_Task_Start_Status(void);
     void HDC302X_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK START" flag
+    Sets the "TASK_START" flag
 
     Description:
-    Set "TASK START" flag. It is used for start state machine in idle state.
+    Set "TASK_START" flag. It is used for start state machine in idle state.
 
     Parameters:
-    @param STATUS - desired state of the "TASK START" flag
+    @param STATUS - desired state of the "TASK_START" flag
 
     Returns:
     None.
@@ -337,10 +337,10 @@ void HDC302X_DRIVER_Set_Task_Start_Status(bool STATUS);
     bool HDC302X_DRIVER_Get_Task_Completed_Status(void)
 
     Summary:
-    Retrieves the "TASK COMPLETED" flag.
+    Retrieves the "TASK_COMPLETED" flag.
 
     Description:
-    This function retrieve "TASK COMPLETED" flag.
+    This function retrieve "TASK_COMPLETED" flag.
 
     Parameters:
     None.
@@ -358,13 +358,13 @@ bool HDC302X_DRIVER_Get_Task_Completed_Status(void);
     void HDC302X_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag
 
     Description:
-    Set "TASK COMPLETED" flag. It is used for end state machine in last state.
+    Set "TASK_COMPLETED" flag. It is used for end state machine in last state.
 
     Parameters:
-    @param STATUS - desired state of the "TASK COMPLETED" flag
+    @param STATUS - desired state of the "TASK_COMPLETED" flag
 
     Returns:
     None.
@@ -373,6 +373,48 @@ bool HDC302X_DRIVER_Get_Task_Completed_Status(void);
     None.
  */
 void HDC302X_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+/**
+    Function:
+    bool HDC302X_DRIVER_Get_Alert_Status(void)
+
+    Summary:
+    Retrieves the "HDC302X_ALERT" flag.
+
+    Description:
+    This function retrieve "HDC302X_ALERT" flag.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - true if a alert has been ocured otherwise is not
+
+    Remarks:
+    None.
+ */
+bool HDC302X_DRIVER_Get_Alert_Status(void);
+
+/**
+    Function:
+    void HDC302X_DRIVER_Set_Alert_Status(bool STATUS)
+
+    Summary:
+    Sets the "HDC302X_ALERT" flag
+
+    Description:
+    Set "HDC302X_ALERT" flag. It is used for end state machine in last state.
+
+    Parameters:
+    @param STATUS - desired state of the "HDC302X_ALERT" flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void HDC302X_DRIVER_Set_Alert_Status(bool STATUS);
 
 /**
    Function:

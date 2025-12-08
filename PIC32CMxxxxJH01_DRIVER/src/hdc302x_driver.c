@@ -56,7 +56,7 @@ HDC302X_SENSOR_SETTINGS hdc302x_sensorSettings;
 
 void HDC302X_DRIVER_Alert(uintptr_t CONTEXT)
 {
-    hdc302x_driverData.HDC302X_ALERT = true;
+    HDC302X_DRIVER_Set_Alert_Status(true);
 }
 
 // *****************************************************************************
@@ -83,6 +83,16 @@ bool HDC302X_DRIVER_Get_Task_Completed_Status(void)
 void HDC302X_DRIVER_Set_Task_Completed_Status(bool STATUS)
 {
     hdc302x_driverData.HDC302X_TASK_COMPLETED = STATUS;
+}
+
+bool HDC302X_DRIVER_Get_Alert_Status(void)
+{
+    return (hdc302x_driverData.HDC302X_ALERT);
+}
+
+void HDC302X_DRIVER_Set_Alert_Status(bool STATUS)
+{
+    hdc302x_driverData.HDC302X_ALERT = STATUS;
 }
 
 void HDC302X_DRIVER_Set_I2C_Address(void)

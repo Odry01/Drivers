@@ -165,9 +165,174 @@ void VCNL4200_DRIVER_Alert(uintptr_t CONTEXT);
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+   Function:
+   void VCNL4200_DRIVER_Initialize(void)
+
+   Summary:
+   Performs initialization of the VCNL4200 driver.
+
+   Description:
+   The routine sets a default sensor address,
+   and sets initial state of state machine. 
+
+   Parameters:
+   None.
+
+   Returns:
+   None.
+
+   Remarks:
+   None.
+ */
 void VCNL4200_DRIVER_Initialize(void);
 
+/**
+   Function:
+   void VCNL4200_DRIVER_Tasks(void)
+
+   Summary:
+   Executes periodic driver tasks.
+
+   Description:
+   Function where is running state machine.
+
+   Parameters:
+   None.
+
+   Returns:
+   None.
+
+   Remarks:
+   None.
+ */
 void VCNL4200_DRIVER_Tasks(void);
+
+/**
+    Function:
+    bool VCNL4200_DRIVER_Get_Task_Start_Status(void)
+
+    Summary:
+    Retrieves the "TASK_START" flag.
+
+    Description:
+    This function retrieve "TASK_START" flag.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - true if a task has been started otherwise is not
+
+    Remarks:
+    None.
+ */
+bool VCNL4200_DRIVER_Get_Task_Start_Status(void);
+
+/**
+    Function:
+    void VCNL4200_DRIVER_Set_Task_Start_Status(bool STATUS)
+
+    Summary:
+    Sets the "TASK_START" flag
+
+    Description:
+    Set "TASK_START" flag. It is used for start state machine in idle state.
+
+    Parameters:
+    @param STATUS - desired state of the "TASK_START" flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void VCNL4200_DRIVER_Set_Task_Start_Status(bool STATUS);
+
+/**
+    Function:
+    bool VCNL4200_DRIVER_Get_Task_Completed_Status(void)
+
+    Summary:
+    Retrieves the "TASK_COMPLETED" flag.
+
+    Description:
+    This function retrieve "TASK_COMPLETED" flag.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - true if a task has been completed otherwise is not
+
+    Remarks:
+    None.
+ */
+bool VCNL4200_DRIVER_Get_Task_Completed_Status(void);
+
+/**
+    Function:
+    void VCNL4200_DRIVER_Set_Task_Completed_Status(bool STATUS)
+
+    Summary:
+    Sets the "TASK_COMPLETED" flag
+
+    Description:
+    Set "TASK_COMPLETED" flag. It is used for end state machine in last state.
+
+    Parameters:
+    @param STATUS - desired state of the "TASK_COMPLETED" flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void VCNL4200_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+/**
+    Function:
+    bool VCNL4200_DRIVER_Get_Alert_Status(void)
+
+    Summary:
+    Retrieves the "VCNL4200_ALERT" flag.
+
+    Description:
+    This function retrieve "VCNL4200_ALERT" flag.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - true if a alert has been ocured otherwise is not
+
+    Remarks:
+    None.
+ */
+bool VCNL4200_DRIVER_Get_Alert_Status(void);
+
+/**
+    Function:
+    void VCNL4200_DRIVER_Set_Alert_Status(bool STATUS)
+
+    Summary:
+    Sets the "VCNL4200_ALERT" flag
+
+    Description:
+    Set "VCNL4200_ALERT" flag. It is used for end state machine in last state.
+
+    Parameters:
+    @param STATUS - desired state of the "VCNL4200_ALERT" flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void VCNL4200_DRIVER_Set_Alert_Status(bool STATUS);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

@@ -38,6 +38,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
 
 MCP9808_DRIVER_DATA mcp9808_driverData;
@@ -52,7 +54,7 @@ MCP9808_DRIVER_SENSOR_DATA mcp9808_sensorData;
 
 void MCP9808_DRIVER_Alert(uintptr_t CONTEXT)
 {
-    mcp9808_driverData.MCP9808_ALERT = true;
+    MCP9808_DRIVER_Set_Alert_Status(true);
 }
 
 // *****************************************************************************
@@ -79,6 +81,16 @@ bool MCP9808_DRIVER_Get_Task_Completed_Status(void)
 void MCP9808_DRIVER_Set_Task_Completed_Status(bool STATUS)
 {
     mcp9808_driverData.MCP9808_TASK_COMPLETED = STATUS;
+}
+
+bool MCP9808_DRIVER_Get_Alert_Status(void)
+{
+    return (mcp9808_driverData.MCP9808_ALERT);
+}
+
+void MCP9808_DRIVER_Set_Alert_Status(bool STATUS)
+{
+    mcp9808_driverData.MCP9808_ALERT = STATUS;
 }
 
 void MCP9808_DRIVER_Set_I2C_Address(void)

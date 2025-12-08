@@ -125,6 +125,10 @@ void XM125_DRIVER_Initialize(void);
 
 void XM125_DRIVER_Tasks(void);
 
+bool XM125_DRIVER_Get_Alert_Status(void);
+
+void XM125_DRIVER_Set_Alert_Status(bool STATUS);
+
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
 }
