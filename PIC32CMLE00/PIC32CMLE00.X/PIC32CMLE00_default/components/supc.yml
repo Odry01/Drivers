@@ -1,0 +1,71 @@
+configVersion: 1.0.0
+componentName: supc
+coreVersion: 5.8.3
+device: PIC32CM5164LE00100
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: supc
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.25.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: supc
+          x: '636'
+          y: '395'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SUPC_BOD33_RUNSTDBY:
+      attributes:
+        id: SUPC_BOD33_RUNSTDBY
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SUPC_INTERRUPT_ENABLE:
+      attributes:
+        id: SUPC_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SUPC_VREF_SEL:
+      attributes:
+        id: SUPC_VREF_SEL
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
+    SUPC_VREF_VREFOE:
+      attributes:
+        id: SUPC_VREF_VREFOE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+  userData: {}
