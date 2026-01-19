@@ -1,0 +1,89 @@
+configVersion: 1.0.0
+componentName: supc
+coreVersion: 5.8.3
+device: PIC32CM5164JH01100
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: supc
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.25.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: supc
+          x: '754'
+          y: '465'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SUPC_BODVDD_PSEL:
+      attributes:
+        id: SUPC_BODVDD_PSEL
+      children:
+      - children:
+        - attributes:
+            value: '15'
+          type: User
+        type: Values
+      type: KeyValueSet
+    SUPC_BODVDD_RUNSTDBY:
+      attributes:
+        id: SUPC_BODVDD_RUNSTDBY
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SUPC_BODVDD_STDBYCFG:
+      attributes:
+        id: SUPC_BODVDD_STDBYCFG
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: '0'
+          type: User
+        type: Values
+      type: KeyValueSet
+    SUPC_INTERRUPT_ENABLE:
+      attributes:
+        id: SUPC_INTERRUPT_ENABLE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SUPC_VREF_VREFOE:
+      attributes:
+        id: SUPC_VREF_VREFOE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+  userData: {}
