@@ -93,15 +93,15 @@ void SHT4X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER)
     DRV_I2C_WriteTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void SHT4X_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS)
+void SHT4X_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS)
 {
     DRV_I2C_ReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SHT4X_DRIVER_Store_Measured_Values(void)
 {
-    sht4x_sensorData.T_VALUE = sht4x_driverData.I2C_DATA_RECEIVE[0] << 8 | sht4x_driverData.I2C_DATA_RECEIVE[1];
-    sht4x_sensorData.H_VALUE = sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | sht4x_driverData.I2C_DATA_RECEIVE[4];
+    sht4x_sensorData.T_VALUE = (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[1];
+    sht4x_sensorData.H_VALUE = (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[4];
 }
 
 void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS)
@@ -112,7 +112,7 @@ void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS)
 
 void SHT4X_DRIVER_Store_Serial_Number(void)
 {
-    sht4x_sensorData.SERIAL_NUMBER = sht4x_driverData.I2C_DATA_RECEIVE[0] << 24 | sht4x_driverData.I2C_DATA_RECEIVE[1] << 16 | sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | sht4x_driverData.I2C_DATA_RECEIVE[4];
+    sht4x_sensorData.SERIAL_NUMBER = (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[0] << 24 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[1] << 16 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[4];
 }
 
 void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
@@ -220,7 +220,7 @@ void SHT4X_DRIVER_Tasks(void)
         case SHT4X_DRIVER_STATE_START_WAIT_TIMER:
         {
             TIMER_DRIVER_Start_Wait_TMR();
-            sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA;
+            sht4x_driverData.state = SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE;
             break;
         }
 
@@ -230,20 +230,20 @@ void SHT4X_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Set_Wait_TMR_Status(false);
                 TIMER_DRIVER_Stop_Wait_TMR();
-                sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA;
+                sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURED_VALUES;
             }
             break;
         }
 
-        case SHT4X_DRIVER_STATE_GET_MEASURE_DATA:
+        case SHT4X_DRIVER_STATE_GET_MEASURED_VALUES:
         {
-            SHT4X_DRIVER_Get_Measure_Values(sht4x_driverData.I2C_ADDRESS[0]);
+            SHT4X_DRIVER_Get_Measured_Values(sht4x_driverData.I2C_ADDRESS[0]);
             TIMER_DRIVER_Start_Bus_TMR();
-            sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURE_DATA_WAIT_FOR_TRANSFER;
+            sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURED_VALUES_WAIT_FOR_TRANSFER;
             break;
         }
 
-        case SHT4X_DRIVER_STATE_GET_MEASURE_DATA_WAIT_FOR_TRANSFER:
+        case SHT4X_DRIVER_STATE_GET_MEASURED_VALUES_WAIT_FOR_TRANSFER:
         {
             if (DRV_I2C_TransferStatusGet(sht4x_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
@@ -276,7 +276,7 @@ void SHT4X_DRIVER_Tasks(void)
 
         case SHT4X_DRIVER_STATE_STORE_DATA:
         {
-            /* Add function for storing temperature */
+            /* Add function for storing data */
             SHT4X_DRIVER_Set_Task_Completed_Status(true);
             sht4x_driverData.state = SHT4X_DRIVER_STATE_IDLE;
             break;

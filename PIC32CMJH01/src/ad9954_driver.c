@@ -88,7 +88,7 @@ void AD9954_DRIVER_Get_CFR1_Register(void)
 
 void AD9954_DRIVER_Store_CFR1_Register(void)
 {
-    ad9954_ddsData.CFR1_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 24 | ad9954_driverData.SPI_DATA_RECEIVE[1] << 16 | ad9954_driverData.SPI_DATA_RECEIVE[2] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[3];
+    ad9954_ddsData.CFR1_REGISTER_VALUE = (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 24 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[1] << 16 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[2] << 8 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[3];
 }
 
 void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
@@ -109,7 +109,7 @@ void AD9954_DRIVER_Get_CFR2_Register(void)
 
 void AD9954_DRIVER_Store_CFR2_Register(void)
 {
-    ad9954_ddsData.CFR2_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[1];
+    ad9954_ddsData.CFR2_REGISTER_VALUE = (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[1];
 }
 
 void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_1, uint8_t WORD_0)
@@ -128,7 +128,7 @@ void AD9954_DRIVER_Get_ASF_Register(void)
 
 void AD9954_DRIVER_Store_ASF_Register(void)
 {
-    ad9954_ddsData.ASF_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[1];
+    ad9954_ddsData.ASF_REGISTER_VALUE = (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[1];
 }
 
 void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_1, uint8_t WORD_0)
@@ -147,7 +147,7 @@ void AD9954_DRIVER_Get_ARR_Register(void)
 
 void AD9954_DRIVER_Store_ARR_Register(void)
 {
-    ad9954_ddsData.ARR_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[1];
+    ad9954_ddsData.ARR_REGISTER_VALUE = (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[1];
 }
 
 void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0)
@@ -165,7 +165,7 @@ void AD9954_DRIVER_Get_FTW0_Register(void)
 
 void AD9954_DRIVER_Store_FTW0_Register(void)
 {
-    ad9954_ddsData.FTW0_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 24 | ad9954_driverData.SPI_DATA_RECEIVE[1] << 16 | ad9954_driverData.SPI_DATA_RECEIVE[2] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[3];
+    ad9954_ddsData.FTW0_REGISTER_VALUE = (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 24 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[1] << 16 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[2] << 8 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[3];
 }
 
 void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
@@ -186,7 +186,7 @@ void AD9954_DRIVER_Get_POW0_Register(void)
 
 void AD9954_DRIVER_Store_POW0_Register(void)
 {
-    ad9954_ddsData.POW0_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[1];
+    ad9954_ddsData.POW0_REGISTER_VALUE = (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 8 | (uint16_t) ad9954_driverData.SPI_DATA_RECEIVE[1];
 }
 
 void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_0, uint8_t WORD_1)
@@ -205,7 +205,7 @@ void AD9954_DRIVER_Get_FTW1_Register(void)
 
 void AD9954_DRIVER_Store_FTW1_Register(void)
 {
-    ad9954_ddsData.FTW1_REGISTER_VALUE = ad9954_driverData.SPI_DATA_RECEIVE[0] << 24 | ad9954_driverData.SPI_DATA_RECEIVE[1] << 16 | ad9954_driverData.SPI_DATA_RECEIVE[2] << 8 | ad9954_driverData.SPI_DATA_RECEIVE[3];
+    ad9954_ddsData.FTW1_REGISTER_VALUE = (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[0] << 24 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[1] << 16 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[2] << 8 | (uint32_t) ad9954_driverData.SPI_DATA_RECEIVE[3];
 }
 
 void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
@@ -510,7 +510,7 @@ void AD9954_DRIVER_Tasks(void)
             ad9954_driverData.state = AD9954_DRIVER_STATE_SET_PLSCW_WAIT_FOR_TRANSFER;
             break;
         }
-        
+
         case AD9954_DRIVER_STATE_SET_PLSCW_WAIT_FOR_TRANSFER:
         {
             if (DRV_SPI_TransferStatusGet(ad9954_driverData.SPI_TRANSFER_HANDLE) == DRV_SPI_TRANSFER_EVENT_COMPLETE)

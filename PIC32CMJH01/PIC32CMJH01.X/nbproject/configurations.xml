@@ -22,6 +22,56 @@
               <itemPath>../src/config/default/driver/usart/drv_usart_definitions.h</itemPath>
               <itemPath>../src/config/default/driver/usart/src/drv_usart_local.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="wifi" displayName="wifi" projectFiles="true">
+              <logicalFolder name="wincs02" displayName="wincs02" projectFiles="true">
+                <logicalFolder name="dev" displayName="dev" projectFiles="true">
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/dev/wdrv_winc_eint.h</itemPath>
+                </logicalFolder>
+                <logicalFolder name="include" displayName="include" projectFiles="true">
+                  <logicalFolder name="dev" displayName="dev" projectFiles="true">
+                    <itemPath>../src/config/default/driver/wifi/wincs02/include/dev/wdrv_winc_spi.h</itemPath>
+                    <itemPath>../src/config/default/driver/wifi/wincs02/include/dev/conf_winc_dev.h</itemPath>
+                  </logicalFolder>
+                </logicalFolder>
+                <logicalFolder name="nc_driver" displayName="nc_driver" projectFiles="true">
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/microchip_wincs02_intf.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_cmds.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_cmd_req.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_debug.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_dev.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_sdio_drv.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_socket.h</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/include/nc_driver/winc_tables.h</itemPath>
+                </logicalFolder>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_api.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_assoc.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_authctx.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_bssctx.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_bssfind.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_client_api.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_common.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_dns.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_debug.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_dhcps.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_extcrypto.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_file.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_netif.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_nvm.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_ota.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_pps.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_prov.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_mqtt.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_sntp.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_socket.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_softap.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_sta.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_systime.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_tls.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_utils.h</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/include/wdrv_winc_wifi.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
             <itemPath>../src/config/default/driver/driver.h</itemPath>
             <itemPath>../src/config/default/driver/driver_common.h</itemPath>
           </logicalFolder>
@@ -86,6 +136,8 @@
               <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom3_spi_master.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom4_spi_master.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom5_spi_master.h</itemPath>
               </logicalFolder>
               <logicalFolder name="usart" displayName="usart" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom1_usart.h</itemPath>
@@ -125,6 +177,12 @@
               <itemPath>../src/config/default/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/default/system/int/sys_int_mapping.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="mqtt" displayName="mqtt" projectFiles="true">
+              <itemPath>../src/config/default/system/mqtt/sys_wincs_mqtt_service.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="net" displayName="net" projectFiles="true">
+              <itemPath>../src/config/default/system/net/sys_wincs_net_service.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="ports" displayName="ports" projectFiles="true">
               <itemPath>../src/config/default/system/ports/sys_ports.h</itemPath>
               <itemPath>../src/config/default/system/ports/sys_ports_mapping.h</itemPath>
@@ -134,9 +192,13 @@
               <itemPath>../src/config/default/system/time/sys_time_definitions.h</itemPath>
               <itemPath>../src/config/default/system/time/src/sys_time_local.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="wifi" displayName="wifi" projectFiles="true">
+              <itemPath>../src/config/default/system/wifi/sys_wincs_wifi_service.h</itemPath>
+            </logicalFolder>
             <itemPath>../src/config/default/system/system.h</itemPath>
             <itemPath>../src/config/default/system/system_common.h</itemPath>
             <itemPath>../src/config/default/system/system_module.h</itemPath>
+            <itemPath>../src/config/default/system/sys_wincs_system_service.h</itemPath>
           </logicalFolder>
           <itemPath>../src/config/default/device.h</itemPath>
           <itemPath>../src/config/default/user.h</itemPath>
@@ -169,6 +231,7 @@
         <itemPath>../src/ws281x_driver.h</itemPath>
         <itemPath>../src/vcnl4200_driver.h</itemPath>
         <itemPath>../src/xm125_driver.h</itemPath>
+        <itemPath>../src/wincs02_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
@@ -299,23 +362,29 @@
           <itemPath>PIC32CMJH01_default/components/drv_i2c_0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/divas.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom1.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sysNetRNWF.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/eic.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/drv_i2c.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/freqm.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/dac.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/dfp.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sysMqttRNWF.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/drv_usart.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/can0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom0.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sysWifiRNWF.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/tcc0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/drv_spi_0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/rstc.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sercom5.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/nvmctrl.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sys_time.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drvWifiWincS02.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sys_console_0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/supc.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/drv_usart_0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/rtc.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sercom4.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom3.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom2.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sys_console.yml</itemPath>
@@ -358,6 +427,47 @@
             </logicalFolder>
             <logicalFolder name="usart" displayName="usart" projectFiles="true">
               <itemPath>../src/config/default/driver/usart/src/drv_usart.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="wifi" displayName="wifi" projectFiles="true">
+              <logicalFolder name="wincs02" displayName="wincs02" projectFiles="true">
+                <logicalFolder name="dev" displayName="dev" projectFiles="true">
+                  <logicalFolder name="spi" displayName="spi" projectFiles="true">
+                    <itemPath>../src/config/default/driver/wifi/wincs02/dev/wdrv_winc_spi.c</itemPath>
+                  </logicalFolder>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/dev/wdrv_winc_eint.c</itemPath>
+                </logicalFolder>
+                <logicalFolder name="nc_driver" displayName="nc_driver" projectFiles="true">
+                  <itemPath>../src/config/default/driver/wifi/wincs02/nc_driver/winc_cmds.c</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/nc_driver/winc_cmd_req.c</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/nc_driver/winc_dev.c</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/nc_driver/winc_sdio_drv.c</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/nc_driver/winc_socket.c</itemPath>
+                  <itemPath>../src/config/default/driver/wifi/wincs02/nc_driver/winc_tables.c</itemPath>
+                </logicalFolder>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_assoc.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_authctx.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_bssctx.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_bssfind.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_dns.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_dhcps.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_extcrypto.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_file.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_mqtt.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_netif.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_ota.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_pps.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_nvm.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_prov.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_sntp.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_socket.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_softap.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_sta.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_systime.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_tls.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_utils.c</itemPath>
+                <itemPath>../src/config/default/driver/wifi/wincs02/wdrv_winc_wifi.c</itemPath>
+              </logicalFolder>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
@@ -412,6 +522,8 @@
               </logicalFolder>
               <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom3_spi_master.c</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom4_spi_master.c</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom5_spi_master.c</itemPath>
               </logicalFolder>
               <logicalFolder name="usart" displayName="usart" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom1_usart.c</itemPath>
@@ -445,9 +557,19 @@
             <logicalFolder name="int" displayName="int" projectFiles="true">
               <itemPath>../src/config/default/system/int/src/sys_int.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="mqtt" displayName="mqtt" projectFiles="true">
+              <itemPath>../src/config/default/system/mqtt/src/sys_wincs_mqtt_service.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="net" displayName="net" projectFiles="true">
+              <itemPath>../src/config/default/system/net/src/sys_wincs_net_service.c</itemPath>
+            </logicalFolder>
             <logicalFolder name="time" displayName="time" projectFiles="true">
               <itemPath>../src/config/default/system/time/src/sys_time.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="wifi" displayName="wifi" projectFiles="true">
+              <itemPath>../src/config/default/system/wifi/src/sys_wincs_wifi_service.c</itemPath>
+            </logicalFolder>
+            <itemPath>../src/config/default/system/sys_wincs_system_service.c</itemPath>
           </logicalFolder>
           <itemPath>../src/config/default/tasks.c</itemPath>
           <itemPath>../src/config/default/initialization.c</itemPath>
@@ -477,6 +599,7 @@
         <itemPath>../src/vcnl4200_driver.c</itemPath>
         <itemPath>../src/ws281x_driver.c</itemPath>
         <itemPath>../src/xm125_driver.c</itemPath>
+        <itemPath>../src/wincs02_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>
@@ -497,7 +620,7 @@
       </toolsSet>
       <packs>
         <pack name="PIC32CM-JH_DFP" vendor="Microchip" version="1.5.236"/>
-        <pack name="CMSIS" vendor="ARM" version="6.2.0"/>
+        <pack name="CMSIS" vendor="ARM" version="6.3.0"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -526,6 +649,38 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../src/wincs02_driver.c" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/wincs02_driver.h" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
@@ -544,7 +699,7 @@
         <property key="exclude-floating-point" value="false"/>
         <property key="expand-pragma-config" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/PIC32CM5164JH01100_DFP"/>
+                  value="../src;../src/config/default;../src/config/default/driver/wifi/wincs02/include/;../src/config/default/driver/wifi/wincs02/include/dev;../src/config/default/driver/wifi/wincs02/include/nc_driver;../src/packs/CMSIS/;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/PIC32CM5164JH01100_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -627,7 +782,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="4096"/>
+        <property key="heap-size" value="8192"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>

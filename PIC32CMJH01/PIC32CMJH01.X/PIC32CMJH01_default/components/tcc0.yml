@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: tcc0
-coreVersion: 5.8.3
+coreVersion: 5.8.4
 device: PIC32CM5164JH01100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.25.0
+  version: v3.25.1
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -171,56 +171,6 @@ data:
           type: Dynamic
         type: Values
       type: String
-    TCC_0_WEXCTRL_DTIEN:
-      attributes:
-        id: TCC_0_WEXCTRL_DTIEN
-      children:
-      - children:
-        - attributes:
-            value: 'false'
-          type: User
-        type: Values
-      type: Boolean
-    TCC_1_WEXCTRL_DTIEN:
-      attributes:
-        id: TCC_1_WEXCTRL_DTIEN
-      children:
-      - children:
-        - attributes:
-            value: 'false'
-          type: User
-        type: Values
-      type: Boolean
-    TCC_2_WEXCTRL_DTIEN:
-      attributes:
-        id: TCC_2_WEXCTRL_DTIEN
-      children:
-      - children:
-        - attributes:
-            value: 'false'
-          type: User
-        type: Values
-      type: Boolean
-    TCC_3_WEXCTRL_DTIEN:
-      attributes:
-        id: TCC_3_WEXCTRL_DTIEN
-      children:
-      - children:
-        - attributes:
-            value: 'false'
-          type: User
-        type: Values
-      type: Boolean
-    TCC_CTRLA_PRESCALER:
-      attributes:
-        id: TCC_CTRLA_PRESCALER
-      children:
-      - children:
-        - attributes:
-            value: '1'
-          type: User
-        type: Values
-      type: KeyValueSet
     TCC_MODULE_FREQUENCY:
       attributes:
         id: TCC_MODULE_FREQUENCY
@@ -228,18 +178,8 @@ data:
       - children:
         - attributes:
             id: tcc0
-            value: '24000000'
+            value: '48000000'
           type: Dynamic
-        type: Values
-      type: Integer
-    TCC_PER_PER:
-      attributes:
-        id: TCC_PER_PER
-      children:
-      - children:
-        - attributes:
-            value: '29'
-          type: User
         type: Values
       type: Integer
     TCC_RAMP_CH1_DUTY:
@@ -271,7 +211,7 @@ data:
       - children:
         - attributes:
             id: tcc0
-            value: '29'
+            value: '2399'
           type: Dynamic
         type: Values
       type: Integer
@@ -282,7 +222,7 @@ data:
       - children:
         - attributes:
             id: tcc0
-            value: '23999'
+            value: '47999'
           type: Dynamic
         type: Values
       type: Long
@@ -295,8 +235,28 @@ data:
             id: max
           children:
           - type: Value
-            value: '699.0507'
+            value: '349.52536'
           type: Float
         type: Attributes
       type: Float
+    TCC_WEXCTRL_DTLS:
+      attributes:
+        id: TCC_WEXCTRL_DTLS
+      children:
+      - children:
+        - attributes:
+            value: '48'
+          type: User
+        type: Values
+      type: Integer
+    TCC_WEXCTRL_DTHS:
+      attributes:
+        id: TCC_WEXCTRL_DTHS
+      children:
+      - children:
+        - attributes:
+            value: '48'
+          type: User
+        type: Values
+      type: Integer
   userData: {}

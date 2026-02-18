@@ -46,11 +46,12 @@ WS281X_DRIVER_DATA ws281x_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-void WS281X_DRIVER_DMAC_CH4_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT)
+void WS281X_DRIVER_DMAC_CH0_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT)
 {
     if (EVENT == DMAC_TRANSFER_EVENT_COMPLETE)
     {
-        TCC0_PWMStop();
+        ws281x_driverData.DMAC_CH5_TRANSFER_COMPLETED = true;
+        ws281x_driverData.LED_INDEX = 0;
     }
 }
 
@@ -87,54 +88,77 @@ void WS281X_DRIVER_Set_Color(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LE
     ws281x_driverData.BLUE_LED = BLUE_LED;
 }
 
-void WS281X_DRIVER_Set_LED_Strip_Data(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED)
+void WS281X_DRIVER_Set_Data_Bits(void)
 {
-    for (int i = 0; i < NUMBER_OF_LEDS; i++)
+    ws281x_driverData.LED_BITS[0] = 0xC0C0C0C0;
+    ws281x_driverData.LED_BITS[1] = 0xC0C0C0F8;
+    ws281x_driverData.LED_BITS[2] = 0xC0C0F8C0;
+    ws281x_driverData.LED_BITS[3] = 0xC0C0F8F8;
+    ws281x_driverData.LED_BITS[4] = 0xC0F8C0C0;
+    ws281x_driverData.LED_BITS[5] = 0xC0F8C0F8;
+    ws281x_driverData.LED_BITS[6] = 0xC0F8F8C0;
+    ws281x_driverData.LED_BITS[7] = 0xC0F8F8F8;
+    ws281x_driverData.LED_BITS[8] = 0xF8C0C0C0;
+    ws281x_driverData.LED_BITS[9] = 0xF8C0C0F8;
+    ws281x_driverData.LED_BITS[10] = 0xF8C0F8C0;
+    ws281x_driverData.LED_BITS[11] = 0xF8C0F8F8;
+    ws281x_driverData.LED_BITS[12] = 0xF8F8C0C0;
+    ws281x_driverData.LED_BITS[13] = 0xF8F8C0F8;
+    ws281x_driverData.LED_BITS[14] = 0xF8F8F8C0;
+    ws281x_driverData.LED_BITS[15] = 0xF8F8F8F8;
+}
+
+void WS281X_DRIVER_Set_Strip_Color(void)
+{
+    for (uint8_t i = 0; i < NUMBER_OF_LEDS; i++)
     {
-        for (int j = 7; j >= 0; j--)
-        {
-            ws281x_driverData.DMAC_CH4_BUFFER[i][j] = (GREEN_LED >> (7 - j) & 1);
-
-            if (ws281x_driverData.DMAC_CH4_BUFFER[i][j] == 1)
-            {
-                ws281x_driverData.DMAC_CH4_BUFFER[i][j] = T1H;
-            }
-            else
-            {
-                ws281x_driverData.DMAC_CH4_BUFFER[i][j] = T1L;
-            }
-
-            ws281x_driverData.DMAC_CH4_BUFFER[i][8 + j] = (RED_LED >> (7 - j)) & 1;
-
-            if (ws281x_driverData.DMAC_CH4_BUFFER[i][8 + j] == 1)
-            {
-                ws281x_driverData.DMAC_CH4_BUFFER[i][8 + j] = T1H;
-            }
-            else
-            {
-                ws281x_driverData.DMAC_CH4_BUFFER[i][8 + j] = T1L;
-            }
-
-            ws281x_driverData.DMAC_CH4_BUFFER[i][16 + j] = (BLUE_LED >> (7 - j)) & 1;
-
-            if (ws281x_driverData.DMAC_CH4_BUFFER[i][16 + j] == 1)
-            {
-                ws281x_driverData.DMAC_CH4_BUFFER[i][16 + j] = T1H;
-            }
-            else
-            {
-                ws281x_driverData.DMAC_CH4_BUFFER[i][16 + j] = T1L;
-            }
-        }
+        ws281x_driverData.PIXEL[i][0] = ws281x_driverData.RED_LED;
+        ws281x_driverData.PIXEL[i][1] = ws281x_driverData.GREEN_LED;
+        ws281x_driverData.PIXEL[i][2] = ws281x_driverData.BLUE_LED;
     }
 }
 
-void WS281X_DRIVER_Send_LED_Strip_Data(void)
+void WS281X_DRIVER_Set_Data(uint16_t *INDEX, uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED)
 {
-    if (DMAC_ChannelTransfer(DMAC_CHANNEL_4, (void*) &ws281x_driverData.DMAC_CH4_BUFFER[0][0], (void*) &TCC0_REGS->TCC_CCBUF[0], BUFFER_SIZE))
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[GREEN_LED >> 4] >> 24) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[GREEN_LED >> 4] >> 16) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[GREEN_LED >> 4] >> 8) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = (ws281x_driverData.LED_BITS[GREEN_LED >> 4] & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[GREEN_LED & 0x0F] >> 24) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[GREEN_LED & 0x0F] >> 16) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[GREEN_LED & 0x0F] >> 8) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = (ws281x_driverData.LED_BITS[GREEN_LED & 0x0F] & 0xFF);
+
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[RED_LED >> 4] >> 24) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[RED_LED >> 4] >> 16) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[RED_LED >> 4] >> 8) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = (ws281x_driverData.LED_BITS[RED_LED >> 4] & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[RED_LED & 0x0F] >> 24) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[RED_LED & 0x0F] >> 16) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[RED_LED & 0x0F] >> 8) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = (ws281x_driverData.LED_BITS[RED_LED & 0x0F] & 0xFF);
+
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[BLUE_LED >> 4] >> 24) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[BLUE_LED >> 4] >> 16) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[BLUE_LED >> 4] >> 8) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = (ws281x_driverData.LED_BITS[BLUE_LED >> 4] & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[BLUE_LED & 0x0F] >> 24) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[BLUE_LED & 0x0F] >> 16) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = ((ws281x_driverData.LED_BITS[BLUE_LED & 0x0F] >> 8) & 0xFF);
+    ws281x_driverData.DMAC_CH5_BUFFER[MINIMUM_DELAY + (*INDEX)++] = (ws281x_driverData.LED_BITS[BLUE_LED & 0x0F] & 0xFF);
+}
+
+void WS281X_DRIVER_Set_Strip_Data(void)
+{
+    for (uint8_t i = 0; i < NUMBER_OF_LEDS; i++)
     {
-        TCC0_PWMStart();
+        WS281X_DRIVER_Set_Data(&ws281x_driverData.LED_INDEX, ws281x_driverData.PIXEL[i][0], ws281x_driverData.PIXEL[i][1], ws281x_driverData.PIXEL[i][2]);
     }
+}
+
+void WS281X_DRIVER_Send_Data(void)
+{
+    DMAC_ChannelTransfer(DMAC_CHANNEL_5, ws281x_driverData.DMAC_CH5_BUFFER, (const void *) &SERCOM5_REGS->SPIM.SERCOM_DATA, sizeof (ws281x_driverData.DMAC_CH5_BUFFER));
 }
 
 void WS281X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -151,7 +175,6 @@ void WS281X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
              );
 }
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -161,7 +184,7 @@ void WS281X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 void WS281X_DRIVER_Initialize(void)
 {
     ws281x_driverData.state = WS281X_DRIVER_STATE_INIT;
-    DMAC_ChannelCallbackRegister(DMAC_CHANNEL_4, WS281X_DRIVER_DMAC_CH4_Callback, 0);
+    DMAC_ChannelCallbackRegister(DMAC_CHANNEL_5, WS281X_DRIVER_DMAC_CH5_Callback, 0);
 }
 
 void WS281X_DRIVER_Tasks(void)
@@ -173,6 +196,7 @@ void WS281X_DRIVER_Tasks(void)
             ws281x_driverData.RED_LED = 128;
             ws281x_driverData.GREEN_LED = 128;
             ws281x_driverData.BLUE_LED = 128;
+            WS281X_DRIVER_Set_Data_Bits();
             ws281x_driverData.state = WS281X_DRIVER_STATE_IDLE;
             break;
         }
@@ -181,30 +205,39 @@ void WS281X_DRIVER_Tasks(void)
         {
             if (WS281X_DRIVER_Get_Task_Start_Status() == true)
             {
-                ws281x_driverData.state = WS281X_DRIVER_STATE_SET_COLOR;
+                ws281x_driverData.state = WS281X_DRIVER_STATE_SET_LED_STRIP_COLOR;
             }
             break;
         }
 
-        case WS281X_DRIVER_STATE_SET_COLOR:
+        case WS281X_DRIVER_STATE_SET_LED_STRIP_COLOR:
         {
-            WS281X_DRIVER_Set_Color(ws281x_driverData.RED_LED, ws281x_driverData.GREEN_LED, ws281x_driverData.BLUE_LED);
+            WS281X_DRIVER_Set_Strip_Color();
             ws281x_driverData.state = WS281X_DRIVER_STATE_SET_LED_STRIP_DATA;
             break;
         }
 
         case WS281X_DRIVER_STATE_SET_LED_STRIP_DATA:
         {
-            WS281X_DRIVER_Set_LED_Strip_Data(ws281x_driverData.RED_LED, ws281x_driverData.GREEN_LED, ws281x_driverData.BLUE_LED);
+            WS281X_DRIVER_Set_Strip_Data();
             ws281x_driverData.state = WS281X_DRIVER_STATE_SEND_LED_STRIP_DATA;
             break;
         }
 
         case WS281X_DRIVER_STATE_SEND_LED_STRIP_DATA:
         {
-            WS281X_DRIVER_Send_LED_Strip_Data();
-            WS281X_DRIVER_Set_Task_Completed_Status(true);
-            ws281x_driverData.state = WS281X_DRIVER_STATE_IDLE;
+            WS281X_DRIVER_Send_Data();
+            ws281x_driverData.state = WS281X_DRIVER_STATE_WAIT_FOR_TRANSFER_LED_STRIP_DATA;
+            break;
+        }
+
+        case WS281X_DRIVER_STATE_WAIT_FOR_TRANSFER_LED_STRIP_DATA:
+        {
+            if (ws281x_driverData.DMAC_CH5_TRANSFER_COMPLETED == true)
+            {
+                WS281X_DRIVER_Set_Task_Completed_Status(true);
+                ws281x_driverData.state = WS281X_DRIVER_STATE_IDLE;
+            }
             break;
         }
 

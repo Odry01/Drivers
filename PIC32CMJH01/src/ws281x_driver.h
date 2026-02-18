@@ -53,11 +53,8 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define LED_DATA_WIDTH      24
-#define NUMBER_OF_LEDS      20
-#define BUFFER_SIZE         LED_DATA_WIDTH * NUMBER_OF_LEDS
-#define T1H                 20
-#define T1L                 9
+#define NUMBER_OF_LEDS          1
+#define MINIMUM_DELAY           0xFA
 
 // *****************************************************************************
 
@@ -75,9 +72,10 @@ typedef enum
 {
     WS281X_DRIVER_STATE_INIT = 0,
     WS281X_DRIVER_STATE_IDLE,
-    WS281X_DRIVER_STATE_SET_COLOR,
+    WS281X_DRIVER_STATE_SET_LED_STRIP_COLOR,
     WS281X_DRIVER_STATE_SET_LED_STRIP_DATA,
     WS281X_DRIVER_STATE_SEND_LED_STRIP_DATA,
+    WS281X_DRIVER_STATE_WAIT_FOR_TRANSFER_LED_STRIP_DATA,
 } WS281X_DRIVER_STATES;
 
 // *****************************************************************************
@@ -102,10 +100,14 @@ typedef struct
     /* Driver variables */
     volatile bool WS281X_TASK_START;
     volatile bool WS281X_TASK_COMPLETED;
+    volatile bool DMAC_CH5_TRANSFER_COMPLETED;
     uint8_t RED_LED;
     uint8_t GREEN_LED;
     uint8_t BLUE_LED;
-    uint8_t DMAC_CH4_BUFFER[NUMBER_OF_LEDS][LED_DATA_WIDTH];
+    uint8_t PIXEL[NUMBER_OF_LEDS][3];
+    uint8_t DMAC_CH5_BUFFER[2048];
+    uint16_t LED_INDEX;
+    uint32_t LED_BITS[16];
 } WS281X_DRIVER_DATA;
 
 // *****************************************************************************
@@ -114,7 +116,7 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-void WS281X_DRIVER_DMAC_CH4_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT);
+void WS281X_DRIVER_DMAC_CH5_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -136,9 +138,15 @@ void WS281X_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
 void WS281X_DRIVER_Set_Color(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
 
-void WS281X_DRIVER_Set_LED_Strip_Data(uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
+void WS281X_DRIVER_Set_Data_Bits(void);
 
-void WS281X_DRIVER_Send_LED_Strip_Data(void);
+void WS281X_DRIVER_Set_Strip_Color(void);
+
+void WS281X_DRIVER_Set_Data(uint16_t *INDEX, uint8_t RED_LED, uint8_t GREEN_LED, uint8_t BLUE_LED);
+
+void WS281X_DRIVER_Set_Strip_Data(void);
+
+void WS281X_DRIVER_Send_Data(void);
 
 void WS281X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 

@@ -176,7 +176,7 @@ void SEN63C_DRIVER_Get_Product_Name(uint8_t I2C_ADDRESS)
 
 void SEN63C_DRIVER_Store_Product_Name(void)
 {
-    
+
 }
 
 void SEN63C_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS)
@@ -207,7 +207,7 @@ void SEN63C_DRIVER_Read_And_Clear_Device_Status(uint8_t I2C_ADDRESS)
 
 void SEN63C_DRIVER_Store_Device_Status(void)
 {
-    sen63c_sensorData.DEVICE_STATUS = sen63c_driverData.I2C_DATA_RECEIVE[0] << 8 | sen63c_driverData.I2C_DATA_RECEIVE[1];
+    sen63c_sensorData.DEVICE_STATUS = (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void SEN63C_DRIVER_Get_FW_Version(uint8_t I2C_ADDRESS)
@@ -219,7 +219,7 @@ void SEN63C_DRIVER_Get_FW_Version(uint8_t I2C_ADDRESS)
 
 void SEN63C_DRIVER_Store_FW_Version(void)
 {
-sen63c_sensorData.FW_VERSION = sen63c_driverData.I2C_DATA_RECEIVE[0] << 8 | sen63c_driverData.I2C_DATA_RECEIVE[1];
+    sen63c_sensorData.FW_VERSION = (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void SEN63C_DRIVER_Reset_Device(uint8_t I2C_ADDRESS)
@@ -252,8 +252,8 @@ void SEN63C_DRIVER_Get_Heater_Measurement(uint8_t I2C_ADDRESS)
 
 void SEN63C_DRIVER_Store_Heater_Measurement(void)
 {
-    sen63c_sensorData.T_VALUE = sen63c_driverData.I2C_DATA_RECEIVE[0] << 8 | sen63c_driverData.I2C_DATA_RECEIVE[1];
-    sen63c_sensorData.H_VALUE = sen63c_driverData.I2C_DATA_RECEIVE[3] << 8 | sen63c_driverData.I2C_DATA_RECEIVE[4];
+    sen63c_sensorData.T_VALUE = (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[1];
+    sen63c_sensorData.H_VALUE = (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) sen63c_driverData.I2C_DATA_RECEIVE[4];
 }
 
 //void SEN63C_DRIVER_Perform_Forced_CO2_Recalibration(uint8_t I2C_ADDRESS)

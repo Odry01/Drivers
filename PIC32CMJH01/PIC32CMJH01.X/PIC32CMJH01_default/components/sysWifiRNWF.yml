@@ -1,0 +1,269 @@
+configVersion: 1.0.0
+componentName: sysWifiRNWF
+coreVersion: 5.8.4
+device: PIC32CM5164JH01100
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: sysWifiRNWF
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: wireless_system_rnwf
+  type: package
+  version: v3.1.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: sysWifiRNWF
+          x: '571'
+          y: '177'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SYS_RNWF_ENABLE_DNS:
+      attributes:
+        id: SYS_RNWF_ENABLE_DNS
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SYS_RNWF_INF_WINCS02_SYSTEM_HEADER:
+      attributes:
+        id: SYS_RNWF_INF_WINCS02_SYSTEM_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_RNWF_INF_WINCS02_SYSTEM_SOURCE:
+      attributes:
+        id: SYS_RNWF_INF_WINCS02_SYSTEM_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_RNWF_INTERFACE_MODE:
+      attributes:
+        id: SYS_RNWF_INTERFACE_MODE
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: sysWifiRNWF
+            value: SPI
+          type: Dynamic
+        - attributes:
+            value: SPI
+          type: User
+        type: Values
+      type: Combo
+    SYS_RNWF_MQTT_ENABLE:
+      attributes:
+        id: SYS_RNWF_MQTT_ENABLE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SYS_RNWF_NET_SER_ENABLE:
+      attributes:
+        id: SYS_RNWF_NET_SER_ENABLE
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    SYS_RNWF_POWER_SAVE_MODE:
+      attributes:
+        id: SYS_RNWF_POWER_SAVE_MODE
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: Boolean
+    SYS_RNWF_SNTP_ADDRESS:
+      attributes:
+        id: SYS_RNWF_SNTP_ADDRESS
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: time.google.com
+          type: User
+        type: Values
+      type: String
+    SYS_RNWF_WIFI_CALLBACK_HANDLER:
+      attributes:
+        id: SYS_RNWF_WIFI_CALLBACK_HANDLER
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: WINCS02_DRIVER_WIFI_Callback
+          type: User
+        type: Values
+      type: String
+    SYS_RNWF_WIFI_DEVICE:
+      attributes:
+        id: SYS_RNWF_WIFI_DEVICE
+      children:
+      - children:
+        - attributes:
+            value: WINCS02
+          type: User
+        type: Values
+      type: Combo
+    SYS_RNWF_WIFI_WINCS02_HEADER:
+      attributes:
+        id: SYS_RNWF_WIFI_WINCS02_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_RNWF_WIFI_WINCS02_SOURCE:
+      attributes:
+        id: SYS_RNWF_WIFI_WINCS02_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_WINCS_WIFI_CONFIGURATION_H:
+      attributes:
+        id: SYS_WINCS_WIFI_CONFIGURATION_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_RNWF_WIFI_STA_SECURITY:
+      attributes:
+        id: SYS_RNWF_WIFI_STA_SECURITY
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: OPEN
+          type: User
+        type: Values
+      type: Combo
+    SYS_RNWF_WIFI_STA_SSID_NAME:
+      attributes:
+        id: SYS_RNWF_WIFI_STA_SSID_NAME
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: Admin
+          type: User
+        type: Values
+      type: String
+    SYS_RNWF_WIFI_STA_PWD_NAME:
+      attributes:
+        id: SYS_RNWF_WIFI_STA_PWD_NAME
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            value: Admin
+          type: User
+        type: Values
+      type: String
+  userData: {}

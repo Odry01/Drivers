@@ -65,6 +65,75 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for ADC0_INPUT pin ***/
+#define ADC0_INPUT_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 2U)) & 0x01U)
+#define ADC0_INPUT_PIN                  PORT_PIN_PA02
+
+/*** Macros for CONSOLE_UART_TX pin ***/
+#define CONSOLE_UART_TX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 4U)) & 0x01U)
+#define CONSOLE_UART_TX_PIN                  PORT_PIN_PA04
+
+/*** Macros for CONSOLE_UART_RX pin ***/
+#define CONSOLE_UART_RX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 5U)) & 0x01U)
+#define CONSOLE_UART_RX_PIN                  PORT_PIN_PA05
+
+/*** Macros for I2C_SDA pin ***/
+#define I2C_SDA_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 12U)) & 0x01U)
+#define I2C_SDA_PIN                  PORT_PIN_PA12
+
+/*** Macros for I2C_SCK pin ***/
+#define I2C_SCK_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 13U)) & 0x01U)
+#define I2C_SCK_PIN                  PORT_PIN_PA13
+
+/*** Macros for UART_TX pin ***/
+#define UART_TX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 16U)) & 0x01U)
+#define UART_TX_PIN                  PORT_PIN_PA16
+
+/*** Macros for UART_RX pin ***/
+#define UART_RX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 17U)) & 0x01U)
+#define UART_RX_PIN                  PORT_PIN_PA17
+
+/*** Macros for WS2812B_DATA pin ***/
+#define WS2812B_DATA_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 16U)) & 0x01U)
+#define WS2812B_DATA_PIN                  PORT_PIN_PB16
+
+/*** Macros for SPI_MOSI pin ***/
+#define SPI_MOSI_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 20U)) & 0x01U)
+#define SPI_MOSI_PIN                  PORT_PIN_PB20
+
+/*** Macros for SPI_SCK pin ***/
+#define SPI_SCK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 21U)) & 0x01U)
+#define SPI_SCK_PIN                  PORT_PIN_PB21
+
+/*** Macros for SPI_CS pin ***/
+#define SPI_CS_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 20U)) & 0x01U)
+#define SPI_CS_PIN                  PORT_PIN_PA20
+
+/*** Macros for SPI_MISO pin ***/
+#define SPI_MISO_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 21U)) & 0x01U)
+#define SPI_MISO_PIN                  PORT_PIN_PA21
+
+/*** Macros for CAN0_TX pin ***/
+#define CAN0_TX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 24U)) & 0x01U)
+#define CAN0_TX_PIN                  PORT_PIN_PA24
+
+/*** Macros for CAN0_RX pin ***/
+#define CAN0_RX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 25U)) & 0x01U)
+#define CAN0_RX_PIN                  PORT_PIN_PA25
+
+/*** Macros for WDRV_WINC_INT pin ***/
+#define WDRV_WINC_INT_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 0U)) & 0x01U)
+#define WDRV_WINC_INT_PIN                  PORT_PIN_PB00
+
+/*** Macros for WDRV_WINC_RESETN pin ***/
+#define WDRV_WINC_RESETN_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 1U))
+#define WDRV_WINC_RESETN_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 1U))
+#define WDRV_WINC_RESETN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 1U))
+#define WDRV_WINC_RESETN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 1U))
+#define WDRV_WINC_RESETN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 1U))
+#define WDRV_WINC_RESETN_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 1U)) & 0x01U)
+#define WDRV_WINC_RESETN_PIN                  PORT_PIN_PB01
+
 // *****************************************************************************
 /* PORT Group
 
@@ -404,6 +473,40 @@ typedef enum
 // Section: Generated API based on pin configurations done in Pin Manager
 // *****************************************************************************
 // *****************************************************************************
+// *****************************************************************************
+/* Function:
+    void PORT_Initialize(void)
+
+  Summary:
+    Initializes the PORT Library.
+
+  Description:
+    This function initializes all ports and pins as configured in the
+    MHC Pin Manager.
+
+  Precondition:
+    None.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+
+    PORT_Initialize();
+
+    </code>
+
+  Remarks:
+    The function should be called once before calling any other PORTS PLIB
+    functions.
+*/
+
+void PORT_Initialize(void);
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: PORT APIs which operates on multiple pins of a group

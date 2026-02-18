@@ -149,6 +149,19 @@ static const DRV_I2C_INIT drvI2C0InitData =
 };
 // </editor-fold>
 
+static const WDRV_WINC_SPI_CFG wdrvWincSpiInitData =
+{
+    .txDMAChannel       = SYS_DMA_CHANNEL_4,
+    .rxDMAChannel       = SYS_DMA_CHANNEL_5,
+    .txAddress          = (void *)&(SERCOM4_REGS->SPIM.SERCOM_DATA),
+    .rxAddress          = (void *)&(SERCOM4_REGS->SPIM.SERCOM_DATA),
+};
+
+static const WDRV_WINC_SYS_INIT wdrvWincInitData = {
+    .pSPICfg    = &wdrvWincSpiInitData,
+    .intSrc     = EIC_PIN_0
+};
+
 // <editor-fold defaultstate="collapsed" desc="DRV_SPI Instance 0 Initialization Data">
 
 /* SPI Client Objects Pool */
@@ -406,6 +419,7 @@ void SYS_Initialize ( void* data )
     PM_Initialize();
 
   
+    PORT_Initialize();
 
     CLOCK_Initialize();
 
@@ -429,12 +443,16 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_USART_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_USART_Initialize();
+
+    EVSYS_Initialize();
 
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
+
+    SERCOM5_SPI_Initialize();
+
+    SERCOM4_SPI_Initialize();
 
     CAN0_Initialize();
 
@@ -452,6 +470,9 @@ void SYS_Initialize ( void* data )
 
     /* Initialize I2C0 Driver Instance */
     sysObj.drvI2C0 = DRV_I2C_Initialize(DRV_I2C_INDEX_0, (SYS_MODULE_INIT *)&drvI2C0InitData);
+
+    /* Initialize the WINC Driver */
+    sysObj.drvWifiWinc = WDRV_WINC_Initialize(0, (SYS_MODULE_INIT*)&wdrvWincInitData);
 
     /* Initialize SPI0 Driver Instance */
     sysObj.drvSPI0 = DRV_SPI_Initialize(DRV_SPI_INDEX_0, (SYS_MODULE_INIT *)&drvSPI0InitData);
@@ -490,6 +511,7 @@ void SYS_Initialize ( void* data )
     STCC4_DRIVER_Initialize();
     TIMER_DRIVER_Initialize();
     VCNL4200_DRIVER_Initialize();
+    WINCS02_DRIVER_Initialize();
     WS281X_DRIVER_Initialize();
     XM125_DRIVER_Initialize();
 

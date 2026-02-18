@@ -1,6 +1,6 @@
 configVersion: 1.0.0
-coreVersion: 5.8.3
-spaHostVersion: 1.2.0
+coreVersion: 5.8.4
+spaHostVersion: 1.2.1
 device: PIC32CM5164JH01100
 deviceLibrary: {}
 groupModules: []
@@ -13,6 +13,7 @@ modules:
 - dac
 - dfp
 - divas
+- drvWifiWincS02
 - drv_i2c
 - drv_i2c_0
 - drv_spi
@@ -30,7 +31,12 @@ modules:
 - sercom1
 - sercom2
 - sercom3
+- sercom4
+- sercom5
 - supc
+- sysMqttRNWF
+- sysNetRNWF
+- sysWifiRNWF
 - sys_console
 - sys_console_0
 - sys_time
@@ -59,11 +65,11 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\PIC32CM5164JH01100.ld
   hash: 342880b5026488987e3eaecac49a90fa597e6e62aaa2a958138af9137e7759de
 - file: ..\src\config\default\configuration.h
-  hash: 23c55774d3fffe9da9ec4a7f3fb4328d7a4da9f9620dd52a9078e2e85ff0ebb3
+  hash: 0e29301350ce1c6460f7ec7e3a40c075fc29728bec8c9fcb443a2a736f536921
 - file: ..\src\config\default\definitions.h
-  hash: 24a8e62d41a85ac01161198562184072770929712cce49392e18f12764295cfc
+  hash: b904c19ded2371becf8ad97cd727e68b7c9f47bce9ba8aa81d8a69e9ade700fa
 - file: ..\src\config\default\device.h
-  hash: 7c97d3f5b796da3cec806d0156380075f2dfac6566857296f5423c211ded1297
+  hash: 04b157a2340644f4ee17c29e3bd72ef709c024d6c973aa94c33756458c76bf87
 - file: ..\src\config\default\device_cache.h
   hash: e2914501b361bbc93a56d6915b1bf4fac00277e61f31fdee87a587bc15dea5b6
 - file: ..\src\config\default\device_vectors.h
@@ -96,14 +102,152 @@ generatedFileHashHistoryMap:
   hash: 6880801e39a314a660beb6122a1ba97919a8443408cc7772b909f05d0d7bbdd2
 - file: ..\src\config\default\driver\usart\src\drv_usart_local.h
   hash: 1bafe73a4e8ec43c6b3612ec797b96454bf3b44cf80af2625b821cdb23f274f1
+- file: ..\src\config\default\driver\wifi\wincs02\dev\wdrv_winc_eint.c
+  hash: eecb9f6aaec935b59b4e0c16c4032bca4ca6c542f0d12b12e3aac40553fb188f
+- file: ..\src\config\default\driver\wifi\wincs02\dev\wdrv_winc_spi.c
+  hash: 5bafb87dc418ea01e6ec1b89fb4a40c49921be63048ca913d88a41badf0fda26
+- file: ..\src\config\default\driver\wifi\wincs02\include\dev\conf_winc_dev.h
+  hash: cd075624092c58dfc23b91f15a4f6bc58bc5be28c4128cdbd9057acfb47199ae
+- file: ..\src\config\default\driver\wifi\wincs02\include\dev\wdrv_winc_eint.h
+  hash: 2ad8ebef249713fd43a7c2356a703aa7913700b34fbb8fa23a673fffdf36f4d0
+- file: ..\src\config\default\driver\wifi\wincs02\include\dev\wdrv_winc_spi.h
+  hash: 7d95f50c67e34db07743b87e30a9e3ca71ab0995de1466ec537fdbf580cd2ea2
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\microchip_wincs02_intf.h
+  hash: c34bf4c70664efa4b3f38b0b2bcc9722100361b82fee46b06f17b094b0da5255
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_cmd_req.h
+  hash: 7a4977de53353191120e54d86a3cf1e2aac84a0d03e5638e7ee3d335cfae6b3f
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_cmds.h
+  hash: 45bdc634d33b7271fb44032196f0423cd11d0f4b1a69ca5b93b6964072e36292
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_debug.h
+  hash: dde838ba66e971d7d894efb00cfcf3ed755d74bd7d275f0f000d8f796945cf20
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_dev.h
+  hash: 07a29d735800b9ea33542b806018ab8f2d8f554914675dbf75ebd42958ca9fe6
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_sdio_drv.h
+  hash: 3541b0f4aeb4d631103c4e920b91bcd8866a8b09028af8a6e8d2f591fc2f49c0
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_socket.h
+  hash: 86edb0feac3fce1306a59cc0863d5c5ad98a965693aea795f9a6206356e44800
+- file: ..\src\config\default\driver\wifi\wincs02\include\nc_driver\winc_tables.h
+  hash: 1d42d9ea832caec5883b6af7dab0dec882ec87facbfc4e0fb2ff29c22ec7859e
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc.h
+  hash: 255bbc251e062d4313aef6841c66bc1df3342985a3bfc389925031b104c9d170
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_api.h
+  hash: 38f3f61e6ebd1c1fb13fbc458033fc47f78aceb65479d49442b83a0a75cc9221
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_assoc.h
+  hash: fa17d9609b0f2efd5def5f9154c9b778fa955f341e5e0ef8dce026e12c751e3d
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_authctx.h
+  hash: cb81d20806a3d4a98ce2a88d1ecde138f48209bc7ffbe11f0939da3bb4fdc5f6
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_bssctx.h
+  hash: 6f09c834e343cf2d6cf7357a37e2234aa51b9af01dcb2c9c888a7de253838283
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_bssfind.h
+  hash: 56b0d6fe13eb158b00edaabe6b1b46c3527b9f62670810bcb4e942556b44e188
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_client_api.h
+  hash: beaf9e6b6c0f79f583dabba8f6a6758be02ce9005f8a063bd68a83b8bf9b3f32
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_common.h
+  hash: 0954f585c76b037fff4610710d65c83e6d608c46e37ec7190f598504277b85e7
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_debug.h
+  hash: 0d9c10b08011f6a85267a8a5bd3ddc32016d1e9c59faba3183c03c2a28604bf6
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_dhcps.h
+  hash: 8b33eb5fbac7132681f08c6e05444d8a353618681842b8502b4348c41e235809
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_dns.h
+  hash: cd6b5e1a1f2be7e2bf7791cdbfa6f4dfd64d75a71a8e32de43fee2f3a934a7f9
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_extcrypto.h
+  hash: d3e071523c9152bded0efa515588a57fe17a584f6ec7996b0d959e8f39c17cc0
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_file.h
+  hash: 850fdb5e8223fe7bd52bd707532d5bc406b98034ce736ed57ba917ade817ef7c
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_mqtt.h
+  hash: a0802fdcf4944825576075422d144428f82935bed5663b96109b57a1658ffbf8
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_netif.h
+  hash: 9f6fa4cb48fb13aa32decbe51bdd0e8d903209647c2efa966a0e8c97e9dda7d1
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_nvm.h
+  hash: 4857c5e4ca18170c3750526151fed1e52164a1df4c7e5b1f134738c92602d451
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_ota.h
+  hash: 8c716bf878cd02a9bd0dde968689c7f64043a673f9111e1b2b8313a521993932
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_pps.h
+  hash: 3a4a1c3376dacbbc7c620435f7cfd90ab25d99365f1187d2f43a8025dbaa4183
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_prov.h
+  hash: 1ea6a1ea8c190b9f0dead0f95f714e8950888d9dbc28c808402fcd8feb0e9e68
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_sntp.h
+  hash: ae1194a6a999d2180772e6ee19116e038d2c957b9229bf48065dd61828fdd2f5
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_socket.h
+  hash: 10dafa8b09e7b404ba7188ded0142e6f1af0ab9777aa5e702c741084d7427dde
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_softap.h
+  hash: 3116484205ef6008191317207fbaa3bf31b82ae4d6153cb4f72e659c61a3d7dc
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_sta.h
+  hash: 0738315aaff5031289f6215161638bd6d5294bbb1d03c2944c8e4c19dd0a04b5
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_systime.h
+  hash: 1d333a8b7efcd5a0041957de73900da99393334c1d2bbbb627f772a295649233
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_tls.h
+  hash: 78539922bd314bfc995769225a0fac336f58facf81c9d16ba360f1ee2b85ba6d
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_utils.h
+  hash: 3c0399c8cafde2f8a1c97f041e1822dec5869b135a9abac599cc5666528334a7
+- file: ..\src\config\default\driver\wifi\wincs02\include\wdrv_winc_wifi.h
+  hash: 8e1503f91e955648a7ec26f693dab75fd75b7765b4e99b5eb5fd7e1726751d1e
+- file: ..\src\config\default\driver\wifi\wincs02\nc_driver\winc_cmd_req.c
+  hash: 4ce82cdf0be01381d1ce1160913461f6a9dd559da7cbd6fa47fa6c99f68f872e
+- file: ..\src\config\default\driver\wifi\wincs02\nc_driver\winc_cmds.c
+  hash: 9ddc7046cafb2e8c55b7d443693cce2849d5f454583c60c03897ccb289e35c82
+- file: ..\src\config\default\driver\wifi\wincs02\nc_driver\winc_dev.c
+  hash: 01ec32bea76830aec68e65b74efb969023c87712ef3acc4213f3f32c2b29667b
+- file: ..\src\config\default\driver\wifi\wincs02\nc_driver\winc_sdio_drv.c
+  hash: dd51b0cc924763910fa403636769ef18277d9068083e258c2c3465efffa78f34
+- file: ..\src\config\default\driver\wifi\wincs02\nc_driver\winc_socket.c
+  hash: ec377a1aa333d5a5a6b8965e8e5178774a8d04541ba6aa039f6a789976314398
+- file: ..\src\config\default\driver\wifi\wincs02\nc_driver\winc_tables.c
+  hash: 9c15f3560b72086b03a71b696efbbe95e9f92811d3aab812b3a62b1ed1032c06
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc.c
+  hash: 168f44d88c4031c8fabcf51b59b00676c3b0293dd01c148160ed1b7e8e15e3ae
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_assoc.c
+  hash: a027f71bf9bae39462a4a86389b5b7e625bb44b19ac218213ca66ac0b3f20ee7
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_authctx.c
+  hash: bc95b3a3d073c34aad39314d35c113a0a4ffce0fdf9649bf3acc8f5293f6bccd
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_bssctx.c
+  hash: 8410d0155436bb0c01535569162386721d670344372d45573ad57cc8192cbaa2
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_bssfind.c
+  hash: 045240ac688ddba81d3700099177e538023d96bcbb1dfda33e822127f8047326
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_dhcps.c
+  hash: 4f1d3038ead076127d1a855e490c7e1b3adbce55bbc30b0c055f16011710d597
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_dns.c
+  hash: afd34590e98fac4e3ba51c0aedd1e500d1b5dd7e782da385ed6dab52f3cd4f20
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_extcrypto.c
+  hash: a1f82472707aad81b65688a19c2bd9d93943ad8487fa98448a4faa087423c821
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_file.c
+  hash: a591e729a6797999d5d73dfac0b8dc0245c0c0bf157dd94e825dd0b56f4e4efa
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_mqtt.c
+  hash: 36f424666f01b6b94d4a023d983dbc8247deca9c7124e42b3be200fff49ca064
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_netif.c
+  hash: 855436959c6399c886d46813abc864f4313ee4bd7052c4c62df98204d77cdcf1
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_nvm.c
+  hash: 903c22669f6bc82cca5014f7962fa2b601758267945bebae69d463486600018c
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_ota.c
+  hash: 1765ef4cee2d8af21cc13ba8efa1f2f9ca8b28e85cbd42b4a834d7153e3f3a40
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_pps.c
+  hash: bca63cb5fd2321ffd633a3498950f07b1f8fea167ac51913272bcc9a9a196a28
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_prov.c
+  hash: 409f9c62696bc8be4fd1f6be1b7efccf5673c0f9be5a7849927f15d826fd8c92
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_sntp.c
+  hash: 072f0341a8b21fa227a104845c6502cb895b319075044b2f9933fe43a7d01766
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_socket.c
+  hash: 493cb2ed45b31fb8a9c5dfcca3e6f7709549650403dd6c7ce0bd0b2dcc5825f1
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_softap.c
+  hash: f692623001dfae2c61e2dd2fedddd4e64f6325b6a48a31bfadb97b6067950dd8
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_sta.c
+  hash: b9f09114ca575f111a953870f5b89545dbc51f8f8ed841836ab783728cf7f732
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_systime.c
+  hash: 735c37146edc00ffafc7802184b4bb4ee3503c456b9ad7d7b64f92ea27d8a836
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_tls.c
+  hash: 5fb0f4d4c794b074bbf7cac553db2d9fb305d485e9714cdd6b0f8ec12c19f494
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_utils.c
+  hash: f26ad9b4c88a4cc6f8fe137e6b0506696034a470aaf4cbd3caa02da9fe6b3efd
+- file: ..\src\config\default\driver\wifi\wincs02\wdrv_winc_wifi.c
+  hash: 3a94ce08f79c44509cd520ee10872481423b5f3de9cdf7bf5635d5a741a56e14
 - file: ..\src\config\default\exceptions.c
   hash: 4460457d985f664a3dcd5a719dd869dec9348b072e04671de668948ee99faa56
 - file: ..\src\config\default\initialization.c
-  hash: acf275373395462b39ad04dcf7019760ec8a7af64b872c7d7a854378a2656310
+  hash: 85213703e368b7b109cf92ccf17454108df3be50d06099e56b0020900d90d7d1
 - file: ..\src\config\default\interrupts.c
-  hash: 997013256e6c4dcaba320b0e3b63e59d7dbddafde7b925f93b821dbb09e5651f
+  hash: 68b2d59c9b4d6d0b5512e2037e8b14372e0fd8b8524ccd01d64a41ed8912d7bf
 - file: ..\src\config\default\interrupts.h
-  hash: dfdb1f7662056691b89b6819c5482992b3ce7fd709c93eeeb8ccf5077198f22a
+  hash: fda2c1419efef7da85a650c6ffbaa2bd285780b413d311e4a20a111467fd5f80
 - file: ..\src\config\default\libc_syscalls.c
   hash: c9afc1b1257829415a1a6746ce3744f0a768b339d59fff2ab3ca1fab58b2a916
 - file: ..\src\config\default\osal\osal.h
@@ -125,7 +269,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\can\plib_can_common.h
   hash: e0e3b54f69be9d8811bbe507f91daa443ae7bff5dc724ac51baebc160097b2d6
 - file: ..\src\config\default\peripheral\clock\plib_clock.c
-  hash: dfb772949880cae15f58d1881c4e5f333bdc8da746cdbb305ef86481cc14a863
+  hash: ecdba27708c839699fa37b073a5a77b765aed6a60237c4d18619d6033d8ceadb
 - file: ..\src\config\default\peripheral\clock\plib_clock.h
   hash: 01c269741541514e997ef61546f4dbb0e23f66e27c6a957162557f13b4638baf
 - file: ..\src\config\default\peripheral\dac\plib_dac.c
@@ -137,9 +281,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\divas\plib_divas.h
   hash: f1ee4cb50652e2008a8f22d100246fd217313e118211c17877fd0c7bd8a62f8e
 - file: ..\src\config\default\peripheral\dmac\plib_dmac.c
-  hash: 5c7e694eae81a9891aa50b5833494a80787b5bc2019f59f8ec618985455b3f6b
+  hash: ce71143f1d91a00a22cbe78b80e12aa13d833c541ed9f5ddf59c5eea24d2c350
 - file: ..\src\config\default\peripheral\dmac\plib_dmac.h
-  hash: d8dc178e1dfbe5178df9af3c9f56d078c5e533d663bec2fcf40b238625517467
+  hash: e69db8665c7fe28cd2d826310631dd33ea139f883d6676bcba40c815f83a89b0
 - file: ..\src\config\default\peripheral\eic\plib_eic.c
   hash: b40e786a0ec038541d9f185b4c35e7a12b3a2883fec7b0ec2d2dccda2fe9c6a9
 - file: ..\src\config\default\peripheral\eic\plib_eic.h
@@ -153,7 +297,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\freqm\plib_freqm.h
   hash: c506b3c4317c2ae7f9ef67320bf8faa373dafcb8ac8009ac308df530128a5449
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.c
-  hash: 80e07ffedf2265c403313abd68617add1f8a3f40c33d6fa525e235398740584b
+  hash: e90675169d101f014cfa97e418cd1b743f49c6adba76cc1b0771123602eb2de5
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.h
   hash: 9936ac782115af41003255283fa2f603f4ff2212d16275b7c80ea8d067a9e208
 - file: ..\src\config\default\peripheral\nvmctrl\plib_nvmctrl.c
@@ -165,9 +309,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\pm\plib_pm.h
   hash: b327e56856e773605cb0ba5abe0374485defeeb4b148520a145defebee77158b
 - file: ..\src\config\default\peripheral\port\plib_port.c
-  hash: 554b36ce35723948e94f7872d1d82d2876b522dd9f4d4eaa6750c080ef01365f
+  hash: 8f4759009ba73fedaf032598352f35c78a8e87e62b5660a5e2bf8edcd723aa8e
 - file: ..\src\config\default\peripheral\port\plib_port.h
-  hash: 29fa3e1c26f451b9dddd3bca056867154b53c26ed47cdcb15d0eaefd65768709
+  hash: 40b5a3553eb5f372a47394354f57d56f027912b61af2e83a304763ee23c8695c
 - file: ..\src\config\default\peripheral\rstc\plib_rstc.c
   hash: 8ecdc07b01d576d30384c0a0370b97ac7dae835168106d04ba82cbbc7fc3c660
 - file: ..\src\config\default\peripheral\rstc\plib_rstc.h
@@ -186,6 +330,14 @@ generatedFileHashHistoryMap:
   hash: c342de4849a4a30d05fc8204b857d963ea1752aaea2a8cc4e813f452cda92db6
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom3_spi_master.h
   hash: 351b72a164869e3672e455b02f4de6083ca436a862a6e55388c9a221911b4c39
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom4_spi_master.c
+  hash: cdedf71921be3d5c8b026f9de185cd3e595b74dc65b2f95b418201b385d1b7a9
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom4_spi_master.h
+  hash: 8615baebaf7234665699c1684aec924b2a5a4be311d3f3980c546a77b8f04ae5
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom5_spi_master.c
+  hash: 0196b62b3976fc14d6c8f48deb76518b6595a6fa596b2035fdc199e29e606220
+- file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom5_spi_master.h
+  hash: dd3d8e30fa86b8f719e59cc2b4c3b94790c6bb9fdf53dfb5022f653b37957c3e
 - file: ..\src\config\default\peripheral\sercom\spi_master\plib_sercom_spi_master_common.h
   hash: 06e3c7813e1608b5008e3c8955569f9cff04bef321a34c35421f7979368a4ada
 - file: ..\src\config\default\peripheral\sercom\usart\plib_sercom0_usart.c
@@ -207,7 +359,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\systick\plib_systick.h
   hash: 906fdb57ea1eab89769cc59ac156b2a153176ee216eff61a5aea93df34ca4101
 - file: ..\src\config\default\peripheral\tcc\plib_tcc0.c
-  hash: 08ee76454cbccb1e410490979f562175dedbbc5a1fd9be22be49daf6635f2f88
+  hash: 624eae604669c08eaa99991d1a106efa9278cbe17c0ade3cc768cee4b85bd7c8
 - file: ..\src\config\default\peripheral\tcc\plib_tcc0.h
   hash: 81f7d4577b88b3b9113e4e29151b4d5e8f528334ae653924dd9a6ce364147c25
 - file: ..\src\config\default\peripheral\tcc\plib_tcc_common.h
@@ -217,7 +369,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\wdt\plib_wdt.h
   hash: d4bb429b750e4e2970fe12d9c4eea02d2e0b1f1d30279577033555379f94e1a0
 - file: ..\src\config\default\pin_configurations.csv
-  hash: 15918cf23606fab8ad597cc717d84b3cb95f9f781eef0fac9321eb60ab01aa34
+  hash: d00d9b65a321ff613142dafff7381a89a63314fbcda0ac8d41cbe33930c9999d
 - file: ..\src\config\default\startup_xc32.c
   hash: 94d5747e403f5e3307f1207e4e51032561b25d8e885100b0097eb1979bb9d8c2
 - file: ..\src\config\default\stdio\xc32_monitor.c
@@ -250,10 +402,22 @@ generatedFileHashHistoryMap:
   hash: dc104ae181fd5309e1bb42896246644fae95915a8e639b23ecfccc8840850274
 - file: ..\src\config\default\system\int\sys_int_mapping.h
   hash: 5abf8528dabc1b17378f5d137870597037214fddf33880fa40e9263352da3008
+- file: ..\src\config\default\system\mqtt\src\sys_wincs_mqtt_service.c
+  hash: fa91d0f5d7b24be107192b11995175791cf8bac9e7ff5c0096c5e157cae63c98
+- file: ..\src\config\default\system\mqtt\sys_wincs_mqtt_service.h
+  hash: 77585a95a4864144164c83404c51d5d0c7fe70504703ff345e0599637ca6d658
+- file: ..\src\config\default\system\net\src\sys_wincs_net_service.c
+  hash: 41e249c1aa1e6e58a3f0a151b8b0f6907da5cf70f093c1a5fd3ba8a09f6759bf
+- file: ..\src\config\default\system\net\sys_wincs_net_service.h
+  hash: 247d39b9c1f4c7ea716b866410d470e47ce4ef16a10c19e2265e028cec954549
 - file: ..\src\config\default\system\ports\sys_ports.h
   hash: 44ead6778855c9681f4d47f3fa252a83ad2d8b170a64f3a98e06016243291cac
 - file: ..\src\config\default\system\ports\sys_ports_mapping.h
   hash: 8a3e7ed01aa847c87f76796b56665f7f91f591fddfe6cf2e4161a03332608c3e
+- file: ..\src\config\default\system\sys_wincs_system_service.c
+  hash: 37c238a8653d9bd20e42c59a282bdcb506e7de3dad87d3511cb78432f55cbe24
+- file: ..\src\config\default\system\sys_wincs_system_service.h
+  hash: 07ce3ebc7013e64a784518149fe551c100fc90d215045130ee6ec1c0e31bcf20
 - file: ..\src\config\default\system\system.h
   hash: 2b75f8e370e5cb2c54f70da7351ee149f0d5a7673e700f39b373099716b31b55
 - file: ..\src\config\default\system\system_common.h
@@ -268,8 +432,12 @@ generatedFileHashHistoryMap:
   hash: 6357468f7670698b16bfb6439d9919ed38eba99d4f03277a8b43ac34586fa1b3
 - file: ..\src\config\default\system\time\sys_time_definitions.h
   hash: bff2d3a629283b03b410a8e7cc15085267a8553202fac75c76a9aa3f61c57d78
+- file: ..\src\config\default\system\wifi\src\sys_wincs_wifi_service.c
+  hash: 37d53e0fd6d7b0eedf82926892a0c7b42f7b9d96ea71843d49ed505709a19155
+- file: ..\src\config\default\system\wifi\sys_wincs_wifi_service.h
+  hash: 1e507b0f73e6d4e1c4daed6feffff965c5169cf61c801d3f17480a93bb15c684
 - file: ..\src\config\default\tasks.c
-  hash: dfa58e344c0f0db1e0cf94d80790eead911dd6f5a48bbd4d08a4e30cdb61cf7f
+  hash: 32a181dc899f162e6bc28036556da3d9d965515840572a1902f7e3d2be4b3069
 - file: ..\src\config\default\toolchain_specifics.h
   hash: a4f1774c6f1f8c6cd522567536c9e9d75ca63259b868015ac9b0fb0aeeffe1f4
 - file: ..\src\config\default\user.h
@@ -520,6 +688,10 @@ generatedFileHashHistoryMap:
   hash: a06724147b596edbd1018eb74026837d9e47373ff2f3cd2521181eba2575eb7d
 - file: ..\src\vcnl4200_driver.h
   hash: 5c2a2bdf3e3327ac9d6ec6c7c7c5baad1d327f78a4609df7e053ec9ab9087815
+- file: ..\src\wincs02_driver.c
+  hash: 571d65a7da0279fe00129318dd752ce90740df4efd520247b09bc806d48c34a3
+- file: ..\src\wincs02_driver.h
+  hash: 3497a24849fa95332a49d4d4f93e126a72ffa0ece7b1aea8109fa444ae5fe6d5
 - file: ..\src\ws281x_driver.c
   hash: 4145827f88c9cc0327a550ec117480fae392e00fac624762719e6230b0ed2ba8
 - file: ..\src\ws281x_driver.h

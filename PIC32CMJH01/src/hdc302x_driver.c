@@ -112,7 +112,7 @@ void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Offset_Values(void)
 {
-    hdc302x_sensorData.OFFSET = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.OFFSET = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Set_Offset_Values(uint8_t I2C_ADDRESS)
@@ -134,7 +134,7 @@ void HDC302X_DRIVER_Get_Set_High_Alert(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Set_High_Alert(void)
 {
-    hdc302x_sensorData.SET_HIGH_ALERT = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.SET_HIGH_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Set_Set_High_Alert(uint8_t I2C_ADDRESS)
@@ -156,7 +156,7 @@ void HDC302X_DRIVER_Get_Clear_High_Alert(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Clear_High_Alert(void)
 {
-    hdc302x_sensorData.CLEAR_HIGH_ALERT = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.CLEAR_HIGH_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Set_Clear_High_Alert(uint8_t I2C_ADDRESS)
@@ -178,7 +178,7 @@ void HDC302X_DRIVER_Get_Set_Low_Alert(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Set_Low_Alert(void)
 {
-    hdc302x_sensorData.SET_LOW_ALERT = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.SET_LOW_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Set_Set_Low_Alert(uint8_t I2C_ADDRESS)
@@ -200,7 +200,7 @@ void HDC302X_DRIVER_Get_Clear_Low_Alert(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Clear_Low_Alert(void)
 {
-    hdc302x_sensorData.CLEAR_LOW_ALERT = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.CLEAR_LOW_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS)
@@ -248,8 +248,8 @@ void HDC302X_DRIVER_Get_Auto_Measure_Values(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Measurement_Values(void)
 {
-    hdc302x_sensorData.T_VALUE = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
-    hdc302x_sensorData.H_VALUE = hdc302x_driverData.I2C_DATA_RECEIVE[3] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[4];
+    hdc302x_sensorData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[4];
 }
 
 void HDC302X_DRIVER_Get_Minimum_Temperature_Value(uint8_t I2C_ADDRESS)
@@ -261,7 +261,7 @@ void HDC302X_DRIVER_Get_Minimum_Temperature_Value(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Minimum_Temperature_Value(void)
 {
-    hdc302x_sensorData.T_VALUE = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Get_Maximum_Temperature_Value(uint8_t I2C_ADDRESS)
@@ -273,7 +273,7 @@ void HDC302X_DRIVER_Get_Maximum_Temperature_Value(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Maximum_Temperature_Value(void)
 {
-    hdc302x_sensorData.T_VALUE = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Get_Minimum_Humidity_Value(uint8_t I2C_ADDRESS)
@@ -285,7 +285,7 @@ void HDC302X_DRIVER_Get_Minimum_Humidity_Value(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Minimum_Humidity_Value(void)
 {
-    hdc302x_sensorData.H_VALUE = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Get_Maximum_Humidity_Value(uint8_t I2C_ADDRESS)
@@ -297,7 +297,7 @@ void HDC302X_DRIVER_Get_Maximum_Humidity_Value(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Maximum_Humidity_Value(void)
 {
-    hdc302x_sensorData.H_VALUE = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
@@ -320,7 +320,7 @@ void HDC302X_DRIVER_Get_Sensor_Status(uint8_t I2C_ADDRESS)
 
 void HDC302X_DRIVER_Store_Sensor_Status(void)
 {
-    hdc302x_sensorData.STATUS = hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    hdc302x_sensorData.STATUS = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void HDC302X_DRIVER_Get_NIST_3(uint8_t I2C_ADDRESS)

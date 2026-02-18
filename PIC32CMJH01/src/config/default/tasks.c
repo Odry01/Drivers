@@ -77,7 +77,10 @@ void SYS_Tasks ( void )
 
 
     /* Maintain Device Drivers */
-    
+        WDRV_WINC_Tasks(sysObj.drvWifiWinc);
+
+
+
 
     /* Maintain Middleware & Other Libraries */
     
@@ -133,6 +136,9 @@ void SYS_Tasks ( void )
 
     /* Call Application task VCNL4200_DRIVER. */
     VCNL4200_DRIVER_Tasks();
+
+    /* Call Application task WINCS02_DRIVER. */
+//    WINCS02_DRIVER_Tasks();
 
     /* Call Application task WS281X_DRIVER. */
     WS281X_DRIVER_Tasks();

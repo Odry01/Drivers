@@ -104,7 +104,7 @@ void VCNL4200_DRIVER_Get_ALS_CFG(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_ALS_CFG(void)
 {
-    vcnl4200_sensorData.ALS_CFG = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.ALS_CFG = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Set_ALS_CFG(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t LSB_VALUE)
@@ -123,7 +123,7 @@ void VCNL4200_DRIVER_Get_ALS_High_Alert(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_ALS_High_Alert(void)
 {
-    vcnl4200_sensorData.ALS_THDH = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.ALS_THDH = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Set_ALS_High_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t LSB_VALUE)
@@ -142,7 +142,7 @@ void VCNL4200_DRIVER_Get_ALS_Low_Alert(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_ALS_Low_Alert(void)
 {
-    vcnl4200_sensorData.ALS_THDL = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.ALS_THDL = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Set_ALS_Low_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t LSB_VALUE)
@@ -181,7 +181,7 @@ void VCNL4200_DRIVER_Get_PS_High_Alert(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_PS_High_Alert(void)
 {
-    vcnl4200_sensorData.PS_THDH = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.PS_THDH = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Set_PS_High_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t LSB_VALUE)
@@ -200,7 +200,7 @@ void VCNL4200_DRIVER_Get_PS_Low_Alert(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_PS_Low_Alert(void)
 {
-    vcnl4200_sensorData.PS_THDL = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.PS_THDL = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Set_PS_Low_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t LSB_VALUE)
@@ -219,7 +219,7 @@ void VCNL4200_DRIVER_Get_PS_Data(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_PS_Data(void)
 {
-    vcnl4200_sensorData.PS_DATA = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.PS_DATA = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Get_ALS_Data(uint8_t I2C_ADDRESS)
@@ -230,7 +230,7 @@ void VCNL4200_DRIVER_Get_ALS_Data(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_ALS_Data(void)
 {
-    vcnl4200_sensorData.ALS_DATA = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.ALS_DATA = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Get_White_Data(uint8_t I2C_ADDRESS)
@@ -241,7 +241,7 @@ void VCNL4200_DRIVER_Get_White_Data(uint8_t I2C_ADDRESS)
 
 void VCNL4200_DRIVER_Store_White_Data(void)
 {
-    vcnl4200_sensorData.WHITE_DATA = vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.WHITE_DATA = (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[1] << 8 | (uint16_t) vcnl4200_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void VCNL4200_DRIVER_Get_INT_Flag(uint8_t I2C_ADDRESS)

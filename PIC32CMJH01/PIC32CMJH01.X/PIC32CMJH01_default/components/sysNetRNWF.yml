@@ -1,0 +1,80 @@
+configVersion: 1.0.0
+componentName: sysNetRNWF
+coreVersion: 5.8.4
+device: PIC32CM5164JH01100
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: sysNetRNWF
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: wireless_system_rnwf
+  type: package
+  version: v3.1.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: sysNetRNWF
+          x: '581'
+          y: '237'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    SYS_RNWF_NET_SOCKET_CALLBACK_HANDLER:
+      attributes:
+        id: SYS_RNWF_NET_SOCKET_CALLBACK_HANDLER
+      children:
+      - children:
+        - attributes:
+            value: WINCS02_DRIVER_SOCKET_Callback
+          type: User
+        type: Values
+      type: String
+    SYS_RNWF_WINCS02_NET_HEADER:
+      attributes:
+        id: SYS_RNWF_WINCS02_NET_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_RNWF_WINCS02_NET_SOURCE:
+      attributes:
+        id: SYS_RNWF_WINCS02_NET_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    SYS_WINCS02_CONSOLE_SYS_CONFIG:
+      attributes:
+        id: SYS_WINCS02_CONSOLE_SYS_CONFIG
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+  userData: {}

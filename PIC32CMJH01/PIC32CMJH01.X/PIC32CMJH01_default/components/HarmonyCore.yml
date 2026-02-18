@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: HarmonyCore
-coreVersion: 5.8.3
+coreVersion: 5.8.4
 device: PIC32CM5164JH01100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: core
   type: package
-  version: v3.15.5
+  version: v3.16.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -373,7 +373,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.c
+            value: wincs02_driver.c
           type: String
         type: Attributes
       type: File
@@ -392,7 +392,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.h
+            value: wincs02_driver.h
           type: String
         type: Attributes
       type: File
@@ -411,7 +411,7 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.c
+            value: ws281x_driver.c
           type: String
         type: Attributes
       type: File
@@ -430,7 +430,7 @@ data:
             id: name
           children:
           - type: Value
-            value: xm125_driver.h
+            value: ws281x_driver.h
           type: String
         type: Attributes
       type: File
@@ -1006,7 +1006,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '20'
+            value: '21'
           type: User
         type: Values
       type: Integer
@@ -1106,7 +1106,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ws281x_driver
+            value: wincs02_driver
           type: User
         type: Values
       type: String
@@ -1116,7 +1116,7 @@ data:
       children:
       - children:
         - attributes:
-            value: xm125_driver
+            value: ws281x_driver
           type: User
         type: Values
       type: String
@@ -1458,4 +1458,52 @@ data:
           type: Boolean
         type: Attributes
       type: File
+    APP20_C:
+      attributes:
+        id: APP20_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP20_H:
+      attributes:
+        id: APP20_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: xm125_driver.h
+          type: String
+        type: Attributes
+      type: File
+    GEN_APP_TASK_NAME_20:
+      attributes:
+        id: GEN_APP_TASK_NAME_20
+      children:
+      - children:
+        - attributes:
+            value: xm125_driver
+          type: User
+        type: Values
+      type: String
   userData: {}

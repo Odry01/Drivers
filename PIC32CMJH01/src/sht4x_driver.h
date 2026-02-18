@@ -89,8 +89,8 @@ typedef enum
     SHT4X_DRIVER_STATE_START_MEASURE_WAIT_FOR_TRANSFER,
     SHT4X_DRIVER_STATE_START_WAIT_TIMER,
     SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE,
-    SHT4X_DRIVER_STATE_GET_MEASURE_DATA,
-    SHT4X_DRIVER_STATE_GET_MEASURE_DATA_WAIT_FOR_TRANSFER,
+    SHT4X_DRIVER_STATE_GET_MEASURED_VALUES,
+    SHT4X_DRIVER_STATE_GET_MEASURED_VALUES_WAIT_FOR_TRANSFER,
     SHT4X_DRIVER_STATE_STORE_MEASURED_VALUES,
     SHT4X_DRIVER_STATE_CALCULATE_DATA,
     SHT4X_DRIVER_STATE_STORE_DATA,
@@ -312,7 +312,7 @@ void SHT4X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER)
     Remarks:
     None.
  */
-void SHT4X_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS);
+void SHT4X_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS);
 
 /**
     Function:
@@ -334,10 +334,10 @@ void SHT4X_DRIVER_Store_Measured_Values(void);
 
 /**
     Function:
-    void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS)
+    void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS)
 
     Summary:
-    Reads the serial number of the sensor.
+    Gets the serial number of the sensor.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -348,7 +348,7 @@ void SHT4X_DRIVER_Store_Measured_Values(void);
     Remarks:
     None.
  */
-void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS);
+void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS);
 
 /**
     Function:

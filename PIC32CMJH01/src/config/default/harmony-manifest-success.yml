@@ -4,18 +4,20 @@
 
 
 project: PIC32CMJH01
-creation_date: 2026-01-19T18:35:58.965+01:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2026-02-18T20:52:17.852+01:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
-mcc_version: v5.6.3
-mcc_core_version: v5.8.3
+mcc_version: v5.6.4
+mcc_core_version: v5.8.4
 mplabx_version: v6.25        # if MPLAB X plugin only
-harmony_version: v5.6.3
+harmony_version: v5.6.4
 compiler: XC32 5.00
 
 modules:
-    - {name: "csp", version: "v3.25.0"}
-    - {name: "core", version: "v3.15.5"}
+    - {name: "csp", version: "v3.25.1"}
+    - {name: "core", version: "v3.16.0"}
+    - {name: "wireless_system_rnwf", version: "v3.1.0"}
+    - {name: "wireless_wifi", version: "v3.12.2"}
     - {name: "CMSIS_5", version: "5.9.0"}
 
 packs:

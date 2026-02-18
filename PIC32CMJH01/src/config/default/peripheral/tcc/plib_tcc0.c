@@ -66,9 +66,12 @@ void TCC0_PWMInitialize(void)
         /* Wait for sync */
     }
     /* Clock prescaler */
-    TCC0_REGS->TCC_CTRLA = TCC_CTRLA_PRESCALER_DIV2
+    TCC0_REGS->TCC_CTRLA = TCC_CTRLA_PRESCALER_DIV1
                             | TCC_CTRLA_PRESCSYNC_PRESC ;
     TCC0_REGS->TCC_WEXCTRL = TCC_WEXCTRL_OTMX(0UL);
+    /* Dead time configurations */
+    TCC0_REGS->TCC_WEXCTRL |= TCC_WEXCTRL_DTIEN0_Msk | TCC_WEXCTRL_DTIEN1_Msk | TCC_WEXCTRL_DTIEN2_Msk | TCC_WEXCTRL_DTIEN3_Msk
+ 	 	 | TCC_WEXCTRL_DTLS(48UL) | TCC_WEXCTRL_DTHS(48UL);
 
     TCC0_REGS->TCC_WAVE = TCC_WAVE_WAVEGEN_NPWM | TCC_WAVE_RAMP_RAMP1;
 
@@ -78,7 +81,7 @@ void TCC0_PWMInitialize(void)
     TCC0_REGS->TCC_CC[1] = 0U;
     TCC0_REGS->TCC_CC[2] = 0U;
     TCC0_REGS->TCC_CC[3] = 0U;
-    TCC0_REGS->TCC_PER = 29U;
+    TCC0_REGS->TCC_PER = 2399U;
 
 
 
