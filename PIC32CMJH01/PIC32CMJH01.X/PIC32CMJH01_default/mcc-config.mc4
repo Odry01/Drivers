@@ -65,9 +65,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\PIC32CM5164JH01100.ld
   hash: 342880b5026488987e3eaecac49a90fa597e6e62aaa2a958138af9137e7759de
 - file: ..\src\config\default\configuration.h
-  hash: 0e29301350ce1c6460f7ec7e3a40c075fc29728bec8c9fcb443a2a736f536921
+  hash: 9af09b367becb8ea5e3d760a6695b97ccfdd79013525a7afb762b3e5ddf21671
 - file: ..\src\config\default\definitions.h
-  hash: b904c19ded2371becf8ad97cd727e68b7c9f47bce9ba8aa81d8a69e9ade700fa
+  hash: eea22ddf00a331ba2c7c4b09ae47fafff07772929a653f0182df34bdbcfcd565
 - file: ..\src\config\default\device.h
   hash: 04b157a2340644f4ee17c29e3bd72ef709c024d6c973aa94c33756458c76bf87
 - file: ..\src\config\default\device_cache.h

@@ -201,7 +201,7 @@ extern "C" {
 
 
 #define SYS_WINCS_WIFI_COUNTRYCODE          "GEN"
-#define SYS_WINCS_WIFI_SNTP_ADDRESS          "time.google.com"
+#define SYS_WINCS_WIFI_SNTP_ADDRESS          "162.159.200.123"
 
 
 #define SYS_WINCS_WIFI_CallbackHandler	     WINCS02_DRIVER_WIFI_Callback

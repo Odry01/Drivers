@@ -50,16 +50,7 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define WIFI_SSID           "SSID"
-#define WIFI_PASSWORD       "PWD"
-#define SNTP_URL            "time.google.com"
 
-#define MQTT_BROKER_URL     "test.mosquitto.org"
-#define MQTT_BROKER_PORT    1883
-#define MQTT_USERNAME       "Admin"
-#define MQTT_PASSWORD       "Admin"
-#define MQTT_CLIENT_ID      "WINCS02"
-#define MQTT_TOPIC_NAME     "WINCS02/Out"
 
 // *****************************************************************************
 
@@ -78,19 +69,20 @@ typedef enum
     WINCS02_DRIVER_STATE_INIT = 0,
     WINCS02_DRIVER_STATE_CHECK_DRIVER_STATUS,
     WINCS02_DRIVER_STATE_OPEN_DRIVER,
-    WINCS02_DRIVER_STATE_SET_REG_DOMAIN,
-    WINCS02_DRIVER_STATE_CALLBACK_REGISTER,
+    WINCS02_DRIVER_STATE_WIFI_CALLBACK_REGISTER,
+    WINCS02_DRIVER_STATE_MQTT_CALLBACK_REGISTER,
+    WINCS02_DRIVER_STATE_SET_SNTP_SERVER,
     WINCS02_DRIVER_STATE_WIFI_CFG,
-    WINCS02_DRIVER_STATE_WIFI_CONNECT,
-    WINCS02_DRIVER_STATE_WAIT_FOR_IP,
-    WINCS02_DRIVER_STATE_SNTP_CFG,
-    WINCS02_DRIVER_STATE_WAIT_FOR_SNTP,
-    WINCS02_DRIVER_STATE_GET_SNTP_TIME,
+    WINCS02_DRIVER_STATE_WAIT_FOR_IPV4,
+    WINCS02_DRIVER_STATE_WAIT_FOR_IPV6_LOCAL,
+    WINCS02_DRIVER_STATE_WAIT_FOR_IPV6_GLOBAL,
+    WINCS02_DRIVER_STATE_GET_TIME,
+    WINCS02_DRIVER_STATE_WAIT_FOR_TIME,
     WINCS02_DRIVER_STATE_MQTT_CFG,
     WINCS02_DRIVER_STATE_MQTT_CONNECT,
     WINCS02_DRIVER_STATE_WAIT_FOR_MQTT_CONNECT,
     WINCS02_DRIVER_STATE_IDLE,
-    WINCS02_DRIVER_STATE_SET_MQTT_PAYLOAD,
+    WINCS02_DRIVER_STATE_SET_MQTT_PUBLISH_PAYLOAD,
     WINCS02_DRIVER_STATE_MQTT_PUBLISH,
     WINCS02_DRIVER_STATE_WAIT_FOR_PUBLISH,
     WINCS02_DRIVER_STATE_ERROR,
@@ -117,20 +109,20 @@ typedef struct
 
     /* Driver variables */
     DRV_HANDLE WINCS02_HANDLE;
-        
+    SYS_STATUS WINCS02_STATUS;
     volatile bool WINCS02_TASK_START;
     volatile bool WINCS02_TASK_COMPLETED;
-    
-    volatile bool WIFI_CONNECT_STATUS;
-    volatile bool IP_ADDRESS_ASSIGN_STATUS;
-    volatile bool SNTP_STATUS;
-    volatile bool MQTT_CONNECT_STATUS;
-    volatile bool MQTT_SUBCRIBE_STATUS;
-    volatile bool MQTT_PUBLISH_STATUS;
-    volatile bool REG_DOMAIN_SET;
 
-    char MQTT_TOPIC[64];
-    char MQTT_PAYLOAD[1024];
+    volatile bool WIFI_CONNECT_STATUS;
+    volatile bool IPV4_ADDRESS_ASSIGN_STATUS;
+    volatile bool IPV6_LOCAL_ADDRESS_ASSIGN_STATUS;
+    volatile bool IPV6_GLOBAL_ADDRESS_ASSIGN_STATUS;
+    volatile bool SNTP_UP_STATUS;
+    volatile bool MQTT_CONNECT_STATUS;
+    volatile bool MQTT_SUBSCRIBE_COMPLETE;
+    volatile bool MQTT_PUBLISH_COMPLETE;
+    volatile bool REG_DOMAIN_SET;
+    char MQTT_MESSAGE[4096];
 } WINCS02_DRIVER_DATA;
 
 // *****************************************************************************
@@ -159,6 +151,12 @@ void WINCS02_DRIVER_Set_Task_Start_Status(bool STATUS);
 bool WINCS02_DRIVER_Get_Task_Completed_Status(void);
 
 void WINCS02_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+void WINCS02_DRIVER_WIFI_Config(void);
+
+void WINCS02_DRIVER_MQTT_Config(void);
+
+void WINCS02_DRIVER_Set_MQTT_Payload(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

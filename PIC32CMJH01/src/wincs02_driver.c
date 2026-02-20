@@ -30,7 +30,6 @@
 #include "wincs02_driver.h"
 #include "system/wifi/sys_wincs_wifi_service.h"
 #include "system/mqtt/sys_wincs_mqtt_service.h"
-#include "system/net/sys_wincs_net_service.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -41,6 +40,9 @@
 // *****************************************************************************
 
 WINCS02_DRIVER_DATA wincs02_driverData;
+SYS_WINCS_WIFI_PARAM_t WIFI_CONFIG;
+SYS_WINCS_MQTT_CFG_t MQTT_CONFIG;
+SYS_WINCS_MQTT_FRAME_t MQTT_PUBLISH;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -54,11 +56,7 @@ SYS_WINCS_WIFI_CALLBACK_t WINCS02_DRIVER_WIFI_Callback(SYS_WINCS_WIFI_EVENT_t EV
     {
         case SYS_WINCS_WIFI_REG_DOMAIN_SET_ACK:
         {
-            if (wincs02_driverData.REG_DOMAIN_SET == false)
-            {
-                wincs02_driverData.REG_DOMAIN_SET = true;
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_WIFI_CFG;
-            }
+            wincs02_driverData.REG_DOMAIN_SET = true;
             break;
         }
 
@@ -71,26 +69,52 @@ SYS_WINCS_WIFI_CALLBACK_t WINCS02_DRIVER_WIFI_Callback(SYS_WINCS_WIFI_EVENT_t EV
         case SYS_WINCS_WIFI_DISCONNECTED:
         {
             wincs02_driverData.WIFI_CONNECT_STATUS = false;
-            wincs02_driverData.IP_ADDRESS_ASSIGN_STATUS = false;
-            wincs02_driverData.SNTP_STATUS = false;
+            wincs02_driverData.IPV4_ADDRESS_ASSIGN_STATUS = false;
+            wincs02_driverData.IPV6_LOCAL_ADDRESS_ASSIGN_STATUS = false;
+            wincs02_driverData.IPV6_GLOBAL_ADDRESS_ASSIGN_STATUS = false;
+            wincs02_driverData.SNTP_UP_STATUS = false;
+            SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_STA_CONNECT, NULL);
             break;
         }
 
         case SYS_WINCS_WIFI_DHCP_IPV4_COMPLETE:
         {
-            wincs02_driverData.IP_ADDRESS_ASSIGN_STATUS = true;
+            wincs02_driverData.IPV4_ADDRESS_ASSIGN_STATUS = true;
+            break;
+        }
+
+        case SYS_WINCS_WIFI_DHCP_IPV6_LOCAL_COMPLETE:
+        {
+            wincs02_driverData.IPV6_LOCAL_ADDRESS_ASSIGN_STATUS = true;
+            break;
+        }
+
+        case SYS_WINCS_WIFI_DHCP_IPV6_GLOBAL_COMPLETE:
+        {
+            wincs02_driverData.IPV6_GLOBAL_ADDRESS_ASSIGN_STATUS = true;
             break;
         }
 
         case SYS_WINCS_WIFI_SNTP_UP:
         {
-            wincs02_driverData.SNTP_STATUS = true;
+            wincs02_driverData.SNTP_UP_STATUS = true;
             break;
         }
 
         case SYS_WINCS_WIFI_CONNECT_FAILED:
         {
             wincs02_driverData.WIFI_CONNECT_STATUS = false;
+            SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_STA_CONNECT, NULL);
+            break;
+        }
+
+        case SYS_WINCS_WIFI_ERROR:
+        {
+            wincs02_driverData.WIFI_CONNECT_STATUS = false;
+            wincs02_driverData.IPV4_ADDRESS_ASSIGN_STATUS = false;
+            wincs02_driverData.IPV6_LOCAL_ADDRESS_ASSIGN_STATUS = false;
+            wincs02_driverData.IPV6_GLOBAL_ADDRESS_ASSIGN_STATUS = false;
+            wincs02_driverData.SNTP_UP_STATUS = false;
             break;
         }
 
@@ -117,18 +141,26 @@ SYS_WINCS_MQTT_CALLBACK_t WINCS02_DRIVER_MQTT_Callback(SYS_WINCS_MQTT_EVENT_t EV
 
         case SYS_WINCS_MQTT_PUBLISH_ACK:
         {
-            wincs02_driverData.MQTT_PUBLISH_STATUS = true;
+            wincs02_driverData.MQTT_PUBLISH_COMPLETE = true;
             break;
         }
 
         case SYS_WINCS_MQTT_SUBCRIBE_ACK:
         {
-            wincs02_driverData.MQTT_SUBCRIBE_STATUS = true;
+            wincs02_driverData.MQTT_SUBSCRIBE_COMPLETE = true;
+            break;
+        }
+
+        case SYS_WINCS_MQTT_ERROR:
+        {
+            wincs02_driverData.MQTT_CONNECT_STATUS = false;
             break;
         }
 
         default:
+        {
             break;
+        }
     }
     return SYS_WINCS_PASS;
 }
@@ -161,26 +193,35 @@ void WINCS02_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
 void WINCS02_DRIVER_WIFI_Config(void)
 {
-    wincs02_driverData.WIFI_CONFIG.mode = SYS_WINCS_WIFI_MODE_STA;
-    wincs02_driverData.WIFI_CONFIG.ssid = WIFI_SSID;
-    wincs02_driverData.WIFI_CONFIG.passphrase = WIFI_PASSWORD;
-    wincs02_driverData.WIFI_CONFIG.security = SYS_WINCS_WIFI_SECURITY_WPA2;
-    wincs02_driverData.WIFI_CONFIG.autoConnect = 0;
-    wincs02_driverData.WIFI_CONFIG.channel = 0;
-    wincs02_driverData.WIFI_CONFIG.ssidVisibility = true;
+    WIFI_CONFIG.mode = SYS_WINCS_WIFI_DEVMODE;
+    WIFI_CONFIG.ssid = SYS_WINCS_WIFI_STA_SSID;
+    WIFI_CONFIG.passphrase = SYS_WINCS_WIFI_STA_PWD;
+    WIFI_CONFIG.security = SYS_WINCS_WIFI_STA_SECURITY;
+    WIFI_CONFIG.autoConnect = SYS_WINCS_WIFI_STA_AUTOCONNECT;
+    WIFI_CONFIG.channel = 0;
+    WIFI_CONFIG.ssidVisibility = true;
 }
 
 void WINCS02_DRIVER_MQTT_Config(void)
 {
-    wincs02_driverData.MQTT_CONFIG.url = MQTT_BROKER_URL;
-    wincs02_driverData.MQTT_CONFIG.port = MQTT_BROKER_PORT;
-    wincs02_driverData.MQTT_CONFIG.clientId = MQTT_CLIENT_ID;
-    wincs02_driverData.MQTT_CONFIG.username = MQTT_USERNAME;
-    wincs02_driverData.MQTT_CONFIG.password = MQTT_PASSWORD;
-    wincs02_driverData.MQTT_CONFIG.tlsIdx = false;
-    wincs02_driverData.MQTT_CONFIG.protoVer = SYS_WINCS_MQTT_PROTO_VER_3;
-    wincs02_driverData.MQTT_CONFIG.cleanSession = true;
-    wincs02_driverData.MQTT_CONFIG.keepAliveTime = 3600;
+    MQTT_CONFIG.url = SYS_WINCS_MQTT_CLOUD_URL;
+    MQTT_CONFIG.port = SYS_WINCS_MQTT_CLOUD_PORT;
+    MQTT_CONFIG.clientId = SYS_WINCS_MQTT_CLIENT_ID;
+    MQTT_CONFIG.username = SYS_WINCS_MQTT_CLOUD_USER_NAME;
+    MQTT_CONFIG.password = SYS_WINCS_MQTT_PASSWORD;
+    MQTT_CONFIG.tlsIdx = false;
+    MQTT_CONFIG.protoVer = SYS_WINCS_MQTT_PROTO_VERSION;
+    MQTT_CONFIG.cleanSession = SYS_WINCS_MQTT_CLEAN_SESSION;
+    MQTT_CONFIG.keepAliveTime = SYS_WINCS_MQTT_KEEP_ALIVE_TIME;
+}
+
+void WINCS02_DRIVER_Set_MQTT_Publish_Payload(void)
+{
+    MQTT_PUBLISH.topic = SYS_WINCS_MQTT_PUB_TOPIC_NAME;
+    MQTT_PUBLISH.message = SYS_WINCS_MQTT_PUB_MSG;
+    MQTT_PUBLISH.qos = SYS_WINCS_MQTT_PUB_MSG_QOS_TYPE;
+    MQTT_PUBLISH.retain = SYS_WINCS_MQTT_PUB_MSG_RETAIN;
+    MQTT_PUBLISH.protoVer = SYS_WINCS_MQTT_PROTO_VERSION;
 }
 
 // *****************************************************************************
@@ -209,8 +250,7 @@ void WINCS02_DRIVER_Tasks(void)
 
         case WINCS02_DRIVER_STATE_CHECK_DRIVER_STATUS:
         {
-            SYS_STATUS status;
-            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_GET_DRV_STATUS, &status) == SYS_STATUS_READY)
+            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_GET_DRV_STATUS, &wincs02_driverData.WINCS02_STATUS) == SYS_WINCS_PASS)
             {
                 wincs02_driverData.state = WINCS02_DRIVER_STATE_OPEN_DRIVER;
             }
@@ -221,8 +261,7 @@ void WINCS02_DRIVER_Tasks(void)
         {
             if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_OPEN_DRIVER, &wincs02_driverData.WINCS02_HANDLE) == SYS_WINCS_PASS)
             {
-                SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_GET_DRV_HANDLE, &wincs02_driverData.WINCS02_HANDLE);
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_SET_REG_DOMAIN;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WIFI_CALLBACK_REGISTER;
             }
             else
             {
@@ -231,34 +270,38 @@ void WINCS02_DRIVER_Tasks(void)
             break;
         }
 
-        case WINCS02_DRIVER_STATE_SET_REG_DOMAIN:
+        case WINCS02_DRIVER_STATE_WIFI_CALLBACK_REGISTER:
         {
-            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_REG_DOMAIN, "EMEA") == SYS_WINCS_PASS)
+            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_CALLBACK, SYS_WINCS_WIFI_CallbackHandler) == SYS_WINCS_PASS)
             {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_CALLBACK_REGISTER;
-            }
-            else
-            {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_ERROR;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_CALLBACK_REGISTER;
             }
             break;
         }
 
-        case WINCS02_DRIVER_STATE_CALLBACK_REGISTER:
+        case WINCS02_DRIVER_STATE_MQTT_CALLBACK_REGISTER:
         {
-            SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_CALLBACK, WINCS02_DRIVER_WIFI_Callback);
-            SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_SET_CALLBACK, WINCS02_DRIVER_MQTT_Callback);
-            wincs02_driverData.state = WINCS02_DRIVER_STATE_WIFI_CFG;
+            if (SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_SET_CALLBACK, SYS_WINCS_MQTT_CallbackHandler) == SYS_WINCS_PASS)
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_SET_SNTP_SERVER;
+            }
+            break;
+        }
+
+        case WINCS02_DRIVER_STATE_SET_SNTP_SERVER:
+        {
+            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_SNTP, SYS_WINCS_WIFI_SNTP_ADDRESS) == SYS_WINCS_PASS)
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WIFI_CFG;
+            }
             break;
         }
 
         case WINCS02_DRIVER_STATE_WIFI_CFG:
         {
-
-
-            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_PARAMS, &wincs02_driverData.WIFI_CONFIG) == SYS_WINCS_PASS)
+            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_PARAMS, &WIFI_CONFIG) == SYS_WINCS_PASS)
             {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_WIFI_CONNECT;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_IPV4;
             }
             else
             {
@@ -267,49 +310,45 @@ void WINCS02_DRIVER_Tasks(void)
             break;
         }
 
-        case WINCS02_DRIVER_STATE_WIFI_CONNECT:
+        case WINCS02_DRIVER_STATE_WAIT_FOR_IPV4:
         {
-            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_STA_CONNECT, NULL) == SYS_WINCS_PASS)
+            if (wincs02_driverData.IPV4_ADDRESS_ASSIGN_STATUS == true)
             {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_IP;
-            }
-            else
-            {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_ERROR;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_IPV6_LOCAL;
             }
             break;
         }
 
-        case WINCS02_DRIVER_STATE_WAIT_FOR_IP:
+        case WINCS02_DRIVER_STATE_WAIT_FOR_IPV6_LOCAL:
         {
-            if (wincs02_driverData.IP_ADDRESS_ASSIGN_STATUS == true)
+            if (wincs02_driverData.IPV6_LOCAL_ADDRESS_ASSIGN_STATUS == true)
             {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_CONNECT;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_IPV6_GLOBAL;
             }
             break;
         }
 
-        case WINCS02_DRIVER_STATE_SNTP_CFG:
+        case WINCS02_DRIVER_STATE_WAIT_FOR_IPV6_GLOBAL:
         {
-            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_SNTP, SNTP_URL) == SYS_WINCS_PASS)
+            if (wincs02_driverData.IPV6_GLOBAL_ADDRESS_ASSIGN_STATUS == true)
             {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_SNTP;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_GET_TIME;
             }
             break;
         }
 
-        case WINCS02_DRIVER_STATE_WAIT_FOR_SNTP:
-        {
-            if (wincs02_driverData.SNTP_STATUS == true)
-            {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_GET_SNTP_TIME;
-            }
-            break;
-        }
-
-        case WINCS02_DRIVER_STATE_GET_SNTP_TIME:
+        case WINCS02_DRIVER_STATE_GET_TIME:
         {
             if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_GET_TIME, NULL) == SYS_WINCS_PASS)
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_TIME;
+            }
+            break;
+        }
+
+        case WINCS02_DRIVER_STATE_WAIT_FOR_TIME:
+        {
+            if (wincs02_driverData.SNTP_UP_STATUS == true)
             {
                 wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_CFG;
             }
@@ -318,15 +357,27 @@ void WINCS02_DRIVER_Tasks(void)
 
         case WINCS02_DRIVER_STATE_MQTT_CFG:
         {
-            SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_CONFIG, &wincs02_driverData.MQTT_CONFIG);
-            wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_CONNECT;
+            if (SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_CONFIG, &MQTT_CONFIG) == SYS_WINCS_PASS)
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_CONNECT;
+            }
+            else
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_ERROR;
+            }
             break;
         }
 
         case WINCS02_DRIVER_STATE_MQTT_CONNECT:
         {
-            SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_CONNECT, &wincs02_driverData.MQTT_CONFIG);
-            wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_MQTT_CONNECT;
+            if (SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_CONNECT, &MQTT_CONFIG) == SYS_WINCS_PASS)
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_MQTT_CONNECT;
+            }
+            else
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_ERROR;
+            }
             break;
         }
 
@@ -343,37 +394,32 @@ void WINCS02_DRIVER_Tasks(void)
         {
             if (WINCS02_DRIVER_Get_Task_Start_Status() == true)
             {
-                wincs02_driverData.state = WINCS02_DRIVER_STATE_SET_MQTT_PAYLOAD;
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_SET_MQTT_PUBLISH_PAYLOAD;
             }
             break;
         }
 
-        case WINCS02_DRIVER_STATE_SET_MQTT_PAYLOAD:
+        case WINCS02_DRIVER_STATE_SET_MQTT_PUBLISH_PAYLOAD:
         {
+            WINCS02_DRIVER_Set_MQTT_Publish_Payload();
             wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_PUBLISH;
             break;
         }
 
         case WINCS02_DRIVER_STATE_MQTT_PUBLISH:
         {
-            SYS_WINCS_MQTT_FRAME_t mqttFrame = {
-                .topic = MQTT_TOPIC_NAME,
-                .message = wincs02_driverData.MQTT_PAYLOAD,
-                .qos = SYS_WINCS_MQTT_QOS2,
-                .retain = false,
-                .protoVer = SYS_WINCS_MQTT_PROTO_VER_3
-            };
-
-            SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_PUBLISH, &mqttFrame);
-            wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_PUBLISH;
+            if (SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_PUBLISH, &MQTT_PUBLISH) == SYS_WINCS_PASS)
+            {
+                wincs02_driverData.state = WINCS02_DRIVER_STATE_WAIT_FOR_PUBLISH;
+            }
             break;
         }
 
         case WINCS02_DRIVER_STATE_WAIT_FOR_PUBLISH:
         {
-            if (wincs02_driverData.MQTT_PUBLISH_STATUS == true)
+            if (wincs02_driverData.MQTT_PUBLISH_COMPLETE == true)
             {
-                wincs02_driverData.MQTT_PUBLISH_STATUS = false;
+                wincs02_driverData.MQTT_PUBLISH_COMPLETE = false;
                 WINCS02_DRIVER_Set_Task_Completed_Status(true);
                 wincs02_driverData.state = WINCS02_DRIVER_STATE_IDLE;
             }

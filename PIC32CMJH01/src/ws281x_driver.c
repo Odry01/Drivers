@@ -46,7 +46,7 @@ WS281X_DRIVER_DATA ws281x_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-void WS281X_DRIVER_DMAC_CH0_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT)
+void WS281X_DRIVER_DMAC_CH5_Callback(DMAC_TRANSFER_EVENT EVENT, uintptr_t CONTEXT)
 {
     if (EVENT == DMAC_TRANSFER_EVENT_COMPLETE)
     {

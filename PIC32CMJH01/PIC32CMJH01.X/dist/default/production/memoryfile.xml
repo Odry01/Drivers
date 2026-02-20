@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/production/PIC32CMJH01.X.production.elf">
+    <memory name="program">
+      <units>bytes</units>
+      <length>524288</length>
+      <used>62602</used>
+      <free>461686</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>65536</length>
+      <used>54242</used>
+      <free>11294</free>
+    </memory>
+  </executable>
+</project>
