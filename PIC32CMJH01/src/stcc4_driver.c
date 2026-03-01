@@ -348,7 +348,7 @@ void STCC4_DRIVER_Tasks(void)
             if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
-                stcc4_driverData.state = STCC4_DRIVER_STATE_START_WAIT_TIMER;
+                stcc4_driverData.state = STCC4_DRIVER_STATE_STORE_PRODUCT_ID;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
