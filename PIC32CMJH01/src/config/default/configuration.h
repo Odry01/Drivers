@@ -142,7 +142,7 @@ extern "C" {
 /* I2C Driver Instance 0 Configuration Options */
 #define DRV_I2C_INDEX_0                       0
 #define DRV_I2C_CLIENTS_NUMBER_IDX0           1
-#define DRV_I2C_QUEUE_SIZE_IDX0               1
+#define DRV_I2C_QUEUE_SIZE_IDX0               64
 #define DRV_I2C_CLOCK_SPEED_IDX0              100
 
 /*** WiFi WINC Driver Configuration ***/
@@ -172,14 +172,14 @@ extern "C" {
 #define DRV_SPI_DMA_MODE
 #define DRV_SPI_XMIT_DMA_CH_IDX0              SYS_DMA_CHANNEL_2
 #define DRV_SPI_RCV_DMA_CH_IDX0               SYS_DMA_CHANNEL_3
-#define DRV_SPI_QUEUE_SIZE_IDX0               1
+#define DRV_SPI_QUEUE_SIZE_IDX0               64
 
 /* USART Driver Instance 0 Configuration Options */
 #define DRV_USART_INDEX_0                  0
 #define DRV_USART_CLIENTS_NUMBER_IDX0      1
 #define DRV_USART_XMIT_DMA_CH_IDX0         SYS_DMA_CHANNEL_0
 #define DRV_USART_RCV_DMA_CH_IDX0          SYS_DMA_CHANNEL_1
-#define DRV_USART_QUEUE_SIZE_IDX0          1
+#define DRV_USART_QUEUE_SIZE_IDX0          64
 
 /* USART Driver Global Configuration Options */
 #define DRV_USART_INSTANCES_NUMBER         1

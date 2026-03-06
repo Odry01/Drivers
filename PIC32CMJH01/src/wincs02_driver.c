@@ -272,7 +272,7 @@ void WINCS02_DRIVER_Tasks(void)
 
         case WINCS02_DRIVER_STATE_WIFI_CALLBACK_REGISTER:
         {
-            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_CALLBACK, SYS_WINCS_WIFI_CallbackHandler) == SYS_WINCS_PASS)
+            if (SYS_WINCS_WIFI_SrvCtrl(SYS_WINCS_WIFI_SET_CALLBACK, WINCS02_DRIVER_WIFI_Callback) == SYS_WINCS_PASS)
             {
                 wincs02_driverData.state = WINCS02_DRIVER_STATE_MQTT_CALLBACK_REGISTER;
             }
@@ -281,7 +281,7 @@ void WINCS02_DRIVER_Tasks(void)
 
         case WINCS02_DRIVER_STATE_MQTT_CALLBACK_REGISTER:
         {
-            if (SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_SET_CALLBACK, SYS_WINCS_MQTT_CallbackHandler) == SYS_WINCS_PASS)
+            if (SYS_WINCS_MQTT_SrvCtrl(SYS_WINCS_MQTT_SET_CALLBACK, WINCS02_DRIVER_MQTT_Callback) == SYS_WINCS_PASS)
             {
                 wincs02_driverData.state = WINCS02_DRIVER_STATE_SET_SNTP_SERVER;
             }
