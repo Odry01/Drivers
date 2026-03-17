@@ -126,14 +126,14 @@ typedef union
 
     struct
     {
-        uint64_t EXAMPLE_TRANSIT_DATA_0;
-        uint64_t EXAMPLE_TRANSIT_DATA_1;
-        uint64_t EXAMPLE_TRANSIT_DATA_2;
-        uint64_t EXAMPLE_TRANSIT_DATA_3;
-        uint64_t EXAMPLE_TRANSIT_DATA_4;
-        uint64_t EXAMPLE_TRANSIT_DATA_5;
-        uint64_t EXAMPLE_TRANSIT_DATA_6;
-        uint64_t EXAMPLE_TRANSIT_DATA_7;
+        uint64_t EXAMPLE_TRANSMIT_DATA_0;
+        uint64_t EXAMPLE_TRANSMIT_DATA_1;
+        uint64_t EXAMPLE_TRANSMIT_DATA_2;
+        uint64_t EXAMPLE_TRANSMIT_DATA_3;
+        uint64_t EXAMPLE_TRANSMIT_DATA_4;
+        uint64_t EXAMPLE_TRANSMIT_DATA_5;
+        uint64_t EXAMPLE_TRANSMIT_DATA_6;
+        uint64_t EXAMPLE_TRANSMIT_DATA_7;
     } data;
     uint8_t bytes[CAN0_DATA_TX_BYTES];
 } CAN0_DATA_TX;
@@ -336,20 +336,19 @@ void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0);
 
 /**
     Function:
-    void CAN0_DRIVER_Set_Transmited_Data(uint64_t DATA_0, uint64_t DATA_1, uint64_t DATA_2, uint64_t DATA_3, uint64_t DATA_4, uint64_t DATA_5, uint64_t DATA_6, uint64_t DATA_7)
-
+    void CAN0_DRIVER_Set_Transmited_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3, uint64_t EXAMPLE_TRANSMIT_DATA_4, uint64_t EXAMPLE_TRANSMIT_DATA_5, uint64_t EXAMPLE_TRANSMIT_DATA_6, uint64_t EXAMPLE_TRANSMIT_DATA_7)
     Summary:
     Loads up to eight 64 bit words into the transmit buffer.
 
     Parameters:
-    @param DATA_0 - first byte payload segment
-    @param DATA_1 - second payload segment
-    @param DATA_2 - third payload segment
-    @param DATA_3 - fourth payload segment
-    @param DATA_4 - fifth payload segment
-    @param DATA_5 - sixth payload segment
-    @param DATA_6 - seventh payload segment
-    @param DATA_7 - eighth payload segment
+    @param EXAMPLE_TRANSMIT_DATA_0 - first byte payload segment
+    @param EXAMPLE_TRANSMIT_DATA_1 - second payload segment
+    @param EXAMPLE_TRANSMIT_DATA_2 - third payload segment
+    @param EXAMPLE_TRANSMIT_DATA_3 - fourth payload segment
+    @param EXAMPLE_TRANSMIT_DATA_4 - fifth payload segment
+    @param EXAMPLE_TRANSMIT_DATA_5 - sixth payload segment
+    @param EXAMPLE_TRANSMIT_DATA_6 - seventh payload segment
+    @param EXAMPLE_TRANSMIT_DATA_7 - eighth payload segment
 
     Returns:
     None.
@@ -357,7 +356,7 @@ void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0);
     Remarks:
     That data is it there only as example. Use own params for this function.
  */
-void CAN0_DRIVER_Set_Transmited_Data(uint64_t DATA_0, uint64_t DATA_1, uint64_t DATA_2, uint64_t DATA_3, uint64_t DATA_4, uint64_t DATA_5, uint64_t DATA_6, uint64_t DATA_7);
+void CAN0_DRIVER_Set_Transmited_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3, uint64_t EXAMPLE_TRANSMIT_DATA_4, uint64_t EXAMPLE_TRANSMIT_DATA_5, uint64_t EXAMPLE_TRANSMIT_DATA_6, uint64_t EXAMPLE_TRANSMIT_DATA_7);
 
 /**
     Function:

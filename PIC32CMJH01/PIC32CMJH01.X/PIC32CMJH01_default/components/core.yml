@@ -1956,7 +1956,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '8192'
+            value: '1024'
           type: User
         type: Values
       type: Integer

@@ -77,6 +77,7 @@ typedef enum
     RSTC_DRIVER_STATE_CHECK_EXT_RESET,
     RSTC_DRIVER_STATE_CHECK_WDT_RESET,
     RSTC_DRIVER_STATE_CHECK_SYST_RESET,
+    RSTC_DRIVER_STATE_STORE_RESULT,
 } RSTC_DRIVER_STATES;
 
 // *****************************************************************************

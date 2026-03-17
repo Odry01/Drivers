@@ -442,7 +442,7 @@ static SYS_TIME_HANDLE SYS_TIME_TimerObjectCreate(
     return tmrHandle;
 }
 
-/* MISRA C-2012 Rule 11.3 deviated:1 Deviation record ID -  H3_MISRAC_2012_R_11_3_DR_1 */
+/* MISRA C-2023 Rule 11.3 deviated:1 Deviation record ID -  H3_MISRAC_2023_R_11_3_DR_1 */
 static void SYS_TIME_CounterInit(const SYS_MODULE_INIT* init)
 {
     SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ *)&gSystemCounterObj;
@@ -564,7 +564,7 @@ void SYS_TIME_CounterSet ( uint32_t count )
     SYS_INT_Restore(interruptState);
 }
 
-/* MISRA C-2012 Rule 10.8 deviated:2 Deviation record ID -  H3_MISRAC_2012_R_10_8_DR_1 */
+/* MISRA C-2023 Rule 10.8 deviated:2 Deviation record ID -  H3_MISRAC_2023_R_10_8_DR_1 */
 
 uint32_t  SYS_TIME_CountToUS ( uint32_t count )
 {
@@ -576,7 +576,7 @@ uint32_t  SYS_TIME_CountToMS ( uint32_t count )
     return (uint32_t) (((uint64_t)count * 1000u) / gSystemCounterObj.hwTimerTickFreq);
 }
 
-/* MISRA C-2012 Rule 10.1 deviated:2 Deviation record ID -  H3_MISRAC_2012_R_10_1_DR_1 */
+/* MISRA C-2023 Rule 10.1 deviated:2 Deviation record ID -  H3_MISRAC_2023_R_10_1_DR_1 */
 
 /* MISRAC 2012 deviation block end */
 

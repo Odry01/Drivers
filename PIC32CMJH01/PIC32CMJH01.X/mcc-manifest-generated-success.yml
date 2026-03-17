@@ -2,7 +2,7 @@
 
 manifest_file_version: 1.0.0
 project: PIC32CMJH01
-creation_date: 2026-03-02T10:28:53.426+01:00[Europe/Prague]
+creation_date: 2026-03-17T20:35:40.644+01:00[Europe/Prague]
 operating_system: Windows 11
 mcc_mode: IDE
 mcc_mode_version: v6.25
@@ -19,7 +19,7 @@ device_library: {library_class: com.microchip.mcc.harmony.Harmony3Library, name:
 packs: {name: PIC32CM-JH_DFP, version: 1.5.236}
 modules:
 - {name: csp, type: HARMONY, version: v3.25.1}
-- {name: core, type: HARMONY, version: v3.16.0}
+- {name: core, type: HARMONY, version: v3.16.1}
 - {name: wireless_system_rnwf, type: HARMONY, version: v3.1.0}
 - {name: wireless_wifi, type: HARMONY, version: v3.12.2}
 - {name: CMSIS_5, type: HARMONY, version: 5.9.0}
