@@ -358,42 +358,42 @@
                      displayName="PIC32CMJH01_default"
                      projectFiles="true">
         <logicalFolder name="components" displayName="components" projectFiles="true">
-          <itemPath>PIC32CMJH01_default/components/evsys.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/drv_i2c_0.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/divas.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sercom1.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sysNetRNWF.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/eic.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/drv_i2c.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/freqm.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sercom2.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/pm.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drv_spi.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/dac.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/dfp.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/rstc.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/core.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sys_console_0.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drv_spi_0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sysMqttRNWF.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/cmsis.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drvWifiWincS02.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sercom1.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drv_i2c_0.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sercom5.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drv_usart_0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/drv_usart.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/nvmctrl.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/eic.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/HarmonyCore.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/can0.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/tcc0.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sysNetRNWF.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/adc0.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/freqm.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/rtc.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom0.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sysWifiRNWF.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/tcc0.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/drv_spi_0.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/rstc.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sercom5.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/nvmctrl.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sys_time.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/drvWifiWincS02.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sys_console_0.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/supc.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/drv_usart_0.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/rtc.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom4.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sercom3.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/sercom2.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/evsys.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/drv_i2c.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sys_time.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/supc.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sys_console.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/adc0.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/pm.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/cmsis.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/core.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/drv_spi.yml</itemPath>
-          <itemPath>PIC32CMJH01_default/components/HarmonyCore.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/dfp.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/divas.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/sercom3.yml</itemPath>
         </logicalFolder>
         <itemPath>PIC32CMJH01_default/mcc-config.mc4</itemPath>
       </logicalFolder>
@@ -615,7 +615,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>noID</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>5.00</languageToolchainVersion>
+        <languageToolchainVersion>5.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>

@@ -90,14 +90,14 @@ void STCC4_DRIVER_Start_Continuous_Measurement(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_START_CONTINUOUS_MEASUREMENT_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_START_CONTINUOUS_MEASUREMENT_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Stop_Continuous_Measurement(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_STOP_CONTINUOUS_MEASUREMENT_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_STOP_CONTINUOUS_MEASUREMENT_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS)
@@ -125,7 +125,7 @@ void STCC4_DRIVER_Set_RHT_Compensation(uint8_t I2C_ADDRESS, uint8_t T_VALUE_MSB,
     stcc4_driverData.I2C_DATA_TRANSMIT[5] = H_VALUE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[6] = H_VALUE_LSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[7] = STCC4_DRIVER_Calculation_Array_CRC(H_VALUE_MSB, H_VALUE_LSB);
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 8, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 8, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Set_Pressure_Compensation(uint8_t I2C_ADDRESS, uint8_t P_VALUE_MSB, uint8_t P_VALUE_LSB)
@@ -135,47 +135,47 @@ void STCC4_DRIVER_Set_Pressure_Compensation(uint8_t I2C_ADDRESS, uint8_t P_VALUE
     stcc4_driverData.I2C_DATA_TRANSMIT[2] = P_VALUE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[3] = P_VALUE_LSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_Array_CRC(P_VALUE_MSB, P_VALUE_LSB);
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 5, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 5, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Single_Shot_Measurement(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_MEASURE_SINGLE_SHOT_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_MEASURE_SINGLE_SHOT_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Enter_Sleep_Mode(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_ENTER_SLEEP_MODE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_ENTER_SLEEP_MODE_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Exit_Sleep_Mode(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_EXIT_SLEEP_MODE;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Perform_Conditioning(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_PERFORM_CONDITIONING_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_PERFORM_CONDITIONING_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Perform_Soft_Reset(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_PERFORM_SOFT_RESET;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Perform_Factory_Reset(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_PERFORM_FACTORY_RESET_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_PERFORM_FACTORY_RESET_LSB;
-    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void*) &stcc4_driverData.I2C_DATA_RECEIVE, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_DATA_RECEIVE, 1, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Store_Factory_Reset_Result(void)
@@ -187,7 +187,7 @@ void STCC4_DRIVER_Perform_Self_Test(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_PERFORM_SELF_TEST_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_PERFORM_SELF_TEST_LSB;
-    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void*) &stcc4_driverData.I2C_DATA_RECEIVE, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_DATA_RECEIVE, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Store_Self_Test_Result(void)
@@ -199,14 +199,14 @@ void STCC4_DRIVER_Enable_Testing_Mode(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_ENABLE_TESTING_MODE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_ENABLE_TESTING_MODE_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Disable_Testing_Mode(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_DISABLE_TESTING_MODE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_DISABLE_TESTING_MODE_LSB;
-    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Perform_Forced_Recalibration(uint8_t I2C_ADDRESS, uint8_t CO2_TARGET_MSB, uint8_t CO2_TARGET_LSB)
@@ -216,7 +216,7 @@ void STCC4_DRIVER_Perform_Forced_Recalibration(uint8_t I2C_ADDRESS, uint8_t CO2_
     stcc4_driverData.I2C_DATA_TRANSMIT[2] = CO2_TARGET_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[3] = CO2_TARGET_LSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_Array_CRC(CO2_TARGET_MSB, CO2_TARGET_LSB);
-    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void*) &stcc4_driverData.I2C_DATA_RECEIVE, 3, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, &stcc4_driverData.I2C_DATA_TRANSMIT, 2, &stcc4_driverData.I2C_DATA_RECEIVE, 3, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void STCC4_DRIVER_Store_Forced_Recalibration_Result(void)
@@ -350,6 +350,11 @@ void STCC4_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 stcc4_driverData.state = STCC4_DRIVER_STATE_STORE_PRODUCT_ID;
             }
+            else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -389,6 +394,11 @@ void STCC4_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 stcc4_driverData.state = STCC4_DRIVER_STATE_START_WAIT_TIMER;
+            }
+            else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -431,6 +441,11 @@ void STCC4_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 stcc4_driverData.state = STCC4_DRIVER_STATE_STORE_MEASURED_VALUES;
+            }
+            else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {

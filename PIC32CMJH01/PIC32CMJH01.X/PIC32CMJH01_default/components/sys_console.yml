@@ -34,7 +34,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '8192'
+            value: '4096'
           type: User
         type: Values
       type: Integer

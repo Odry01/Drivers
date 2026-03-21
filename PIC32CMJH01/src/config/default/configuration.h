@@ -129,7 +129,7 @@ extern "C" {
 #define SYS_CONSOLE_DEVICE_MAX_INSTANCES   			(1U)
 #define SYS_CONSOLE_UART_MAX_INSTANCES 	   			(1U)
 #define SYS_CONSOLE_USB_CDC_MAX_INSTANCES 	   		(0U)
-#define SYS_CONSOLE_PRINT_BUFFER_SIZE        		(8192U)
+#define SYS_CONSOLE_PRINT_BUFFER_SIZE        		(4096U)
 
 
 
@@ -142,19 +142,19 @@ extern "C" {
 /* I2C Driver Instance 0 Configuration Options */
 #define DRV_I2C_INDEX_0                       0
 #define DRV_I2C_CLIENTS_NUMBER_IDX0           1
-#define DRV_I2C_QUEUE_SIZE_IDX0               64
+#define DRV_I2C_QUEUE_SIZE_IDX0               8
 #define DRV_I2C_CLOCK_SPEED_IDX0              100
 
 /*** WiFi WINC Driver Configuration ***/
 #define WDRV_WINC_EIC_SOURCE
 #define WDRV_WINC_DEBUG_LEVEL               WDRV_WINC_DEBUG_TYPE_NONE
-#define WDRV_WINC_DEV_RX_BUFF_SZ            2048
+#define WDRV_WINC_DEV_RX_BUFF_SZ            1024
 #define WINC_SOCK_SLAB_ALLOC_MODE           1
-#define WDRV_WINC_DEV_SOCK_SLAB_NUM         50
-#define WDRV_WINC_DEV_SOCK_SLAB_SZ          1472
-#define WINC_SOCK_NUM_SOCKETS               10
-#define WINC_SOCK_BUF_RX_SZ                 7360
-#define WINC_SOCK_BUF_TX_SZ                 4416
+#define WDRV_WINC_DEV_SOCK_SLAB_NUM         16
+#define WDRV_WINC_DEV_SOCK_SLAB_SZ          1024
+#define WINC_SOCK_NUM_SOCKETS               1
+#define WINC_SOCK_BUF_RX_SZ                 4096
+#define WINC_SOCK_BUF_TX_SZ                 4096
 #define WINC_SOCK_BUF_RX_PKT_BUF_NUM        5
 #define WINC_SOCK_BUF_TX_PKT_BUF_NUM        5
 #define WDRV_WINC_MOD_DISABLE_SYSLOG
@@ -172,14 +172,14 @@ extern "C" {
 #define DRV_SPI_DMA_MODE
 #define DRV_SPI_XMIT_DMA_CH_IDX0              SYS_DMA_CHANNEL_2
 #define DRV_SPI_RCV_DMA_CH_IDX0               SYS_DMA_CHANNEL_3
-#define DRV_SPI_QUEUE_SIZE_IDX0               64
+#define DRV_SPI_QUEUE_SIZE_IDX0               8
 
 /* USART Driver Instance 0 Configuration Options */
 #define DRV_USART_INDEX_0                  0
 #define DRV_USART_CLIENTS_NUMBER_IDX0      1
 #define DRV_USART_XMIT_DMA_CH_IDX0         SYS_DMA_CHANNEL_0
 #define DRV_USART_RCV_DMA_CH_IDX0          SYS_DMA_CHANNEL_1
-#define DRV_USART_QUEUE_SIZE_IDX0          64
+#define DRV_USART_QUEUE_SIZE_IDX0          8
 
 /* USART Driver Global Configuration Options */
 #define DRV_USART_INSTANCES_NUMBER         1

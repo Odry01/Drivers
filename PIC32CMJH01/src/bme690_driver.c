@@ -95,7 +95,7 @@ void BME690_DRIVER_Set_I2C_Address(void)
 void BME690_DRIVER_Get_VARIANT_ID_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_VARIANT_ID_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_VARIANT_ID_Data(void)
@@ -106,7 +106,7 @@ void BME690_DRIVER_Store_VARIANT_ID_Data(void)
 void BME690_DRIVER_Get_CHIP_ID_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CHIP_ID_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_CHIP_ID_Data(void)
@@ -118,13 +118,13 @@ void BME690_DRIVER_Set_CONFIG_Data(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CONFIG_REGISTER;
     bme690_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Get_CONFIG_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CONFIG_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_CONFIG_Data(void)
@@ -136,13 +136,13 @@ void BME690_DRIVER_Set_CTRL_MEAS_Data(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_MEAS_REGISTER;
     bme690_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Get_CTRL_MEAS_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_MEAS_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_CTRL_MEAS_Data(void)
@@ -154,13 +154,13 @@ void BME690_DRIVER_Set_CTRL_HUM_Data(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_HUM_REGISTER;
     bme690_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Get_CTRL_HUM_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_HUM_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_CTRL_HUM_Data(void)
@@ -172,13 +172,13 @@ void BME690_DRIVER_Set_CTRL_GAS_1_Data(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_GAS_1_REGISTER;
     bme690_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Get_CTRL_GAS_1_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_GAS_1_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_CTRL_GAS_1_Data(void)
@@ -190,13 +190,13 @@ void BME690_DRIVER_Set_CTRL_GAS_0_Data(uint8_t I2C_ADDRESS, uint8_t DATA)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_GAS_0_REGISTER;
     bme690_driverData.I2C_DATA_TRANSMIT[1] = DATA;
-    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 2, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Get_CTRL_GAS_0_Data(uint8_t I2C_ADDRESS)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_CTRL_GAS_0_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_CTRL_GAS_0_Data(void)
@@ -207,7 +207,7 @@ void BME690_DRIVER_Store_CTRL_GAS_0_Data(void)
 void BME690_DRIVER_Get_T_MSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.T_MSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_T_MSB_Data(uint8_t BUFFER)
@@ -218,7 +218,7 @@ void BME690_DRIVER_Store_T_MSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_T_LSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.T_LSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_T_LSB_Data(uint8_t BUFFER)
@@ -229,7 +229,7 @@ void BME690_DRIVER_Store_T_LSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_T_XLSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.T_XLSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_T_XLSB_Data(uint8_t BUFFER)
@@ -240,7 +240,7 @@ void BME690_DRIVER_Store_T_XLSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_H_MSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.H_MSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_H_MSB_Data(uint8_t BUFFER)
@@ -251,7 +251,7 @@ void BME690_DRIVER_Store_H_MSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_H_LSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.H_LSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_H_LSB_Data(uint8_t BUFFER)
@@ -262,7 +262,7 @@ void BME690_DRIVER_Store_H_LSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_G_MSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.G_MSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_G_MSB_Data(uint8_t BUFFER)
@@ -273,7 +273,7 @@ void BME690_DRIVER_Store_G_MSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_G_LSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.G_LSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_G_LSB_Data(uint8_t BUFFER)
@@ -284,7 +284,7 @@ void BME690_DRIVER_Store_G_LSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_P_MSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_MSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_P_MSB_Data(uint8_t BUFFER)
@@ -295,7 +295,7 @@ void BME690_DRIVER_Store_P_MSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_P_LSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_LSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_P_LSB_Data(uint8_t BUFFER)
@@ -306,7 +306,7 @@ void BME690_DRIVER_Store_P_LSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_P_XLSB_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_XLSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_P_XLSB_Data(uint8_t BUFFER)
@@ -317,7 +317,7 @@ void BME690_DRIVER_Store_P_XLSB_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_SUB_MEAS_INDEX_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_XLSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_SUB_MEAS_INDEX_Data(uint8_t BUFFER)
@@ -328,7 +328,7 @@ void BME690_DRIVER_Store_SUB_MEAS_INDEX_Data(uint8_t BUFFER)
 void BME690_DRIVER_Get_MEAS_STATUS_Data(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
     bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_XLSB_REGISTER[BUFFER];
-    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &bme690_driverData.I2C_DATA_TRANSMIT, 1, (void*) &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_MEAS_STATUS_Data(uint8_t BUFFER)
@@ -717,7 +717,7 @@ void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f Â°C\r\n"
+             "Temperature: %.2f �C\r\n"
              "Humidity: %.2f %%\r\n",
              bme690_sensorData.TEMPERATURE,
              bme690_sensorData.HUMIDITY
@@ -745,7 +745,7 @@ void BME690_DRIVER_Tasks(void)
         case BME690_DRIVER_STATE_INIT:
         {
             BME690_DRIVER_Set_I2C_Address();
-            //            BME690_DRIVER_Set_Measure_Registers();
+            BME690_DRIVER_Set_Measure_Registers();
             bme690_driverData.I2C_HANDLE = DRV_I2C_Open(DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE);
             bme690_driverData.state = BME690_DRIVER_STATE_CHECK_I2C_HANDLER;
             break;
@@ -777,7 +777,7 @@ void BME690_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(bme690_driverData.I2C_HANDLE);
             BME690_DRIVER_Set_Task_Completed_Status(true);
-            bme690_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             break;
         }
 
@@ -785,7 +785,7 @@ void BME690_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(bme690_driverData.I2C_HANDLE);
             BME690_DRIVER_Set_Task_Completed_Status(true);
-            bme690_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             break;
         }
 

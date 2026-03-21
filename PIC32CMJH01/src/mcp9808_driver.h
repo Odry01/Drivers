@@ -59,8 +59,8 @@ extern "C"
 #define MCP9808_CMD_DEVICE_ID_REGISTER          0x7
 #define MCP9808_CMD_RESULT_RESOLUTION_REGISTER  0x8
 
-#define MCP9808_I2C_RX_BUFFER_SIZE          8
-#define MCP9808_I2C_TX_BUFFER_SIZE          8
+#define MCP9808_I2C_RX_BUFFER_SIZE              8
+#define MCP9808_I2C_TX_BUFFER_SIZE              8
 
 // *****************************************************************************
 

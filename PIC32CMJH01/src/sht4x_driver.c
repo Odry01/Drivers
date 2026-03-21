@@ -90,12 +90,12 @@ void SHT4X_DRIVER_Set_I2C_Address(void)
 void SHT4X_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS, uint8_t SHT4X_REGISTER)
 {
     sht4x_driverData.I2C_DATA_TRANSMIT[0] = SHT4X_REGISTER;
-    DRV_I2C_WriteTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, &sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SHT4X_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS)
 {
-    DRV_I2C_ReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_ReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, &sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SHT4X_DRIVER_Store_Measured_Values(void)
@@ -107,7 +107,7 @@ void SHT4X_DRIVER_Store_Measured_Values(void)
 void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS)
 {
     sht4x_driverData.I2C_DATA_TRANSMIT[0] = SHT4X_CMD_SERIAL_NUMBER;
-    DRV_I2C_WriteReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sht4x_driverData.I2C_DATA_TRANSMIT, 1, (void*) &sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, &sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SHT4X_DRIVER_Store_Serial_Number(void)
@@ -118,7 +118,7 @@ void SHT4X_DRIVER_Store_Serial_Number(void)
 void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
 {
     sht4x_driverData.I2C_DATA_TRANSMIT[0] = SHT4X_CMD_SOFT_RESET;
-    DRV_I2C_WriteTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, &sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SHT4X_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
@@ -208,6 +208,11 @@ void SHT4X_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_START_WAIT_TIMER;
             }
+            if (DRV_I2C_TransferStatusGet(sht4x_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                sht4x_driverData.state = SHT4X_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -249,6 +254,11 @@ void SHT4X_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_STORE_MEASURED_VALUES;
+            }
+            if (DRV_I2C_TransferStatusGet(sht4x_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                sht4x_driverData.state = SHT4X_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {

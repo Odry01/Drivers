@@ -407,7 +407,7 @@ void SEN63C_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(sen63c_driverData.I2C_HANDLE);
             SEN63C_DRIVER_Set_Task_Completed_Status(true);
-            sen63c_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            sen63c_driverData.state = SEN63C_DRIVER_STATE_IDLE;
             break;
         }
 
@@ -415,7 +415,7 @@ void SEN63C_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(sen63c_driverData.I2C_HANDLE);
             SEN63C_DRIVER_Set_Task_Completed_Status(true);
-            sen63c_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            sen63c_driverData.state = SEN63C_DRIVER_STATE_IDLE;
             break;
         }
 

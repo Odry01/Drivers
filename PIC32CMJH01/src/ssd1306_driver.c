@@ -193,14 +193,14 @@ void SSD1306_DRIVER_Write_CMD(uint8_t I2C_ADDRESS, uint8_t CMD)
 {
     ssd1306_driverData.I2C_DATA_TRANSMIT[0] = SSD1306_CMD_COMMAND;
     ssd1306_driverData.I2C_DATA_TRANSMIT[1] = CMD;
-    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &ssd1306_driverData.I2C_DATA_TRANSMIT, 2, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, &ssd1306_driverData.I2C_DATA_TRANSMIT, 2, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SSD1306_DRIVER_Update_Screen(uint8_t I2C_ADDRESS)
 {
     ssd1306_driverData.I2C_DATA_TRANSMIT[0] = SSD1306_CMD_DATA_CONTINUE;
     memcpy(&ssd1306_driverData.I2C_DATA_TRANSMIT[1], &ssd1306_driverData.FRAME_BUFFER[ssd1306_driverData.ROW_INDEX * SSD1306_OLED_WIDTH], SSD1306_OLED_WIDTH);
-    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &ssd1306_driverData.I2C_DATA_TRANSMIT, 129, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, &ssd1306_driverData.I2C_DATA_TRANSMIT, 129, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SSD1306_DRIVER_Clear_Display(void)
@@ -307,6 +307,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_DISPLAY_CLOCK;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -330,6 +335,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_DISPLAY_CLOCK_VALUE;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -355,6 +365,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_MULTIPLEX_RATIO;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -378,6 +393,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_MULTIPLEX_RATIO_VALUE;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -403,6 +423,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_DISPLAY_OFFSET;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -426,6 +451,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_DISPLAY_OFFSET_VALUE;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -451,6 +481,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_START_LINE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -474,6 +509,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_CHARGE_PUMP;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -499,6 +539,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_CHARGE_PUMP_VALUE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -522,6 +567,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_MEMORY_ADDRESS_MODE;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -547,6 +597,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_MEMORY_ADDRESS_MODE_VALUE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -570,6 +625,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_SEGMENT_REMAP;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -595,6 +655,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_COM_SCAN_DIR_DEC;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -618,6 +683,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_COM_PINS;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -643,6 +713,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_COM_PINS_VALUE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -666,6 +741,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_CONTRAST_CONTROL;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -691,6 +771,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_CONTRAST_CONTROL_VALUE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -714,6 +799,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_PRECHARGE_PERIOD;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -739,6 +829,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_PRECHARGE_PERIOD_VALUE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -762,6 +857,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_VCOM_DESELECT;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -787,6 +887,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_VCOM_DESELECT_VALUE;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -810,6 +915,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_DISPLAY_ALL_ON_RESUME;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -835,6 +945,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_NORMAL_DISPLAY;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -859,6 +974,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_SET_DISPLAY_ON;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -882,6 +1002,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_IDLE;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -929,6 +1054,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_UPDATE_SCREEN_SET_COLUM_START;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -951,6 +1081,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_UPDATE_SCREEN_SET_COLUM_END;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -975,6 +1110,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_UPDATE_SCREEN_SET_ROW_ADDRESS;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -997,6 +1137,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_UPDATE_SCREEN_SET_ROW_START;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -1021,6 +1166,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_UPDATE_SCREEN_SET_ROW_END;
             }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -1043,6 +1193,11 @@ void SSD1306_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_UPDATE_SCREEN_SEND_DATA;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -1067,6 +1222,11 @@ void SSD1306_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ssd1306_driverData.ROW_INDEX++;
                 ssd1306_driverData.state = SSD1306_DRIVER_STATE_CHECK_ROW_INDEX;
+            }
+            else if (DRV_I2C_TransferStatusGet(ssd1306_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ssd1306_driverData.state = SSD1306_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {

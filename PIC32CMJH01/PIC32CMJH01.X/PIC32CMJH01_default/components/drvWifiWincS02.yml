@@ -172,4 +172,75 @@ data:
           type: Dynamic
         type: Values
       type: Boolean
+    DRV_WIFI_WINC_SOCKET_SLAB_EST_MEM:
+      attributes:
+        id: DRV_WIFI_WINC_SOCKET_SLAB_EST_MEM
+      children:
+      - children:
+        - attributes:
+            id: drvWifiWincS02
+            value: '16384'
+          type: Dynamic
+        type: Values
+      type: Integer
+    DRV_WIFI_WINC_SOCKET_SLAB_SZ:
+      attributes:
+        id: DRV_WIFI_WINC_SOCKET_SLAB_SZ
+      children:
+      - children:
+        - attributes:
+            value: '1024'
+          type: User
+        type: Values
+      type: Integer
+    DRV_WIFI_WINC_SOCKET_SLAB_NUM:
+      attributes:
+        id: DRV_WIFI_WINC_SOCKET_SLAB_NUM
+      children:
+      - children:
+        - attributes:
+            value: '16'
+          type: User
+        type: Values
+      type: Integer
+    DRV_WIFI_WINC_SOCKET_TX_BUF_SZ:
+      attributes:
+        id: DRV_WIFI_WINC_SOCKET_TX_BUF_SZ
+      children:
+      - children:
+        - attributes:
+            value: '4096'
+          type: User
+        type: Values
+      type: Integer
+    DRV_WIFI_WINC_SOCKET_RX_BUF_SZ:
+      attributes:
+        id: DRV_WIFI_WINC_SOCKET_RX_BUF_SZ
+      children:
+      - children:
+        - attributes:
+            value: '4096'
+          type: User
+        type: Values
+      type: Integer
+    DRV_WIFI_WINC_RX_BUFF_SZ:
+      attributes:
+        id: DRV_WIFI_WINC_RX_BUFF_SZ
+      children:
+      - children:
+        - attributes:
+            value: '1024'
+          type: User
+        type: Values
+      type: Integer
+    DRV_WIFI_WINC_SOCKET_NUM:
+      attributes:
+        id: DRV_WIFI_WINC_SOCKET_NUM
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: Integer
   userData: {}

@@ -169,6 +169,11 @@ void FCM360W_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 fcm360w_driverData.state = FCM360W_DRIVER_STATE_QRST_READ_MODULE_RESPONSE;
             }
+            else if (DRV_USART_BufferStatusGet(fcm360w_driverData.USART_BUFFER_HANDLE) == DRV_USART_BUFFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                fcm360w_driverData.state = FCM360W_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -192,6 +197,11 @@ void FCM360W_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 fcm360w_driverData.state = FCM360W_DRIVER_STATE_QRST_STORE_BYTE;
+            }
+            else if (DRV_USART_BufferStatusGet(fcm360w_driverData.USART_BUFFER_HANDLE) == DRV_USART_BUFFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                fcm360w_driverData.state = FCM360W_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {

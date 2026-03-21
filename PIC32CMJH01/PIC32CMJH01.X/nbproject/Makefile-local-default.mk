@@ -19,7 +19,7 @@ PATH_TO_IDE_BIN=C:/Applications/Microchip/MPLAB X IDE/mplab_platform/platform/..
 # Adding MPLAB X bin directory to path.
 PATH:=C:/Applications/Microchip/MPLAB X IDE/mplab_platform/platform/../mplab_ide/modules/../../bin/:$(PATH)
 # Path to java used to run MPLAB X when this makefile was created
-MP_JAVA_PATH="C:\Applications\Microchip\MPLAB X IDE\sys\java\zulu8.80.0.17-ca-fx-jre8.0.422-win_x64/bin/"
+MP_JAVA_PATH="C:\Applications\Microchip\MPLAB X IDE\sys\java\zulu8.86.0.25-ca-fx-jre8.0.452-win_x64/bin/"
 OS_CURRENT="$(shell uname -s)"
 MP_CC="C:\Applications\Microchip\XC32\bin\xc32-gcc.exe"
 MP_CPPC="C:\Applications\Microchip\XC32\bin\xc32-g++.exe"
@@ -34,5 +34,5 @@ MP_CPPC_DIR="C:\Applications\Microchip\XC32\bin"
 MP_AS_DIR="C:\Applications\Microchip\XC32\bin"
 MP_LD_DIR="C:\Applications\Microchip\XC32\bin"
 MP_AR_DIR="C:\Applications\Microchip\XC32\bin"
-DFP_DIR=C:/Users/ondre/.mchp_packs/Microchip/PIC32CM-JH_DFP/1.5.236
+DFP_DIR=C:/Applications/Microchip/MPLAB X IDE/packs/Microchip/PIC32CM-JH_DFP/1.5.236
 CMSIS_DIR=C:/Users/ondre/.mchp_packs/ARM/CMSIS/6.3.0

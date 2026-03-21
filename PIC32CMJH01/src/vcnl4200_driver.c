@@ -101,7 +101,7 @@ void VCNL4200_DRIVER_Set_I2C_Address(void)
 void VCNL4200_DRIVER_Get_ALS_CFG(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDH;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_CFG(void)
@@ -114,13 +114,13 @@ void VCNL4200_DRIVER_Set_ALS_CFG(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_CFG;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_ALS_High_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDH;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_High_Alert(void)
@@ -133,13 +133,13 @@ void VCNL4200_DRIVER_Set_ALS_High_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, 
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDH;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_ALS_Low_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDL;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_Low_Alert(void)
@@ -152,13 +152,53 @@ void VCNL4200_DRIVER_Set_ALS_Low_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, u
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDL;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+}
+
+void VCNL4200_DRIVER_Get_PS_CFG1_CFG2(uint8_t I2C_ADDRESS)
+{
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG1;
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+}
+
+void VCNL4200_DRIVER_Store_PS_CFG1_CFG2(void)
+{
+    vcnl4200_sensorData.PS_CFG1 = vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.PS_CFG2 = vcnl4200_driverData.I2C_DATA_RECEIVE[1];
+}
+
+void VCNL4200_DRIVER_Set_PS_CFG1_CFG2(uint8_t I2C_ADDRESS, uint8_t PS_CFG1_VALUE, uint8_t PS_CFG2_VALUE)
+{
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG1;
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = PS_CFG1_VALUE;
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = PS_CFG2_VALUE;
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+}
+
+void VCNL4200_DRIVER_Get_PS_CFG3_MS(uint8_t I2C_ADDRESS)
+{
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG3;
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+}
+
+void VCNL4200_DRIVER_Store_PS_CFG3_MS(void)
+{
+    vcnl4200_sensorData.PS_CFG3 = vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+    vcnl4200_sensorData.PS_MS = vcnl4200_driverData.I2C_DATA_RECEIVE[1];
+}
+
+void VCNL4200_DRIVER_Set_PS_CFG3_MS(uint8_t I2C_ADDRESS, uint8_t PS_CONF3_VALUE, uint8_t PS_MS_VALUE)
+{
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG3;
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = PS_CONF3_VALUE;
+    vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = PS_MS_VALUE;
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_Cancellation(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CANC;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_Cancellation(void)
@@ -172,13 +212,13 @@ void VCNL4200_DRIVER_Set_PS_Cancellation(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE,
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CANC;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_High_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDH;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_High_Alert(void)
@@ -191,13 +231,13 @@ void VCNL4200_DRIVER_Set_PS_High_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, u
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDH;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_Low_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDL;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_Low_Alert(void)
@@ -210,13 +250,13 @@ void VCNL4200_DRIVER_Set_PS_Low_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, ui
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDL;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_Data(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_DATA;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_Data(void)
@@ -227,7 +267,7 @@ void VCNL4200_DRIVER_Store_PS_Data(void)
 void VCNL4200_DRIVER_Get_ALS_Data(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_DATA;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_Data(void)
@@ -238,7 +278,7 @@ void VCNL4200_DRIVER_Store_ALS_Data(void)
 void VCNL4200_DRIVER_Get_White_Data(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_WHITE_DATA;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_White_Data(void)
@@ -249,12 +289,26 @@ void VCNL4200_DRIVER_Store_White_Data(void)
 void VCNL4200_DRIVER_Get_INT_Flag(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_INT_FLAG;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void*) &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_INT_Flag(void)
 {
-    vcnl4200_sensorData.INT_FLAG = vcnl4200_driverData.I2C_DATA_RECEIVE[1];
+    vcnl4200_sensorData.INT_FLAG = vcnl4200_driverData.I2C_DATA_RECEIVE[0];
+}
+
+void VCNL4200_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
+{
+    SYS_CONSOLE_Print
+            (
+             CONSOLE_HANDLE,
+             "ALS: %d\r\n"
+             "PS: %d\r\n"
+             "White: %d\r\n",
+             vcnl4200_sensorData.ALS_DATA,
+             vcnl4200_sensorData.PS_DATA,
+             vcnl4200_sensorData.WHITE_DATA
+             );
 }
 
 // *****************************************************************************
@@ -268,7 +322,6 @@ void VCNL4200_DRIVER_Initialize(void)
     vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_INIT;
     vcnl4200_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
     vcnl4200_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
-    EIC_CallbackRegister(EIC_PIN_0, VCNL4200_DRIVER_Alert, 0);
 }
 
 void VCNL4200_DRIVER_Tasks(void)
@@ -291,7 +344,88 @@ void VCNL4200_DRIVER_Tasks(void)
             }
             else
             {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_ALS_CFG;
+            }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_SET_ALS_CFG:
+        {
+            VCNL4200_DRIVER_Set_ALS_CFG(vcnl4200_driverData.I2C_ADDRESS[0], 0b00000001, 0b01000000);
+            TIMER_DRIVER_Start_Bus_TMR();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_ALS_CFG_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_SET_ALS_CFG_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_PS_CFG1_CFG2;
+            }
+            else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_SET_PS_CFG1_CFG2:
+        {
+            VCNL4200_DRIVER_Set_PS_CFG1_CFG2(vcnl4200_driverData.I2C_ADDRESS[0], 0b01000000, 0b00001000);
+            TIMER_DRIVER_Start_Bus_TMR();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_PS_CFG1_CFG2_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_SET_PS_CFG1_CFG2_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_PS_CFG3_MS;
+            }
+            else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_SET_PS_CFG3_MS:
+        {
+            VCNL4200_DRIVER_Set_PS_CFG3_MS(vcnl4200_driverData.I2C_ADDRESS[0], 0b01110001, 0b00001010);
+            TIMER_DRIVER_Start_Bus_TMR();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_PS_CFG3_MS_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_SET_PS_CFG3_MS_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
+            }
+            else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_TIMER_EXPIRED;
             }
             break;
         }
@@ -300,8 +434,111 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (VCNL4200_DRIVER_Get_Task_Start_Status() == true)
             {
-                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_GET_PS_DATA;
             }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_GET_PS_DATA:
+        {
+            VCNL4200_DRIVER_Get_PS_Data(vcnl4200_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_GET_PS_DATA_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_GET_PS_DATA_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_PS_DATA;
+            }
+            else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_STORE_PS_DATA:
+        {
+            VCNL4200_DRIVER_Store_PS_Data();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_GET_ALS_DATA;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_GET_ALS_DATA:
+        {
+            VCNL4200_DRIVER_Get_ALS_Data(vcnl4200_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_GET_ALS_DATA_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_GET_ALS_DATA_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_ALS_DATA;
+            }
+            else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_STORE_ALS_DATA:
+        {
+            VCNL4200_DRIVER_Store_ALS_Data();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_GET_WHITE_DATA;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_GET_WHITE_DATA:
+        {
+            VCNL4200_DRIVER_Get_White_Data(vcnl4200_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_GET_WHITE_DATA_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_GET_WHITE_DATA_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_WHITE_DATA;
+            }
+            else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_STORE_WHITE_DATA:
+        {
+            VCNL4200_DRIVER_Store_White_Data();
+            VCNL4200_DRIVER_Set_Task_Completed_Status(true);
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             break;
         }
 
@@ -309,7 +546,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(vcnl4200_driverData.I2C_HANDLE);
             VCNL4200_DRIVER_Set_Task_Completed_Status(true);
-            vcnl4200_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             break;
         }
 
@@ -317,7 +554,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(vcnl4200_driverData.I2C_HANDLE);
             VCNL4200_DRIVER_Set_Task_Completed_Status(true);
-            vcnl4200_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             break;
         }
 

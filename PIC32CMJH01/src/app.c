@@ -115,15 +115,22 @@ void APP_Tasks(void)
     {
         case APP_STATE_INIT:
         {
+            appData.state = APP_STATE_START_MAIN_TMR;
+            break;
+        }
+
+        case APP_STATE_START_MAIN_TMR:
+        {
+            TIMER_DRIVER_Start_Main_TMR();
             appData.state = APP_STATE_IDLE;
             break;
         }
 
         case APP_STATE_IDLE:
         {
-            if (RTC_DRIVER_Get_Alarm_Status() == true)
+            if (TIMER_DRIVER_Get_Main_TMR_Status() == true)
             {
-                RTC_DRIVER_Set_Alarm_Status(false);
+                TIMER_DRIVER_Set_Main_TMR_Status(false);
                 appData.state = APP_STATE_ENABLE_WDT;
             }
             break;
@@ -147,7 +154,7 @@ void APP_Tasks(void)
             else
             {
                 WDT_Clear();
-                appData.state = APP_STATE_CAN0_DRIVER_OPERATION;
+                appData.state = APP_STATE_CONSOLE_DRIVER_OPERATION;
             }
             break;
         }
@@ -158,34 +165,6 @@ void APP_Tasks(void)
             {
                 HDC302X_DRIVER_Set_Task_Start_Status(false);
                 HDC302X_DRIVER_Set_Task_Completed_Status(false);
-                WDT_Clear();
-                appData.state = APP_STATE_CAN0_DRIVER_OPERATION;
-            }
-            break;
-        }
-
-        case APP_STATE_CAN0_DRIVER_OPERATION:
-        {
-            if (APP_Get_CAN0_Error_Status() == false)
-            {
-                CAN0_DRIVER_Set_Task_Start_Status(true);
-                WDT_Clear();
-                appData.state = APP_STATE_WAIT_FOR_FINISH_CAN0_DRIVER_OPERATION;
-            }
-            else
-            {
-                WDT_Clear();
-                appData.state = APP_STATE_CONSOLE_DRIVER_OPERATION;
-            }
-            break;
-        }
-
-        case APP_STATE_WAIT_FOR_FINISH_CAN0_DRIVER_OPERATION:
-        {
-            if (CAN0_DRIVER_Get_Task_Completed_Status() == true)
-            {
-                CAN0_DRIVER_Set_Task_Start_Status(false);
-                CAN0_DRIVER_Set_Task_Completed_Status(false);
                 WDT_Clear();
                 appData.state = APP_STATE_CONSOLE_DRIVER_OPERATION;
             }
@@ -206,7 +185,6 @@ void APP_Tasks(void)
             {
                 CONSOLE_DRIVER_Set_Task_Start_Status(false);
                 CONSOLE_DRIVER_Set_Task_Completed_Status(false);
-                TIMER_DRIVER_Start_Main_TMR();
                 WDT_Clear();
                 appData.state = APP_STATE_DISABLE_WDT;
             }
@@ -216,13 +194,6 @@ void APP_Tasks(void)
         case APP_STATE_DISABLE_WDT:
         {
             WDT_Disable();
-            appData.state = APP_STATE_ENTER_TO_STANDBY_MODE;
-            break;
-        }
-
-        case APP_STATE_ENTER_TO_STANDBY_MODE:
-        {
-            PM_StandbyModeEnter();
             appData.state = APP_STATE_IDLE;
             break;
         }

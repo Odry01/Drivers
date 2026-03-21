@@ -148,7 +148,7 @@ void XM125_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(xm125_driverData.I2C_HANDLE);
             XM125_DRIVER_Set_Task_Completed_Status(true);
-            xm125_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            xm125_driverData.state = XM125_DRIVER_STATE_IDLE;
             break;
         }
 
@@ -156,7 +156,7 @@ void XM125_DRIVER_Tasks(void)
         {
             DRV_I2C_Close(xm125_driverData.I2C_HANDLE);
             XM125_DRIVER_Set_Task_Completed_Status(true);
-            xm125_driverData.state = MCP9808_DRIVER_STATE_IDLE;
+            xm125_driverData.state = XM125_DRIVER_STATE_IDLE;
             break;
         }
 

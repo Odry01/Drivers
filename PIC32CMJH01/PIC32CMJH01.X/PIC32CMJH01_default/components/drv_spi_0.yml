@@ -61,16 +61,6 @@ data:
           type: Dynamic
         type: Values
       type: String
-    DRV_SPI_QUEUE_SIZE:
-      attributes:
-        id: DRV_SPI_QUEUE_SIZE
-      children:
-      - children:
-        - attributes:
-            value: '64'
-          type: User
-        type: Values
-      type: Integer
     DRV_SPI_RX_DMA_CHANNEL:
       attributes:
         id: DRV_SPI_RX_DMA_CHANNEL
@@ -138,4 +128,14 @@ data:
           type: Dynamic
         type: Values
       type: Boolean
+    DRV_SPI_QUEUE_SIZE:
+      attributes:
+        id: DRV_SPI_QUEUE_SIZE
+      children:
+      - children:
+        - attributes:
+            value: '8'
+          type: User
+        type: Values
+      type: Integer
   userData: {}

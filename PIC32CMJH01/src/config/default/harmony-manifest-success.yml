@@ -4,14 +4,14 @@
 
 
 project: PIC32CMJH01
-creation_date: 2026-03-17T20:35:40.740+01:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2026-03-21T22:58:42.018+01:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
 mcc_version: v5.6.4
 mcc_core_version: v5.8.4
-mplabx_version: v6.25        # if MPLAB X plugin only
+mplabx_version: v6.30        # if MPLAB X plugin only
 harmony_version: v5.6.4
-compiler: XC32 5.00
+compiler: XC32 5.10
 
 modules:
     - {name: "csp", version: "v3.25.1"}

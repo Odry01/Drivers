@@ -415,6 +415,11 @@ void AD9954_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
             }
+            else if (DRV_SPI_TransferStatusGet(ad9954_driverData.SPI_TRANSFER_HANDLE) == DRV_SPI_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -448,6 +453,11 @@ void AD9954_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_SET_FTW1;
             }
+            else if (DRV_SPI_TransferStatusGet(ad9954_driverData.SPI_TRANSFER_HANDLE) == DRV_SPI_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -471,6 +481,11 @@ void AD9954_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_SET_NLSCW;
+            }
+            else if (DRV_SPI_TransferStatusGet(ad9954_driverData.SPI_TRANSFER_HANDLE) == DRV_SPI_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
@@ -496,6 +511,11 @@ void AD9954_DRIVER_Tasks(void)
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
             }
+            else if (DRV_SPI_TransferStatusGet(ad9954_driverData.SPI_TRANSFER_HANDLE) == DRV_SPI_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
+            }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {
                 TIMER_DRIVER_Set_Bus_TMR_Status(false);
@@ -519,6 +539,11 @@ void AD9954_DRIVER_Tasks(void)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
                 ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
+            }
+            else if (DRV_SPI_TransferStatusGet(ad9954_driverData.SPI_TRANSFER_HANDLE) == DRV_SPI_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                ad9954_driverData.state = AD9954_DRIVER_STATE_ERROR;
             }
             else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
             {

@@ -50,16 +50,6 @@ data:
           type: Dynamic
         type: Values
       type: String
-    DRV_USART_QUEUE_SIZE:
-      attributes:
-        id: DRV_USART_QUEUE_SIZE
-      children:
-      - children:
-        - attributes:
-            value: '64'
-          type: User
-        type: Values
-      type: Integer
     DRV_USART_RX_DMA:
       attributes:
         id: DRV_USART_RX_DMA
@@ -156,4 +146,14 @@ data:
           type: Dynamic
         type: Values
       type: Boolean
+    DRV_USART_QUEUE_SIZE:
+      attributes:
+        id: DRV_USART_QUEUE_SIZE
+      children:
+      - children:
+        - attributes:
+            value: '8'
+          type: User
+        type: Values
+      type: Integer
   userData: {}
