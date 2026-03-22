@@ -78,12 +78,17 @@ void RSTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
     rstc_driverData.RSTC_TASK_COMPLETED = STATUS;
 }
 
+void RSTC_DRIVER_Set_Reset_Reason(char *RESET_REASON)
+{
+    sprintf(rstc_driverData.RESET_REASON, "%s", RESET_REASON);
+}
+
 void RSTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 {
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Reset reason: %d\r\n",
+             "Reset reason: %s\r\n",
              rstc_driverData.RESET_REASON
              );
 }
@@ -122,13 +127,13 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_POR_RESET)
             {
-                rstc_driverData.RESET_REASON = 1;
+                RSTC_DRIVER_Set_Reset_Reason("Power On Reset");
                 RSTC_DRIVER_Set_Task_Completed_Status(true);
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             else
             {
-                rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Reset_Reason("None");
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_BODCORE_RESET;
             }
             break;
@@ -138,13 +143,13 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_BODCORE_RESET)
             {
-                rstc_driverData.RESET_REASON = 2;
+                RSTC_DRIVER_Set_Reset_Reason("Brown Out CORE Detector Reset");
                 RSTC_DRIVER_Set_Task_Completed_Status(true);
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             else
             {
-                rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Reset_Reason("None");
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_BODVDD_RESET;
             }
             break;
@@ -154,12 +159,12 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_BODVDD_RESET)
             {
-                rstc_driverData.RESET_REASON = 3;
+                RSTC_DRIVER_Set_Reset_Reason("Brown Out VDD Detector Reset");
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             else
             {
-                rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Reset_Reason("None");
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_EXT_RESET;
             }
             break;
@@ -169,13 +174,13 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_EXT_RESET)
             {
-                rstc_driverData.RESET_REASON = 4;
+                RSTC_DRIVER_Set_Reset_Reason("External Reset");
                 RSTC_DRIVER_Set_Task_Completed_Status(true);
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             else
             {
-                rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Reset_Reason("None");
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_WDT_RESET;
             }
             break;
@@ -185,13 +190,13 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_WDT_RESET)
             {
-                rstc_driverData.RESET_REASON = 5;
+                RSTC_DRIVER_Set_Reset_Reason("Watchdog Reset");
                 RSTC_DRIVER_Set_Task_Completed_Status(true);
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             else
             {
-                rstc_driverData.RESET_REASON = 0;
+                RSTC_DRIVER_Set_Reset_Reason("None");
                 rstc_driverData.state = RSTC_DRIVER_STATE_CHECK_SYST_RESET;
             }
             break;
@@ -201,23 +206,16 @@ void RSTC_DRIVER_Tasks(void)
         {
             if (RSTC_ResetCauseGet() == RSTC_RESET_CAUSE_SYST_RESET)
             {
-                rstc_driverData.RESET_REASON = 6;
+                RSTC_DRIVER_Set_Reset_Reason("System Reset Request");
                 RSTC_DRIVER_Set_Task_Completed_Status(true);
                 rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             else
             {
-                rstc_driverData.RESET_REASON = 0;
-                rstc_driverData.state = RSTC_DRIVER_STATE_STORE_RESULT;
+                RSTC_DRIVER_Set_Reset_Reason("None");
+                rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
             }
             break;
-        }
-
-	case RSTC_DRIVER_STATE_STORE_RESULT:
-        {
-            /* Add function for storing data */
-            RSTC_DRIVER_Set_Task_Completed_Status(true);
-            rstc_driverData.state = RSTC_DRIVER_STATE_IDLE;
         }
 
         default:

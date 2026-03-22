@@ -77,7 +77,6 @@ typedef enum
     RSTC_DRIVER_STATE_CHECK_EXT_RESET,
     RSTC_DRIVER_STATE_CHECK_WDT_RESET,
     RSTC_DRIVER_STATE_CHECK_SYST_RESET,
-    RSTC_DRIVER_STATE_STORE_RESULT,
 } RSTC_DRIVER_STATES;
 
 // *****************************************************************************
@@ -102,7 +101,7 @@ typedef struct
     /* Driver variables */
     volatile bool RSTC_TASK_START;
     volatile bool RSTC_TASK_COMPLETED;
-    uint8_t RESET_REASON;
+    char RESET_REASON[64];
 } RSTC_DRIVER_DATA;
 
 // *****************************************************************************
@@ -226,6 +225,24 @@ bool RSTC_DRIVER_Get_Task_Completed_Status(void);
     None.
  */
 void RSTC_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+/**
+    Function:
+    void RSTC_DRIVER_Set_Reset_Reason(char *RESET_REASON)
+
+    Summary:
+    Sets the MCU reset reason 
+
+    Parameters:
+    @param RESET_REASON - describe of MCU reset reason
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void RSTC_DRIVER_Set_Reset_Reason(char *RESET_REASON);
 
 /**
     Function:
