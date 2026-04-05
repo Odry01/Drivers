@@ -67,7 +67,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\configuration.h
   hash: 9bc0c97dd959beb827eddd13315d74560c83e17a20da613327b3b30db505f1c8
 - file: ..\src\config\default\definitions.h
-  hash: bd88b5b4ce96eda3127d7e2b81ca2889bd5a2c6b95ce55256fe1a5d0ba4adf81
+  hash: aceced5c427d5b3eec57a9d4b09386136c2ffe1ee354bfd3e82c7b30cd592f74
 - file: ..\src\config\default\device.h
   hash: 04b157a2340644f4ee17c29e3bd72ef709c024d6c973aa94c33756458c76bf87
 - file: ..\src\config\default\device_cache.h
@@ -243,7 +243,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: 4460457d985f664a3dcd5a719dd869dec9348b072e04671de668948ee99faa56
 - file: ..\src\config\default\initialization.c
-  hash: dd22191af568372bd38dee685483a7b6ec86dc80a5820fe0af3e644b58a23786
+  hash: e8ad9ac7ca7599b6a0afcd519d8fc9971fa43bed0fc6a4f99850f5d88d60167a
 - file: ..\src\config\default\interrupts.c
   hash: 68b2d59c9b4d6d0b5512e2037e8b14372e0fd8b8524ccd01d64a41ed8912d7bf
 - file: ..\src\config\default\interrupts.h

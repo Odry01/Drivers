@@ -824,7 +824,7 @@ void BMP585_DRIVER_Tasks(void)
 
         case BMP585_DRIVER_STATE_STORE_DATA:
         {
-            /* Add function for storing temperature */
+            /* Add function for storing data */
             BMP585_DRIVER_Set_Task_Completed_Status(true);
             bmp585_driverData.state = BMP585_DRIVER_STATE_IDLE;
             break;
@@ -833,6 +833,7 @@ void BMP585_DRIVER_Tasks(void)
         case BMP585_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(bmp585_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             BMP585_DRIVER_Set_Task_Completed_Status(true);
             bmp585_driverData.state = BMP585_DRIVER_STATE_IDLE;
             break;
@@ -841,6 +842,7 @@ void BMP585_DRIVER_Tasks(void)
         case BMP585_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(bmp585_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             BMP585_DRIVER_Set_Task_Completed_Status(true);
             bmp585_driverData.state = BMP585_DRIVER_STATE_IDLE;
             break;

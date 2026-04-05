@@ -767,7 +767,7 @@ void HDC302X_DRIVER_Get_Manual_Measure_Values(uint8_t I2C_ADDRESS);
     void HDC302X_DRIVER_Get_Auto_Measure_Values(uint8_t I2C_ADDRESS)
 
     Summary:
-    Retrieves the most recent measurement taken in auto‑mode.
+    Retrieves the most recent measurement taken in auto measure mode.
 
     Parameters:
     @param I2C_ADDRESS - sensor address

@@ -430,6 +430,7 @@ void WINCS02_DRIVER_Tasks(void)
 
         case WINCS02_DRIVER_STATE_ERROR:
         {
+            APP_Set_SPI_Error_Status(true);
             wincs02_driverData.state = WINCS02_DRIVER_STATE_IDLE;
             break;
         }

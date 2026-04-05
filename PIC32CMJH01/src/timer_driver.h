@@ -8,7 +8,7 @@
     timer_driver.h
 
   Status:
-    In development
+    Finished
  
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -56,7 +56,6 @@ extern "C"
 #define START_UP_TIMER      10000
 #define MAIN_TIMER          5000
 #define BUS_TIMER           500
-#define WAIT_TIMER          10
 
 // *****************************************************************************
 
@@ -78,11 +77,11 @@ typedef struct
     SYS_TIME_HANDLE START_UP_TMR;
     SYS_TIME_HANDLE MAIN_TMR;
     SYS_TIME_HANDLE BUS_TMR;
-    SYS_TIME_HANDLE WAIT_TMR;
+    SYS_TIME_HANDLE DELAY_US_TMR;
+    SYS_TIME_HANDLE DELAY_MS_TMR;
     volatile bool START_UP_TMR_EXPIRED;
     volatile bool MAIN_TMR_EXPIRED;
     volatile bool BUS_TMR_EXPIRED;
-    volatile bool WAIT_TMR_EXPIRED;
 } TIMER_DRIVER_DATA;
 
 // *****************************************************************************
@@ -96,8 +95,6 @@ void Start_Up_TMR_Callback(uintptr_t CONTEXT);
 void Main_TMR_Callback(uintptr_t CONTEXT);
 
 void Bus_TMR_Callback(uintptr_t CONTEXT);
-
-void Wait_TMR_Callback(uintptr_t CONTEXT);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -343,76 +340,75 @@ void TIMER_DRIVER_Stop_Bus_TMR(void);
 
 /**
     Function:
-    bool TIMER_DRIVER_Get_Wait_TMR_Status(void)
+    bool TIMER_DRIVER_Get_Delay_US_TMR_Status(void)
 
     Summary:
-    Indicate the current status of the wait timer.
+    Retrieves the current status of the microsecond delay timer.
 
     Parameters:
     None.
 
     Returns:
-    @return bool - true if the wait timer is finished
+    @return bool - true if the microsecond delay is finished
 
     Remarks:
-    Use when you won't use delay function.
+    Use this delay when you need to wait for some operation.
  */
-bool TIMER_DRIVER_Get_Wait_TMR_Status(void);
+bool TIMER_DRIVER_Get_Delay_US_TMR_Status(void);
 
 /**
     Function:
-    void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS)
+    void TIMER_DRIVER_Delay_US_TMR(uint32_t DELAY_US)
 
     Summary:
-    Sets the status flag for the wait timer.
+    Sets the delay in microseconds for the delay timer.
 
     Parameters:
-    @param STATUS - desired state of the wait timer flag
+    @param DELAY_MS - desired time of delay in microseconds
 
     Returns:
     None.
 
     Remarks:
-    Use when you won't use delay function.
+    Use this delay when you need to wait for some operation.
  */
-void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS);
+void TIMER_DRIVER_Delay_US_TMR(uint32_t DELAY_US);
 
 /**
     Function:
-    void TIMER_DRIVER_Start_Wait_TMR(void)
+    bool TIMER_DRIVER_Get_Delay_MS_TMR_Status(void)
 
     Summary:
-    Starts the wait timer.
+    Retrieves the current status of the millisecond delay timer.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - true if the millisecond delay is finished
 
     Remarks:
-    Use when you won't use delay function.
+    Use this delay when you need to wait for some operation.
  */
-void TIMER_DRIVER_Start_Wait_TMR(void);
+bool TIMER_DRIVER_Get_Delay_MS_TMR_Status(void);
 
 /**
     Function:
-    void TIMER_DRIVER_Stop_Wait_TMR(void)
+    void TIMER_DRIVER_Delay_MS_TMR(uint32_t DELAY_MS)
 
     Summary:
-    Stops the wait timer.
+    Sets the delay in milliseconds for the delay timer.
 
     Parameters:
-    None.
+    @param DELAY_MS - desired time of delay in milliseconds
 
     Returns:
     None.
 
     Remarks:
-    Use when you won't use delay function.
-    When the timer is not stopped, timer will be renewed.
+    Use this delay when you need to wait for some operation.
  */
-void TIMER_DRIVER_Stop_Wait_TMR(void);
+void TIMER_DRIVER_Delay_MS_TMR(uint32_t DELAY_MS);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

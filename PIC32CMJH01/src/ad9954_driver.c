@@ -557,6 +557,7 @@ void AD9954_DRIVER_Tasks(void)
         case AD9954_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_SPI_Close(ad9954_driverData.SPI_HANDLE);
+            APP_Set_SPI_Error_Status(true);
             AD9954_DRIVER_Set_Task_Completed_Status(true);
             ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
             break;
@@ -565,6 +566,7 @@ void AD9954_DRIVER_Tasks(void)
         case AD9954_DRIVER_STATE_ERROR:
         {
             DRV_SPI_Close(ad9954_driverData.SPI_HANDLE);
+            APP_Set_SPI_Error_Status(true);
             AD9954_DRIVER_Set_Task_Completed_Status(true);
             ad9954_driverData.state = AD9954_DRIVER_STATE_IDLE;
             break;

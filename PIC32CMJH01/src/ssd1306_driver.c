@@ -1261,6 +1261,7 @@ void SSD1306_DRIVER_Tasks(void)
         case SSD1306_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(ssd1306_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             SSD1306_DRIVER_Set_Task_Completed_Status(true);
             ssd1306_driverData.state = SSD1306_DRIVER_STATE_IDLE;
             break;
@@ -1269,6 +1270,7 @@ void SSD1306_DRIVER_Tasks(void)
         case SSD1306_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(ssd1306_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             SSD1306_DRIVER_Set_Task_Completed_Status(true);
             ssd1306_driverData.state = SSD1306_DRIVER_STATE_IDLE;
             break;

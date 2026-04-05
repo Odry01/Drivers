@@ -147,6 +147,7 @@ void XM125_DRIVER_Tasks(void)
         case XM125_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(xm125_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             XM125_DRIVER_Set_Task_Completed_Status(true);
             xm125_driverData.state = XM125_DRIVER_STATE_IDLE;
             break;
@@ -155,6 +156,7 @@ void XM125_DRIVER_Tasks(void)
         case XM125_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(xm125_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             XM125_DRIVER_Set_Task_Completed_Status(true);
             xm125_driverData.state = XM125_DRIVER_STATE_IDLE;
             break;

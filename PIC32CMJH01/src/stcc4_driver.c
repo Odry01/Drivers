@@ -367,33 +367,24 @@ void STCC4_DRIVER_Tasks(void)
         case STCC4_DRIVER_STATE_STORE_PRODUCT_ID:
         {
             STCC4_DRIVER_Store_Product_ID();
-            stcc4_driverData.state = STCC4_DRIVER_STATE_IDLE;
+            stcc4_driverData.state = STCC4_DRIVER_STATE_PERFORM_CONDITIONING;
             break;
         }
 
-        case STCC4_DRIVER_STATE_IDLE:
+        case STCC4_DRIVER_STATE_PERFORM_CONDITIONING:
         {
-            if (STCC4_DRIVER_Get_Task_Start_Status() == true)
-            {
-                stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASUREMENT;
-            }
-            break;
-        }
-
-        case STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASUREMENT:
-        {
-            STCC4_DRIVER_Single_Shot_Measurement(stcc4_driverData.I2C_ADDRESS[0]);
+            STCC4_DRIVER_Perform_Conditioning(stcc4_driverData.I2C_ADDRESS[0]);
             TIMER_DRIVER_Start_Bus_TMR();
-            stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASUREMENT_WAIT_FOR_TRANSFER;
+            stcc4_driverData.state = STCC4_DRIVER_STATE_PERFORM_CONDITIONING_WAIT_FOR_TRANSFER;
             break;
         }
 
-        case STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASUREMENT_WAIT_FOR_TRANSFER:
+        case STCC4_DRIVER_STATE_PERFORM_CONDITIONING_WAIT_FOR_TRANSFER:
         {
             if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
-                stcc4_driverData.state = STCC4_DRIVER_STATE_START_WAIT_TIMER;
+                stcc4_driverData.state = STCC4_DRIVER_STATE_START_PERFORM_CONDITIONING_DELAY;
             }
             else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
             {
@@ -409,19 +400,94 @@ void STCC4_DRIVER_Tasks(void)
             break;
         }
 
-        case STCC4_DRIVER_STATE_START_WAIT_TIMER:
+        case STCC4_DRIVER_STATE_START_PERFORM_CONDITIONING_DELAY:
         {
-            TIMER_DRIVER_Start_Wait_TMR();
-            stcc4_driverData.state = STCC4_DRIVER_STATE_WAIT_FOR_MEASURE;
+            TIMER_DRIVER_Delay_MS_TMR(22500);
+            stcc4_driverData.state = STCC4_DRIVER_STATE_WAIT_FOR_PERFORM_CONDITIONING;
             break;
         }
 
-        case STCC4_DRIVER_STATE_WAIT_FOR_MEASURE:
+        case STCC4_DRIVER_STATE_WAIT_FOR_PERFORM_CONDITIONING:
         {
-            if (TIMER_DRIVER_Get_Wait_TMR_Status() == true)
+            if (TIMER_DRIVER_Get_Delay_MS_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_Wait_TMR_Status(false);
-                TIMER_DRIVER_Stop_Wait_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_IDLE;
+            }
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_IDLE:
+        {
+            if (STCC4_DRIVER_Get_Task_Start_Status() == true)
+            {
+                stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE;
+            }
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_EXIT_SLEEP_MODE:
+        {
+            STCC4_DRIVER_Exit_Sleep_Mode(stcc4_driverData.I2C_ADDRESS[0]);
+            stcc4_driverData.state = STCC4_DRIVER_STATE_START_EXIT_SLEEP_MODE_DELAY;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_START_EXIT_SLEEP_MODE_DELAY:
+        {
+            TIMER_DRIVER_Delay_MS_TMR(10);
+            stcc4_driverData.state = STCC4_DRIVER_STATE_WAIT_FOR_EXIT_SLEEP_MODE;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_WAIT_FOR_EXIT_SLEEP_MODE:
+        {
+            if (TIMER_DRIVER_Get_Delay_MS_TMR_Status() == true)
+            {
+                stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE;
+            }
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE:
+        {
+            STCC4_DRIVER_Single_Shot_Measurement(stcc4_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE_DELAY;
+            }
+            else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE_DELAY:
+        {
+            TIMER_DRIVER_Delay_MS_TMR(500);
+            stcc4_driverData.state = STCC4_DRIVER_STATE_WAIT_FOR_SINGLE_SHOT_MEASURE;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_WAIT_FOR_SINGLE_SHOT_MEASURE:
+        {
+            if (TIMER_DRIVER_Get_Delay_MS_TMR_Status() == true)
+            {
                 stcc4_driverData.state = STCC4_DRIVER_STATE_GET_MEASURED_VALUES;
             }
             break;
@@ -463,6 +529,35 @@ void STCC4_DRIVER_Tasks(void)
             break;
         }
 
+        case STCC4_DRIVER_STATE_ENTER_SLEEP_MODE:
+        {
+            STCC4_DRIVER_Enter_Sleep_Mode(stcc4_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            stcc4_driverData.state = STCC4_DRIVER_STATE_ENTER_SLEEP_MODE_WAIT_FOR_TRANSFER;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_ENTER_SLEEP_MODE_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_CALCULATE_DATA;
+            }
+            else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                stcc4_driverData.state = STCC4_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
         case STCC4_DRIVER_STATE_CALCULATE_DATA:
         {
             STCC4_DRIVER_Calculation_CO2(stcc4_sensorData.CO2_VALUE);
@@ -483,6 +578,7 @@ void STCC4_DRIVER_Tasks(void)
         case STCC4_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(stcc4_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             STCC4_DRIVER_Set_Task_Completed_Status(true);
             stcc4_driverData.state = STCC4_DRIVER_STATE_IDLE;
             break;
@@ -491,6 +587,7 @@ void STCC4_DRIVER_Tasks(void)
         case STCC4_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(stcc4_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             STCC4_DRIVER_Set_Task_Completed_Status(true);
             stcc4_driverData.state = STCC4_DRIVER_STATE_IDLE;
             break;
@@ -502,6 +599,7 @@ void STCC4_DRIVER_Tasks(void)
         }
     }
 }
+
 
 /*******************************************************************************
  End of File

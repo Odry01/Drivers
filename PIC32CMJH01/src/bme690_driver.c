@@ -776,6 +776,7 @@ void BME690_DRIVER_Tasks(void)
         case BME690_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(bme690_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             BME690_DRIVER_Set_Task_Completed_Status(true);
             bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             break;
@@ -784,6 +785,7 @@ void BME690_DRIVER_Tasks(void)
         case BME690_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(bme690_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             BME690_DRIVER_Set_Task_Completed_Status(true);
             bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             break;

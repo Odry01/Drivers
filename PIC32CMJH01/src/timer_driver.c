@@ -8,7 +8,7 @@
     timer_driver.c
 
   Status:
-    In development
+    Finished
  
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -63,11 +63,6 @@ void Main_TMR_Callback(uintptr_t CONTEXT)
 void Bus_TMR_Callback(uintptr_t CONTEXT)
 {
     timer_driverData.BUS_TMR_EXPIRED = true;
-}
-
-void Wait_TMR_Callback(uintptr_t CONTEXT)
-{
-    timer_driverData.WAIT_TMR_EXPIRED = true;
 }
 
 // *****************************************************************************
@@ -136,24 +131,24 @@ void TIMER_DRIVER_Stop_Bus_TMR(void)
     SYS_TIME_TimerStop(timer_driverData.BUS_TMR);
 }
 
-bool TIMER_DRIVER_Get_Wait_TMR_Status(void)
+bool TIMER_DRIVER_Get_Delay_US_TMR_Status(void)
 {
-    return (timer_driverData.WAIT_TMR_EXPIRED);
+    return (SYS_TIME_DelayIsComplete(timer_driverData.DELAY_US_TMR));
 }
 
-void TIMER_DRIVER_Set_Wait_TMR_Status(bool STATUS)
+void TIMER_DRIVER_Delay_US_TMR(uint32_t DELAY_US)
 {
-    timer_driverData.WAIT_TMR_EXPIRED = STATUS;
+    SYS_TIME_DelayMS(DELAY_US, &timer_driverData.DELAY_US_TMR);
 }
 
-void TIMER_DRIVER_Start_Wait_TMR(void)
+bool TIMER_DRIVER_Get_Delay_MS_TMR_Status(void)
 {
-    SYS_TIME_TimerStart(timer_driverData.WAIT_TMR);
+    return (SYS_TIME_DelayIsComplete(timer_driverData.DELAY_MS_TMR));
 }
 
-void TIMER_DRIVER_Stop_Wait_TMR(void)
+void TIMER_DRIVER_Delay_MS_TMR(uint32_t DELAY_MS)
 {
-    SYS_TIME_TimerStop(timer_driverData.WAIT_TMR);
+    SYS_TIME_DelayMS(DELAY_MS, &timer_driverData.DELAY_MS_TMR);
 }
 
 // *****************************************************************************
@@ -167,19 +162,15 @@ void TIMER_DRIVER_Initialize(void)
     timer_driverData.START_UP_TMR = SYS_TIME_HANDLE_INVALID;
     timer_driverData.MAIN_TMR = SYS_TIME_HANDLE_INVALID;
     timer_driverData.BUS_TMR = SYS_TIME_HANDLE_INVALID;
-    timer_driverData.WAIT_TMR = SYS_TIME_HANDLE_INVALID;
     timer_driverData.START_UP_TMR_EXPIRED = false;
     timer_driverData.MAIN_TMR_EXPIRED = false;
     timer_driverData.BUS_TMR_EXPIRED = false;
-    timer_driverData.WAIT_TMR_EXPIRED = false;
     timer_driverData.START_UP_TMR = SYS_TIME_CallbackRegisterMS(Start_Up_TMR_Callback, 0, START_UP_TIMER, SYS_TIME_PERIODIC);
     timer_driverData.MAIN_TMR = SYS_TIME_CallbackRegisterMS(Main_TMR_Callback, 0, MAIN_TIMER, SYS_TIME_PERIODIC);
     timer_driverData.BUS_TMR = SYS_TIME_CallbackRegisterMS(Bus_TMR_Callback, 0, BUS_TIMER, SYS_TIME_PERIODIC);
-    timer_driverData.WAIT_TMR = SYS_TIME_CallbackRegisterMS(Wait_TMR_Callback, 0, WAIT_TIMER, SYS_TIME_PERIODIC);
     TIMER_DRIVER_Stop_Start_Up_TMR();
     TIMER_DRIVER_Stop_Main_TMR();
     TIMER_DRIVER_Stop_Bus_TMR();
-    TIMER_DRIVER_Stop_Wait_TMR();
 }
 
 /*******************************************************************************

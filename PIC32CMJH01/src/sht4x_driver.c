@@ -206,7 +206,7 @@ void SHT4X_DRIVER_Tasks(void)
             if (DRV_I2C_TransferStatusGet(sht4x_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
-                sht4x_driverData.state = SHT4X_DRIVER_STATE_START_WAIT_TIMER;
+                sht4x_driverData.state = SHT4X_DRIVER_STATE_START_MEASURE_DELAY;
             }
             if (DRV_I2C_TransferStatusGet(sht4x_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
             {
@@ -222,19 +222,17 @@ void SHT4X_DRIVER_Tasks(void)
             break;
         }
 
-        case SHT4X_DRIVER_STATE_START_WAIT_TIMER:
+        case SHT4X_DRIVER_STATE_START_MEASURE_DELAY:
         {
-            TIMER_DRIVER_Start_Wait_TMR();
-            sht4x_driverData.state = SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE;
+            TIMER_DRIVER_Delay_MS_TMR(10);
+            sht4x_driverData.state = SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE_DELAY;
             break;
         }
 
-        case SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE:
+        case SHT4X_DRIVER_STATE_WAIT_FOR_MEASURE_DELAY:
         {
-            if (TIMER_DRIVER_Get_Wait_TMR_Status() == true)
+            if (TIMER_DRIVER_Get_Delay_MS_TMR_Status() == true)
             {
-                TIMER_DRIVER_Set_Wait_TMR_Status(false);
-                TIMER_DRIVER_Stop_Wait_TMR();
                 sht4x_driverData.state = SHT4X_DRIVER_STATE_GET_MEASURED_VALUES;
             }
             break;
@@ -295,6 +293,7 @@ void SHT4X_DRIVER_Tasks(void)
         case SHT4X_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(sht4x_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             SHT4X_DRIVER_Set_Task_Completed_Status(true);
             sht4x_driverData.state = SHT4X_DRIVER_STATE_IDLE;
             break;
@@ -303,6 +302,7 @@ void SHT4X_DRIVER_Tasks(void)
         case SHT4X_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(sht4x_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             SHT4X_DRIVER_Set_Task_Completed_Status(true);
             sht4x_driverData.state = SHT4X_DRIVER_STATE_IDLE;
             break;

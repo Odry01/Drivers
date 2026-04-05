@@ -266,6 +266,7 @@ void FCM360W_DRIVER_Tasks(void)
         case FCM360W_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_USART_Close(fcm360w_driverData.USART_HANDLE);
+            APP_Set_UART_Error_Status(true);
             FCM360W_DRIVER_Set_Task_Completed_Status(true);
             fcm360w_driverData.state = FCM360W_DRIVER_STATE_IDLE;
             break;
@@ -274,6 +275,7 @@ void FCM360W_DRIVER_Tasks(void)
         case FCM360W_DRIVER_STATE_ERROR:
         {
             DRV_USART_Close(fcm360w_driverData.USART_HANDLE);
+            APP_Set_UART_Error_Status(true);
             FCM360W_DRIVER_Set_Task_Completed_Status(true);
             fcm360w_driverData.state = FCM360W_DRIVER_STATE_IDLE;
             break;

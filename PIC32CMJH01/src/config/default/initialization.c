@@ -452,9 +452,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM5_SPI_Initialize();
 
-    CAN0_Initialize();
-
     SERCOM4_SPI_Initialize();
+
+    CAN0_Initialize();
 
     EIC_Initialize();
 

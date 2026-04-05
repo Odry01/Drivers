@@ -284,7 +284,7 @@ void AD9954_DRIVER_Set_Task_Completed_Status(bool STATUS);
    void AD9954_DRIVER_Get_CFR1_Register(void)
 
    Summary:
-   Reads the current value of register CFR1 from the device.
+   Reads the current value of register CFR1 value.
 
    Parameters:
    None.
@@ -293,7 +293,7 @@ void AD9954_DRIVER_Set_Task_Completed_Status(bool STATUS);
    None.
 
    Remarks:
-   The register is read in MSB‑first order (WORD 3 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_CFR1_Register(void);
 
@@ -302,7 +302,7 @@ void AD9954_DRIVER_Get_CFR1_Register(void);
    void AD9954_DRIVER_Store_CFR1_Register(void)
 
    Summary:
-   Persists the internally cached CFR1 value to non‑volatile memory.
+   Store the CFR1 register value into variables.
 
    Parameters:
    None.
@@ -320,20 +320,19 @@ void AD9954_DRIVER_Store_CFR1_Register(void);
    void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register CFR1 with the supplied byte values.
+   Sets the value of register CFR1 value.
 
    Parameters:
-   @param WORD_3 - most‑significant byte of CFR1
-   @param WORD_2 - second‑most‑significant byte
-   @param WORD_1 - third byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_3 - first byte of CFR1
+   @param WORD_2 - second byte of CFR1
+   @param WORD_1 - third byte of CFR1
+   @param WORD_0 - fourth byte of CFR1
 
    Returns:
    None.
 
    Remarks:
-   The caller must ensure that the values are valid for the current
-   operating mode.
+   None.
  */
 void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -342,7 +341,7 @@ void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
    void AD9954_DRIVER_Get_CFR2_Register(void)
 
    Summary:
-   Reads the current value of register CFR2 from the device.
+   Reads the current value of register CFR2 value.
 
    Parameters:
    None.
@@ -351,7 +350,7 @@ void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
    None.
 
    Remarks:
-   The register is read MSB‑first.
+   None.
  */
 void AD9954_DRIVER_Get_CFR2_Register(void);
 
@@ -360,7 +359,7 @@ void AD9954_DRIVER_Get_CFR2_Register(void);
    void AD9954_DRIVER_Store_CFR2_Register(void)
 
    Summary:
-   Persists the internally cached CFR2 value to non‑volatile memory.
+   Store the CFR2 register value into variables.
 
    Parameters:
    None.
@@ -378,17 +377,17 @@ void AD9954_DRIVER_Store_CFR2_Register(void);
    void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register CFR2 with the supplied byte values.
+   Sets the value of register CFR1 value.
 
    Parameters:
-   @param WORD_1 - most‑significant byte of CFR2
-   @param WORD_0 - least‑significant byte
+   @param WORD_1 - first byte of CFR1
+   @param WORD_0 - second byte of CFR1
 
    Returns:
    None.
 
    Remarks:
-   The register controls phase and amplitude scaling.
+   None.
  */
 void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_1, uint8_t WORD_0);
 
@@ -397,7 +396,7 @@ void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_1, uint8_t WORD_0);
    void AD9954_DRIVER_Get_ASF_Register(void)
 
    Summary:
-   Reads the current value of register ASF (Amplitude‑Scale‑Factor).
+   Reads the current value of register ASF value.
 
    Parameters:
    None.
@@ -406,7 +405,7 @@ void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_1, uint8_t WORD_0);
    None.
 
    Remarks:
-   The register is read MSB‑first.
+   None.
  */
 void AD9954_DRIVER_Get_ASF_Register(void);
 
@@ -415,7 +414,7 @@ void AD9954_DRIVER_Get_ASF_Register(void);
    void AD9954_DRIVER_Store_ASF_Register(void)
 
    Summary:
-   Persists the internally cached ASF value to non‑volatile memory.
+   Store the ASF register value into variables.
 
    Parameters:
    None.
@@ -433,17 +432,17 @@ void AD9954_DRIVER_Store_ASF_Register(void);
    void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register ASF with the supplied byte values.
+   Sets the value of register ASF value.
 
    Parameters:
-   @param WORD_1 - most‑significant byte of ASF
-   @param WORD_0 - least‑significant byte
+   @param WORD_1 - first byte of ASF
+   @param WORD_0 - second byte of ASF
 
    Returns:
    None.
 
    Remarks:
-   The register controls the output amplitude.
+   None.
  */
 void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_1, uint8_t WORD_0);
 
@@ -452,7 +451,7 @@ void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_1, uint8_t WORD_0);
    void AD9954_DRIVER_Get_ARR_Register(void)
 
    Summary:
-   Reads the current value of register ARR (Amplitude‑Ramping Register).
+   Reads the current value of register ARR value.
 
    Parameters:
    None.
@@ -461,7 +460,7 @@ void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_1, uint8_t WORD_0);
    None.
 
    Remarks:
-   The register is read LSB‑first (only WORD 0 exists).
+   None.
  */
 void AD9954_DRIVER_Get_ARR_Register(void);
 
@@ -470,7 +469,7 @@ void AD9954_DRIVER_Get_ARR_Register(void);
    void AD9954_DRIVER_Store_ARR_Register(void)
 
    Summary:
-   Persists the internally cached ARR value to non‑volatile memory.
+   Store the ARR register value into variables.
 
    Parameters:
    None.
@@ -488,16 +487,16 @@ void AD9954_DRIVER_Store_ARR_Register(void);
    void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0)
 
    Summary:
-   Programs register ARR with the supplied byte value.
+   Sets the value of register ARR value.
 
    Parameters:
-   @param WORD_0 - byte to write into ARR
+   @param WORD_0 - byte of ARR
 
    Returns:
    None.
 
    Remarks:
-   This register sets the amplitude‑ramping period.
+   None.
  */
 void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0);
 
@@ -506,7 +505,7 @@ void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0);
    void AD9954_DRIVER_Get_FTW0_Register(void)
 
    Summary:
-   Reads the current value of register FTW0 (Frequency‑Tuning Word 0).
+   Reads the current value of register FTW0 value.
 
    Parameters:
    None.
@@ -515,7 +514,7 @@ void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0);
    None.
 
    Remarks:
-   Register is read MSB‑first.
+   None.
  */
 void AD9954_DRIVER_Get_FTW0_Register(void);
 
@@ -524,7 +523,7 @@ void AD9954_DRIVER_Get_FTW0_Register(void);
    void AD9954_DRIVER_Store_FTW0_Register(void)
 
    Summary:
-   Persists the internally cached FTW0 value to non‑volatile memory.
+   Store the FTW0 register value into variables.
 
    Parameters:
    None.
@@ -542,19 +541,19 @@ void AD9954_DRIVER_Store_FTW0_Register(void);
    void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register FTW0 with the supplied byte values.
+   Sets the value of register FTW0 value.
 
    Parameters:
-   @param WORD_3 - most‑significant byte of FTW0
-   @param WORD_2 - second‑most‑significant byte
-   @param WORD_1 - third byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_3 - first byte of FTW0
+   @param WORD_2 - second byte of FTW0
+   @param WORD_1 - third byte of FTW0
+   @param WORD_0 - fourth byte of FTW0
 
    Returns:
    None.
 
    Remarks:
-   The device interprets the word as a 32‑bit unsigned integer.
+   None.
  */
 void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -563,7 +562,7 @@ void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
    void AD9954_DRIVER_Get_POW0_Register(void)
 
    Summary:
-   Reads the current value of register POW0 (Power‑Offset Word 0).
+   Reads the current value of register POW0 value.
 
    Parameters:
    None.
@@ -572,7 +571,7 @@ void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
    None.
 
    Remarks:
-   Register is read MSB‑first.
+   None.
  */
 void AD9954_DRIVER_Get_POW0_Register(void);
 
@@ -581,7 +580,7 @@ void AD9954_DRIVER_Get_POW0_Register(void);
    void AD9954_DRIVER_Store_POW0_Register(void)
 
    Summary:
-   Persists the internally cached POW0 value to non‑volatile memory.
+   Store the POW0 register value into variables.
 
    Parameters:
    None.
@@ -599,17 +598,17 @@ void AD9954_DRIVER_Store_POW0_Register(void);
    void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register POW0 with the supplied byte values.
+   Sets the value of register POW0 value.
 
    Parameters:
-   @param WORD_1 - most‑significant byte of POW0
-   @param WORD_0 - least‑significant byte
+   @param WORD_1 - third byte of POW0
+   @param WORD_0 - fourth byte of POW0
 
    Returns:
    None.
 
    Remarks:
-   This register sets the power‑offset for frequency component 0.
+   None.
  */
 void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_1, uint8_t WORD_0);
 
@@ -618,7 +617,7 @@ void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_1, uint8_t WORD_0);
    void AD9954_DRIVER_Get_FTW1_Register(void)
 
    Summary:
-   Reads the current value of register FTW1 (Frequency‑Tuning Word 1).
+   Reads the current value of register FTW1 value.
 
    Parameters:
    None.
@@ -627,7 +626,7 @@ void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_1, uint8_t WORD_0);
    None.
 
    Remarks:
-   Register is read MSB‑first.
+   None.
  */
 void AD9954_DRIVER_Get_FTW1_Register(void);
 
@@ -636,7 +635,7 @@ void AD9954_DRIVER_Get_FTW1_Register(void);
    void AD9954_DRIVER_Store_FTW1_Register(void)
 
    Summary:
-   Persists the internally cached FTW1 value to non‑volatile memory.
+   Store the FTW1 register value into variables.
 
    Parameters:
    None.
@@ -654,19 +653,19 @@ void AD9954_DRIVER_Store_FTW1_Register(void);
    void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register FTW1 with the supplied byte values.
+   Sets the value of register FTW1 value.
 
    Parameters:
-   @param WORD_3 - most‑significant byte of FTW1
-   @param WORD_2 - second‑most‑significant byte
-   @param WORD_1 - third byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_3 - first byte of FTW1
+   @param WORD_2 - second byte of FTW1
+   @param WORD_1 - third byte of FTW1
+   @param WORD_0 - fourth byte of FTW1
 
    Returns:
    None.
 
    Remarks:
-   The device interprets the word as a 32‑bit unsigned integer.
+   None.
  */
 void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -675,7 +674,7 @@ void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
    void AD9954_DRIVER_Get_RSCW0_Register(void)
 
    Summary:
-   Reads the current value of register RSCW0 (Random‑Sequence‑Control‑Word 0).
+   Reads the current value of register RSCW0 value.
 
    Parameters:
    None.
@@ -684,7 +683,7 @@ void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
    None.
 
    Remarks:
-   Register is read MSB‑first (WORD 4 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_RSCW0_Register(void);
 
@@ -693,7 +692,7 @@ void AD9954_DRIVER_Get_RSCW0_Register(void);
    void AD9954_DRIVER_Store_RSCW0_Register(void)
 
    Summary:
-   Persists the internally cached RSCW0 value to non‑volatile memory.
+   Store the RSCW0 register value into variables.
 
    Parameters:
    None.
@@ -711,21 +710,20 @@ void AD9954_DRIVER_Store_RSCW0_Register(void);
    void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register RSCW0 with the supplied byte values.
+   Sets the value of register RSCW0 value.
 
    Parameters:
-   @param WORD_4 - most‑significant byte of RSCW0
-   @param WORD_3 - next byte
-   @param WORD_2 - third byte
-   @param WORD_1 - fourth byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_4 - first byte of RSCW0
+   @param WORD_3 - second byte of RSCW0
+   @param WORD_2 - third byte of RSCW0
+   @param WORD_1 - fourth byte of RSCW0
+   @param WORD_0 - fifth byte of RSCW0
 
    Returns:
    None.
 
    Remarks:
-   The register is 40 bits wide; the upper 8 bits (WORD 4) are often
-   zero depending on configuration.
+   None.
  */
 void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -734,7 +732,7 @@ void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    void AD9954_DRIVER_Get_RSCW1_Register(void)
 
    Summary:
-   Reads the current value of register RSCW1 (Random‑Sequence‑Control‑Word 1).
+   Reads the current value of register RSCW1 value.
 
    Parameters:
    None.
@@ -743,7 +741,7 @@ void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    None.
 
    Remarks:
-   Register is read MSB‑first (WORD 4 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_RSCW1_Register(void);
 
@@ -752,7 +750,7 @@ void AD9954_DRIVER_Get_RSCW1_Register(void);
    void AD9954_DRIVER_Store_RSCW1_Register(void)
 
    Summary:
-   Persists the internally cached RSCW1 value to non‑volatile memory.
+   Store the RSCW1 register value into variables.
 
    Parameters:
    None.
@@ -770,21 +768,20 @@ void AD9954_DRIVER_Store_RSCW1_Register(void);
    void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register RSCW1 with the supplied byte values.
+   Sets the value of register RSCW1 value.
 
    Parameters:
-   @param WORD_4 - most‑significant byte of RSCW1
-   @param WORD_3 - next byte
-   @param WORD_2 - third byte
-   @param WORD_1 - fourth byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_4 - first byte of RSCW1
+   @param WORD_3 - second byte of RSCW1
+   @param WORD_2 - third byte of RSCW1
+   @param WORD_1 - fourth byte of RSCW1
+   @param WORD_0 - fifth byte of RSCW1
 
    Returns:
    None.
 
    Remarks:
-   The register is 40 bits wide; the upper 8 bits (WORD 4) are often
-   zero depending on configuration.
+   None.
  */
 void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -793,7 +790,7 @@ void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    void AD9954_DRIVER_Get_RSCW2_Register(void)
 
    Summary:
-   Reads the current value of register RSCW2 (Random‑Sequence‑Control‑Word 2).
+   Reads the current value of register RSCW2 value.
 
    Parameters:
    None.
@@ -802,7 +799,7 @@ void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    None.
 
    Remarks:
-   Register is read MSB‑first (WORD 4 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_RSCW2_Register(void);
 
@@ -811,7 +808,7 @@ void AD9954_DRIVER_Get_RSCW2_Register(void);
    void AD9954_DRIVER_Store_RSCW2_Register(void)
 
    Summary:
-   Persists the internally cached RSCW2 value to non‑volatile memory.
+   Store the RSCW2 register value into variables.
 
    Parameters:
    None.
@@ -829,21 +826,20 @@ void AD9954_DRIVER_Store_RSCW2_Register(void);
    void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register RSCW2 with the supplied byte values.
+   Sets the value of register RSCW2 value.
 
    Parameters:
-   @param WORD_4 - most‑significant byte of RSCW2
-   @param WORD_3 - next byte
-   @param WORD_2 - third byte
-   @param WORD_1 - fourth byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_4 - first byte of RSCW2
+   @param WORD_3 - second byte of RSCW2
+   @param WORD_2 - third byte of RSCW2
+   @param WORD_1 - fourth byte of RSCW2
+   @param WORD_0 - fifth byte of RSCW2
 
    Returns:
    None.
 
    Remarks:
-   The register is 40 bits wide; the upper 8 bits (WORD 4) are often
-   zero depending on configuration.
+   None.
  */
 void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -852,7 +848,7 @@ void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    void AD9954_DRIVER_Get_RSCW3_Register(void)
 
    Summary:
-   Reads the current value of register RSCW3 (Random‑Sequence‑Control‑Word 3).
+   Reads the current value of register RSCW3 value.
 
    Parameters:
    None.
@@ -861,7 +857,7 @@ void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    None.
 
    Remarks:
-   Register is read MSB‑first (WORD 4 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_RSCW3_Register(void);
 
@@ -870,7 +866,7 @@ void AD9954_DRIVER_Get_RSCW3_Register(void);
    void AD9954_DRIVER_Store_RSCW3_Register(void)
 
    Summary:
-   Persists the internally cached RSCW3 value to non‑volatile memory.
+   Store the RSCW3 register value into variables.
 
    Parameters:
    None.
@@ -888,21 +884,20 @@ void AD9954_DRIVER_Store_RSCW3_Register(void);
    void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register RSCW3 with the supplied byte values.
+   Sets the value of register RSCW3 value.
 
    Parameters:
-   @param WORD_4 - most‑significant byte of RSCW3
-   @param WORD_3 - next byte
-   @param WORD_2 - third byte
-   @param WORD_1 - fourth byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_4 - first byte of RSCW3
+   @param WORD_3 - second byte of RSCW3
+   @param WORD_2 - third byte of RSCW3
+   @param WORD_1 - fourth byte of RSCW3
+   @param WORD_0 - fifth byte of RSCW3
 
    Returns:
    None.
 
    Remarks:
-   The register is 40 bits wide; the upper 8 bits (WORD 4) are often
-   zero depending on configuration.
+   None.
  */
 void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -911,7 +906,7 @@ void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    void AD9954_DRIVER_Get_NLSCW_Register(void)
 
    Summary:
-   Reads the current value of register NLSCW (Noise‑Level‑Sweep‑Control‑Word).
+   Reads the current value of register NLSCW value.
 
    Parameters:
    None.
@@ -920,7 +915,7 @@ void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    None.
 
    Remarks:
-   Register is read MSB‑first (WORD 4 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_NLSCW_Register(void);
 
@@ -929,7 +924,7 @@ void AD9954_DRIVER_Get_NLSCW_Register(void);
    void AD9954_DRIVER_Store_NLSCW_Register(void)
 
    Summary:
-   Persists the internally cached NLSCW value to non‑volatile memory.
+   Store the NLSCW register value into variables.
 
    Parameters:
    None.
@@ -947,21 +942,20 @@ void AD9954_DRIVER_Store_NLSCW_Register(void);
    void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register NLSCW with the supplied byte values.
+   Sets the value of register NLSCW value.
 
    Parameters:
-   @param WORD_4 - most‑significant byte of NLSCW
-   @param WORD_3 - next byte
-   @param WORD_2 - third byte
-   @param WORD_1 - fourth byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_4 - first byte of NLSCW
+   @param WORD_3 - second byte of NLSCW
+   @param WORD_2 - third byte of NLSCW
+   @param WORD_1 - fourth byte of NLSCW
+   @param WORD_0 - fifth byte of NLSCW
 
    Returns:
    None.
 
    Remarks:
-   The register is 40 bits wide; the upper 8 bits (WORD 4) are often
-   zero depending on configuration.
+   None.
  */
 void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -970,7 +964,7 @@ void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    void AD9954_DRIVER_Get_PLSCW_Register(void)
 
    Summary:
-   Reads the current value of register PLSCW (Phase‑Level‑Sweep‑Control‑Word).
+   Reads the current value of register PLSCW value.
 
    Parameters:
    None.
@@ -979,7 +973,7 @@ void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    None.
 
    Remarks:
-   Register is read MSB‑first (WORD 4 … WORD 0).
+   None.
  */
 void AD9954_DRIVER_Get_PLSCW_Register(void);
 
@@ -988,7 +982,7 @@ void AD9954_DRIVER_Get_PLSCW_Register(void);
    void AD9954_DRIVER_Store_PLSCW_Register(void)
 
    Summary:
-   Persists the internally cached PLSCW value to non‑volatile memory.
+   Store the PLSCW register value into variables.
 
    Parameters:
    None.
@@ -1006,21 +1000,20 @@ void AD9954_DRIVER_Store_PLSCW_Register(void);
    void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0)
 
    Summary:
-   Programs register PLSCW with the supplied byte values.
+   Sets the value of register PLSCW value.
 
    Parameters:
-   @param WORD_4 - most‑significant byte of PLSCW
-   @param WORD_3 - next byte
-   @param WORD_2 - third byte
-   @param WORD_1 - fourth byte
-   @param WORD_0 - least‑significant byte
+   @param WORD_4 - first byte of RSCW0
+   @param WORD_3 - second byte of RSCW0
+   @param WORD_2 - third byte of RSCW0
+   @param WORD_1 - fourth byte of RSCW0
+   @param WORD_0 - fifth byte of RSCW0
 
    Returns:
    None.
 
    Remarks:
-   The register is 40 bits wide; the upper 8 bits (WORD 4) are often
-   zero depending on configuration.
+   None.
  */
 void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WORD_2, uint8_t WORD_1, uint8_t WORD_0);
 
@@ -1029,7 +1022,7 @@ void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    void AD9954_DRIVER_Set_Frequency(uint32_t FREQUENCY)
 
    Summary:
-   Sets the DDS output frequency by programming FTW registers.
+   Sets the output frequency to FTW register.
 
    Parameters:
    @param FREQUENCY - desired output frequency in Hz
@@ -1038,8 +1031,7 @@ void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
    None.
 
    Remarks:
-   The maximum representable frequency depends on the device’s
-   reference clock and word size.  Overflow results in saturation.
+   None.
  */
 void AD9954_DRIVER_Set_Frequency(uint32_t FREQUENCY);
 
@@ -1058,7 +1050,7 @@ void AD9954_DRIVER_Set_Frequency(uint32_t FREQUENCY);
    None.
 
    Remarks:
-   The driver clamps values to the device’s allowable range.
+   None.
  */
 void AD9954_DRIVER_Set_Linear_Sweep(uint32_t POSITIVE_LINEAR_SWEEP, uint32_t NEGATIVE_LINEAR_SWEEP);
 

@@ -406,6 +406,7 @@ void SEN63C_DRIVER_Tasks(void)
         case SEN63C_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(sen63c_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             SEN63C_DRIVER_Set_Task_Completed_Status(true);
             sen63c_driverData.state = SEN63C_DRIVER_STATE_IDLE;
             break;
@@ -414,6 +415,7 @@ void SEN63C_DRIVER_Tasks(void)
         case SEN63C_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(sen63c_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             SEN63C_DRIVER_Set_Task_Completed_Status(true);
             sen63c_driverData.state = SEN63C_DRIVER_STATE_IDLE;
             break;

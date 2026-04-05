@@ -537,6 +537,13 @@ void VCNL4200_DRIVER_Tasks(void)
         case VCNL4200_DRIVER_STATE_STORE_WHITE_DATA:
         {
             VCNL4200_DRIVER_Store_White_Data();
+            vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_DATA;
+            break;
+        }
+
+        case VCNL4200_DRIVER_STATE_STORE_DATA:
+        {
+            /* Add function for storing data */
             VCNL4200_DRIVER_Set_Task_Completed_Status(true);
             vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             break;
@@ -545,6 +552,7 @@ void VCNL4200_DRIVER_Tasks(void)
         case VCNL4200_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(vcnl4200_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             VCNL4200_DRIVER_Set_Task_Completed_Status(true);
             vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             break;
@@ -553,6 +561,7 @@ void VCNL4200_DRIVER_Tasks(void)
         case VCNL4200_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(vcnl4200_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             VCNL4200_DRIVER_Set_Task_Completed_Status(true);
             vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             break;

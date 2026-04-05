@@ -401,7 +401,7 @@ void MCP9808_DRIVER_Tasks(void)
 
         case MCP9808_DRIVER_STATE_STORE_TEMPERATURE:
         {
-            /* Add function for storing temperature */
+            /* Add function for storing data */
             MCP9808_DRIVER_Set_Task_Completed_Status(true);
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;
@@ -410,6 +410,7 @@ void MCP9808_DRIVER_Tasks(void)
         case MCP9808_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(mcp9808_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             MCP9808_DRIVER_Set_Task_Completed_Status(true);
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;
@@ -418,6 +419,7 @@ void MCP9808_DRIVER_Tasks(void)
         case MCP9808_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(mcp9808_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             MCP9808_DRIVER_Set_Task_Completed_Status(true);
             mcp9808_driverData.state = MCP9808_DRIVER_STATE_IDLE;
             break;

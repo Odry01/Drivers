@@ -610,6 +610,7 @@ void HDC302X_DRIVER_Tasks(void)
         case HDC302X_DRIVER_STATE_TIMER_EXPIRED:
         {
             DRV_I2C_Close(hdc302x_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             HDC302X_DRIVER_Set_Task_Completed_Status(true);
             hdc302x_driverData.state = HDC302X_DRIVER_STATE_IDLE;
             break;
@@ -618,6 +619,7 @@ void HDC302X_DRIVER_Tasks(void)
         case HDC302X_DRIVER_STATE_ERROR:
         {
             DRV_I2C_Close(hdc302x_driverData.I2C_HANDLE);
+            APP_Set_I2C_Error_Status(true);
             HDC302X_DRIVER_Set_Task_Completed_Status(true);
             hdc302x_driverData.state = HDC302X_DRIVER_STATE_IDLE;
             break;
