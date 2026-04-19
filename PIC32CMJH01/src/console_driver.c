@@ -43,6 +43,7 @@
 // *****************************************************************************
 
 CONSOLE_DRIVER_DATA console_driverData;
+CONSOLE_PAYLOAD_DATA console_payloadData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -78,6 +79,24 @@ void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS)
     console_driverData.CONSOLE_TASK_COMPLETED = STATUS;
 }
 
+void CONSOLE_DRIVER_Set_Example_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3)
+{
+    console_payloadData.EXAMPLE_TRANSMIT_DATA_0 = EXAMPLE_TRANSMIT_DATA_0;
+    console_payloadData.EXAMPLE_TRANSMIT_DATA_1 = EXAMPLE_TRANSMIT_DATA_1;
+    console_payloadData.EXAMPLE_TRANSMIT_DATA_2 = EXAMPLE_TRANSMIT_DATA_2;
+    console_payloadData.EXAMPLE_TRANSMIT_DATA_3 = EXAMPLE_TRANSMIT_DATA_3;
+}
+
+void CONSOLE_DRIVER_Print_Example_Payload(void)
+{
+    SYS_CONSOLE_Print
+            (
+             console_driverData.CONSOLE_HANDLE,
+             "{\"Example data\":%u,%u,%u,%u}\r\n",
+             console_payloadData.EXAMPLE_TRANSMIT_DATA_0, console_payloadData.EXAMPLE_TRANSMIT_DATA_1, console_payloadData.EXAMPLE_TRANSMIT_DATA_2, console_payloadData.EXAMPLE_TRANSMIT_DATA_3
+             );
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -110,11 +129,7 @@ void CONSOLE_DRIVER_Tasks(void)
 
         case CONSOLE_DRIVER_STATE_PRINT_DATA:
         {
-            CAN0_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
-            RTC_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
-            RSTC_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
-            HDC302X_DRIVER_Print_Data(console_driverData.CONSOLE_HANDLE);
-            SYS_CONSOLE_Message(console_driverData.CONSOLE_HANDLE, "\r\n");
+            CONSOLE_DRIVER_Print_Example_Payload();
             CONSOLE_DRIVER_Set_Task_Completed_Status(true);
             console_driverData.state = CONSOLE_DRIVER_STATE_IDLE;
             break;

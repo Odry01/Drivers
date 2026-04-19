@@ -361,6 +361,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_PS_CFG1_CFG2;
             }
             else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
@@ -388,6 +389,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_SET_PS_CFG3_MS;
             }
             else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
@@ -415,6 +417,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_IDLE;
             }
             else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
@@ -451,6 +454,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_PS_DATA;
             }
             else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
@@ -485,6 +489,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_ALS_DATA;
             }
             else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
@@ -519,6 +524,7 @@ void VCNL4200_DRIVER_Tasks(void)
         {
             if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
+                TIMER_DRIVER_Stop_Bus_TMR();
                 vcnl4200_driverData.state = VCNL4200_DRIVER_STATE_STORE_WHITE_DATA;
             }
             else if (DRV_I2C_TransferStatusGet(vcnl4200_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)

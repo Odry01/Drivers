@@ -105,6 +105,24 @@ void RTC_DRIVER_Set_Init_Time(void)
     RTC_RTCCTimeSet(&rtc_driverData.INIT_TIME);
 }
 
+void RTC_DRIVER_Set_NTP_Time(uint32_t NTP_TIME)
+{
+    struct tm UNIX_TIME;
+    gmtime_r(&NTP_TIME, &UNIX_TIME);
+    rtc_driverData.INIT_TIME.tm_sec = UNIX_TIME.tm_sec;
+    rtc_driverData.INIT_TIME.tm_min = UNIX_TIME.tm_min;
+    rtc_driverData.INIT_TIME.tm_hour = UNIX_TIME.tm_hour;
+    rtc_driverData.INIT_TIME.tm_mday = UNIX_TIME.tm_mday;
+    rtc_driverData.INIT_TIME.tm_mon = UNIX_TIME.tm_mon;
+    rtc_driverData.INIT_TIME.tm_year = UNIX_TIME.tm_year;
+    rtc_driverData.INIT_TIME.tm_wday = UNIX_TIME.tm_wday;
+    rtc_driverData.INIT_TIME.tm_yday = UNIX_TIME.tm_yday;
+    rtc_driverData.INIT_TIME.tm_isdst = UNIX_TIME.tm_isdst;
+    rtc_driverData.INIT_TIME.tm_gmtoff = UNIX_TIME.tm_gmtoff;
+    rtc_driverData.INIT_TIME.tm_zone = UNIX_TIME.tm_zone;
+    RTC_RTCCTimeSet(&rtc_driverData.INIT_TIME);
+}
+
 void RTC_DRIVER_Set_Alarm_Time(void)
 {
     rtc_driverData.ALARM_TIME.tm_hour = 0;
@@ -116,7 +134,7 @@ void RTC_DRIVER_Set_Alarm_Time(void)
     RTC_RTCCAlarmSet(&rtc_driverData.ALARM_TIME, RTC_ALARM_MASK_SS);
 }
 
-void RTC_DRIVER_Get_System_Time()
+void RTC_DRIVER_Get_System_Time(void)
 {
     RTC_RTCCTimeGet(&rtc_driverData.SYSTEM_TIME);
 }

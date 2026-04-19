@@ -68,6 +68,7 @@ typedef enum
 {
     WINCS02_DRIVER_STATE_INIT = 0,
     WINCS02_DRIVER_STATE_CHECK_DRIVER_STATUS,
+    WINCS02_DRIVER_STATE_WAIT_FOR_BOOT,
     WINCS02_DRIVER_STATE_OPEN_DRIVER,
     WINCS02_DRIVER_STATE_WIFI_CALLBACK_REGISTER,
     WINCS02_DRIVER_STATE_MQTT_CALLBACK_REGISTER,
@@ -125,6 +126,14 @@ typedef struct
     char MQTT_MESSAGE[4096];
 } WINCS02_DRIVER_DATA;
 
+typedef struct
+{
+    uint8_t EXAMPLE_TRANSMIT_DATA_0;
+    uint8_t EXAMPLE_TRANSMIT_DATA_1;
+    uint8_t EXAMPLE_TRANSMIT_DATA_2;
+    uint8_t EXAMPLE_TRANSMIT_DATA_3;
+} WINCS02_PAYLOAD_DATA;
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Routines
@@ -156,7 +165,11 @@ void WINCS02_DRIVER_WIFI_Config(void);
 
 void WINCS02_DRIVER_MQTT_Config(void);
 
-void WINCS02_DRIVER_Set_MQTT_Payload(void);
+void WINCS02_DRIVER_Set_Example_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3);
+
+void WINCS02_DRIVER_Set_Message_Payload(void);
+
+void WINCS02_DRIVER_Set_MQTT_Publish_Payload(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

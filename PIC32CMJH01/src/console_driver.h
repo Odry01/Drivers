@@ -99,6 +99,14 @@ typedef struct
     volatile bool CONSOLE_TASK_COMPLETED;
 } CONSOLE_DRIVER_DATA;
 
+typedef struct
+{
+    uint8_t EXAMPLE_TRANSMIT_DATA_0;
+    uint8_t EXAMPLE_TRANSMIT_DATA_1;
+    uint8_t EXAMPLE_TRANSMIT_DATA_2;
+    uint8_t EXAMPLE_TRANSMIT_DATA_3;
+} CONSOLE_PAYLOAD_DATA;
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Routines
@@ -220,6 +228,45 @@ bool CONSOLE_DRIVER_Get_Task_Completed_Status(void);
     None.
  */
 void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+/*
+    Function:
+    void CONSOLE_DRIVER_Set_Example_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3)
+
+    Summary:
+    Sets the payload for message to console
+
+    Parameters:
+    @param EXAMPLE_TRANSMIT_DATA_0 - first byte payload segment
+    @param EXAMPLE_TRANSMIT_DATA_1 - second payload segment
+    @param EXAMPLE_TRANSMIT_DATA_2 - third payload segment
+    @param EXAMPLE_TRANSMIT_DATA_3 - fourth payload segment
+
+    Returns:
+    None.
+
+    Remarks:
+    That data is it there only as example. Use own parameters for this function.
+ */
+void CONSOLE_DRIVER_Set_Example_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3);
+
+/**
+    Function:
+    void CONSOLE_DRIVER_Print_Example_Payload(void)
+
+    Summary:
+    Prints the payload to a console.
+
+    Parameters:
+    None.
+
+    Returns:
+    None.
+
+    Remarks:
+    For reading a text use TeraTerm, CoolTerm, etc.
+ */
+void CONSOLE_DRIVER_Print_Example_Payload(void);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

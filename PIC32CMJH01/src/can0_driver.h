@@ -330,13 +330,14 @@ uint8_t CAN0_DRIVER_Set_DLC(uint8_t LENGTH);
     None.
 
     Remarks:
-    That data is it there only as example. Use own params for this function.
+    That data is it there only as example. Use own parameters for this function.
  */
 void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0);
 
 /**
     Function:
     void CAN0_DRIVER_Set_Transmited_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3, uint64_t EXAMPLE_TRANSMIT_DATA_4, uint64_t EXAMPLE_TRANSMIT_DATA_5, uint64_t EXAMPLE_TRANSMIT_DATA_6, uint64_t EXAMPLE_TRANSMIT_DATA_7)
+    
     Summary:
     Loads up to eight 64 bit words into the transmit buffer.
 
@@ -354,7 +355,7 @@ void CAN0_DRIVER_Set_Received_Data(uint64_t DATA_0);
     None.
 
     Remarks:
-    That data is it there only as example. Use own params for this function.
+    That data is it there only as example. Use own parameters for this function.
  */
 void CAN0_DRIVER_Set_Transmited_Data(uint64_t EXAMPLE_TRANSMIT_DATA_0, uint64_t EXAMPLE_TRANSMIT_DATA_1, uint64_t EXAMPLE_TRANSMIT_DATA_2, uint64_t EXAMPLE_TRANSMIT_DATA_3, uint64_t EXAMPLE_TRANSMIT_DATA_4, uint64_t EXAMPLE_TRANSMIT_DATA_5, uint64_t EXAMPLE_TRANSMIT_DATA_6, uint64_t EXAMPLE_TRANSMIT_DATA_7);
 

@@ -48,7 +48,7 @@ BME690_DRIVER_REGISTER_DATA bme690_regData;
 
 BME690_DRIVER_SENSOR_DATA bme690_sensorData;
 
-BME690_DRIVER_CAL_DATA bme690_calData;
+BME690_DRIVER_CALIBRATION_DATA bme690_calibrationData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -336,340 +336,373 @@ void BME690_DRIVER_Store_MEAS_STATUS_Data(uint8_t BUFFER)
     bme690_sensorData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-/*Check calibration registers*/
-void BME690_DRIVER_Get_PAR_T1_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_T1_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_T1_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_T1_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_T1_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_T1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_T1_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_T1_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_T1_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_T1_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_T1_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_T1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_T2_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_T2_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_T2_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_T2_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_T2_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_T2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_T2_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_T2_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_T2_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_T2_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_T2_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_T2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_T3_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_T3_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_T3_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_T3_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_T3_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_T3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_H1_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_H1_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H1_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H1_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_H1_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H1 = (bme690_calibrationData.PAR_H1 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_H1_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_H1_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H1_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H1_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_H1_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H1 = (bme690_calibrationData.PAR_H1 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_H2_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_H2_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H2_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H2_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_H2_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H2 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_H3_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_H3_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H3_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H3_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_H3_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_H4_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_H4_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H4_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H4_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_H4_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H4 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_H5_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_H5_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H5_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H5_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_H5_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H5 = (bme690_calibrationData.PAR_H5 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_H5_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_H5_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H5_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H5_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_H5_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H5 = (bme690_calibrationData.PAR_H5 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_H6_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_H6_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_H6_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_H6_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_H6_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_H6 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P1_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P1_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P1_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P1_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P1_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P1 = (bme690_calibrationData.PAR_P1 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P1_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_P1_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P1_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P1_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_P1_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P1 = (bme690_calibrationData.PAR_P1 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_P2_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P2_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P2_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P2_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P2_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P2 = (bme690_calibrationData.PAR_P2 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P2_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_P2_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P2_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P2_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_P2_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P2 = (bme690_calibrationData.PAR_P2 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_P3_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P3_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P3_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P3_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P3_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P4_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P4_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P4_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P4_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P4_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P4 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P5_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P5_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P5_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P5_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P5_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P5 = (bme690_calibrationData.PAR_P5 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P5_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_P5_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P5_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P5_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_P5_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P5 = (bme690_calibrationData.PAR_P5 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_P6_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P6_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P6_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P6_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P6_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P6 = (bme690_calibrationData.PAR_P6 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P6_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_P6_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P6_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P6_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_P6_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P6 = (bme690_calibrationData.PAR_P6 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_P7_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P7_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P7_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P7_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P7_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P7 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P8_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P8_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P8_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P8_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P8_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P8 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P9_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P9_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P9_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P9_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P9_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P9 = (bme690_calibrationData.PAR_P9 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P9_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_P9_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P9_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P9_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_P9_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P9 = (bme690_calibrationData.PAR_P9 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_P10_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P10_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P10_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P10_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P10_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P10 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_P11_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_P11_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_P11_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_P11_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_P11_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_P11 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_G1_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_G1_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_G1_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_G1_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_G1_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_G1 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_G2_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_G2_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_G2_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_G2_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_G2_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_G2 = (bme690_calibrationData.PAR_G2 & 0xFF00) | bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
-void BME690_DRIVER_Get_PAR_G2_CAL_MSB_Data(void)
+void BME690_DRIVER_Get_PAR_G2_MSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_G2_CALIBRATION_MSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_G2_CAL_MSB_Data(void)
+void BME690_DRIVER_Store_PAR_G2_MSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_G2 = (bme690_calibrationData.PAR_G2 & 0x00FF) | ((uint16_t) bme690_driverData.I2C_DATA_RECEIVE[0] << 8);
 }
 
-void BME690_DRIVER_Get_PAR_G3_CAL_LSB_Data(void)
+void BME690_DRIVER_Get_PAR_G3_LSB_Value(uint8_t I2C_ADDRESS)
 {
-
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = BME690_CMD_PAR_G3_CALIBRATION_LSB_REGISTER;
+    DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, &bme690_driverData.I2C_DATA_TRANSMIT, 1, &bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void BME690_DRIVER_Store_PAR_G3_CAL_LSB_Data(void)
+void BME690_DRIVER_Store_PAR_G3_LSB_Value(void)
 {
-
+    bme690_calibrationData.PAR_G3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_Calibration_Registers(void)
 {
-
+    bme690_calibrationData.PAR_T1 = ((uint16_t) bme690_calibrationData.PAR_T1_MSB << 8) | bme690_calibrationData.PAR_T1_LSB;
+    bme690_calibrationData.PAR_T2 = ((uint16_t) bme690_calibrationData.PAR_T2_MSB << 8) | bme690_calibrationData.PAR_T2_LSB;
 }
 
 void BME690_DRIVER_Set_Measure_Registers(void)
@@ -761,6 +794,1130 @@ void BME690_DRIVER_Tasks(void)
             {
                 bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             }
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_T1_LSB:
+        {
+            BME690_DRIVER_Get_PAR_T1_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T1_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_T1_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_T1_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_T1_LSB:
+        {
+            BME690_DRIVER_Store_PAR_T1_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T1_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_T1_MSB:
+        {
+            BME690_DRIVER_Get_PAR_T1_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T1_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_T1_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_T1_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_T1_MSB:
+        {
+            BME690_DRIVER_Store_PAR_T1_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T2_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_T2_LSB:
+        {
+            BME690_DRIVER_Get_PAR_T2_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T2_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_T2_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_T2_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_T2_LSB:
+        {
+            BME690_DRIVER_Store_PAR_T2_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T2_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_T2_MSB:
+        {
+            BME690_DRIVER_Get_PAR_T2_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T2_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_T2_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_T2_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_T2_MSB:
+        {
+            BME690_DRIVER_Store_PAR_T2_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T3_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_T3_LSB:
+        {
+            BME690_DRIVER_Get_PAR_T3_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_T3_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_T3_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_T3_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_T3_LSB:
+        {
+            BME690_DRIVER_Store_PAR_T3_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H1_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H1_LSB:
+        {
+            BME690_DRIVER_Get_PAR_H1_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H1_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H1_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H1_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H1_LSB:
+        {
+            BME690_DRIVER_Store_PAR_H1_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H1_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H1_MSB:
+        {
+            BME690_DRIVER_Get_PAR_H1_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H1_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H1_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H1_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H1_MSB:
+        {
+            BME690_DRIVER_Store_PAR_H1_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H2_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H2_LSB:
+        {
+            BME690_DRIVER_Get_PAR_H2_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H2_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H2_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H2_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H2_LSB:
+        {
+            BME690_DRIVER_Store_PAR_H2_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H3_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H3_LSB:
+        {
+            BME690_DRIVER_Get_PAR_H3_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H3_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H3_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H3_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H3_LSB:
+        {
+            BME690_DRIVER_Store_PAR_H3_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H4_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H4_LSB:
+        {
+            BME690_DRIVER_Get_PAR_H4_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H4_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H4_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H4_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H4_LSB:
+        {
+            BME690_DRIVER_Store_PAR_H4_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H5_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H5_LSB:
+        {
+            BME690_DRIVER_Get_PAR_H5_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H5_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H5_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H5_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H5_LSB:
+        {
+            BME690_DRIVER_Store_PAR_H5_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H5_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H5_MSB:
+        {
+            BME690_DRIVER_Get_PAR_H5_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H5_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H5_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H5_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H5_MSB:
+        {
+            BME690_DRIVER_Store_PAR_H5_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H6_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_H6_LSB:
+        {
+            BME690_DRIVER_Get_PAR_H6_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_H6_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_H6_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_H6_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_H6_LSB:
+        {
+            BME690_DRIVER_Store_PAR_H6_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P1_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P1_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P1_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P1_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P1_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P1_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P1_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P1_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P1_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P1_MSB:
+        {
+            BME690_DRIVER_Get_PAR_P1_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P1_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P1_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P1_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P1_MSB:
+        {
+            BME690_DRIVER_Store_PAR_P1_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P2_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P2_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P2_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P2_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P2_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P2_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P2_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P2_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P2_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P2_MSB:
+        {
+            BME690_DRIVER_Get_PAR_P2_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P2_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P2_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P2_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P2_MSB:
+        {
+            BME690_DRIVER_Store_PAR_P2_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P3_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P3_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P3_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P3_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P3_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P3_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P3_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P3_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P4_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P4_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P4_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P4_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P4_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P4_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P4_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P4_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P5_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P5_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P5_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P5_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P5_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P5_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P5_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P5_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P5_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P5_MSB:
+        {
+            BME690_DRIVER_Get_PAR_P5_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P5_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P5_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P5_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P5_MSB:
+        {
+            BME690_DRIVER_Store_PAR_P5_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P6_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P6_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P6_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P6_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P6_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P6_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P6_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P6_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P6_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P6_MSB:
+        {
+            BME690_DRIVER_Get_PAR_P6_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P6_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P6_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P6_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P6_MSB:
+        {
+            BME690_DRIVER_Store_PAR_P6_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P7_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P7_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P7_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P7_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P7_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P7_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P7_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P7_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P8_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P8_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P8_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P8_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P8_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P8_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P8_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P8_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P9_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P9_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P9_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P9_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P9_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P9_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P9_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P9_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P9_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P9_MSB:
+        {
+            BME690_DRIVER_Get_PAR_P9_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P9_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P9_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P9_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P9_MSB:
+        {
+            BME690_DRIVER_Store_PAR_P9_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P10_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P10_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P10_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P10_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P10_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P10_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P10_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P10_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P11_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_P11_LSB:
+        {
+            BME690_DRIVER_Get_PAR_P11_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_P11_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_P11_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_P11_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_P11_LSB:
+        {
+            BME690_DRIVER_Store_PAR_P11_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G1_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_G1_LSB:
+        {
+            BME690_DRIVER_Get_PAR_G1_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G1_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_G1_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_G1_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_G1_LSB:
+        {
+            BME690_DRIVER_Store_PAR_G1_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G2_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_G2_LSB:
+        {
+            BME690_DRIVER_Get_PAR_G2_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G2_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_G2_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_G2_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_G2_LSB:
+        {
+            BME690_DRIVER_Store_PAR_G2_LSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G2_MSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_G2_MSB:
+        {
+            BME690_DRIVER_Get_PAR_G2_MSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G2_MSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_G2_MSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_G2_MSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_G2_MSB:
+        {
+            BME690_DRIVER_Store_PAR_G2_MSB_Data();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G3_LSB;
+            break;
+        }
+
+        case BME690_DRIVER_STATE_GET_PAR_G3_LSB:
+        {
+            BME690_DRIVER_Get_PAR_G3_LSB_Data(bme690_driverData.I2C_ADDRESS[0]);
+            TIMER_DRIVER_Start_Bus_TMR();
+            bme690_driverData.state = BME690_DRIVER_STATE_GET_PAR_G3_LSB_WAIT_FOR_TRANSFER;
+            break;
+        }
+        case BME690_DRIVER_STATE_GET_PAR_G3_LSB_WAIT_FOR_TRANSFER:
+        {
+            if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_STORE_PAR_G3_LSB;
+            }
+            else if (DRV_I2C_TransferStatusGet(bme690_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                bme690_driverData.state = BME690_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+        case BME690_DRIVER_STATE_STORE_PAR_G3_LSB:
+        {
+            BME690_DRIVER_Store_PAR_G3_LSB_Data();
+            BME690_DRIVER_Set_Calibration_Registers();
+            BME690_DRIVER_Set_Task_Completed_Status(true);
+            bme690_driverData.state = BME690_DRIVER_STATE_IDLE;
             break;
         }
 

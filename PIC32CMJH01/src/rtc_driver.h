@@ -135,6 +135,14 @@ bool RTC_DRIVER_Get_Alarm_Status(void);
 
 void RTC_DRIVER_Set_Alarm_Status(bool STATUS);
 
+void RTC_DRIVER_Set_Init_Time(void);
+
+void RTC_DRIVER_Set_NTP_Time(uint32_t NTP_TIME);
+
+void RTC_DRIVER_Set_Alarm_Time(void);
+
+void RTC_DRIVER_Get_System_Time(void);
+
 void RTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
