@@ -364,6 +364,10 @@ void BMP585_DRIVER_Store_OSR_Eff(void);
 
 void BMP585_DRIVER_Set_OSR_Eff(uint8_t I2C_ADDRESS, uint8_t EFF);
 
+void BMP585_DRIVER_Calculate_Temperature(void);
+
+void BMP585_DRIVER_Calculate_Pressure(void);
+
 void BMP585_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
