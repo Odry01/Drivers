@@ -27,11 +27,10 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include "configuration.h"
 #include "definitions.h"
 
@@ -122,8 +121,8 @@ extern "C"
 #define SEN63C_CMD_SET_SENSOR_ALTITUDE_MSB                          0x67
 #define SEN63C_CMD_SET_SENSOR_ALTITUDE_LSB                          0x36
 
-#define SEN63C_I2C_RX_BUFFER_SIZE                                   32
-#define SEN63C_I2C_TX_BUFFER_SIZE                                   32
+#define SEN63C_I2C_RX_BUFFER_SIZE                                   64
+#define SEN63C_I2C_TX_BUFFER_SIZE                                   64
 
 // *****************************************************************************
 
@@ -177,18 +176,24 @@ typedef struct
 
 typedef struct
 {
-    char PRODUCT_NAME[32];
-    char SERIAL_NUMBER[32];
+    char PRODUCT_NAME[48];
+    char SERIAL_NUMBER[48];
+    int16_t T_VALUE;
+    int16_t H_VALUE;
+    int16_t CO2_VALUE;
+    int16_t T_RAW_VALUE;
+    int16_t H_RAW_VALUE;
+    int16_t T_HEATER_VALUE;
+    int16_t H_HEATER_VALUE;
     uint16_t DATA_READY_STATUS;
     uint16_t DEVICE_STATUS;
     uint16_t FW_VERSION;
+    uint16_t PM05_VALUE;
     uint16_t PM10_VALUE;
     uint16_t PM25_VALUE;
     uint16_t PM40_VALUE;
     uint16_t PM100_VALUE;
-    int16_t T_VALUE;
-    int16_t H_VALUE;
-    int16_t CO2_VALUE;
+    float PM05;
     float PM10;
     float PM25;
     float PM40;
@@ -200,18 +205,37 @@ typedef struct
 
 typedef struct
 {
-    uint8_t MODE_MSB;
-    uint8_t MODE_LSB;
-    uint8_t OFFSET_MSB;
-    uint8_t OFFSET_LSB;
-    uint8_t SET_HIGH_ALERT_MSB;
-    uint8_t SET_HIGH_ALERT_LSB;
-    uint8_t CLEAR_HIGH_ALERT_MSB;
-    uint8_t CLEAR_HIGH_ALERT_LSB;
-    uint8_t SET_LOW_ALERT_MSB;
-    uint8_t SET_LOW_ALERT_LSB;
-    uint8_t CLEAR_LOW_ALERT_MSB;
-    uint8_t CLEAR_LOW_ALERT_LSB;
+
+    struct
+    {
+        int8_t OFFSET_MSB;
+        int8_t OFFSET_LSB;
+        int8_t SLOPE_MSB;
+        int8_t SLOPE_LSB;
+        uint8_t TIME_CONSTANT_MSB;
+        uint8_t TIME_CONSTANT_LSB;
+        uint8_t SLOT_MSB;
+        uint8_t SLOT_LSB;
+    } TEMPERATURE_OFFSET_PARAMETERS;
+
+    struct
+    {
+        uint8_t K_MSB;
+        uint8_t K_LSB;
+        uint8_t P_MSB;
+        uint8_t P_LSB;
+        uint8_t T1_MSB;
+        uint8_t T1_LSB;
+        uint8_t T2_MSB;
+        uint8_t T2_LSB;
+    } TEMPERATURE_ACCELERATION_PARAMETERS;
+
+    uint8_t CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB;
+    uint8_t CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_LSB;
+    uint8_t AMBIENT_PRESSURE_MSB;
+    uint8_t AMBIENT_PRESSURE_LSB;
+    uint8_t SENSOR_ALTITUDE_MSB;
+    uint8_t SENSOR_ALTITUDE_LSB;
 } SEN63C_SENSOR_SETTINGS;
 
 // *****************************************************************************

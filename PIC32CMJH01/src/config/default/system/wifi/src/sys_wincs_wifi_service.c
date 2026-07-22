@@ -78,7 +78,7 @@ static OSAL_SEM_HANDLE_TYPE   g_bssFindResult;
 static WDRV_WINC_CONN_CFG     g_wifiCfg;
 
 // Array of Wi-Fi callback handlers, with a size defined by SYS_WINCS_WIFI_SERVICE_CB_MAX
-SYS_WINCS_WIFI_CALLBACK_t     g_wifiCallBackHandler[SYS_WINCS_WIFI_SERVICE_CB_MAX];
+static SYS_WINCS_WIFI_CALLBACK_t     g_wifiCallBackHandler[SYS_WINCS_WIFI_SERVICE_CB_MAX];
 
 
 /* ************************************************************************** */
@@ -224,7 +224,7 @@ static bool SYS_WINCS_WIFI_BssFindNotifyCallback
         OSAL_SEM_Post(&g_bssFindResult);
     }
 
-    return false;
+    return (index < ofTotal);
 }
 
 
@@ -261,9 +261,13 @@ static void SYS_WINCS_WIFI_ConnectNotifyCallback
 {
     SYS_WINCS_WIFI_CALLBACK_t wifi_cb_func = g_wifiCallBackHandler[1];
     
-    #if SYS_WINCS_WIFI_DEBUG_LOGS
+    #ifdef SYS_WINCS_WIFI_DEBUG_LOGS
     SYS_WINCS_WIFI_DBG_MSG("SYS_WINCS_WIFI_ConnectNotifyCallback : currentState %d\r\n",currentState);
-    #endif   
+    #endif
+    if (NULL == wifi_cb_func)
+    {
+        return;
+    }
     switch(currentState)
     {
         /* Association state is disconnected. */
@@ -338,6 +342,11 @@ static void SYS_WINCS_WIFI_DhcpEventCallback
 {
     SYS_WINCS_WIFI_CALLBACK_t wifi_cb_func = g_wifiCallBackHandler[1];
     
+    if (NULL == wifi_cb_func)
+    {
+        return;
+    }
+
     switch (eventType)
     {
         case WDRV_WINC_NETIF_EVENT_ADDR_UPDATE:
@@ -348,7 +357,7 @@ static void SYS_WINCS_WIFI_DhcpEventCallback
             {
                 if (WDRV_WINC_IP_ADDRESS_TYPE_IPV4 == pAddrUpdateInfo->type)
                 {
-                    char s[20];
+                    char s[24];
                     WDRV_WINC_UtilsIPAddressToString(&pAddrUpdateInfo->addr.v4, s, sizeof(s));
                     wifi_cb_func(SYS_WINCS_WIFI_DHCP_IPV4_COMPLETE,(uint8_t*) s);
                 }
@@ -356,7 +365,7 @@ static void SYS_WINCS_WIFI_DhcpEventCallback
                 {
                     char s[64];
                     WDRV_WINC_UtilsIPv6AddressToString(&pAddrUpdateInfo->addr.v6, s, sizeof(s));
-                    if(strstr(s,"fe80"))
+                    if(0 == strncmp(s, "fe80", 4))
                     {
                         wifi_cb_func(SYS_WINCS_WIFI_DHCP_IPV6_LOCAL_COMPLETE,(uint8_t*) s);
                     }
@@ -423,6 +432,11 @@ static void SYS_WINCS_WIFI_ResolveCallback
     char addrStr[64] = {""};
     SYS_WINCS_WIFI_CALLBACK_t wifi_cb_func = g_wifiCallBackHandler[1];
     
+    if (NULL == wifi_cb_func)
+    {
+        return;
+    }
+
     if(WDRV_WINC_DNS_STATUS_TIME_OUT == status)
     {
         SYS_WINCS_WIFI_DBG_MSG("DNS resolve Time Out (%d)\r\n", status);
@@ -446,6 +460,7 @@ static void SYS_WINCS_WIFI_ResolveCallback
     else
     {
         SYS_WINCS_WIFI_DBG_MSG("DNS resolve type error (%d)\r\n", pIPAddr->type);
+        return;
     }
     wifi_cb_func(SYS_WINCS_WIFI_DNS_RESOLVED, (void *)addrStr);
 }
@@ -480,8 +495,9 @@ static void SYS_WINCS_SYSTEM_TimeGetCurrentCallback
 )
 {
     struct tm *ptm;
+    time_t timeVal = (time_t)timeUTC;
     
-    ptm = gmtime(&timeUTC);
+    ptm = gmtime(&timeVal);
     static bool print = true;
 
     if(print == true)
@@ -495,7 +511,10 @@ static void SYS_WINCS_SYSTEM_TimeGetCurrentCallback
                     ptm->tm_mday, ptm->tm_mon+1, ptm->tm_year+1900);
             
             SYS_WINCS_WIFI_CALLBACK_t wifi_cb_func = g_wifiCallBackHandler[1];
-            wifi_cb_func(SYS_WINCS_WIFI_SNTP_UP, (void *)&timeUTC);
+            if (NULL != wifi_cb_func)
+            {
+                wifi_cb_func(SYS_WINCS_WIFI_SNTP_UP, (void *)&timeUTC);
+            }
             
             print = false;
         }
@@ -607,6 +626,11 @@ static void SYS_WINCS_WIFI_setRegDomainCallback
 {
     SYS_WINCS_WIFI_CALLBACK_t wifi_cb_func = g_wifiCallBackHandler[1];
     
+    if (NULL == wifi_cb_func)
+    {
+        return;
+    }
+
     if ((1 != index) || (1 != ofTotal) || (false == isCurrent) || 
         (NULL == pRegDomInfo) || (0 == pRegDomInfo->regDomainLen))
     {
@@ -856,8 +880,11 @@ SYS_WINCS_RESULT_t SYS_WINCS_WIFI_SrvCtrl
     {
         case SYS_WINCS_WIFI_GET_DRV_STATUS:
         {
-            *(int*)wifiHandle = '\0';
-            *(int*)wifiHandle = WDRV_WINC_Status(sysObj.drvWifiWinc);
+            /* Use SYS_STATUS* rather than int* to match the caller's type.
+             * Enum size is implementation-defined and may be smaller than int,
+             * so writing through an int* pointer can corrupt adjacent memory. */
+            *(SYS_STATUS*)wifiHandle = (SYS_STATUS)0;
+            *(SYS_STATUS*)wifiHandle = (SYS_STATUS)WDRV_WINC_Status(sysObj.drvWifiWinc);
             return SYS_WINCS_WIFI_GetWincsStatus(WDRV_WINC_STATUS_OK, __FUNCTION__, __LINE__); 
         }
         
@@ -985,6 +1012,7 @@ SYS_WINCS_RESULT_t SYS_WINCS_WIFI_SrvCtrl
         {
             SYS_WINCS_WIFI_SCAN_PARAM_t *scanParams = (SYS_WINCS_WIFI_SCAN_PARAM_t *)wifiHandle;
             
+            OSAL_SEM_Create(&g_bssFindResult, OSAL_SEM_TYPE_COUNTING, 255, 0);
             status = WDRV_WINC_BSSFindSetScanParameters(g_wdrvHandle, 0, 0, scanParams->scanTime, 0);
             if(status != WDRV_WINC_STATUS_OK)
             {

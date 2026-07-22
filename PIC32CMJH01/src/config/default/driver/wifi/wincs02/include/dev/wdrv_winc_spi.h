@@ -70,6 +70,11 @@ typedef struct
 
 } WDRV_WINC_SPI_CFG;
 
+#ifdef __cplusplus // Provide C++ Compatibility
+extern "C"
+{
+#endif
+
 //*******************************************************************************
 /*
   Function:
@@ -178,4 +183,7 @@ void WDRV_WINC_SPIInitialize(const WDRV_WINC_SPI_CFG *const pInitData);
 
 void WDRV_WINC_SPIDeinitialize(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* WDRV_WINC_SPI_H */

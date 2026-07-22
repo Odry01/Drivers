@@ -80,6 +80,7 @@ void FCM360W_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
 void FCM360W_DRIVER_Write_Command(char *MESSAGE)
 {
+    memset(fcm360w_driverData.TX_BUFFER, 0, sizeof (fcm360w_driverData.TX_BUFFER));
     sprintf(fcm360w_driverData.TX_BUFFER, "%s\r", MESSAGE);
     DRV_USART_WriteBufferAdd(fcm360w_driverData.USART_HANDLE, &fcm360w_driverData.TX_BUFFER, strlen(fcm360w_driverData.TX_BUFFER), &fcm360w_driverData.USART_BUFFER_HANDLE);
 }
@@ -156,7 +157,9 @@ void FCM360W_DRIVER_Tasks(void)
 
         case FCM360W_DRIVER_STATE_QRST_MESSAGE_TRANSMIT:
         {
-            FCM360W_DRIVER_Write_Command("AT+QRST");
+            char TX_BUFFER[FCM360W_TX_DATA_SIZE];
+            snprintf(TX_BUFFER, sizeof (TX_BUFFER), "AT+QRST");
+            FCM360W_DRIVER_Write_Command(TX_BUFFER);
             TIMER_DRIVER_Start_Bus_TMR();
             fcm360w_driverData.state = FCM360W_DRIVER_STATE_QRST_WAIT_FOR_MESSAGE_TRANSMIT;
             break;

@@ -148,6 +148,7 @@ extern "C" {
 /*** WiFi WINC Driver Configuration ***/
 #define WDRV_WINC_EIC_SOURCE
 #define WDRV_WINC_DEBUG_LEVEL               WDRV_WINC_DEBUG_TYPE_NONE
+#define WDRV_WINC_TASK_YIELD_TIME           0
 #define WDRV_WINC_DEV_RX_BUFF_SZ            1024
 #define WINC_SOCK_SLAB_ALLOC_MODE           1
 #define WDRV_WINC_DEV_SOCK_SLAB_NUM         16
@@ -158,6 +159,7 @@ extern "C" {
 #define WINC_SOCK_BUF_RX_PKT_BUF_NUM        5
 #define WINC_SOCK_BUF_TX_PKT_BUF_NUM        5
 #define WDRV_WINC_MOD_DISABLE_SYSLOG
+#define WDRV_WINC_MOD_DISABLE_HTTP
 
 /* I2C Driver Common Configuration Options */
 #define DRV_I2C_INSTANCES_NUMBER              (1U)

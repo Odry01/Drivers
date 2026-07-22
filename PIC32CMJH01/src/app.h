@@ -30,11 +30,10 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include "configuration.h"
 #include "definitions.h"
 
@@ -104,6 +103,7 @@ typedef struct
     bool I2C_ERROR;
     bool SPI_ERROR;
     bool UART_ERROR;
+    uint8_t ERROR_STATUS;
 } APP_DATA;
 
 // *****************************************************************************

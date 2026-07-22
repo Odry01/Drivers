@@ -35,4 +35,4 @@ MP_AS_DIR="C:\Applications\Microchip\XC32\bin"
 MP_LD_DIR="C:\Applications\Microchip\XC32\bin"
 MP_AR_DIR="C:\Applications\Microchip\XC32\bin"
 CMSIS_DIR=C:/Users/ondre/.mchp_packs/ARM/CMSIS/6.3.0
-DFP_DIR=C:/Users/ondre/.mchp_packs/Microchip/PIC32CM-JH_DFP/1.6.279
+DFP_DIR=C:/Users/ondre/.mchp_packs/Microchip/PIC32CM-JH_DFP/1.7.296

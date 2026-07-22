@@ -303,6 +303,7 @@ static void SYS_WINCS_NET_SocketEventCallback
     #endif
     if(event ==  WINC_SOCKET_EVENT_CLOSE)
     {
+        SYS_WINCS_NET_ConnIDDeleteBySocket(sockfd);
         net_cb_func(sockfd, SYS_WINCS_NET_SOCK_EVENT_CLOSED, NULL);
         return;
     }
@@ -317,7 +318,13 @@ static void SYS_WINCS_NET_SocketEventCallback
     {
         SYS_WINCS_NET_DBG_MSG("ERROR: Socket error %d from event %d\r\n", status, event);
         SYS_WINCS_NET_ConnIDDeleteBySocket(sockfd);
-        shutdown(sockfd, SHUT_RDWR);
+        /* Only call shutdown() if the socket was successfully opened in firmware.
+         * A failed open event means the socket handle is not yet live;
+         * calling shutdown() on it is incorrect and should be avoided. */
+        if (WINC_SOCKET_EVENT_OPEN != event)
+        {
+            shutdown(sockfd, SHUT_RDWR);
+        }
         return;
     }
 
@@ -327,6 +334,18 @@ static void SYS_WINCS_NET_SocketEventCallback
         {
             if (PF_UNSPEC == pConnID->remoteBindAddress.sin_family)
             {
+                if(SYS_WINCS_NET_SKT_ENCRYPTED == (pConnID->socketType & SYS_WINCS_NET_SKT_ENCRYPTED))
+                {
+                    if(0 == setsockopt(sockfd, IPPROTO_TLS, TLS_CONF_IDX, &g_tlsHandle, sizeof(int)))
+                    {
+                        SYS_WINCS_NET_DBG_MSG("setsockopt TLS SUCCESS\r\n");
+                    }
+                    else
+                    {
+                        SYS_WINCS_NET_DBG_MSG("setsockopt TLS FAIL errno : %d\r\n", errno);
+                    }
+                }
+
                 if (-1 == bind(sockfd, (struct sockaddr*)&pConnID->localBindAddress, sizeof(SYS_WINCS_NET_SOCK_ADDR_TYPE)))
                 {
                     SYS_WINCS_NET_DBG_MSG("ERROR: Failed to bind socket\r\n");
@@ -463,14 +482,18 @@ static void SYS_WINCS_NET_SocketEventCallback
 
             pConnID = SYS_WINCS_NET_ConnIDAdd(newSocket, pConnID->socketType, &pConnID->localBindAddress, &addr, false);
 
-            if (NULL != pConnID)
+            if (NULL == pConnID)
             {
-                #ifdef SYS_WINCS_NET_DEBUG_LOGS
-                SYS_WINCS_NET_connIDPrint();
-                #endif
-                pConnID->isConnected = true;
+                SYS_WINCS_NET_DBG_MSG("ERROR: CID table full, closing accepted socket\r\n");
+                shutdown(newSocket, SHUT_RDWR);
+                break;
             }
-            net_cb_func(sockfd, SYS_WINCS_NET_SOCK_EVENT_CLIENT_CONNECTED, NULL);
+
+            #ifdef SYS_WINCS_NET_DEBUG_LOGS
+            SYS_WINCS_NET_connIDPrint();
+            #endif
+            pConnID->isConnected = true;
+            net_cb_func(newSocket, SYS_WINCS_NET_SOCK_EVENT_CLIENT_CONNECTED, NULL);
             break;
         }
 
@@ -612,7 +635,7 @@ static SYS_WINCS_RESULT_t SYS_WINCS_NET_CreateSocket
     bool httpChkSum = false;
     SYS_WINCS_NET_SOCK_ADDR_TYPE addr;
     SYS_WINCS_NET_SOCKET_TYPE socketType = SYS_WINCS_NET_SKT_UNENCRYPTED;
-    static WDRV_WINC_IP_MULTI_ADDRESS IPAddress;
+    WDRV_WINC_IP_MULTI_ADDRESS IPAddress = {0};
 
     SYS_WINCS_RESULT_t result = SYS_WINCS_FAIL;
            
@@ -752,6 +775,20 @@ static SYS_WINCS_RESULT_t SYS_WINCS_NET_CreateSocket
             return SYS_WINCS_FAIL;
         }
     }
+    else if (socketCfg->bindType == SYS_WINCS_NET_BIND_MCAST)//multicast
+    {
+        if (NULL == SYS_WINCS_NET_ConnIDAdd(socketCfg->sockID, socketType, NULL, &addr, httpChkSum))
+        {
+            shutdown(socketCfg->sockID, SHUT_RDWR);
+            return SYS_WINCS_FAIL;
+        }
+    }
+    else
+    {
+        /* Unknown bind type â?? release the socket rather than leaking it */
+        shutdown(socketCfg->sockID, SHUT_RDWR);
+        return SYS_WINCS_FAIL;
+    }
     
     return SYS_WINCS_PASS;
 }
@@ -794,14 +831,29 @@ int16_t SYS_WINCS_NET_SockRead
     int16_t recvd_data_len = 0;
     recvd_data_len = recv(socket, buffer, length, 0);
 
-    if (-1 == recvd_data_len)
+    if (0 == recvd_data_len)
+    {
+        /* recv() returns 0 when the peer has closed the connection (orderly shutdown).
+         * Clean up local resources and notify the application. */
+        SYS_WINCS_NET_DBG_MSG("Socket %d peer disconnected\r\n", socket);
+        SYS_WINCS_NET_ConnIDDeleteBySocket(socket);
+        shutdown(socket, SHUT_RDWR);
+        if (g_SocketCallBackHandler[0] != NULL)
+        {
+            g_SocketCallBackHandler[0](socket, SYS_WINCS_NET_SOCK_EVENT_DISCONNECTED, NULL);
+        }
+    }
+    else if (-1 == recvd_data_len)
     {
         if ((EWOULDBLOCK != errno) && (EAGAIN != errno))
         {
-            #ifdef SYS_WINCS_NET_DEBUG_LOGS
-            SYS_WINCS_NET_DBG_MSG("Socket recv error %d %d\r\n",socket, errno);
+            SYS_WINCS_NET_DBG_MSG("Socket recv error %d %d\r\n", socket, errno);
             SYS_WINCS_NET_ConnIDDeleteBySocket(socket);
-            #endif
+            shutdown(socket, SHUT_RDWR);
+            if (g_SocketCallBackHandler[0] != NULL)
+            {
+                g_SocketCallBackHandler[0](socket, SYS_WINCS_NET_SOCK_EVENT_ERROR, NULL);
+            }
         }
     }
     return recvd_data_len;
@@ -1005,7 +1057,7 @@ SYS_WINCS_RESULT_t SYS_WINCS_NET_SockSrvCtrl
                 }
             }
             
-            if((tls_cfg_list->tlsKeyName != NULL) && (tls_cfg_list->tlsKeyName != NULL))
+            if((tls_cfg_list->tlsKeyName != NULL) && (tls_cfg_list->tlsKeyPassword != NULL))
             {
                 status =  WDRV_WINC_TLSCtxPrivKeySet(wdrvHandle, g_tlsHandle, tls_cfg_list->tlsKeyName, tls_cfg_list->tlsKeyPassword);
                 if (WDRV_WINC_STATUS_OK != status)

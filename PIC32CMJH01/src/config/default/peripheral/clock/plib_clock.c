@@ -47,8 +47,6 @@
 
 static void OSCCTRL_Initialize(void)
 {
-    uint32_t calibValue = (uint32_t)(((*(uint64_t*)0x00806020UL) >> 19 ) & 0x3fffffUL);
-    OSCCTRL_REGS->OSCCTRL_CAL48M = calibValue;
 
 
     /* Selection of the Division Value */
