@@ -763,7 +763,7 @@ void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f °C\r\n"
+             "Temperature: %.2f \xB0C\r\n"
              "Humidity: %.2f %%\r\n",
              bme690_sensorData.TEMPERATURE,
              bme690_sensorData.HUMIDITY

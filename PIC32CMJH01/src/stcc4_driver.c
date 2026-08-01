@@ -286,13 +286,13 @@ void STCC4_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "CO2: %.0f ppm\r\n"
-             "Temperature: %.2f °C\r\n"
+             "Temperature: %.2f \xB0C\r\n"
              "Humidity: %.2f %%\r\n"
+             "CO2: %.0f ppm\r\n"
              "Status: 0x%X\r\n",
-             stcc4_sensorData.CO2_PPM,
              stcc4_sensorData.CELSIUS_TEMPERATURE,
              stcc4_sensorData.HUMIDITY,
+             stcc4_sensorData.CO2_PPM,
              stcc4_sensorData.SENSOR_STATUS
              );
 }
