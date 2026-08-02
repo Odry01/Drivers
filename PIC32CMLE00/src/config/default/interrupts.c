@@ -79,14 +79,21 @@ void __attribute__((optimize("-O1"), long_call, noreturn, used))Dummy_Handler(vo
 }
 
 /* MISRAC 2023 deviation block start */
-/* MISRA C-2023 Rule 8.6 deviated 39 times.  Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
+/* MISRA C-2023 Rule 8.6 deviated 41 times.  Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
 /* Device vectors list dummy definition*/
 extern void SVCall_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PendSV_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SysTick_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void WDT_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_0_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_1_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_2_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_3_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_4_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_5_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_6_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_EXTINT_7_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
+extern void EIC_OTHER_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void NVMCTRL_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void DMAC_OTHER_Handler         ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void USB_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void EVSYS_0_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void EVSYS_1_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -97,17 +104,12 @@ extern void EVSYS_5_Handler            ( void ) __attribute__((weak, alias("Dumm
 extern void EVSYS_6_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void EVSYS_7_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PAC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM4_0_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM4_1_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM4_2_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void SERCOM4_OTHER_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM5_0_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM5_1_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM5_2_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void SERCOM5_OTHER_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TC0_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TC1_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void TC2_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TCC0_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TCC1_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TCC2_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -135,7 +137,7 @@ static void SYSTEM_Handler( void )
 
 
 /* MISRAC 2023 deviation block start */
-/* MISRA C-2023 Rule 2.8 deviated 39 times.  Deviation record ID -  H3_MISRAC_2023_R_2_8_DR_1 */
+/* MISRA C-2023 Rule 2.8 deviated 41 times.  Deviation record ID -  H3_MISRAC_2023_R_2_8_DR_1 */
 
 __attribute__ ((section(".vectors"), used))
 const H3DeviceVectors exception_table=
@@ -152,22 +154,22 @@ const H3DeviceVectors exception_table=
     .pfnSYSTEM_Handler             = SYSTEM_Handler,
     .pfnWDT_Handler                = WDT_Handler,
     .pfnRTC_Handler                = RTC_InterruptHandler,
-    .pfnEIC_EXTINT_0_Handler       = EIC_EXTINT_0_InterruptHandler,
-    .pfnEIC_EXTINT_1_Handler       = EIC_EXTINT_1_InterruptHandler,
-    .pfnEIC_EXTINT_2_Handler       = EIC_EXTINT_2_InterruptHandler,
-    .pfnEIC_EXTINT_3_Handler       = EIC_EXTINT_3_InterruptHandler,
-    .pfnEIC_EXTINT_4_Handler       = EIC_EXTINT_4_InterruptHandler,
-    .pfnEIC_EXTINT_5_Handler       = EIC_EXTINT_5_InterruptHandler,
-    .pfnEIC_EXTINT_6_Handler       = EIC_EXTINT_6_InterruptHandler,
-    .pfnEIC_EXTINT_7_Handler       = EIC_EXTINT_7_InterruptHandler,
-    .pfnEIC_OTHER_Handler          = EIC_OTHER_InterruptHandler,
+    .pfnEIC_EXTINT_0_Handler       = EIC_EXTINT_0_Handler,
+    .pfnEIC_EXTINT_1_Handler       = EIC_EXTINT_1_Handler,
+    .pfnEIC_EXTINT_2_Handler       = EIC_EXTINT_2_Handler,
+    .pfnEIC_EXTINT_3_Handler       = EIC_EXTINT_3_Handler,
+    .pfnEIC_EXTINT_4_Handler       = EIC_EXTINT_4_Handler,
+    .pfnEIC_EXTINT_5_Handler       = EIC_EXTINT_5_Handler,
+    .pfnEIC_EXTINT_6_Handler       = EIC_EXTINT_6_Handler,
+    .pfnEIC_EXTINT_7_Handler       = EIC_EXTINT_7_Handler,
+    .pfnEIC_OTHER_Handler          = EIC_OTHER_Handler,
     .pfnFREQM_Handler              = FREQM_InterruptHandler,
     .pfnNVMCTRL_Handler            = NVMCTRL_Handler,
     .pfnDMAC_0_Handler             = DMAC_0_InterruptHandler,
     .pfnDMAC_1_Handler             = DMAC_1_InterruptHandler,
     .pfnDMAC_2_Handler             = DMAC_2_InterruptHandler,
     .pfnDMAC_3_Handler             = DMAC_3_InterruptHandler,
-    .pfnDMAC_OTHER_Handler         = DMAC_OTHER_Handler,
+    .pfnDMAC_OTHER_Handler         = DMAC_OTHER_InterruptHandler,
     .pfnUSB_Handler                = USB_Handler,
     .pfnEVSYS_0_Handler            = EVSYS_0_Handler,
     .pfnEVSYS_1_Handler            = EVSYS_1_Handler,
@@ -194,17 +196,17 @@ const H3DeviceVectors exception_table=
     .pfnSERCOM3_1_Handler          = SERCOM3_SPI_InterruptHandler,
     .pfnSERCOM3_2_Handler          = SERCOM3_SPI_InterruptHandler,
     .pfnSERCOM3_OTHER_Handler      = SERCOM3_SPI_InterruptHandler,
-    .pfnSERCOM4_0_Handler          = SERCOM4_0_Handler,
-    .pfnSERCOM4_1_Handler          = SERCOM4_1_Handler,
-    .pfnSERCOM4_2_Handler          = SERCOM4_2_Handler,
-    .pfnSERCOM4_OTHER_Handler      = SERCOM4_OTHER_Handler,
+    .pfnSERCOM4_0_Handler          = SERCOM4_SPI_InterruptHandler,
+    .pfnSERCOM4_1_Handler          = SERCOM4_SPI_InterruptHandler,
+    .pfnSERCOM4_2_Handler          = SERCOM4_SPI_InterruptHandler,
+    .pfnSERCOM4_OTHER_Handler      = SERCOM4_SPI_InterruptHandler,
     .pfnSERCOM5_0_Handler          = SERCOM5_0_Handler,
     .pfnSERCOM5_1_Handler          = SERCOM5_1_Handler,
     .pfnSERCOM5_2_Handler          = SERCOM5_2_Handler,
     .pfnSERCOM5_OTHER_Handler      = SERCOM5_OTHER_Handler,
     .pfnTC0_Handler                = TC0_Handler,
     .pfnTC1_Handler                = TC1_Handler,
-    .pfnTC2_Handler                = TC2_Handler,
+    .pfnTC2_Handler                = TC2_TimerInterruptHandler,
     .pfnTCC0_Handler               = TCC0_Handler,
     .pfnTCC1_Handler               = TCC1_Handler,
     .pfnTCC2_Handler               = TCC2_Handler,

@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: rstc
-          x: '754'
-          y: '345'
+          x: '1381'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

@@ -342,19 +342,19 @@ SYSTEM_OBJECTS sysObj;
 // <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
 
 static const SYS_TIME_PLIB_INTERFACE sysTimePlibAPI = {
-    .timerCallbackSet = (SYS_TIME_PLIB_CALLBACK_REGISTER)SYSTICK_TimerCallbackSet,
-    .timerStart = (SYS_TIME_PLIB_START)SYSTICK_TimerStart,
-    .timerStop = (SYS_TIME_PLIB_STOP)SYSTICK_TimerStop,
-    .timerFrequencyGet = (SYS_TIME_PLIB_FREQUENCY_GET)SYSTICK_TimerFrequencyGet,
-    .timerInterruptRestore = (SYS_TIME_PLIB_INTERRUPT_RESTORE)SYSTICK_TimerInterruptRestore,
-    .timerInterruptDisable = (SYS_TIME_PLIB_INTERRUPT_DISABLE)SYSTICK_TimerInterruptDisable,
-    .timerPeriodSet = (SYS_TIME_PLIB_PERIOD_SET)SYSTICK_TimerPeriodSet,
+    .timerCallbackSet = (SYS_TIME_PLIB_CALLBACK_REGISTER)TC4_TimerCallbackRegister,
+    .timerStart = (SYS_TIME_PLIB_START)TC4_TimerStart,
+    .timerStop = (SYS_TIME_PLIB_STOP)TC4_TimerStop,
+    .timerFrequencyGet = (SYS_TIME_PLIB_FREQUENCY_GET)TC4_TimerFrequencyGet,
+    .timerPeriodSet = (SYS_TIME_PLIB_PERIOD_SET)TC4_Timer16bitPeriodSet,
+    .timerCompareSet = (SYS_TIME_PLIB_COMPARE_SET)TC4_Timer16bitCompareSet,
+    .timerCounterGet = (SYS_TIME_PLIB_COUNTER_GET)TC4_Timer16bitCounterGet,
 };
 
 static const SYS_TIME_INIT sysTimeInitData =
 {
     .timePlib = &sysTimePlibAPI,
-    .hwTimerIntNum = SysTick_IRQn,
+    .hwTimerIntNum = TC4_IRQn,
 };
 
 // </editor-fold>
@@ -433,6 +433,8 @@ void SYS_Initialize ( void* data )
     RTC_Initialize();
 
     FREQM_Initialize();
+
+    TC4_TimerInitialize();
 
 
     ADC0_Initialize();

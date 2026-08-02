@@ -120,7 +120,7 @@
     None.
 */
 
-/* MISRA C-2012 Rule 20.5 deviated:2 Deviation record ID -  H3_MISRAC_2012_R_20_5_DR_1 */
+/* MISRA C-2023 Rule 20.5 deviated:2 Deviation record ID -  H3_MISRAC_2023_R_20_5_DR_1 */
 #ifdef SYS_CONSOLE_PRINT
     #undef SYS_CONSOLE_PRINT
     #define SYS_CONSOLE_PRINT(fmt, ...)                 SYS_CONSOLE_Print(SYS_CONSOLE_DEFAULT_INSTANCE, fmt, ##__VA_ARGS__)

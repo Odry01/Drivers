@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: supc
-          x: '754'
-          y: '465'
+          x: '1653'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

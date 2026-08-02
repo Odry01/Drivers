@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: freqm
-coreVersion: 5.8.3
+coreVersion: 5.9.0
 device: PIC32CM5164LE00100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.25.0
+  version: v3.26.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: freqm
-          x: '636'
-          y: '175'
+          x: '1026'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -41,6 +41,7 @@ data:
     FREQM_REF_CLK_DIV:
       attributes:
         id: FREQM_REF_CLK_DIV
+        label: Divide reference clock by 8
       children:
       - children:
         - attributes:
@@ -51,6 +52,7 @@ data:
     FREQM_REF_CLOCK_FREQUENCY:
       attributes:
         id: FREQM_REF_CLOCK_FREQUENCY
+        label: FREQM_REF_CLOCK_FREQUENCY
       children:
       - children:
         - attributes:
@@ -62,6 +64,7 @@ data:
     FREQM_RESULT_RIGHT_SHIFT:
       attributes:
         id: FREQM_RESULT_RIGHT_SHIFT
+        label: FREQM_RESULT_RIGHT_SHIFT
       children:
       - children:
         - attributes:
@@ -70,4 +73,9 @@ data:
           type: Dynamic
         type: Values
       type: Integer
+    FREQM_REF_CLK_CYCLES:
+      attributes:
+        id: FREQM_REF_CLK_CYCLES
+        label: Measurement Time (Ref Cycles)
+      type: KeyValueSet
   userData: {}

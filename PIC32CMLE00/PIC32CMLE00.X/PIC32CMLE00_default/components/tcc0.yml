@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: tcc0
-coreVersion: 5.8.3
+coreVersion: 5.9.0
 device: PIC32CM5164LE00100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.25.0
+  version: v3.26.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: tcc0
-          x: '636'
-          y: '465'
+          x: '1688'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -224,6 +224,7 @@ data:
     TCC_MODULE_FREQUENCY:
       attributes:
         id: TCC_MODULE_FREQUENCY
+        label: TCC_MODULE_FREQUENCY
       children:
       - children:
         - attributes:
@@ -278,6 +279,7 @@ data:
     TCC_TIMER_PERIOD:
       attributes:
         id: TCC_TIMER_PERIOD
+        label: Period Register
       children:
       - children:
         - attributes:
@@ -289,6 +291,7 @@ data:
     TCC_TIMER_TIME_MS:
       attributes:
         id: TCC_TIMER_TIME_MS
+        label: Time
       children:
       - children:
         - attributes:

@@ -76,7 +76,7 @@ void __attribute__((optimize("-O1"), long_call, noreturn, used))Dummy_Handler(vo
 }
 
 /* MISRAC 2023 deviation block start */
-/* MISRA C-2023 Rule 8.6 deviated 23 times.  Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
+/* MISRA C-2023 Rule 8.6 deviated 22 times.  Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
 /* Device vectors list dummy definition*/
 extern void SVCall_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void PendSV_Handler             ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -94,7 +94,6 @@ extern void TC0_5_Handler              ( void ) __attribute__((weak, alias("Dumm
 extern void TC1_6_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TC2_7_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void TC3_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
-extern void TC4_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void ADC1_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void AC_Handler                 ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
 extern void DAC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler"),noreturn));
@@ -125,7 +124,7 @@ static void SERCOM1_7_Handler( void )
 
 
 /* MISRAC 2023 deviation block start */
-/* MISRA C-2023 Rule 2.8 deviated 23 times.  Deviation record ID -  H3_MISRAC_2023_R_2_8_DR_1 */
+/* MISRA C-2023 Rule 2.8 deviated 22 times.  Deviation record ID -  H3_MISRAC_2023_R_2_8_DR_1 */
 
 __attribute__ ((section(".vectors"), used))
 const H3DeviceVectors exception_table=
@@ -163,7 +162,7 @@ const H3DeviceVectors exception_table=
     .pfnTC1_6_Handler              = TC1_6_Handler,
     .pfnTC2_7_Handler              = TC2_7_Handler,
     .pfnTC3_Handler                = TC3_Handler,
-    .pfnTC4_Handler                = TC4_Handler,
+    .pfnTC4_Handler                = TC4_TimerInterruptHandler,
     .pfnADC0_Handler               = ADC0_InterruptHandler,
     .pfnADC1_Handler               = ADC1_Handler,
     .pfnAC_Handler                 = AC_Handler,

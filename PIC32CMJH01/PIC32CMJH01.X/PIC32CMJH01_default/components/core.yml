@@ -42,6 +42,7 @@ data:
     ADC0_CLOCK_FREQUENCY:
       attributes:
         id: ADC0_CLOCK_FREQUENCY
+        label: ADC0 Clock Frequency
       children:
       - children:
         - attributes:
@@ -108,6 +109,7 @@ data:
     CAN0_CLOCK_FREQUENCY:
       attributes:
         id: CAN0_CLOCK_FREQUENCY
+        label: CAN0 Clock Frequency
       children:
       - children:
         - attributes:
@@ -130,6 +132,7 @@ data:
     DAC_CLOCK_FREQUENCY:
       attributes:
         id: DAC_CLOCK_FREQUENCY
+        label: DAC Clock Frequency
       children:
       - children:
         - attributes:
@@ -688,6 +691,7 @@ data:
     EIC_CLOCK_FREQUENCY:
       attributes:
         id: EIC_CLOCK_FREQUENCY
+        label: EIC Clock Frequency
       children:
       - children:
         - attributes:
@@ -798,6 +802,7 @@ data:
     FREQM_MSR_CLOCK_FREQUENCY:
       attributes:
         id: FREQM_MSR_CLOCK_FREQUENCY
+        label: FREQM_MSR Clock Frequency
       children:
       - children:
         - attributes:
@@ -820,6 +825,7 @@ data:
     FREQM_REF_CLOCK_FREQUENCY:
       attributes:
         id: FREQM_REF_CLOCK_FREQUENCY
+        label: FREQM_REF Clock Frequency
       children:
       - children:
         - attributes:
@@ -842,6 +848,7 @@ data:
     GCLK_ID_18_FREQ:
       attributes:
         id: GCLK_ID_18_FREQ
+        label: 'Peripheral Channel 18 Frequency '
       children:
       - children:
         - attributes:
@@ -864,6 +871,7 @@ data:
     GCLK_ID_19_FREQ:
       attributes:
         id: GCLK_ID_19_FREQ
+        label: 'Peripheral Channel 19 Frequency '
       children:
       - children:
         - attributes:
@@ -886,6 +894,7 @@ data:
     GCLK_ID_20_FREQ:
       attributes:
         id: GCLK_ID_20_FREQ
+        label: 'Peripheral Channel 20 Frequency '
       children:
       - children:
         - attributes:
@@ -908,6 +917,7 @@ data:
     GCLK_ID_21_FREQ:
       attributes:
         id: GCLK_ID_21_FREQ
+        label: 'Peripheral Channel 21 Frequency '
       children:
       - children:
         - attributes:
@@ -930,6 +940,7 @@ data:
     GCLK_ID_26_FREQ:
       attributes:
         id: GCLK_ID_26_FREQ
+        label: 'Peripheral Channel 26 Frequency '
       children:
       - children:
         - attributes:
@@ -952,6 +963,7 @@ data:
     GCLK_ID_2_FREQ:
       attributes:
         id: GCLK_ID_2_FREQ
+        label: 'Peripheral Channel 2 Frequency '
       children:
       - children:
         - attributes:
@@ -974,6 +986,7 @@ data:
     GCLK_ID_36_FREQ:
       attributes:
         id: GCLK_ID_36_FREQ
+        label: 'Peripheral Channel 36 Frequency '
       children:
       - children:
         - attributes:
@@ -996,6 +1009,7 @@ data:
     GCLK_ID_38_FREQ:
       attributes:
         id: GCLK_ID_38_FREQ
+        label: 'Peripheral Channel 38 Frequency '
       children:
       - children:
         - attributes:
@@ -1018,6 +1032,7 @@ data:
     GCLK_ID_3_FREQ:
       attributes:
         id: GCLK_ID_3_FREQ
+        label: 'Peripheral Channel 3 Frequency '
       children:
       - children:
         - attributes:
@@ -1040,6 +1055,7 @@ data:
     GCLK_ID_4_FREQ:
       attributes:
         id: GCLK_ID_4_FREQ
+        label: 'Peripheral Channel 4 Frequency '
       children:
       - children:
         - attributes:
@@ -1073,17 +1089,19 @@ data:
     MCLK_APBC_INITIAL_VALUE:
       attributes:
         id: MCLK_APBC_INITIAL_VALUE
+        label: MCLK_APBC_INITIAL_VALUE
       children:
       - children:
         - attributes:
             id: core
-            value: '0x812027e'
+            value: '0x813027e'
           type: Dynamic
         type: Values
       type: String
     NVIC_-1_0_ENABLE:
       attributes:
         id: NVIC_-1_0_ENABLE
+        label: Enable System Tick Timer Interrupt
       children:
       - children:
         - attributes:
@@ -1095,6 +1113,7 @@ data:
     NVIC_-1_0_HANDLER_LOCK:
       attributes:
         id: NVIC_-1_0_HANDLER_LOCK
+        label: Handler Lock
       children:
       - children:
         - attributes:
@@ -1491,6 +1510,7 @@ data:
     SERCOM0_CORE_CLOCK_FREQUENCY:
       attributes:
         id: SERCOM0_CORE_CLOCK_FREQUENCY
+        label: SERCOM0_CORE Clock Frequency
       children:
       - children:
         - attributes:
@@ -1557,6 +1577,7 @@ data:
     SERCOM1_CORE_CLOCK_FREQUENCY:
       attributes:
         id: SERCOM1_CORE_CLOCK_FREQUENCY
+        label: SERCOM1_CORE Clock Frequency
       children:
       - children:
         - attributes:
@@ -1623,6 +1644,7 @@ data:
     SERCOM2_CORE_CLOCK_FREQUENCY:
       attributes:
         id: SERCOM2_CORE_CLOCK_FREQUENCY
+        label: SERCOM2_CORE Clock Frequency
       children:
       - children:
         - attributes:
@@ -1689,6 +1711,7 @@ data:
     SERCOM3_CORE_CLOCK_FREQUENCY:
       attributes:
         id: SERCOM3_CORE_CLOCK_FREQUENCY
+        label: SERCOM3_CORE Clock Frequency
       children:
       - children:
         - attributes:
@@ -1788,11 +1811,12 @@ data:
     SYSTICK_BUSY:
       attributes:
         id: SYSTICK_BUSY
+        label: Systick Busy
       children:
       - children:
         - attributes:
             id: core
-            value: 'true'
+            value: 'false'
           type: Dynamic
         type: Values
       type: Boolean
@@ -1838,6 +1862,7 @@ data:
     SYSTICK_PERIOD:
       attributes:
         id: SYSTICK_PERIOD
+        label: SysTick Period
       children:
       - children:
         - attributes:
@@ -1849,13 +1874,14 @@ data:
     SYSTICK_PERIOD_MS:
       attributes:
         id: SYSTICK_PERIOD_MS
+        label: Systick Period(Milliseconds)
       children:
       - children:
         - attributes:
             id: readOnly
           children:
           - type: Value
-            value: 'true'
+            value: 'false'
           type: Boolean
         type: Attributes
       - children:
@@ -1863,6 +1889,9 @@ data:
             id: core
             value: '1.0'
           type: Dynamic
+        - attributes:
+            value: '1.0'
+          type: User
         type: Values
       type: Float
     SYSTICK_PERIOD_MS_LONG_INT:
@@ -1879,6 +1908,7 @@ data:
     SYSTICK_PERIOD_US:
       attributes:
         id: SYSTICK_PERIOD_US
+        label: SYSTICK_PERIOD_US
       children:
       - children:
         - attributes:
@@ -1890,39 +1920,43 @@ data:
     SYSTICK_PUBLISH_CAPABILITIES:
       attributes:
         id: SYSTICK_PUBLISH_CAPABILITIES
+        label: Systick Publish Capabilities
       children:
       - children:
         - attributes:
             id: core
-            value: 'true'
+            value: 'false'
           type: Dynamic
         type: Values
       type: Boolean
     SYSTICK_SYS_TIME_COMPONENT_ID:
       attributes:
         id: SYSTICK_SYS_TIME_COMPONENT_ID
+        label: Component id
       children:
       - children:
         - attributes:
             id: core
-            value: sys_time
+            value: None
           type: Dynamic
         type: Values
       type: String
     SYSTICK_USED_BY_SYS_TIME:
       attributes:
         id: SYSTICK_USED_BY_SYS_TIME
+        label: Systick Used By SYS Time
       children:
       - children:
         - attributes:
             id: core
-            value: 'true'
+            value: 'false'
           type: Dynamic
         type: Values
       type: Boolean
     SysTick_INTERRUPT_ENABLE_UPDATE:
       attributes:
         id: SysTick_INTERRUPT_ENABLE_UPDATE
+        label: NVIC Peripheral Enable/Disable Update
       children:
       - children:
         - attributes:
@@ -1934,20 +1968,24 @@ data:
     USE_SYSTICK_INTERRUPT:
       attributes:
         id: USE_SYSTICK_INTERRUPT
+        label: Enable Interrupt
       children:
       - children:
         - attributes:
             id: readOnly
           children:
           - type: Value
-            value: 'true'
+            value: 'false'
           type: Boolean
         type: Attributes
       - children:
         - attributes:
             id: core
-            value: 'true'
+            value: 'false'
           type: Dynamic
+        - attributes:
+            value: 'true'
+          type: User
         type: Values
       type: Boolean
     XC32_HEAP_SIZE:
@@ -1963,20 +2001,24 @@ data:
     systickEnable:
       attributes:
         id: systickEnable
+        label: Enable SysTick
       children:
       - children:
         - attributes:
             id: readOnly
           children:
           - type: Value
-            value: 'true'
+            value: 'false'
           type: Boolean
         type: Attributes
       - children:
         - attributes:
             id: core
-            value: 'true'
+            value: 'false'
           type: Dynamic
+        - attributes:
+            value: 'true'
+          type: User
         type: Values
       type: Boolean
     systickSystemInitFile:
@@ -2121,6 +2163,7 @@ data:
     RTC_CLOCK_FREQUENCY:
       attributes:
         id: RTC_CLOCK_FREQUENCY
+        label: RTC Clock Frequency
       children:
       - children:
         - attributes:
@@ -2240,6 +2283,7 @@ data:
     GCLK_IO_5_FREQ:
       attributes:
         id: GCLK_IO_5_FREQ
+        label: External Output (GCLK_IO[5]) Frequency
       children:
       - children:
         - attributes:
@@ -2251,6 +2295,7 @@ data:
     GCLK_5_FREQ:
       attributes:
         id: GCLK_5_FREQ
+        label: GCLK5 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2262,6 +2307,7 @@ data:
     GCLK_IO_3_FREQ:
       attributes:
         id: GCLK_IO_3_FREQ
+        label: External Output (GCLK_IO[3]) Frequency
       children:
       - children:
         - attributes:
@@ -2273,6 +2319,7 @@ data:
     GCLK_3_FREQ:
       attributes:
         id: GCLK_3_FREQ
+        label: GCLK3 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2284,6 +2331,7 @@ data:
     GCLK_IO_7_FREQ:
       attributes:
         id: GCLK_IO_7_FREQ
+        label: External Output (GCLK_IO[7]) Frequency
       children:
       - children:
         - attributes:
@@ -2295,6 +2343,7 @@ data:
     GCLK_7_FREQ:
       attributes:
         id: GCLK_7_FREQ
+        label: GCLK7 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2306,6 +2355,7 @@ data:
     GCLK_IO_0_FREQ:
       attributes:
         id: GCLK_IO_0_FREQ
+        label: External Output (GCLK_IO[0]) Frequency
       children:
       - children:
         - attributes:
@@ -2317,6 +2367,7 @@ data:
     CPU_CLOCK_FREQUENCY:
       attributes:
         id: CPU_CLOCK_FREQUENCY
+        label: Main Clock Frequency
       children:
       - children:
         - attributes:
@@ -2328,6 +2379,7 @@ data:
     GCLK_0_FREQ:
       attributes:
         id: GCLK_0_FREQ
+        label: GCLK0 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2339,6 +2391,7 @@ data:
     GCLK_IO_4_FREQ:
       attributes:
         id: GCLK_IO_4_FREQ
+        label: External Output (GCLK_IO[4]) Frequency
       children:
       - children:
         - attributes:
@@ -2350,6 +2403,7 @@ data:
     GCLK_4_FREQ:
       attributes:
         id: GCLK_4_FREQ
+        label: GCLK4 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2361,6 +2415,7 @@ data:
     GCLK_8_FREQ:
       attributes:
         id: GCLK_8_FREQ
+        label: GCLK8 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2372,6 +2427,7 @@ data:
     GCLK_IO_6_FREQ:
       attributes:
         id: GCLK_IO_6_FREQ
+        label: External Output (GCLK_IO[6]) Frequency
       children:
       - children:
         - attributes:
@@ -2383,6 +2439,7 @@ data:
     GCLK_6_FREQ:
       attributes:
         id: GCLK_6_FREQ
+        label: GCLK6 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2394,6 +2451,7 @@ data:
     GCLK_IO_1_FREQ:
       attributes:
         id: GCLK_IO_1_FREQ
+        label: External Output (GCLK_IO[1]) Frequency
       children:
       - children:
         - attributes:
@@ -2405,6 +2463,7 @@ data:
     GCLK_IO_2_FREQ:
       attributes:
         id: GCLK_IO_2_FREQ
+        label: External Output (GCLK_IO[2]) Frequency
       children:
       - children:
         - attributes:
@@ -2416,6 +2475,7 @@ data:
     GCLK_2_FREQ:
       attributes:
         id: GCLK_2_FREQ
+        label: GCLK2 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2427,17 +2487,19 @@ data:
     GCLK_1_FREQ:
       attributes:
         id: GCLK_1_FREQ
+        label: GCLK1 Clock Frequency
       children:
       - children:
         - attributes:
             id: core
-            value: '0'
+            value: '1000000'
           type: Dynamic
         type: Values
       type: Integer
     DPLL96M_CLOCK_FREQ:
       attributes:
         id: DPLL96M_CLOCK_FREQ
+        label: FDPLL96M Clock Frequency
       children:
       - children:
         - attributes:
@@ -2449,11 +2511,12 @@ data:
     XOSC32K_FREQ:
       attributes:
         id: XOSC32K_FREQ
+        label: XOSC32K Clock Frequency
       children:
       - children:
         - attributes:
             id: core
-            value: '0'
+            value: '32768'
           type: Dynamic
         type: Values
       type: Integer
@@ -2480,6 +2543,7 @@ data:
     TCC0_CLOCK_FREQUENCY:
       attributes:
         id: TCC0_CLOCK_FREQUENCY
+        label: TCC0 Clock Frequency
       children:
       - children:
         - attributes:
@@ -2491,6 +2555,7 @@ data:
     GCLK_ID_28_FREQ:
       attributes:
         id: GCLK_ID_28_FREQ
+        label: 'Peripheral Channel 28 Frequency '
       children:
       - children:
         - attributes:
@@ -2524,6 +2589,7 @@ data:
     SysTick_INTERRUPT_ENABLE:
       attributes:
         id: SysTick_INTERRUPT_ENABLE
+        label: Vector Peripheral Enable
       children:
       - children:
         - attributes:
@@ -2535,6 +2601,7 @@ data:
     SysTick_INTERRUPT_HANDLER_LOCK:
       attributes:
         id: SysTick_INTERRUPT_HANDLER_LOCK
+        label: Vector Peripheral Handler Lock
       children:
       - children:
         - attributes:
@@ -2546,6 +2613,7 @@ data:
     SERCOM4_CORE_CLOCK_FREQUENCY:
       attributes:
         id: SERCOM4_CORE_CLOCK_FREQUENCY
+        label: SERCOM4_CORE Clock Frequency
       children:
       - children:
         - attributes:
@@ -2557,6 +2625,7 @@ data:
     GCLK_ID_22_FREQ:
       attributes:
         id: GCLK_ID_22_FREQ
+        label: 'Peripheral Channel 22 Frequency '
       children:
       - children:
         - attributes:
@@ -2948,6 +3017,7 @@ data:
     SERCOM5_CORE_CLOCK_FREQUENCY:
       attributes:
         id: SERCOM5_CORE_CLOCK_FREQUENCY
+        label: SERCOM5_CORE Clock Frequency
       children:
       - children:
         - attributes:
@@ -2959,6 +3029,7 @@ data:
     GCLK_ID_23_FREQ:
       attributes:
         id: GCLK_ID_23_FREQ
+        label: 'Peripheral Channel 23 Frequency '
       children:
       - children:
         - attributes:
@@ -4768,6 +4839,228 @@ data:
           type: User
         type: Values
       type: String
+    TC4_CLOCK_FREQUENCY:
+      attributes:
+        id: TC4_CLOCK_FREQUENCY
+        label: TC4 Clock Frequency
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '1000000'
+          type: Dynamic
+        type: Values
+      type: Integer
+    GCLK_ID_32_FREQ:
+      attributes:
+        id: GCLK_ID_32_FREQ
+        label: 'Peripheral Channel 32 Frequency '
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '1000000'
+          type: Dynamic
+        type: Values
+      type: Integer
+    GCLK_ID_32_CHEN:
+      attributes:
+        id: GCLK_ID_32_CHEN
+        label: Peripheral Channel 32 Clock Enable
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC4_CLOCK_ENABLE:
+      attributes:
+        id: TC4_CLOCK_ENABLE
+        label: TC4 Clock Enable
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC4_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: TC4_INTERRUPT_ENABLE_UPDATE
+        label: NVIC Peripheral Enable/Disable Update
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_24_0_ENABLE:
+      attributes:
+        id: NVIC_24_0_ENABLE
+        label: Enable Timer/Counter 4 Interrupt
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC4_INTERRUPT_ENABLE:
+      attributes:
+        id: TC4_INTERRUPT_ENABLE
+        label: Vector Peripheral Enable
+      children:
+      - children:
+        - attributes:
+            id: tc4
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_24_0_HANDLER:
+      attributes:
+        id: NVIC_24_0_HANDLER
+        label: Handler
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: TC4_TimerInterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    TC4_INTERRUPT_HANDLER:
+      attributes:
+        id: TC4_INTERRUPT_HANDLER
+        label: Vector Peripheral Handler
+      children:
+      - children:
+        - attributes:
+            id: tc4
+            value: TC4_TimerInterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    NVIC_24_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_24_0_HANDLER_LOCK
+        label: Handler Lock
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC4_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: TC4_INTERRUPT_HANDLER_LOCK
+        label: Vector Peripheral Handler Lock
+      children:
+      - children:
+        - attributes:
+            id: tc4
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    GCLK_CYCLE_FORMED:
+      attributes:
+        id: GCLK_CYCLE_FORMED
+        label: GCLK_CYCLE_FORMED
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    GCLK_INST_NUM1:
+      attributes:
+        id: GCLK_INST_NUM1
+        label: Enable Generic Clock Generator 1
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    GCLK_1_DIVIDER_VALUE:
+      attributes:
+        id: GCLK_1_DIVIDER_VALUE
+        label: GCLK_1_DIVIDER_VALUE
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: '48'
+          type: Dynamic
+        type: Values
+      type: Integer
+    GCLK_1_DIV:
+      attributes:
+        id: GCLK_1_DIV
+        label: Division Factor
+      children:
+      - children:
+        - attributes:
+            value: '48'
+          type: User
+        type: Values
+      type: Integer
+    GCLK_0_IMPROVE_DUTYCYCLE:
+      attributes:
+        id: GCLK_0_IMPROVE_DUTYCYCLE
+        label: Enable 50/50 Duty Cycle
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    GCLK_1_IMPROVE_DUTYCYCLE:
+      attributes:
+        id: GCLK_1_IMPROVE_DUTYCYCLE
+        label: Enable 50/50 Duty Cycle
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    XOSC32K_EN32K:
+      attributes:
+        id: XOSC32K_EN32K
+        label: Enable 32KHz Output
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    GCLK_ID_32_GENSEL:
+      attributes:
+        id: GCLK_ID_32_GENSEL
+        label: Generator Selection
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
   userData:
     children:
     - attributes:

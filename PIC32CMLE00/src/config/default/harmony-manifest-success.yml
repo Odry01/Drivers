@@ -4,19 +4,19 @@
 
 
 project: PIC32CMLE00
-creation_date: 2026-01-19T19:54:48.137+01:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2026-08-02T20:55:01.090+02:00[Europe/Prague]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 11
 mcc_mode: IDE            # [IDE|Standalone|Headless]
-mcc_version: v5.6.3
-mcc_core_version: v5.8.3
-mplabx_version: v6.25        # if MPLAB X plugin only
-harmony_version: v5.6.3
-compiler: XC32 5.00
+mcc_version: v5.7.0
+mcc_core_version: v5.9.0
+mplabx_version: v6.30        # if MPLAB X plugin only
+harmony_version: 1.7.0
+compiler: XC32 6.00
 
 modules:
-    - {name: "csp", version: "v3.25.0"}
-    - {name: "core", version: "v3.15.5"}
-    - {name: "CMSIS_5", version: "5.9.0"}
+    - {name: "CMSIS_6", version: "v6.3.0"}
+    - {name: "csp", version: "v3.26.0"}
+    - {name: "core", version: "v3.17.0"}
 
 packs:
     - {name: "PIC32CM-LE_DFP", version: "1.3.280"}

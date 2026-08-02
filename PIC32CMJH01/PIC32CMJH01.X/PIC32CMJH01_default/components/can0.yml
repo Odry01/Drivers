@@ -23,7 +23,7 @@ data:
       - attributes:
           id: can0
           x: '5'
-          y: '75'
+          y: '145'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -51,6 +51,7 @@ data:
     CALCULATED_DATA_BITRATE:
       attributes:
         id: CALCULATED_DATA_BITRATE
+        label: Calculated Bit Rate (Kbps)
       children:
       - children:
         - attributes:
@@ -62,6 +63,7 @@ data:
     CALCULATED_DATA_ERRORRATE:
       attributes:
         id: CALCULATED_DATA_ERRORRATE
+        label: Error %
       children:
       - children:
         - attributes:
@@ -73,6 +75,7 @@ data:
     CALCULATED_NOMINAL_BITRATE:
       attributes:
         id: CALCULATED_NOMINAL_BITRATE
+        label: Calculated Bit Rate (Kbps)
       children:
       - children:
         - attributes:
@@ -84,6 +87,7 @@ data:
     CALCULATED_NOMINAL_ERRORRATE:
       attributes:
         id: CALCULATED_NOMINAL_ERRORRATE
+        label: Error %
       children:
       - children:
         - attributes:
@@ -115,6 +119,7 @@ data:
     DATA_SAMPLE_POINT:
       attributes:
         id: DATA_SAMPLE_POINT
+        label: Sample Point %
       children:
       - children:
         - attributes:
@@ -134,6 +139,7 @@ data:
     DATA_TIME_QUANTA_PERIOD:
       attributes:
         id: DATA_TIME_QUANTA_PERIOD
+        label: Time Quanta (ns)
       children:
       - children:
         - attributes:
@@ -145,6 +151,7 @@ data:
     DBTP_DBRP:
       attributes:
         id: DBTP_DBRP
+        label: Bit Rate Prescaler
       children:
       - children:
         - attributes:
@@ -164,6 +171,7 @@ data:
     DBTP_DSJW:
       attributes:
         id: DBTP_DSJW
+        label: Synchronization Jump Width (TQ)
       children:
       - children:
         - attributes:
@@ -175,6 +183,7 @@ data:
     DBTP_DTSEG1:
       attributes:
         id: DBTP_DTSEG1
+        label: Time Segment Before Sample Point (TQ)
       children:
       - children:
         - attributes:
@@ -186,6 +195,7 @@ data:
     DBTP_DTSEG2:
       attributes:
         id: DBTP_DTSEG2
+        label: Time Segment After Sample Point (TQ)
       children:
       - children:
         - attributes:
@@ -197,6 +207,7 @@ data:
     DBTP_TOTAL_TIME_QUANTA:
       attributes:
         id: DBTP_TOTAL_TIME_QUANTA
+        label: Total Time Quanta (TQ)
       children:
       - children:
         - attributes:
@@ -208,6 +219,7 @@ data:
     NBTP_NBRP:
       attributes:
         id: NBTP_NBRP
+        label: Bit Rate Prescaler
       children:
       - children:
         - attributes:
@@ -227,6 +239,7 @@ data:
     NBTP_NSJW:
       attributes:
         id: NBTP_NSJW
+        label: Synchronization Jump Width (TQ)
       children:
       - children:
         - attributes:
@@ -238,6 +251,7 @@ data:
     NBTP_NTSEG1:
       attributes:
         id: NBTP_NTSEG1
+        label: Time Segment Before Sample Point (TQ)
       children:
       - children:
         - attributes:
@@ -249,6 +263,7 @@ data:
     NBTP_NTSEG2:
       attributes:
         id: NBTP_NTSEG2
+        label: Time Segment After Sample Point (TQ)
       children:
       - children:
         - attributes:
@@ -260,6 +275,7 @@ data:
     NBTP_TOTAL_TIME_QUANTA:
       attributes:
         id: NBTP_TOTAL_TIME_QUANTA
+        label: Total Time Quanta (TQ)
       children:
       - children:
         - attributes:
@@ -281,6 +297,7 @@ data:
     NOMINAL_SAMPLE_POINT:
       attributes:
         id: NOMINAL_SAMPLE_POINT
+        label: Sample Point %
       children:
       - children:
         - attributes:
@@ -300,6 +317,7 @@ data:
     NOMINAL_TIME_QUANTA_PERIOD:
       attributes:
         id: NOMINAL_TIME_QUANTA_PERIOD
+        label: Time Quanta (ns)
       children:
       - children:
         - attributes:
@@ -468,6 +486,7 @@ data:
     CAN_CORE_CLOCK_FREQ:
       attributes:
         id: CAN_CORE_CLOCK_FREQ
+        label: Clock Frequency
       children:
       - children:
         - attributes:

@@ -183,7 +183,7 @@ ssize_t Console_UART_ReadFreeBufferCountGet(uint32_t index)
     return nFreeBufferAvailable;
 }
 
-/* MISRA C-2012 Rule 11.8 deviated:1 Deviation record ID -  H3_MISRAC_2012_R_11_8_DR_1 */
+/* MISRA C-2023 Rule 11.8 deviated:1 Deviation record ID -  H3_MISRAC_2023_R_11_8_DR_1 */
 
 ssize_t Console_UART_Write(uint32_t index, const void* pWrBuffer, size_t count )
 {

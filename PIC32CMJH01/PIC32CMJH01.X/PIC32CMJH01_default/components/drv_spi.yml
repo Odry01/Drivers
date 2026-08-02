@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: drv_spi
-          x: '277'
-          y: '605'
+          x: '596'
+          y: '767'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

@@ -59,27 +59,22 @@
 void Reset_Handler (void);
 void NonMaskableInt_Handler (void);
 void HardFault_Handler (void);
+void SysTick_Handler (void);
 void OSC32KCTRL_InterruptHandler (void);
 void SUPC_InterruptHandler (void);
 void RTC_InterruptHandler (void);
-void EIC_EXTINT_0_InterruptHandler (void);
-void EIC_EXTINT_1_InterruptHandler (void);
-void EIC_EXTINT_2_InterruptHandler (void);
-void EIC_EXTINT_3_InterruptHandler (void);
-void EIC_EXTINT_4_InterruptHandler (void);
-void EIC_EXTINT_5_InterruptHandler (void);
-void EIC_EXTINT_6_InterruptHandler (void);
-void EIC_EXTINT_7_InterruptHandler (void);
-void EIC_OTHER_InterruptHandler (void);
 void FREQM_InterruptHandler (void);
 void DMAC_0_InterruptHandler (void);
 void DMAC_1_InterruptHandler (void);
 void DMAC_2_InterruptHandler (void);
 void DMAC_3_InterruptHandler (void);
+void DMAC_OTHER_InterruptHandler (void);
 void SERCOM0_USART_InterruptHandler (void);
 void SERCOM1_USART_InterruptHandler (void);
 void SERCOM2_I2C_InterruptHandler (void);
 void SERCOM3_SPI_InterruptHandler (void);
+void SERCOM4_SPI_InterruptHandler (void);
+void TC2_TimerInterruptHandler (void);
 void TRNG_InterruptHandler (void);
 
 

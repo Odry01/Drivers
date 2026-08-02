@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: sysNetRNWF
-          x: '581'
-          y: '237'
+          x: '755'
+          y: '136'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

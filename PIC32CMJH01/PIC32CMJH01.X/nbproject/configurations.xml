@@ -151,6 +151,10 @@
             <logicalFolder name="systick" displayName="systick" projectFiles="true">
               <itemPath>../src/config/default/peripheral/systick/plib_systick.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="tc" displayName="tc" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/tc/plib_tc_common.h</itemPath>
+              <itemPath>../src/config/default/peripheral/tc/plib_tc4.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="tcc" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc0.h</itemPath>
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc_common.h</itemPath>
@@ -390,6 +394,7 @@
           <itemPath>PIC32CMJH01_default/components/sysWifiRNWF.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom4.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/evsys.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/tc4.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/drv_i2c.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sys_time.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/supc.yml</itemPath>
@@ -539,6 +544,9 @@
             <logicalFolder name="systick" displayName="systick" projectFiles="true">
               <itemPath>../src/config/default/peripheral/systick/plib_systick.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="tc" displayName="tc" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/tc/plib_tc4.c</itemPath>
+            </logicalFolder>
             <logicalFolder name="tcc" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc0.c</itemPath>
             </logicalFolder>
@@ -687,6 +695,7 @@
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="cast-align" value="false"/>
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
@@ -765,6 +774,7 @@
         <property key="additional-options-use-response-files" value="false"/>
         <property key="additional-options-write-sla" value="false"/>
         <property key="allocate-dinit" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="code-dinit" value="false"/>
         <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
@@ -810,6 +820,7 @@
       <C32CPP>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="check-new" value="false"/>
         <property key="eh-specs" value="true"/>
         <property key="enable-app-io" value="false"/>

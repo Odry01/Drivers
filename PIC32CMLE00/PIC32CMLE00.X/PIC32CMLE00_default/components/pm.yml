@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: pm
-coreVersion: 5.8.3
+coreVersion: 5.9.0
 device: PIC32CM5164LE00100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.25.0
+  version: v3.26.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -27,5 +27,20 @@ data:
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
-  symbols: {}
+  symbols:
+    PM_PLCFG_PLSEL:
+      attributes:
+        id: PM_PLCFG_PLSEL
+        label: Performance Level Select
+      children:
+      - children:
+        - attributes:
+            id: pm
+            value: '1'
+          type: Dynamic
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
   userData: {}

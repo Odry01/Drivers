@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: sysMqttRNWF
-          x: '576'
-          y: '207'
+          x: '755'
+          y: '105'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

@@ -621,7 +621,7 @@ DRV_I2C_ERROR DRV_I2C_ErrorGet( const DRV_I2C_TRANSFER_HANDLE transferHandle );
     This function is available only in the asynchronous mode.
 
 */
- /* MISRA C-2012 Rule 8.6 deviated:6 Deviation record ID -  H3_MISRAC_2012_R_8_6_DR_1 */
+ /* MISRA C-2023 Rule 8.6 deviated:6 Deviation record ID -  H3_MISRAC_2023_R_8_6_DR_1 */
 
 void DRV_I2C_WriteTransferAdd(
     const DRV_HANDLE handle,

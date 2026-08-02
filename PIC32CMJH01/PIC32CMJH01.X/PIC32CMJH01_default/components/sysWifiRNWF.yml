@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: sysWifiRNWF
-          x: '571'
-          y: '177'
+          x: '755'
+          y: '75'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

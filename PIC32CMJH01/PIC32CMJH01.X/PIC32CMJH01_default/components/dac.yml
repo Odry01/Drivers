@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: dac
-          x: '754'
-          y: '75'
+          x: '909'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

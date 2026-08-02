@@ -344,6 +344,25 @@ SYSTEM_OBJECTS sysObj;
 // Section: System Initialization
 // *****************************************************************************
 // *****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
+
+static const SYS_TIME_PLIB_INTERFACE sysTimePlibAPI = {
+    .timerCallbackSet = (SYS_TIME_PLIB_CALLBACK_REGISTER)TC2_TimerCallbackRegister,
+    .timerStart = (SYS_TIME_PLIB_START)TC2_TimerStart,
+    .timerStop = (SYS_TIME_PLIB_STOP)TC2_TimerStop,
+    .timerFrequencyGet = (SYS_TIME_PLIB_FREQUENCY_GET)TC2_TimerFrequencyGet,
+    .timerPeriodSet = (SYS_TIME_PLIB_PERIOD_SET)TC2_Timer16bitPeriodSet,
+    .timerCompareSet = (SYS_TIME_PLIB_COMPARE_SET)TC2_Timer16bitCompareSet,
+    .timerCounterGet = (SYS_TIME_PLIB_COUNTER_GET)TC2_Timer16bitCounterGet,
+};
+
+static const SYS_TIME_INIT sysTimeInitData =
+{
+    .timePlib = &sysTimePlibAPI,
+    .hwTimerIntNum = TC2_IRQn,
+};
+
+// </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="SYS_CONSOLE Instance 0 Initialization Data">
 
 
@@ -412,13 +431,15 @@ void SYS_Initialize ( void* data )
 
     NVMCTRL_Initialize();
 
-
-    ADC_Initialize();
     SUPC_Initialize();
 
+
+    ADC_Initialize();
     RTC_Initialize();
 
     FREQM_Initialize();
+
+    TC2_TimerInitialize();
 
 	TRNG_Initialize();
 
@@ -428,11 +449,14 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_USART_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_USART_Initialize();
 
+    EVSYS_Initialize();
+
+	SYSTICK_TimerInitialize();
     DMAC_Initialize();
+
+    SERCOM4_SPI_Initialize();
 
     EIC_Initialize();
 
@@ -457,8 +481,14 @@ void SYS_Initialize ( void* data )
     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)&drvUsart0InitData);
 
 
-    /* MISRA C-2012 Rule 11.3, 11.8 deviated below. Deviation record ID -  
-     H3_MISRAC_2012_R_11_3_DR_1 & H3_MISRAC_2012_R_11_8_DR_1*/
+    /* MISRA C-2023 Rule 11.3, 11.8 deviated below. Deviation record ID -
+    H3_MISRAC_2023_R_11_3_DR_1 & H3_MISRAC_2023_R_11_8_DR_1*/
+    
+    sysObj.sysTime = SYS_TIME_Initialize(SYS_TIME_INDEX_0, (SYS_MODULE_INIT *)&sysTimeInitData);
+
+    /* MISRAC 2012 deviation block end */
+    /* MISRA C-2023 Rule 11.3, 11.8 deviated below. Deviation record ID -
+     H3_MISRAC_2023_R_11_3_DR_1 & H3_MISRAC_2023_R_11_8_DR_1*/
         sysObj.sysConsole0 = SYS_CONSOLE_Initialize(SYS_CONSOLE_INDEX_0, (SYS_MODULE_INIT *)&sysConsole0Init);
    /* MISRAC 2012 deviation block end */
 

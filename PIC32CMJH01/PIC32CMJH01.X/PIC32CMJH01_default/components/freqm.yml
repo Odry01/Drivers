@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: freqm
-          x: '754'
-          y: '225'
+          x: '1263'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -41,6 +41,7 @@ data:
     FREQM_REF_CLOCK_FREQUENCY:
       attributes:
         id: FREQM_REF_CLOCK_FREQUENCY
+        label: FREQM_REF_CLOCK_FREQUENCY
       children:
       - children:
         - attributes:
@@ -52,6 +53,7 @@ data:
     FREQM_RESULT_RIGHT_SHIFT:
       attributes:
         id: FREQM_RESULT_RIGHT_SHIFT
+        label: FREQM_RESULT_RIGHT_SHIFT
       children:
       - children:
         - attributes:

@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: divas
-          x: '754'
-          y: '125'
+          x: '1027'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph

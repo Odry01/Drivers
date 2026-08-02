@@ -1,0 +1,469 @@
+configVersion: 1.0.0
+componentName: tc2
+coreVersion: 5.9.0
+device: PIC32CM5164LE00100
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: tc2
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.26.0
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments:
+    children:
+    - children:
+      - attributes:
+          id: TC2_TMR
+        children:
+        - children:
+          - attributes:
+              id: targetComponentID
+            children:
+            - type: Value
+              value: sys_time
+            type: String
+          - attributes:
+              id: targetAttachmentID
+            children:
+            - type: Value
+              value: sys_time_TMR_dependency
+            type: String
+          type: Attributes
+        type: DirectCapability
+      type: Attachments
+    type: tc2
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: tc2
+          x: '159'
+          y: '35'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    CALLBACK_API_NAME:
+      attributes:
+        id: CALLBACK_API_NAME
+        label: CALLBACK_API_NAME
+      type: String
+    COMPARE_SET_API_NAME:
+      attributes:
+        id: COMPARE_SET_API_NAME
+        label: COMPARE_SET_API_NAME
+      type: String
+    COUNTER_GET_API_NAME:
+      attributes:
+        id: COUNTER_GET_API_NAME
+        label: COUNTER_GET_API_NAME
+      type: String
+    DVRT_COMPONENT_ID:
+      attributes:
+        id: DVRT_COMPONENT_ID
+        label: dvrt Component id
+      type: String
+    DVRT_PLIB_OPERATION_MODE:
+      attributes:
+        id: DVRT_PLIB_OPERATION_MODE
+        label: dvrt PLIB Operation Mode
+      type: String
+    FREQUENCY_GET_API_NAME:
+      attributes:
+        id: FREQUENCY_GET_API_NAME
+        label: FREQUENCY_GET_API_NAME
+      type: String
+    IRQ_ENUM_NAME:
+      attributes:
+        id: IRQ_ENUM_NAME
+        label: IRQ_ENUM_NAME
+      type: String
+    PERIOD_SET_API_NAME:
+      attributes:
+        id: PERIOD_SET_API_NAME
+        label: PERIOD_SET_API_NAME
+      type: String
+    SYS_TIME_COMPONENT_ID:
+      attributes:
+        id: SYS_TIME_COMPONENT_ID
+        label: Component id
+      children:
+      - children:
+        - attributes:
+            id: tc2
+            value: sys_time
+          type: Dynamic
+        type: Values
+      type: String
+    SYS_TIME_PLIB_OPERATION_MODE:
+      attributes:
+        id: SYS_TIME_PLIB_OPERATION_MODE
+        label: SysTime PLIB Operation Mode
+      children:
+      - children:
+        - attributes:
+            id: tc2
+            value: SYS_TIME_PLIB_MODE_COMPARE
+          type: Dynamic
+        type: Values
+      type: String
+    TC_CAPTURE_CTRLA_CAPTEN0:
+      attributes:
+        id: TC_CAPTURE_CTRLA_CAPTEN0
+        label: Enable Capture Channel 0
+      type: Boolean
+    TC_CAPTURE_CTRLA_CAPTEN1:
+      attributes:
+        id: TC_CAPTURE_CTRLA_CAPTEN1
+        label: Enable Capture Channel 1
+      type: Boolean
+    TC_CAPTURE_CTRLA_COPEN0:
+      attributes:
+        id: TC_CAPTURE_CTRLA_COPEN0
+        label: Capture Trigger Source
+      type: KeyValueSet
+    TC_CAPTURE_CTRLA_COPEN1:
+      attributes:
+        id: TC_CAPTURE_CTRLA_COPEN1
+        label: Capture Trigger Source
+      type: KeyValueSet
+    TC_CAPTURE_ERR_INTERRUPT_MODE:
+      attributes:
+        id: TC_CAPTURE_ERR_INTERRUPT_MODE
+        label: Enable Capture Error Interrupt
+      type: Boolean
+    TC_CAPTURE_EVCTRL_MCEO0:
+      attributes:
+        id: TC_CAPTURE_EVCTRL_MCEO0
+        label: Enable Capture 0 Event Out
+      type: Boolean
+    TC_CAPTURE_EVCTRL_MCEO1:
+      attributes:
+        id: TC_CAPTURE_EVCTRL_MCEO1
+        label: Enable Capture 1 Event Out
+      type: Boolean
+    TC_CAPTURE_INTSET_MC0:
+      attributes:
+        id: TC_CAPTURE_INTSET_MC0
+        label: Enable Capture 0 Interrupt
+      type: Boolean
+    TC_CAPTURE_INTSET_MC1:
+      attributes:
+        id: TC_CAPTURE_INTSET_MC1
+        label: Enable Capture 1 Interrupt
+      type: Boolean
+    TC_CAPTURE_OVF_INTERRUPT_MODE:
+      attributes:
+        id: TC_CAPTURE_OVF_INTERRUPT_MODE
+        label: Enable Capture Overflow Interrupt
+      type: Boolean
+    TC_CAPTURE_TRIGGER_ACTION0:
+      attributes:
+        id: TC_CAPTURE_TRIGGER_ACTION0
+        label: Capture Trigger Action
+      type: KeyValueSet
+    TC_CAPTURE_TRIGGER_EDGE0:
+      attributes:
+        id: TC_CAPTURE_TRIGGER_EDGE0
+        label: Capture Trigger Edge
+      type: KeyValueSet
+    TC_CAPTURE_TRIGGER_EDGE1:
+      attributes:
+        id: TC_CAPTURE_TRIGGER_EDGE1
+        label: Capture Trigger Edge
+      type: KeyValueSet
+    TC_COMPARE_CC0:
+      attributes:
+        id: TC_COMPARE_CC0
+        label: Compare 0 Value (Period)
+      type: Long
+    TC_COMPARE_CC1:
+      attributes:
+        id: TC_COMPARE_CC1
+        label: Compare 1 Value
+      type: Long
+    TC_COMPARE_CTRLBSET_DIR:
+      attributes:
+        id: TC_COMPARE_CTRLBSET_DIR
+        label: Counter Direction
+      type: KeyValueSet
+    TC_COMPARE_CTRLBSET_LUPD:
+      attributes:
+        id: TC_COMPARE_CTRLBSET_LUPD
+        label: Enable Double Buffering
+      type: Boolean
+    TC_COMPARE_CTRLBSET_ONESHOT:
+      attributes:
+        id: TC_COMPARE_CTRLBSET_ONESHOT
+        label: Enable One-Shot Mode
+      type: Boolean
+    TC_COMPARE_DRVCTRL_INVEN0:
+      attributes:
+        id: TC_COMPARE_DRVCTRL_INVEN0
+        label: Invert Output WO[0]
+      type: Boolean
+    TC_COMPARE_DRVCTRL_INVEN1:
+      attributes:
+        id: TC_COMPARE_DRVCTRL_INVEN1
+        label: Invert Output WO[1]
+      type: Boolean
+    TC_COMPARE_EVCTRL_EV:
+      attributes:
+        id: TC_COMPARE_EVCTRL_EV
+        label: Enable Compare Input Event
+      type: Boolean
+    TC_COMPARE_EVCTRL_EVACT:
+      attributes:
+        id: TC_COMPARE_EVCTRL_EVACT
+        label: Select Input Event Action
+      type: KeyValueSet
+    TC_COMPARE_EVCTRL_MCEO0:
+      attributes:
+        id: TC_COMPARE_EVCTRL_MCEO0
+        label: Enable Compare Match 0 Output Event
+      type: Boolean
+    TC_COMPARE_EVCTRL_MCEO1:
+      attributes:
+        id: TC_COMPARE_EVCTRL_MCEO1
+        label: Enable Compare Match 1 Output Event
+      type: Boolean
+    TC_COMPARE_EVCTRL_OVFEO:
+      attributes:
+        id: TC_COMPARE_EVCTRL_OVFEO
+        label: Enable Compare Period Overflow Event
+      type: Boolean
+    TC_COMPARE_EVCTRL_TCINV:
+      attributes:
+        id: TC_COMPARE_EVCTRL_TCINV
+        label: Invert Input Event
+      type: Boolean
+    TC_COMPARE_INTENSET_MC0:
+      attributes:
+        id: TC_COMPARE_INTENSET_MC0
+        label: Enable Compare Match 0 Interrupt
+      type: Boolean
+    TC_COMPARE_INTENSET_MC1:
+      attributes:
+        id: TC_COMPARE_INTENSET_MC1
+        label: Enable Compare Match 1 Interrupt
+      type: Boolean
+    TC_COMPARE_INTENSET_OVF:
+      attributes:
+        id: TC_COMPARE_INTENSET_OVF
+        label: Enable Period Interrupt
+      type: Boolean
+    TC_COMPARE_PERIOD:
+      attributes:
+        id: TC_COMPARE_PERIOD
+        label: Period Value
+      type: Long
+    TC_COMPARE_WAVE_WAVEGEN:
+      attributes:
+        id: TC_COMPARE_WAVE_WAVEGEN
+        label: Waveform Mode
+      type: KeyValueSet
+    TC_CTRLA_MODE:
+      attributes:
+        id: TC_CTRLA_MODE
+        label: Counter Mode
+      type: KeyValueSet
+    TC_CTRLA_ONDEMAND:
+      attributes:
+        id: TC_CTRLA_ONDEMAND
+        label: Clock On Demand
+      type: Boolean
+    TC_CTRLA_PRESCALER:
+      attributes:
+        id: TC_CTRLA_PRESCALER
+        label: Select Prescaler
+      type: KeyValueSet
+    TC_CTRLA_PRESCYNC:
+      attributes:
+        id: TC_CTRLA_PRESCYNC
+        label: Prescaler and Counter Synchronization
+      type: KeyValueSet
+    TC_CTRLA_RUNSTDBY:
+      attributes:
+        id: TC_CTRLA_RUNSTDBY
+        label: Run during Standby
+      type: Boolean
+    TC_FREQUENCY:
+      attributes:
+        id: TC_FREQUENCY
+        label: Clock Frequency
+      children:
+      - children:
+        - attributes:
+            id: tc2
+            value: '1000000'
+          type: Dynamic
+        type: Values
+      type: Integer
+    TC_INSTANCE_NAME:
+      attributes:
+        id: TC_INSTANCE_NAME
+        label: TC_INSTANCE_NAME
+      type: String
+    TC_NUM_CHANNELS:
+      attributes:
+        id: TC_NUM_CHANNELS
+        label: Number of capture channels
+      type: Integer
+    TC_OPERATION_MODE:
+      attributes:
+        id: TC_OPERATION_MODE
+        label: Operating Mode
+      type: Combo
+    TC_SLAVE_MODE:
+      attributes:
+        id: TC_SLAVE_MODE
+        label: Slave Mode
+      type: Boolean
+    TC_SYS_TIME_CONNECTED:
+      attributes:
+        id: TC_SYS_TIME_CONNECTED
+        label: TC_SYS_TIME_CONNECTED
+      children:
+      - children:
+        - attributes:
+            id: tc2
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC_TIMER_CTRLBSET_ONESHOT:
+      attributes:
+        id: TC_TIMER_CTRLBSET_ONESHOT
+        label: Enable One-Shot Mode
+      type: Boolean
+    TC_TIMER_EVCTRL_EV:
+      attributes:
+        id: TC_TIMER_EVCTRL_EV
+        label: Enable Timer Input Event
+      type: Boolean
+    TC_TIMER_EVCTRL_EVACT:
+      attributes:
+        id: TC_TIMER_EVCTRL_EVACT
+        label: Select Input Event Action
+      type: KeyValueSet
+    TC_TIMER_EVCTRL_OVFEO:
+      attributes:
+        id: TC_TIMER_EVCTRL_OVFEO
+        label: Enable Timer Period Overflow Event
+      type: Boolean
+    TC_TIMER_EVCTRL_TCINV:
+      attributes:
+        id: TC_TIMER_EVCTRL_TCINV
+        label: Invert Input Event
+      type: Boolean
+    TC_TIMER_INTENSET_MC1:
+      attributes:
+        id: TC_TIMER_INTENSET_MC1
+        label: Enable Timer Compare Interrupt
+      children:
+      - children:
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: tc2
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC_TIMER_INTENSET_OVF:
+      attributes:
+        id: TC_TIMER_INTENSET_OVF
+        label: Enable Timer Period Interrupt
+      children:
+      - children:
+        - attributes:
+            id: tc2
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    TC_TIMER_PERIOD:
+      attributes:
+        id: TC_TIMER_PERIOD
+        label: Timer Period
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '65535'
+          type: Long
+        type: Attributes
+      - children:
+        - attributes:
+            id: tc2
+            value: '-1'
+          type: Dynamic
+        type: Values
+      type: Long
+    TC_TIMER_TIME_MS:
+      attributes:
+        id: TC_TIMER_TIME_MS
+        label: Time
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '65.536'
+          type: Float
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      - children:
+        - attributes:
+            id: tc2
+            value: '0.0'
+          type: Dynamic
+        type: Values
+      type: Float
+    TC_TIMER_UNIT:
+      attributes:
+        id: TC_TIMER_UNIT
+        label: Timer Period Unit
+      type: Combo
+    TIMER_PERIOD_MAX:
+      attributes:
+        id: TIMER_PERIOD_MAX
+        label: TIMER_PERIOD_MAX
+      type: String
+    TIMER_START_API_NAME:
+      attributes:
+        id: TIMER_START_API_NAME
+        label: TIMER_START_API_NAME
+      type: String
+    TIMER_STOP_API_NAME:
+      attributes:
+        id: TIMER_STOP_API_NAME
+        label: TIMER_STOP_API_NAME
+      type: String
+    TIMER_WIDTH:
+      attributes:
+        id: TIMER_WIDTH
+        label: TIMER_WIDTH
+      type: Integer
+  userData: {}

@@ -23,7 +23,7 @@ data:
       - attributes:
           id: sercom5
           x: '5'
-          y: '495'
+          y: '565'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -31,6 +31,7 @@ data:
     I2CM_BAUD:
       attributes:
         id: I2CM_BAUD
+        label: I2C BAUD
       children:
       - children:
         - attributes:
@@ -255,6 +256,7 @@ data:
     SPI_BAUD_REG_VALUE:
       attributes:
         id: SPI_BAUD_REG_VALUE
+        label: SPI Baud
       children:
       - children:
         - attributes:
@@ -342,6 +344,7 @@ data:
     USART_BAUD_VALUE:
       attributes:
         id: USART_BAUD_VALUE
+        label: Baud Rate Value
       children:
       - children:
         - attributes:
@@ -397,6 +400,7 @@ data:
     USART_SAMPLE_COUNT:
       attributes:
         id: USART_SAMPLE_COUNT
+        label: No Of Samples
       children:
       - children:
         - attributes:
@@ -408,6 +412,7 @@ data:
     USART_SAMPLE_RATE:
       attributes:
         id: USART_SAMPLE_RATE
+        label: Sample Rate
       children:
       - children:
         - attributes:

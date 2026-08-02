@@ -82,6 +82,7 @@
               <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom3_spi_master.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom_spi_master_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom4_spi_master.h</itemPath>
               </logicalFolder>
               <logicalFolder name="usart" displayName="usart" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom1_usart.h</itemPath>
@@ -91,6 +92,13 @@
             </logicalFolder>
             <logicalFolder name="supc" displayName="supc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/supc/plib_supc.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="systick" displayName="systick" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/systick/plib_systick.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="tc" displayName="tc" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/tc/plib_tc_common.h</itemPath>
+              <itemPath>../src/config/default/peripheral/tc/plib_tc2.h</itemPath>
             </logicalFolder>
             <logicalFolder name="tcc" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc0.h</itemPath>
@@ -122,6 +130,11 @@
               <itemPath>../src/config/default/system/ports/sys_ports.h</itemPath>
               <itemPath>../src/config/default/system/ports/sys_ports_mapping.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="time" displayName="time" projectFiles="true">
+              <itemPath>../src/config/default/system/time/sys_time.h</itemPath>
+              <itemPath>../src/config/default/system/time/sys_time_definitions.h</itemPath>
+              <itemPath>../src/config/default/system/time/src/sys_time_local.h</itemPath>
+            </logicalFolder>
             <itemPath>../src/config/default/system/system.h</itemPath>
             <itemPath>../src/config/default/system/system_common.h</itemPath>
             <itemPath>../src/config/default/system/system_module.h</itemPath>
@@ -144,16 +157,19 @@
           <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
             <logicalFolder name="Core" displayName="Core" projectFiles="true">
               <logicalFolder name="Include" displayName="Include" projectFiles="true">
+                <logicalFolder name="m-profile" displayName="m-profile" projectFiles="true">
+                  <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/m-profile/cmsis_iccarm_m.h</itemPath>
+                  <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h</itemPath>
+                  <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/m-profile/cmsis_armclang_m.h</itemPath>
+                  <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/m-profile/armv8m_mpu.h</itemPath>
+                  <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/m-profile/armv7m_cachel1.h</itemPath>
+                </logicalFolder>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_version.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_iccarm.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_gcc.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armcc.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang_ltm.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/core_cm23.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/mpu_armv8.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cachel1_armv7.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/tz_context.h</itemPath>
               </logicalFolder>
             </logicalFolder>
@@ -253,35 +269,38 @@
                      displayName="PIC32CMLE00_default"
                      projectFiles="true">
         <logicalFolder name="components" displayName="components" projectFiles="true">
-          <itemPath>PIC32CMLE00_default/components/sercom1.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/rtc.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/HarmonyCore.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/cmsis.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/drv_i2c.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/pm.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/sys_console_0.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/opamp.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/adc.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/drv_i2c_0.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/evsys.yml</itemPath>
           <itemPath>PIC32CMLE00_default/components/sercom2.yml</itemPath>
           <itemPath>PIC32CMLE00_default/components/drv_usart.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/trng.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/core.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/drv_usart_0.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/drv_i2c_0.yml</itemPath>
           <itemPath>PIC32CMLE00_default/components/drv_spi.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/eic.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/supc.yml</itemPath>
           <itemPath>PIC32CMLE00_default/components/drv_spi_0.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/dac.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/sercom3.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/sercom0.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/sys_console.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/adc.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/HarmonyCore.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sys_console_0.yml</itemPath>
           <itemPath>PIC32CMLE00_default/components/rstc.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/nvmctrl.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/tcc0.yml</itemPath>
-          <itemPath>PIC32CMLE00_default/components/freqm.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/eic.yml</itemPath>
           <itemPath>PIC32CMLE00_default/components/dfp.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/supc.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sys_time.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/trng.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sercom3.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/freqm.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/core.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/drv_i2c.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/tc2.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/drv_usart_0.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/opamp.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/cmsis.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/tcc0.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/dac.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sercom0.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sercom4.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/rtc.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sercom1.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/evsys.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/sys_console.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/pm.yml</itemPath>
+          <itemPath>PIC32CMLE00_default/components/nvmctrl.yml</itemPath>
         </logicalFolder>
         <itemPath>PIC32CMLE00_default/mcc-config.mc4</itemPath>
       </logicalFolder>
@@ -366,6 +385,7 @@
               </logicalFolder>
               <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom3_spi_master.c</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/spi_master/plib_sercom4_spi_master.c</itemPath>
               </logicalFolder>
               <logicalFolder name="usart" displayName="usart" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom1_usart.c</itemPath>
@@ -374,6 +394,12 @@
             </logicalFolder>
             <logicalFolder name="supc" displayName="supc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/supc/plib_supc.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="systick" displayName="systick" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/systick/plib_systick.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="tc" displayName="tc" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/tc/plib_tc2.c</itemPath>
             </logicalFolder>
             <logicalFolder name="tcc" displayName="tcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tcc/plib_tcc0.c</itemPath>
@@ -395,6 +421,9 @@
             </logicalFolder>
             <logicalFolder name="int" displayName="int" projectFiles="true">
               <itemPath>../src/config/default/system/int/src/sys_int.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="time" displayName="time" projectFiles="true">
+              <itemPath>../src/config/default/system/time/src/sys_time.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <itemPath>../src/config/default/tasks.c</itemPath>
@@ -425,8 +454,8 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32CM-LE_DFP" vendor="Microchip" version="1.4.336"/>
         <pack name="CMSIS" vendor="ARM" version="6.3.0"/>
+        <pack name="PIC32CM-LE_DFP" vendor="Microchip" version="1.4.336"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -458,6 +487,7 @@
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="cast-align" value="false"/>
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
@@ -536,6 +566,7 @@
         <property key="additional-options-use-response-files" value="false"/>
         <property key="additional-options-write-sla" value="false"/>
         <property key="allocate-dinit" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="code-dinit" value="false"/>
         <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
@@ -581,6 +612,7 @@
       <C32CPP>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="check-new" value="false"/>
         <property key="eh-specs" value="true"/>
         <property key="enable-app-io" value="false"/>

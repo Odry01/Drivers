@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: sercom2
-coreVersion: 5.8.3
+coreVersion: 5.9.0
 device: PIC32CM5164LE00100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.25.0
+  version: v3.26.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments:
@@ -77,6 +77,7 @@ data:
     I2CM_BAUD:
       attributes:
         id: I2CM_BAUD
+        label: I2C BAUD
       children:
       - children:
         - attributes:
@@ -88,6 +89,7 @@ data:
     I2CS_SDASETUP_TIME_NS:
       attributes:
         id: I2CS_SDASETUP_TIME_NS
+        label: SDA Setup Time (ns)
       children:
       - children:
         - attributes:
@@ -101,6 +103,7 @@ data:
     I2CS_SDASETUP_TIME_REG_VALUE:
       attributes:
         id: I2CS_SDASETUP_TIME_REG_VALUE
+        label: SDA Setup Time Register Value
       children:
       - children:
         - attributes:
@@ -288,6 +291,7 @@ data:
     SPI_BAUD_REG_VALUE:
       attributes:
         id: SPI_BAUD_REG_VALUE
+        label: SPI Baud
       children:
       - children:
         - attributes:
@@ -321,6 +325,7 @@ data:
     USART_BAUD_VALUE:
       attributes:
         id: USART_BAUD_VALUE
+        label: Baud Rate Value
       children:
       - children:
         - attributes:
@@ -376,6 +381,7 @@ data:
     USART_SAMPLE_COUNT:
       attributes:
         id: USART_SAMPLE_COUNT
+        label: No Of Samples
       children:
       - children:
         - attributes:
@@ -387,6 +393,7 @@ data:
     USART_SAMPLE_RATE:
       attributes:
         id: USART_SAMPLE_RATE
+        label: Sample Rate
       children:
       - children:
         - attributes:

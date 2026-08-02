@@ -40,6 +40,7 @@ modules:
 - sys_console
 - sys_console_0
 - sys_time
+- tc4
 - tcc0
 generatedFileHashHistoryMap:
 - file: ..\src\ad9954_driver.c
@@ -65,9 +66,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\PIC32CM5164JH01100.ld
   hash: 342880b5026488987e3eaecac49a90fa597e6e62aaa2a958138af9137e7759de
 - file: ..\src\config\default\configuration.h
-  hash: fc70b0bdd9fa0e6878c78267212927f7c9e4668e1755a9a0ac8e898d23de8c8f
+  hash: ae9a6582e8f982d2bde1948af7d4e699917086c23942eadc50e25cbc0cd498fb
 - file: ..\src\config\default\definitions.h
-  hash: f77dbd84960ff8141c05c07f01f30b30851665c5d894d64dfb6500e724584778
+  hash: 2626aaacc95ef9ccbcd09f7c282e26197537ba014c93c6ff9a304b544958f137
 - file: ..\src\config\default\device.h
   hash: 04b157a2340644f4ee17c29e3bd72ef709c024d6c973aa94c33756458c76bf87
 - file: ..\src\config\default\device_cache.h
@@ -243,11 +244,11 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: 4460457d985f664a3dcd5a719dd869dec9348b072e04671de668948ee99faa56
 - file: ..\src\config\default\initialization.c
-  hash: dd22191af568372bd38dee685483a7b6ec86dc80a5820fe0af3e644b58a23786
+  hash: 40c18bc477f1fcf547a9946a10259258e825fd8ebe33345c78c47e5c765d3671
 - file: ..\src\config\default\interrupts.c
-  hash: 68b2d59c9b4d6d0b5512e2037e8b14372e0fd8b8524ccd01d64a41ed8912d7bf
+  hash: c6fecd6c07efcc7ff415e97428714d84a7051f547cc2b91d15186aa6a2874a31
 - file: ..\src\config\default\interrupts.h
-  hash: fda2c1419efef7da85a650c6ffbaa2bd285780b413d311e4a20a111467fd5f80
+  hash: de8a1bdaf5f6c6eca93c1ed5bb3078d151b619c46ab9f85d67b81530fbd10a8a
 - file: ..\src\config\default\libc_syscalls.c
   hash: c9afc1b1257829415a1a6746ce3744f0a768b339d59fff2ab3ca1fab58b2a916
 - file: ..\src\config\default\osal\osal.h
@@ -269,7 +270,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\can\plib_can_common.h
   hash: e0e3b54f69be9d8811bbe507f91daa443ae7bff5dc724ac51baebc160097b2d6
 - file: ..\src\config\default\peripheral\clock\plib_clock.c
-  hash: 5172d63a8cbf80b3350d9633005692073f1925ee65b2744dcd901f3300dce2d8
+  hash: 1972cb378bf25a08a2aad1f5b5fc0355ddb433cdab9e7c7a42725ce01c0d276a
 - file: ..\src\config\default\peripheral\clock\plib_clock.h
   hash: 01c269741541514e997ef61546f4dbb0e23f66e27c6a957162557f13b4638baf
 - file: ..\src\config\default\peripheral\dac\plib_dac.c
@@ -297,7 +298,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\freqm\plib_freqm.h
   hash: c506b3c4317c2ae7f9ef67320bf8faa373dafcb8ac8009ac308df530128a5449
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.c
-  hash: e90675169d101f014cfa97e418cd1b743f49c6adba76cc1b0771123602eb2de5
+  hash: 001066904523b646d49be0524e39f800af3d84c95d1aefbb0f1b839a1b28d6b0
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.h
   hash: 9936ac782115af41003255283fa2f603f4ff2212d16275b7c80ea8d067a9e208
 - file: ..\src\config\default\peripheral\nvmctrl\plib_nvmctrl.c
@@ -355,9 +356,15 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\supc\plib_supc.h
   hash: 87fbe6c238415886c190ff4dff80e2de63e19a5d88da1d4d3f4c1b885b167a0b
 - file: ..\src\config\default\peripheral\systick\plib_systick.c
-  hash: 53c844e97ba2bf0bb896b0a36c729587f39b3d06b048fe665c86385e1e234207
+  hash: 477dc28931fc8765d8ec33d4afa79cc5659731d4f37e20139b3f17242407c06c
 - file: ..\src\config\default\peripheral\systick\plib_systick.h
-  hash: 906fdb57ea1eab89769cc59ac156b2a153176ee216eff61a5aea93df34ca4101
+  hash: a189d32422a5de630f963f5ec70b0ee72a7718647f35bd391e13badd54e4f701
+- file: ..\src\config\default\peripheral\tc\plib_tc4.c
+  hash: 86cc8b173dfab855aaf5f6df5d34e98c72a71d89b66a5730dff251548372d39d
+- file: ..\src\config\default\peripheral\tc\plib_tc4.h
+  hash: 99a66048ea2e80b330842f59510bb9f643843de1adc1351ad2e9dea583ab4b40
+- file: ..\src\config\default\peripheral\tc\plib_tc_common.h
+  hash: 487b4f489229b8e16b24ab48ddc1f414b095585439f0e10d53b2285fc3979f63
 - file: ..\src\config\default\peripheral\tcc\plib_tcc0.c
   hash: 624eae604669c08eaa99991d1a106efa9278cbe17c0ade3cc768cee4b85bd7c8
 - file: ..\src\config\default\peripheral\tcc\plib_tcc0.h
@@ -425,13 +432,13 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\system\system_module.h
   hash: 7bfe351ce506b843c61e5be013b6e3bf2a6253d73f5db189dbaf0c4f494cb75a
 - file: ..\src\config\default\system\time\src\sys_time.c
-  hash: 7125d85005c3afb20cdca4509083568ad7975ac71b3ab36d60f86f325f430db5
+  hash: 4e733ffe4705a0b3f880391fe886ccb0e88c772c1f19c55b4a005747fbf6aa93
 - file: ..\src\config\default\system\time\src\sys_time_local.h
-  hash: b5911e9527666f333c003f69b86f92b9b88712a365d0d5f92c6e816e9f43b4c6
+  hash: df56f970664902417d798760e44978cf4b84c108cf0761647a383e91db76980c
 - file: ..\src\config\default\system\time\sys_time.h
   hash: 6357468f7670698b16bfb6439d9919ed38eba99d4f03277a8b43ac34586fa1b3
 - file: ..\src\config\default\system\time\sys_time_definitions.h
-  hash: bff2d3a629283b03b410a8e7cc15085267a8553202fac75c76a9aa3f61c57d78
+  hash: b8c332f36f8a6ed230dc25b1f9f7f2970699947567f80cb06534d405b7a0dd9d
 - file: ..\src\config\default\system\wifi\src\sys_wincs_wifi_service.c
   hash: 5deed944d287128e0fc48b1804552c01e90fa826752024cc0cdd3fb41cb2f1c0
 - file: ..\src\config\default\system\wifi\sys_wincs_wifi_service.h

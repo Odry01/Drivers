@@ -100,7 +100,7 @@ static bool SYS_TIME_ResourceLock(void)
 
         if(OSAL_MUTEX_Lock(&gSystemCounterObj.timerMutex, OSAL_WAIT_FOREVER) == OSAL_RESULT_SUCCESS)
         {
-            gSystemCounterObj.hwTimerIntStatus = gSystemCounterObj.timePlib->timerInterruptDisable();
+            gSystemCounterObj.hwTimerIntStatus = SYS_INT_SourceDisable(gSystemCounterObj.hwTimerIntNum);
             return true;
         }
         else
@@ -119,7 +119,7 @@ static bool SYS_TIME_ResourceLock(void)
 
 static void SYS_TIME_ResourceUnlock(void)
 {
-    gSystemCounterObj.timePlib->timerInterruptRestore(gSystemCounterObj.hwTimerIntStatus);
+    SYS_INT_SourceRestore(gSystemCounterObj.hwTimerIntNum, gSystemCounterObj.hwTimerIntStatus);
 
     if(gSystemCounterObj.interruptNestingCount == 0U)
     {
@@ -153,11 +153,66 @@ static SYS_TIME_TIMER_OBJ* SYS_TIME_GetTimerObject(SYS_TIME_HANDLE handle)
     return NULL;
 }
 
-static void SYS_TIME_RemoveFromList(SYS_TIME_TIMER_OBJ* delTimer)
+static void SYS_TIME_HwTimerCompareUpdate(void)
+{
+    uint64_t nextHwCounterValue = 0;
+    uint64_t currHwCounterValue;
+    SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ* )&gSystemCounterObj;
+    SYS_TIME_TIMER_OBJ* tmrActive = counterObj->tmrActive;
+
+    counterObj->hwTimerPreviousValue = counterObj->hwTimerCurrentValue;
+
+    if (tmrActive != NULL)
+    {
+        if (tmrActive->relativeTimePending > SYS_TIME_HW_COUNTER_HALF_PERIOD)
+        {
+            nextHwCounterValue = (uint64_t)counterObj->hwTimerCurrentValue + SYS_TIME_HW_COUNTER_HALF_PERIOD;
+        }
+        else
+        {
+            /* Use a non-volatile intermediate to prevent dual volatile access in single statement */
+            uint32_t relativeTimePending = tmrActive->relativeTimePending;
+            nextHwCounterValue = (uint64_t)counterObj->hwTimerCurrentValue + relativeTimePending;
+        }
+    }
+    else
+    {
+        nextHwCounterValue = (uint64_t)counterObj->hwTimerCurrentValue + SYS_TIME_HW_COUNTER_HALF_PERIOD;
+    }
+
+    currHwCounterValue = counterObj->timePlib->timerCounterGet();
+
+    /* The hardware counter has rolled over */
+    if (currHwCounterValue < counterObj->hwTimerPreviousValue)
+    {
+        currHwCounterValue = SYS_TIME_HW_COUNTER_PERIOD + currHwCounterValue;
+    }
+
+    /* Already elapsed or about elapse. Set compare value to immediately generate an interrupt */
+    if (nextHwCounterValue  < (currHwCounterValue + counterObj->hwTimerCompareMargin))
+    {
+        counterObj->hwTimerCompareValue = (uint32_t)currHwCounterValue + counterObj->hwTimerCompareMargin;
+    }
+    else
+    {
+        counterObj->hwTimerCompareValue = (uint32_t)nextHwCounterValue;
+    }
+
+    /* Compare value cannot be zero. */
+    if ((counterObj->hwTimerCompareValue & SYS_TIME_HW_COUNTER_PERIOD) == 0U)
+    {
+        counterObj->hwTimerCompareValue = 1;
+    }
+
+    counterObj->timePlib->timerCompareSet(counterObj->hwTimerCompareValue);
+}
+
+static bool SYS_TIME_RemoveFromList(SYS_TIME_TIMER_OBJ* delTimer)
 {
     SYS_TIME_COUNTER_OBJ* counter = (SYS_TIME_COUNTER_OBJ *)&gSystemCounterObj;
     SYS_TIME_TIMER_OBJ* tmr = counter->tmrActive;
     SYS_TIME_TIMER_OBJ* prevTmr = NULL;
+    bool isHeadTimerUpdated = false;
 
     tmr = counter->tmrActive;
 
@@ -171,7 +226,7 @@ static void SYS_TIME_RemoveFromList(SYS_TIME_TIMER_OBJ* delTimer)
     /* Could not find the timer in the list? return */
     if (tmr == NULL)
     {
-        return;
+        return isHeadTimerUpdated;
     }
 
     /* Add the deleted timer pending time to the next timer in the list */
@@ -186,6 +241,7 @@ static void SYS_TIME_RemoveFromList(SYS_TIME_TIMER_OBJ* delTimer)
     if (prevTmr == NULL)
     {
         counter->tmrActive = counter->tmrActive->tmrNext;
+        isHeadTimerUpdated = true;
     }
     else
     {
@@ -194,19 +250,22 @@ static void SYS_TIME_RemoveFromList(SYS_TIME_TIMER_OBJ* delTimer)
     }
 
     delTimer->tmrNext = NULL;
+
+    return isHeadTimerUpdated;
 }
 
-static void SYS_TIME_AddToList(SYS_TIME_TIMER_OBJ* newTimer)
+static bool SYS_TIME_AddToList(SYS_TIME_TIMER_OBJ* newTimer)
 {
     uint64_t total_time = 0;
     SYS_TIME_COUNTER_OBJ* counter = (SYS_TIME_COUNTER_OBJ* )&gSystemCounterObj;
     SYS_TIME_TIMER_OBJ* tmr = counter->tmrActive;
     SYS_TIME_TIMER_OBJ* prevTmr = NULL;
     uint32_t newTimerTime;
+    bool isHeadTimerUpdated = false;
 
     if (newTimer == NULL)
     {
-        return;
+        return isHeadTimerUpdated;
     }
 
     newTimerTime = newTimer->relativeTimePending;
@@ -216,6 +275,7 @@ static void SYS_TIME_AddToList(SYS_TIME_TIMER_OBJ* newTimer)
         /* Add the new timer to the top of the list */
         newTimer->relativeTimePending = newTimerTime;
         counter->tmrActive = newTimer;
+        isHeadTimerUpdated = true;
     }
     else
     {
@@ -238,6 +298,7 @@ static void SYS_TIME_AddToList(SYS_TIME_TIMER_OBJ* newTimer)
             counter->tmrActive = newTimer;
             /* head->next = previous head */
             newTimer->tmrNext = tmr;
+            isHeadTimerUpdated = true;
         }
         else
         {
@@ -255,6 +316,28 @@ static void SYS_TIME_AddToList(SYS_TIME_TIMER_OBJ* newTimer)
             newTimer->tmrNext->relativeTimePending -= newTimerTime;
         }
     }
+    return isHeadTimerUpdated;
+}
+
+static uint32_t SYS_TIME_GetElapsedCount(uint32_t hwTimerCurrentValue)
+{
+    SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ* )&gSystemCounterObj;
+    uint32_t elapsedCount = 0;
+    uint32_t hwTimerPreviousValue = counterObj->hwTimerPreviousValue;
+
+    /* Calculate the elapsed time since the last time the timers in the list
+     * were updated. */
+    if (hwTimerCurrentValue > hwTimerPreviousValue)
+    {
+        elapsedCount = hwTimerCurrentValue - hwTimerPreviousValue;
+    }
+    else
+    {
+        elapsedCount = (SYS_TIME_HW_COUNTER_PERIOD - hwTimerPreviousValue) + hwTimerCurrentValue + 1U;
+    }
+
+    return elapsedCount;
+
 }
 
 static uint32_t SYS_TIME_GetTotalElapsedCount(SYS_TIME_TIMER_OBJ* tmr)
@@ -263,6 +346,7 @@ static uint32_t SYS_TIME_GetTotalElapsedCount(SYS_TIME_TIMER_OBJ* tmr)
     SYS_TIME_TIMER_OBJ* tmrActive = counterObj->tmrActive;
     uint32_t pendingCount = 0;
     uint32_t elapsedCount = 0;
+    uint32_t hwTimerCurrentValue;
 
     if (tmr->active == false)
     {
@@ -276,9 +360,19 @@ static uint32_t SYS_TIME_GetTotalElapsedCount(SYS_TIME_TIMER_OBJ* tmr)
             pendingCount += tmrActive->relativeTimePending;
             tmrActive = tmrActive->tmrNext;
         }
-
         /* Add the pending time of the requested timer */
         pendingCount += tmrActive->relativeTimePending;
+        hwTimerCurrentValue = counterObj->timePlib->timerCounterGet();
+        elapsedCount = SYS_TIME_GetElapsedCount(hwTimerCurrentValue);
+
+        if (pendingCount >= elapsedCount)
+        {
+            pendingCount -= elapsedCount;
+        }
+        else
+        {
+            pendingCount = 0;
+        }
 
         if (tmrActive->requestedTime >= pendingCount)
         {
@@ -291,6 +385,59 @@ static uint32_t SYS_TIME_GetTotalElapsedCount(SYS_TIME_TIMER_OBJ* tmr)
     }
 
     return elapsedCount;
+}
+
+static void SYS_TIME_UpdateTimerList(uint32_t elapsedCount)
+{
+    SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ* )&gSystemCounterObj;
+    SYS_TIME_TIMER_OBJ* tmr = NULL;
+
+    tmr = counterObj->tmrActive;
+
+    while ((tmr != NULL) && (elapsedCount > 0U))
+    {
+        if (tmr->relativeTimePending >= elapsedCount)
+        {
+            tmr->relativeTimePending -= elapsedCount;
+            elapsedCount = 0;
+        }
+        else
+        {
+            /* The timer has probably expired */
+            elapsedCount -= tmr->relativeTimePending;
+            tmr->relativeTimePending = 0;
+        }
+        tmr = tmr->tmrNext;
+    }
+
+    counterObj->hwTimerPreviousValue = counterObj->hwTimerCurrentValue;
+}
+
+static void SYS_TIME_TimerAdd(SYS_TIME_TIMER_OBJ* newTimer)
+{
+    SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ* )&gSystemCounterObj;
+    uint32_t elapsedCount = 0;
+    bool isHeadTimerUpdated = false;
+    bool interruptState;
+
+    counterObj->hwTimerCurrentValue = counterObj->timePlib->timerCounterGet();
+
+    elapsedCount = SYS_TIME_GetElapsedCount(counterObj->hwTimerCurrentValue);
+
+    SYS_TIME_UpdateTimerList(elapsedCount);
+
+    interruptState = SYS_INT_Disable();
+    counterObj->swCounter64 = counterObj->swCounter64 + elapsedCount;
+    SYS_INT_Restore(interruptState);
+
+    isHeadTimerUpdated = SYS_TIME_AddToList(newTimer);
+
+    if (isHeadTimerUpdated == true)
+    {
+        interruptState = SYS_INT_Disable();
+        SYS_TIME_HwTimerCompareUpdate();
+        SYS_INT_Restore(interruptState);
+    }
 }
 
 static void SYS_TIME_ClientNotify(void)
@@ -314,18 +461,19 @@ static void SYS_TIME_ClientNotify(void)
             {
                 /* For periodic timers and delay timers, just remove from the list */
                 /* Removing from list does not clear active flag */
-                SYS_TIME_RemoveFromList(tmrActive);
+                (void) SYS_TIME_RemoveFromList(tmrActive);
                 if (tmrActive->type == SYS_TIME_SINGLE)
                 {
                     /* Delay timers become inactive after expiry. */
                     tmrActive->active = false;
                 }
             }
+
             if(tmrActive->callback != NULL)
             {
                 tmrActive->callback(tmrActive->context);
             }
-            /* Get the timer at the top of the list */
+
             tmrActive = counterObj->tmrActive;
         }
         else
@@ -335,29 +483,25 @@ static void SYS_TIME_ClientNotify(void)
     }
 }
 
-static void SYS_TIME_UpdateTime(void)
+static void SYS_TIME_UpdateTime(uint32_t elapsedCounts)
 {
     uint8_t i;
-    SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ* )&gSystemCounterObj;
-    SYS_TIME_TIMER_OBJ* tmr = NULL;
 
-    /* Decrement the counter of the timer at the head of the list */
-    tmr = counterObj->tmrActive;
+    SYS_TIME_UpdateTimerList(elapsedCounts);
 
-    if ((tmr != NULL) && (tmr->relativeTimePending > 0U))
-    {
-        tmr->relativeTimePending--;
-    }
-
-    /* Update the list and notify the clients */
     SYS_TIME_ClientNotify();
 
     /* Add the removed timers back into the linked list if the timer type is periodic. */
     for ( i = 0U; i < (uint32_t)SYS_TIME_MAX_TIMERS; i++)
     {
         /* tmrElapsed is cleared anytime a timer is stopped, started, reloaded
-         * or destroyed. tmrElapsedFlag is cleared when the application reads
-         * the status by calling the SYS_TIME_TimerPeriodHasExpired API.
+         * or destroyed.
+         * If timer is stopped from CB, there is no need to add it back to list
+         * If timer is started from CB, it is already added to list by start routine
+         * If timer is reloaded from CB, it is already added to list by reload routine
+         * If timer is destroyed from CB, there is no need to add it back to list
+         * Note: tmrElapsedFlag is cleared when the application reads the status
+         * by calling the SYS_TIME_TimerPeriodHasExpired API.
          */
         if (timers[i].tmrElapsed == true)
         {
@@ -367,7 +511,7 @@ static void SYS_TIME_UpdateTime(void)
             {
                 /* Reload the relative pending time with the requested time */
                 timers[i].relativeTimePending = timers[i].requestedTime;
-                SYS_TIME_AddToList(&timers[i]);
+               (void) SYS_TIME_AddToList(&timers[i]);
             }
         }
     }
@@ -377,18 +521,27 @@ static void SYS_TIME_PLIBCallback(uint32_t status, uintptr_t context)
 {
     SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ *)&gSystemCounterObj;
     SYS_TIME_TIMER_OBJ* tmrActive = counterObj->tmrActive;
+    uint32_t elapsedCount = 0;
+    bool interruptState;
 
-    counterObj->swCounter64++;
+    counterObj->hwTimerCurrentValue = counterObj->timePlib->timerCounterGet();
+
+    elapsedCount = SYS_TIME_GetElapsedCount(counterObj->hwTimerCurrentValue);
+
+    counterObj->swCounter64 = counterObj->swCounter64 + elapsedCount;
 
     if (tmrActive != NULL)
     {
         counterObj->interruptNestingCount++;
 
-        SYS_TIME_UpdateTime();
+        SYS_TIME_UpdateTime(elapsedCount);
 
         counterObj->interruptNestingCount--;
     }
 
+    interruptState = SYS_INT_Disable();
+    SYS_TIME_HwTimerCompareUpdate();
+    SYS_INT_Restore(interruptState);
 }
 
 static SYS_TIME_HANDLE SYS_TIME_TimerObjectCreate(
@@ -409,8 +562,7 @@ static SYS_TIME_HANDLE SYS_TIME_TimerObjectCreate(
     }
     if((gSystemCounterObj.status == SYS_STATUS_READY) && (period > 0U) && (period >= count))
     {
-        tmr = timers;
-        while(tmr < &timers[SYS_TIME_MAX_TIMERS])
+        for(tmr = timers; tmr < &timers[SYS_TIME_MAX_TIMERS]; tmr++)
         {
             if(tmr->inUse == false)
             {
@@ -426,40 +578,54 @@ static SYS_TIME_HANDLE SYS_TIME_TimerObjectCreate(
 
                 /* Assign a handle to this request. The timer handle must be unique. */
                 tmr->tmrHandle = (SYS_TIME_HANDLE) SYS_TIME_MAKE_HANDLE(gSysTimeTokenCount, (uint16_t)tmrObjIndex);
-
                 /* Update the token number. */
                 gSysTimeTokenCount = SYS_TIME_UPDATE_TOKEN(gSysTimeTokenCount);
 
                 tmrHandle = tmr->tmrHandle;
+
                 break;
             }
-            tmr++;
             tmrObjIndex++;
         }
     }
 
     SYS_TIME_ResourceUnlock();
+
     return tmrHandle;
 }
 
 /* MISRA C-2023 Rule 11.3 deviated:1 Deviation record ID -  H3_MISRAC_2023_R_11_3_DR_1 */
-static void SYS_TIME_CounterInit(const SYS_MODULE_INIT* init)
+static void SYS_TIME_CounterInit(SYS_MODULE_INIT* init)
 {
+    uint64_t numerator, numeratorRead;
     SYS_TIME_COUNTER_OBJ* counterObj = (SYS_TIME_COUNTER_OBJ *)&gSystemCounterObj;
-    const SYS_TIME_INIT* initData = (const SYS_TIME_INIT *)init;
+    SYS_TIME_INIT* initData = (SYS_TIME_INIT *)init;
 
     counterObj->timePlib = initData->timePlib;
-    counterObj->hwTimerTickFreq = (uint32_t)SYS_TIME_TICK_FREQ_IN_HZ;
+    counterObj->hwTimerFrequency = counterObj->timePlib->timerFrequencyGet();
+
+    /*num_timer_cnts = (execution_cycles * timer_freq)/cpu_freq*/
+    numerator = ((uint64_t)SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES * counterObj->hwTimerFrequency);
+    numeratorRead = (numerator/(uint64_t)SYS_TIME_CPU_CLOCK_FREQUENCY) + 2U;
+    counterObj->hwTimerCompareMargin = (uint32_t)numeratorRead;
+
     counterObj->hwTimerIntNum = initData->hwTimerIntNum;
+    counterObj->hwTimerPreviousValue = 0;
+    counterObj->hwTimerPeriodValue = SYS_TIME_HW_COUNTER_PERIOD;
+    counterObj->hwTimerCompareValue = SYS_TIME_HW_COUNTER_HALF_PERIOD;
 
     counterObj->swCounter64 = 0;
     counterObj->tmrActive = NULL;
     counterObj->interruptNestingCount = 0;
 
     counterObj->timePlib->timerCallbackSet(SYS_TIME_PLIBCallback, 0);
+    if (counterObj->timePlib->timerPeriodSet != NULL)
+    {
+        counterObj->timePlib->timerPeriodSet(counterObj->hwTimerPeriodValue);
+    }
+    counterObj->timePlib->timerCompareSet(counterObj->hwTimerCompareValue);
     counterObj->timePlib->timerStart();
 }
-
 /* MISRAC 2012 deviation block end */
 
 // *****************************************************************************
@@ -467,6 +633,9 @@ static void SYS_TIME_CounterInit(const SYS_MODULE_INIT* init)
 // Section: System Interface Functions
 // *****************************************************************************
 // *****************************************************************************
+
+/* MISRA C-2023 Rule 11.8 deviated:1 Deviation record ID -  H3_MISRAC_2023_R_11_8_DR_1 */
+
 SYS_MODULE_OBJ SYS_TIME_Initialize( const SYS_MODULE_INDEX index, const SYS_MODULE_INIT * const init )
 {
     if(init == NULL || index != (uint32_t)SYS_TIME_INDEX_0)
@@ -479,13 +648,15 @@ SYS_MODULE_OBJ SYS_TIME_Initialize( const SYS_MODULE_INDEX index, const SYS_MODU
         return SYS_MODULE_OBJ_INVALID;
     }
 
-    SYS_TIME_CounterInit((const SYS_MODULE_INIT *)init);
+    SYS_TIME_CounterInit((SYS_MODULE_INIT *)init);
     (void) memset(timers, 0, sizeof(timers));
 
     gSystemCounterObj.status = SYS_STATUS_READY;
 
     return (SYS_MODULE_OBJ)&gSystemCounterObj;
 }
+
+/* MISRAC 2012 deviation block end */
 
 void SYS_TIME_Deinitialize ( SYS_MODULE_OBJ object )
 {
@@ -498,8 +669,8 @@ void SYS_TIME_Deinitialize ( SYS_MODULE_OBJ object )
 
     counterObj->timePlib->timerStop();
 
-    (void) memset(&timers, 0, sizeof(timers));
-    (void) memset(&gSystemCounterObj, 0, sizeof(gSystemCounterObj));
+   (void) memset(&timers, 0, sizeof(timers));
+   (void) memset(&gSystemCounterObj, 0, sizeof(gSystemCounterObj));
 
     counterObj->status = SYS_STATUS_UNINITIALIZED;
 
@@ -526,18 +697,21 @@ SYS_STATUS SYS_TIME_Status ( SYS_MODULE_OBJ object )
 // *****************************************************************************
 uint32_t SYS_TIME_FrequencyGet ( void )
 {
-    return (uint32_t)gSystemCounterObj.hwTimerTickFreq;
+    return gSystemCounterObj.hwTimerFrequency;
 }
 
 uint64_t SYS_TIME_Counter64Get ( void )
 {
     SYS_TIME_COUNTER_OBJ * counterObj = (SYS_TIME_COUNTER_OBJ *)&gSystemCounterObj;
     uint64_t counter64 = 0;
+    uint32_t elapsedCount;
     bool interruptState;
 
-	interruptState = SYS_INT_Disable();
+    interruptState = SYS_INT_Disable();
 
-    counter64 = counterObj->swCounter64;
+    elapsedCount = SYS_TIME_GetElapsedCount(counterObj->timePlib->timerCounterGet());
+
+    counter64 = counterObj->swCounter64 + elapsedCount;
 
     SYS_INT_Restore(interruptState);
 
@@ -557,43 +731,33 @@ void SYS_TIME_CounterSet ( uint32_t count )
 {
     bool interruptState;
 
-	interruptState = SYS_INT_Disable();
+    interruptState = SYS_INT_Disable();
 
     gSystemCounterObj.swCounter64 = count;
 
     SYS_INT_Restore(interruptState);
 }
 
-/* MISRA C-2023 Rule 10.8 deviated:2 Deviation record ID -  H3_MISRAC_2023_R_10_8_DR_1 */
-
 uint32_t  SYS_TIME_CountToUS ( uint32_t count )
 {
-    return (uint32_t) (((uint64_t)count * 1000000u) / gSystemCounterObj.hwTimerTickFreq);
+    return (uint32_t) (((uint64_t)count * 1000000U) / gSystemCounterObj.hwTimerFrequency);
 }
 
 uint32_t  SYS_TIME_CountToMS ( uint32_t count )
 {
-    return (uint32_t) (((uint64_t)count * 1000u) / gSystemCounterObj.hwTimerTickFreq);
+    return (uint32_t) (((uint64_t)count * 1000U) / gSystemCounterObj.hwTimerFrequency);
 }
-
-/* MISRA C-2023 Rule 10.1 deviated:2 Deviation record ID -  H3_MISRAC_2023_R_10_1_DR_1 */
-
-/* MISRAC 2012 deviation block end */
 
 uint32_t SYS_TIME_USToCount ( uint32_t us )
 {
-    uint32_t count = (uint32_t)(((uint64_t)us * gSystemCounterObj.hwTimerTickFreq) / 1000000UL);
-
-    return count;
+    return (uint32_t) ((us * (uint64_t) gSystemCounterObj.hwTimerFrequency) / 1000000U);
 }
 
 uint32_t SYS_TIME_MSToCount ( uint32_t ms )
 {
-    uint32_t count = (uint32_t)(((uint64_t)ms * gSystemCounterObj.hwTimerTickFreq) / 1000UL);
-
-    return count;
+    return (uint32_t) (( ms * (uint64_t) gSystemCounterObj.hwTimerFrequency) / 1000U);
 }
-/* MISRAC 2012 deviation block end */
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -648,7 +812,7 @@ SYS_TIME_RESULT SYS_TIME_TimerReload(
     if((tmr != NULL) && (period > 0U) && (period >= count))
     {
         /* Temporarily remove the timer from the list. Update and then add it back */
-        SYS_TIME_RemoveFromList(tmr);
+        (void) SYS_TIME_RemoveFromList(tmr);
         tmr->tmrElapsedFlag = false;
         tmr->tmrElapsed = false;
         tmr->type = type;
@@ -656,12 +820,19 @@ SYS_TIME_RESULT SYS_TIME_TimerReload(
         tmr->relativeTimePending = period - count;
         tmr->callback = callBack;
         tmr->context = context;
-        SYS_TIME_AddToList(tmr);
+        if (gSystemCounterObj.interruptNestingCount == 0U)
+        {
+            (void) SYS_TIME_TimerAdd(tmr);
+        }
+        else
+        {
+            (void) SYS_TIME_AddToList(tmr);
+        }
         tmr->active = true;
         result = SYS_TIME_SUCCESS;
     }
 
-    SYS_TIME_ResourceUnlock();
+    (void) SYS_TIME_ResourceUnlock();
     return result;
 }
 
@@ -681,7 +852,7 @@ SYS_TIME_RESULT SYS_TIME_TimerDestroy(SYS_TIME_HANDLE handle)
     {
         if(tmr->active == true)
         {
-            SYS_TIME_RemoveFromList(tmr);
+            (void) SYS_TIME_RemoveFromList(tmr);
             tmr->active = false;
         }
         tmr->tmrElapsedFlag = false;
@@ -690,7 +861,7 @@ SYS_TIME_RESULT SYS_TIME_TimerDestroy(SYS_TIME_HANDLE handle)
         result = SYS_TIME_SUCCESS;
     }
 
-    SYS_TIME_ResourceUnlock();
+    (void) SYS_TIME_ResourceUnlock();
     return result;
 }
 
@@ -718,9 +889,14 @@ SYS_TIME_RESULT SYS_TIME_TimerStart(SYS_TIME_HANDLE handle)
             {
                 tmr->relativeTimePending = tmr->requestedTime;
             }
-
-            SYS_TIME_AddToList(tmr);
-
+            if (gSystemCounterObj.interruptNestingCount == 0U)
+            {
+                SYS_TIME_TimerAdd(tmr);
+            }
+            else
+            {
+                (void) SYS_TIME_AddToList(tmr);
+            }
             tmr->tmrElapsedFlag = false;
             tmr->tmrElapsed = false;
             tmr->active = true;
@@ -728,7 +904,7 @@ SYS_TIME_RESULT SYS_TIME_TimerStart(SYS_TIME_HANDLE handle)
         result = SYS_TIME_SUCCESS;
     }
 
-    SYS_TIME_ResourceUnlock();
+    (void) SYS_TIME_ResourceUnlock();
     return result;
 }
 
@@ -748,7 +924,7 @@ SYS_TIME_RESULT SYS_TIME_TimerStop(SYS_TIME_HANDLE handle)
     {
         if (tmr->active == true)
         {
-            SYS_TIME_RemoveFromList(tmr);
+            (void) SYS_TIME_RemoveFromList(tmr);
             tmr->tmrElapsedFlag = false;
             tmr->tmrElapsed = false;
             tmr->active = false;
@@ -758,7 +934,7 @@ SYS_TIME_RESULT SYS_TIME_TimerStop(SYS_TIME_HANDLE handle)
         result = SYS_TIME_SUCCESS;
     }
 
-    SYS_TIME_ResourceUnlock();
+    (void) SYS_TIME_ResourceUnlock();
     return result;
 }
 
@@ -766,6 +942,7 @@ SYS_TIME_RESULT SYS_TIME_TimerCounterGet(SYS_TIME_HANDLE handle, uint32_t* count
 {
     SYS_TIME_TIMER_OBJ* tmr = NULL;
     SYS_TIME_RESULT result = SYS_TIME_ERROR;
+    uint32_t elapsedCount;
 
     if (SYS_TIME_ResourceLock() == false)
     {
@@ -777,12 +954,13 @@ SYS_TIME_RESULT SYS_TIME_TimerCounterGet(SYS_TIME_HANDLE handle, uint32_t* count
         tmr = SYS_TIME_GetTimerObject(handle);
         if(tmr != NULL)
         {
-            *count = SYS_TIME_GetTotalElapsedCount(tmr);
+            elapsedCount = SYS_TIME_GetTotalElapsedCount(tmr);
+            *count = elapsedCount;
             result = SYS_TIME_SUCCESS;
         }
     }
 
-    SYS_TIME_ResourceUnlock();
+    (void) SYS_TIME_ResourceUnlock();
     return result;
 }
 
@@ -805,7 +983,7 @@ bool SYS_TIME_TimerPeriodHasExpired(SYS_TIME_HANDLE handle)
         tmr->tmrElapsedFlag = false;
     }
 
-    SYS_TIME_ResourceUnlock();
+    (void) SYS_TIME_ResourceUnlock();
     return status;
 }
 
@@ -827,7 +1005,7 @@ SYS_TIME_RESULT SYS_TIME_DelayUS ( uint32_t us, SYS_TIME_HANDLE* handle )
     *handle = SYS_TIME_TimerObjectCreate(0, SYS_TIME_USToCount(us), NULL, 0, SYS_TIME_SINGLE);
     if(*handle != SYS_TIME_HANDLE_INVALID)
     {
-       (void) SYS_TIME_TimerStart(*handle);
+        (void) SYS_TIME_TimerStart(*handle);
         result = SYS_TIME_SUCCESS;
     }
 
@@ -846,7 +1024,7 @@ SYS_TIME_RESULT SYS_TIME_DelayMS ( uint32_t ms, SYS_TIME_HANDLE* handle )
     *handle = SYS_TIME_TimerObjectCreate(0, SYS_TIME_MSToCount(ms), NULL, 0, SYS_TIME_SINGLE);
     if(*handle != SYS_TIME_HANDLE_INVALID)
     {
-        (void) SYS_TIME_TimerStart(*handle);
+       (void)  SYS_TIME_TimerStart(*handle);
         result = SYS_TIME_SUCCESS;
     }
 
@@ -859,7 +1037,7 @@ bool SYS_TIME_DelayIsComplete ( SYS_TIME_HANDLE handle )
 
     if(true == SYS_TIME_TimerPeriodHasExpired(handle))
     {
-       (void) SYS_TIME_TimerDestroy(handle);
+        (void) SYS_TIME_TimerDestroy(handle);
         status = true;
     }
 

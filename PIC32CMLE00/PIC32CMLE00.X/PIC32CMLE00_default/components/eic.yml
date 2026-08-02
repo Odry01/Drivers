@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 componentName: eic
-coreVersion: 5.8.3
+coreVersion: 5.9.0
 device: PIC32CM5164LE00100
 library: []
 dependency:
@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.25.0
+  version: v3.26.0
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -22,8 +22,8 @@ data:
     - children:
       - attributes:
           id: eic
-          x: '636'
-          y: '125'
+          x: '908'
+          y: '5'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
@@ -31,6 +31,7 @@ data:
     EIC_ASYNCH:
       attributes:
         id: EIC_ASYNCH
+        label: EIC_ASYNCH
       children:
       - children:
         - attributes:
@@ -42,166 +43,87 @@ data:
     EIC_CHAN_0:
       attributes:
         id: EIC_CHAN_0
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel0
       type: Boolean
     EIC_CHAN_1:
       attributes:
         id: EIC_CHAN_1
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel1
       type: Boolean
     EIC_CHAN_10:
       attributes:
         id: EIC_CHAN_10
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel10
       type: Boolean
     EIC_CHAN_11:
       attributes:
         id: EIC_CHAN_11
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel11
       type: Boolean
     EIC_CHAN_12:
       attributes:
         id: EIC_CHAN_12
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel12
       type: Boolean
     EIC_CHAN_13:
       attributes:
         id: EIC_CHAN_13
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel13
       type: Boolean
     EIC_CHAN_14:
       attributes:
         id: EIC_CHAN_14
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel14
       type: Boolean
     EIC_CHAN_15:
       attributes:
         id: EIC_CHAN_15
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel15
       type: Boolean
     EIC_CHAN_2:
       attributes:
         id: EIC_CHAN_2
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel2
       type: Boolean
     EIC_CHAN_3:
       attributes:
         id: EIC_CHAN_3
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel3
       type: Boolean
     EIC_CHAN_4:
       attributes:
         id: EIC_CHAN_4
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel4
       type: Boolean
     EIC_CHAN_5:
       attributes:
         id: EIC_CHAN_5
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel5
       type: Boolean
     EIC_CHAN_6:
       attributes:
         id: EIC_CHAN_6
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel6
       type: Boolean
     EIC_CHAN_7:
       attributes:
         id: EIC_CHAN_7
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel7
       type: Boolean
     EIC_CHAN_8:
       attributes:
         id: EIC_CHAN_8
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel8
       type: Boolean
     EIC_CHAN_9:
       attributes:
         id: EIC_CHAN_9
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable EIC Channel9
       type: Boolean
     EIC_CONFIG_FILTEN_0:
       attributes:
         id: EIC_CONFIG_FILTEN_0
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -211,15 +133,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_1:
       attributes:
         id: EIC_CONFIG_FILTEN_1
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -229,15 +147,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_10:
       attributes:
         id: EIC_CONFIG_FILTEN_10
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -247,15 +161,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_11:
       attributes:
         id: EIC_CONFIG_FILTEN_11
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -265,15 +175,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_12:
       attributes:
         id: EIC_CONFIG_FILTEN_12
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -283,15 +189,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_13:
       attributes:
         id: EIC_CONFIG_FILTEN_13
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -301,15 +203,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_14:
       attributes:
         id: EIC_CONFIG_FILTEN_14
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -319,15 +217,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_15:
       attributes:
         id: EIC_CONFIG_FILTEN_15
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -337,15 +231,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_2:
       attributes:
         id: EIC_CONFIG_FILTEN_2
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -355,15 +245,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_3:
       attributes:
         id: EIC_CONFIG_FILTEN_3
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -373,15 +259,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_4:
       attributes:
         id: EIC_CONFIG_FILTEN_4
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -391,15 +273,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_6:
       attributes:
         id: EIC_CONFIG_FILTEN_6
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -409,15 +287,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_7:
       attributes:
         id: EIC_CONFIG_FILTEN_7
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -427,15 +301,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_8:
       attributes:
         id: EIC_CONFIG_FILTEN_8
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -445,15 +315,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_9:
       attributes:
         id: EIC_CONFIG_FILTEN_9
+        label: Enable filter
       children:
       - children:
         - attributes:
@@ -463,186 +329,103 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_CONFIG_SENSE_0:
       attributes:
         id: EIC_CONFIG_SENSE_0
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt0 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_1:
       attributes:
         id: EIC_CONFIG_SENSE_1
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt1 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_10:
       attributes:
         id: EIC_CONFIG_SENSE_10
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt10 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_11:
       attributes:
         id: EIC_CONFIG_SENSE_11
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt11 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_12:
       attributes:
         id: EIC_CONFIG_SENSE_12
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt12 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_13:
       attributes:
         id: EIC_CONFIG_SENSE_13
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt13 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_14:
       attributes:
         id: EIC_CONFIG_SENSE_14
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt14 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_15:
       attributes:
         id: EIC_CONFIG_SENSE_15
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt15 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_2:
       attributes:
         id: EIC_CONFIG_SENSE_2
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt2 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_3:
       attributes:
         id: EIC_CONFIG_SENSE_3
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt3 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_4:
       attributes:
         id: EIC_CONFIG_SENSE_4
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt4 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_5:
       attributes:
         id: EIC_CONFIG_SENSE_5
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt5 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_6:
       attributes:
         id: EIC_CONFIG_SENSE_6
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt6 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_7:
       attributes:
         id: EIC_CONFIG_SENSE_7
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt7 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_8:
       attributes:
         id: EIC_CONFIG_SENSE_8
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt8 Edge Selection
       type: KeyValueSet
     EIC_CONFIG_SENSE_9:
       attributes:
         id: EIC_CONFIG_SENSE_9
-      children:
-      - children:
-        - attributes:
-            value: '2'
-          type: User
-        type: Values
+        label: External Interrupt9 Edge Selection
       type: KeyValueSet
     EIC_DEBOUNCEN:
       attributes:
         id: EIC_DEBOUNCEN
+        label: EIC_DEBOUNCEN
       children:
       - children:
         - attributes:
             id: eic
-            value: '65503'
+            value: '0'
           type: Dynamic
         type: Values
       type: Hex
     EIC_DEBOUNCEN_0:
       attributes:
         id: EIC_DEBOUNCEN_0
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -652,15 +435,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_1:
       attributes:
         id: EIC_DEBOUNCEN_1
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -670,15 +449,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_10:
       attributes:
         id: EIC_DEBOUNCEN_10
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -688,15 +463,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_11:
       attributes:
         id: EIC_DEBOUNCEN_11
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -706,15 +477,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_12:
       attributes:
         id: EIC_DEBOUNCEN_12
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -724,15 +491,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_13:
       attributes:
         id: EIC_DEBOUNCEN_13
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -742,15 +505,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_14:
       attributes:
         id: EIC_DEBOUNCEN_14
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -760,15 +519,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_15:
       attributes:
         id: EIC_DEBOUNCEN_15
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -778,15 +533,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_2:
       attributes:
         id: EIC_DEBOUNCEN_2
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -796,15 +547,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_3:
       attributes:
         id: EIC_DEBOUNCEN_3
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -814,15 +561,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_4:
       attributes:
         id: EIC_DEBOUNCEN_4
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -832,15 +575,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_6:
       attributes:
         id: EIC_DEBOUNCEN_6
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -850,15 +589,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_7:
       attributes:
         id: EIC_DEBOUNCEN_7
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -868,15 +603,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_8:
       attributes:
         id: EIC_DEBOUNCEN_8
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -886,15 +617,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCEN_9:
       attributes:
         id: EIC_DEBOUNCEN_9
+        label: Enable Debounce
       children:
       - children:
         - attributes:
@@ -904,55 +631,31 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
       type: Boolean
     EIC_DEBOUNCER_NO_STATES_0:
       attributes:
         id: EIC_DEBOUNCER_NO_STATES_0
-      children:
-      - children:
-        - attributes:
-            value: '1'
-          type: User
-        type: Values
+        label: Valid Pin States for EXTINT[7:0]
       type: KeyValueSet
     EIC_DEBOUNCER_NO_STATES_1:
       attributes:
         id: EIC_DEBOUNCER_NO_STATES_1
-      children:
-      - children:
-        - attributes:
-            value: '1'
-          type: User
-        type: Values
+        label: Valid Pin States Duration for EXTINT[15:8]
       type: KeyValueSet
     EIC_DEBOUNCER_PRESCALER_0:
       attributes:
         id: EIC_DEBOUNCER_PRESCALER_0
-      children:
-      - children:
-        - attributes:
-            value: '7'
-          type: User
-        type: Values
+        label: Debouncer Prescaler for EXTINT[7:0]
       type: KeyValueSet
     EIC_DEBOUNCER_PRESCALER_1:
       attributes:
         id: EIC_DEBOUNCER_PRESCALER_1
-      children:
-      - children:
-        - attributes:
-            value: '7'
-          type: User
-        type: Values
+        label: Debouncer Prescaler for EXTINT[15:8]
       type: KeyValueSet
     EIC_EXTINTEO:
       attributes:
         id: EIC_EXTINTEO
+        label: EIC_EXTINTEO
       children:
       - children:
         - attributes:
@@ -964,182 +667,104 @@ data:
     EIC_INT:
       attributes:
         id: EIC_INT
+        label: EIC_INT
       children:
       - children:
         - attributes:
             id: eic
-            value: '65535'
+            value: '0'
           type: Dynamic
         type: Values
       type: Hex
     EIC_INT_0:
       attributes:
         id: EIC_INT_0
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_1:
       attributes:
         id: EIC_INT_1
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_10:
       attributes:
         id: EIC_INT_10
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_11:
       attributes:
         id: EIC_INT_11
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_12:
       attributes:
         id: EIC_INT_12
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_13:
       attributes:
         id: EIC_INT_13
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_14:
       attributes:
         id: EIC_INT_14
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_15:
       attributes:
         id: EIC_INT_15
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_2:
       attributes:
         id: EIC_INT_2
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_3:
       attributes:
         id: EIC_INT_3
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_4:
       attributes:
         id: EIC_INT_4
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_5:
       attributes:
         id: EIC_INT_5
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_6:
       attributes:
         id: EIC_INT_6
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_7:
       attributes:
         id: EIC_INT_7
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_8:
       attributes:
         id: EIC_INT_8
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_INT_9:
       attributes:
         id: EIC_INT_9
-      children:
-      - children:
-        - attributes:
-            value: 'true'
-          type: User
-        type: Values
+        label: Enable Interrupt
       type: Boolean
     EIC_OTHER_HANDLER_ACTIVE:
       attributes:
         id: EIC_OTHER_HANDLER_ACTIVE
+        label: EIC_OTHER_HANDLER_ACTIVE
       children:
       - children:
         - attributes:
             id: eic
-            value: 'true'
+            value: 'false'
           type: Dynamic
         type: Values
       type: Boolean
