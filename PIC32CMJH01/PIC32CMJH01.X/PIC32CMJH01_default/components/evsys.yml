@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.26.0
+  version: v3.26.1
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -42,6 +42,7 @@ data:
     EVSYS_CHANNEL_0_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_0_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -64,6 +65,7 @@ data:
     EVSYS_CHANNEL_10_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_10_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -86,6 +88,7 @@ data:
     EVSYS_CHANNEL_11_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_11_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -108,6 +111,7 @@ data:
     EVSYS_CHANNEL_1_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_1_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -130,6 +134,7 @@ data:
     EVSYS_CHANNEL_2_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_2_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -152,6 +157,7 @@ data:
     EVSYS_CHANNEL_3_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_3_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -174,6 +180,7 @@ data:
     EVSYS_CHANNEL_4_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_4_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -196,6 +203,7 @@ data:
     EVSYS_CHANNEL_5_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_5_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -218,6 +226,7 @@ data:
     EVSYS_CHANNEL_6_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_6_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -240,6 +249,7 @@ data:
     EVSYS_CHANNEL_7_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_7_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -262,6 +272,7 @@ data:
     EVSYS_CHANNEL_8_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_8_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -284,6 +295,7 @@ data:
     EVSYS_CHANNEL_9_USER_READY:
       attributes:
         id: EVSYS_CHANNEL_9_USER_READY
+        label: Event Users Status
       children:
       - children:
         - attributes:
@@ -552,6 +564,42 @@ data:
       - children:
         - attributes:
             id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    USER_PDEC_EVU_0_READY:
+      attributes:
+        id: USER_PDEC_EVU_0_READY
+        label: USER_PDEC_EVU_0_READY
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    USER_PDEC_EVU_1_READY:
+      attributes:
+        id: USER_PDEC_EVU_1_READY
+        label: USER_PDEC_EVU_1_READY
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    USER_PDEC_EVU_2_READY:
+      attributes:
+        id: USER_PDEC_EVU_2_READY
+        label: USER_PDEC_EVU_2_READY
+      children:
+      - children:
+        - attributes:
+            id: pdec
             value: 'false'
           type: Dynamic
         type: Values

@@ -479,13 +479,13 @@ void SEN63C_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature %.2f \xB0C\r\n"
+             "Temperature %.2f °C\r\n"
              "Humidity %.2f %%\r\n"
              "CO2 %.0f ppm\r\n"
-             "PM1.0 %.2f \xB5g/m\xB3\r\n"
-             "PM2.5 %.2f \xB5g/m\xB3\r\n"
-             "PM4.0 %.2f \xB5g/m\xB3\r\n"
-             "PM10.0 %.2f \xB5g/m\xB3\r\n",
+             "PM1.0 %.2f ?g/m?\r\n"
+             "PM2.5 %.2f ?g/m?\r\n"
+             "PM4.0 %.2f ?g/m?\r\n"
+             "PM10.0 %.2f ?g/m?\r\n",
              sen63c_sensorData.CELSIUS_TEMPERATURE,
              sen63c_sensorData.HUMIDITY,
              sen63c_sensorData.CO2,

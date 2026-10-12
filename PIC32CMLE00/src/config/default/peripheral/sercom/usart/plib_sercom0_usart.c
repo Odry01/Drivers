@@ -51,6 +51,13 @@
 #include "interrupts.h"
 #include "plib_sercom0_usart.h"
 
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 7.6 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_7_6_DR_1 */
+/* MISRA C-2023 Rule 10.1 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_1_DR_1 */
+/* MISRA C-2023 Rule 10.4 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_4_DR_1 */
+/* MISRA C-2023 Rule 10.7 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_7_DR_1 */
+/* MISRA C-2023 Rule 10.8 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_8_DR_1 */
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data
@@ -855,3 +862,4 @@ void __attribute__((used)) SERCOM0_USART_InterruptHandler( void )
         }
     }
 }
+/* MISRAC 2023 deviation block end */

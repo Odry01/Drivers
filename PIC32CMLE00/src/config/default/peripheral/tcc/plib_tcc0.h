@@ -55,6 +55,9 @@
 #endif
 // DOM-IGNORE-END
 
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 7.6 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_7_6_DR_1 */
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Data Types
@@ -158,6 +161,7 @@ __STATIC_INLINE bool TCC0_PWM24bitDutySet(TCC0_CHANNEL_NUM channel, uint32_t dut
     return status;
 }
 
+/* MISRAC 2023 deviation block end */
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 

@@ -515,7 +515,7 @@ void BMP585_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f \xB0C\r\n"
+             "Temperature: %.2f °C\r\n"
              "Pressure: %.2f Pa\r\n",
              bmp585_sensorData.CELSIUS_TEMPERATURE,
              bmp585_sensorData.PA_PRESSURE

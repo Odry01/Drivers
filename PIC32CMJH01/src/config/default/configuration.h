@@ -152,7 +152,7 @@ extern "C" {
 #define WDRV_WINC_EIC_SOURCE
 #define WDRV_WINC_DEBUG_LEVEL               WDRV_WINC_DEBUG_TYPE_NONE
 #define WDRV_WINC_TASK_YIELD_TIME           0
-#define WDRV_WINC_DEV_RX_BUFF_SZ            1024
+#define WDRV_WINC_DEV_RX_BUFF_SZ            2048
 #define WINC_SOCK_SLAB_ALLOC_MODE           1
 #define WDRV_WINC_DEV_SOCK_SLAB_NUM         16
 #define WDRV_WINC_DEV_SOCK_SLAB_SZ          1024

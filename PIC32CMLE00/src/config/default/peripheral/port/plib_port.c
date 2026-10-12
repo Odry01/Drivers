@@ -47,6 +47,12 @@
 
 #include "plib_port.h"
 
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 7.6 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_7_6_DR_1 */
+/* MISRA C-2023 Rule 10.1 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_1_DR_1 */
+/* MISRA C-2023 Rule 10.4 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_4_DR_1 */
+/* MISRA C-2023 Rule 10.8 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_8_DR_1 */
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: PORT Implementation
@@ -307,3 +313,5 @@ void PORT_PinGPIOConfig(PORT_PIN pin)
     /* Disable peripheral control of the pin */
     ((port_group_registers_t*)group)->PORT_PINCFG[pin_num] &= ((uint8_t)(~PORT_PINCFG_PMUXEN_Msk));
 }
+
+/* MISRAC 2023 deviation block end */

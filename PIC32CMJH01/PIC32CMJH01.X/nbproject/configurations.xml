@@ -116,6 +116,10 @@
             <logicalFolder name="nvmctrl" displayName="nvmctrl" projectFiles="true">
               <itemPath>../src/config/default/peripheral/nvmctrl/plib_nvmctrl.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="pdec" displayName="pdec" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/pdec/plib_pdec_common.h</itemPath>
+              <itemPath>../src/config/default/peripheral/pdec/plib_pdec.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="pm" displayName="pm" projectFiles="true">
               <itemPath>../src/config/default/peripheral/pm/plib_pm.h</itemPath>
             </logicalFolder>
@@ -399,6 +403,7 @@
           <itemPath>PIC32CMJH01_default/components/sys_time.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/supc.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sys_console.yml</itemPath>
+          <itemPath>PIC32CMJH01_default/components/pdec.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/dfp.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/divas.yml</itemPath>
           <itemPath>PIC32CMJH01_default/components/sercom3.yml</itemPath>
@@ -511,6 +516,9 @@
             </logicalFolder>
             <logicalFolder name="nvmctrl" displayName="nvmctrl" projectFiles="true">
               <itemPath>../src/config/default/peripheral/nvmctrl/plib_nvmctrl.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="pdec" displayName="pdec" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/pdec/plib_pdec.c</itemPath>
             </logicalFolder>
             <logicalFolder name="pm" displayName="pm" projectFiles="true">
               <itemPath>../src/config/default/peripheral/pm/plib_pm.c</itemPath>
@@ -630,8 +638,8 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="CMSIS" vendor="ARM" version="6.3.0"/>
         <pack name="PIC32CM-JH_DFP" vendor="Microchip" version="1.7.296"/>
+        <pack name="CMSIS" vendor="ARM" version="6.3.0"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

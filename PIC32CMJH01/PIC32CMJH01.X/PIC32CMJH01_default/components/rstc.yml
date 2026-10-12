@@ -11,7 +11,7 @@ dependency:
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.26.0
+  version: v3.26.1
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}
@@ -22,7 +22,7 @@ data:
     - children:
       - attributes:
           id: rstc
-          x: '1381'
+          x: '1535'
           y: '5'
         type: ElementPosition
       type: ElementPositions

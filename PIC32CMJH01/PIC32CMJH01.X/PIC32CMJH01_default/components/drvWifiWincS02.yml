@@ -226,12 +226,7 @@ data:
     DRV_WIFI_WINC_RX_BUFF_SZ:
       attributes:
         id: DRV_WIFI_WINC_RX_BUFF_SZ
-      children:
-      - children:
-        - attributes:
-            value: '1024'
-          type: User
-        type: Values
+        label: Receive Buffer Size
       type: Integer
     DRV_WIFI_WINC_SOCKET_NUM:
       attributes:

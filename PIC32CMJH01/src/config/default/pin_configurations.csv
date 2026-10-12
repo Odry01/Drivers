@@ -20,9 +20,9 @@ Pin Number,Pin ID,Custom Name,Function,Mode, Direction,Latch,Pull Up,Pull Down,D
 21,PC05,,Available,,,,,,NORMAL
 22,PC06,,Available,,,,,,NORMAL
 23,PC07,,Available,,,,,,NORMAL
-26,PA08,,Available,,,,,,NORMAL
-27,PA09,,Available,,,,,,NORMAL
-28,PA10,,Available,,,,,,NORMAL
+26,PA08,,PDEC_QDI0,Digital,High Impedance,n/a,No,No,NORMAL
+27,PA09,,PDEC_QDI1,Digital,High Impedance,n/a,No,No,NORMAL
+28,PA10,,PDEC_QDI2,Digital,High Impedance,n/a,No,No,NORMAL
 29,PA11,,Available,,,,,,NORMAL
 32,PB10,,Available,,,,,,NORMAL
 33,PB11,,Available,,,,,,NORMAL

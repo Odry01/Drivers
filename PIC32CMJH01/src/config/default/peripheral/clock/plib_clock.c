@@ -77,6 +77,30 @@ static void OSC32KCTRL_Initialize(void)
     OSC32KCTRL_REGS->OSC32KCTRL_RTCCTRL = OSC32KCTRL_RTCCTRL_RTCSEL(4UL);
 }
 
+static void FDPLL_Initialize(void)
+{
+
+    /****************** DPLL Initialization  *********************************/
+
+    /* Configure DPLL    */
+    OSCCTRL_REGS->OSCCTRL_DPLLCTRLB = OSCCTRL_DPLLCTRLB_FILTER(0UL) | OSCCTRL_DPLLCTRLB_LTIME(0UL)| OSCCTRL_DPLLCTRLB_REFCLK(0UL) ;
+
+
+    OSCCTRL_REGS->OSCCTRL_DPLLRATIO = OSCCTRL_DPLLRATIO_LDRFRAC(2UL) | OSCCTRL_DPLLRATIO_LDR(1952UL);
+
+    while((OSCCTRL_REGS->OSCCTRL_DPLLSYNCBUSY & OSCCTRL_DPLLSYNCBUSY_DPLLRATIO_Msk) == OSCCTRL_DPLLSYNCBUSY_DPLLRATIO_Msk)
+    {
+        /* Waiting for the synchronization */
+    }
+
+    /* Selection of the DPLL Enable */
+    OSCCTRL_REGS->OSCCTRL_DPLLCTRLA = (uint8_t)(OSCCTRL_DPLLCTRLA_ENABLE_Msk | OSCCTRL_DPLLCTRLA_ONDEMAND_Msk );
+
+    while((OSCCTRL_REGS->OSCCTRL_DPLLSYNCBUSY & OSCCTRL_DPLLSYNCBUSY_ENABLE_Msk) == OSCCTRL_DPLLSYNCBUSY_ENABLE_Msk )
+    {
+        /* Waiting for the DPLL enable synchronization */
+    }
+}
 
 
 static void GCLK0_Initialize(void)
@@ -109,6 +133,7 @@ void CLOCK_Initialize (void)
     /* Function to Initialize the 32KHz Oscillators */
     OSC32KCTRL_Initialize();
 
+    FDPLL_Initialize();
     GCLK0_Initialize();
     GCLK1_Initialize();
 
@@ -211,11 +236,18 @@ void CLOCK_Initialize (void)
     {
         /* Wait for synchronization */
     }
+    /* Selection of the Generator and write Lock for PDEC */
+    GCLK_REGS->GCLK_PCHCTRL[41] = GCLK_PCHCTRL_GEN(0x1UL)  | GCLK_PCHCTRL_CHEN_Msk;
+
+    while ((GCLK_REGS->GCLK_PCHCTRL[41] & GCLK_PCHCTRL_CHEN_Msk) != GCLK_PCHCTRL_CHEN_Msk)
+    {
+        /* Wait for synchronization */
+    }
 
 
 
     /* Configure the APBC Bridge Clocks */
-    MCLK_REGS->MCLK_APBCMASK = 0x813027eU;
+    MCLK_REGS->MCLK_APBCMASK = 0xc13027eU;
 
 
 }

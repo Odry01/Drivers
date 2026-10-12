@@ -72,6 +72,7 @@ void SERCOM3_SPI_InterruptHandler (void);
 void SERCOM4_SPI_InterruptHandler (void);
 void TC4_TimerInterruptHandler (void);
 void ADC0_InterruptHandler (void);
+void PDEC_InterruptHandler (void);
 
 
 

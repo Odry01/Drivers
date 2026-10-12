@@ -137,8 +137,8 @@ void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f \xB0C\r\n"
-             "Temperature: %.2f \xB0F\r\n"
+             "Temperature: %.2f °C\r\n"
+             "Temperature: %.2f °F\r\n"
              "Humidity: %.2f %%\r\n",
              sht4x_sensorData.CELSIUS_TEMPERATURE,
              sht4x_sensorData.FAHRENHEIT_TEMPERATURE,

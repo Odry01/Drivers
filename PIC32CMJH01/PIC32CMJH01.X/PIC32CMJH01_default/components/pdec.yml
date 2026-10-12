@@ -1,0 +1,587 @@
+configVersion: 1.0.0
+componentName: pdec
+coreVersion: 5.9.0
+device: PIC32CM5164JH01100
+library: []
+dependency:
+- dependencyPackage: class com.microchip.mcc.harmony.HarmonyModule
+  name: pdec
+  type: module
+  version: ''
+- dependencyPackage: ''
+  name: csp
+  type: package
+  version: v3.26.1
+customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
+data:
+  attachments: {}
+  elementPosition:
+    attributes:
+      id: __ROOTVIEW
+    children:
+    - children:
+      - attributes:
+          id: pdec
+          x: '1381'
+          y: '5'
+        type: ElementPosition
+      type: ElementPositions
+    type: ComponentGraph
+  symbols:
+    ENCODER_POS_GET_API:
+      attributes:
+        id: ENCODER_POS_GET_API
+        label: ENCODER_POS_GET_API
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: PDEC_QDECPositionGet
+          type: Dynamic
+        type: Values
+      type: String
+    ENCODER_POS_SET_API:
+      attributes:
+        id: ENCODER_POS_SET_API
+        label: ENCODER_POS_SET_API
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: ''
+          type: Dynamic
+        type: Values
+      type: String
+    ENCODER_SPEED_GET_API:
+      attributes:
+        id: ENCODER_SPEED_GET_API
+        label: ENCODER_SPEED_GET_API
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: ''
+          type: Dynamic
+        type: Values
+      type: String
+    ENCODER_SPEED_SET_API:
+      attributes:
+        id: ENCODER_SPEED_SET_API
+        label: ENCODER_SPEED_SET_API
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: ''
+          type: Dynamic
+        type: Values
+      type: String
+    ENCODER_START_API:
+      attributes:
+        id: ENCODER_START_API
+        label: ENCODER_START_API
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: PDEC_QDECStart
+          type: Dynamic
+        type: Values
+      type: String
+    ENCODER_STOP_API:
+      attributes:
+        id: ENCODER_STOP_API
+        label: ENCODER_STOP_API
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: PDEC_QDECStop
+          type: Dynamic
+        type: Values
+      type: String
+    PDEC_CC0_ANGULAR:
+      attributes:
+        id: PDEC_CC0_ANGULAR
+        label: Quadrature Pulses per Revolution
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '65535'
+          type: Integer
+        type: Attributes
+      - children:
+        - attributes:
+            value: '64'
+          type: User
+        type: Values
+      type: Integer
+    PDEC_CC0_REVOLUTION:
+      attributes:
+        id: PDEC_CC0_REVOLUTION
+        label: Max Number of Revolutions
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '0'
+          type: Integer
+        type: Attributes
+      type: Integer
+    PDEC_CC1_ANGULAR:
+      attributes:
+        id: PDEC_CC1_ANGULAR
+        label: Compare Value for Quadrature Pulses
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '65535'
+          type: Integer
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: Integer
+    PDEC_CC1_REVOLUTION:
+      attributes:
+        id: PDEC_CC1_REVOLUTION
+        label: Compare Value for Revolutions
+      children:
+      - children:
+        - attributes:
+            id: max
+          children:
+          - type: Value
+            value: '0'
+          type: Integer
+        - attributes:
+            id: visible
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: Integer
+    PDEC_CNTR_CC0:
+      attributes:
+        id: PDEC_CNTR_CC0
+        label: Compare CC0 Value
+      type: Integer
+    PDEC_CNTR_CC1:
+      attributes:
+        id: PDEC_CNTR_CC1
+        label: Compare CC1 Value
+      type: Integer
+    PDEC_CNTR_CTRLA_PEREN:
+      attributes:
+        id: PDEC_CNTR_CTRLA_PEREN
+        label: Select TOP as Period
+      type: Boolean
+    PDEC_COMPARE:
+      attributes:
+        id: PDEC_COMPARE
+        label: Enable Compare Control
+      type: Boolean
+    PDEC_COUNTER_EVEI0:
+      attributes:
+        id: PDEC_COUNTER_EVEI0
+        label: Enable Input Event 0
+      type: Boolean
+    PDEC_COUNTER_EVEI1:
+      attributes:
+        id: PDEC_COUNTER_EVEI1
+        label: Enable Input Event 1
+      type: Boolean
+    PDEC_COUNTER_EVEI2:
+      attributes:
+        id: PDEC_COUNTER_EVEI2
+        label: Enable Input Event 2
+      type: Boolean
+    PDEC_COUNTER_EVINV0:
+      attributes:
+        id: PDEC_COUNTER_EVINV0
+        label: Invert Input Event 0
+      type: Boolean
+    PDEC_COUNTER_EVINV1:
+      attributes:
+        id: PDEC_COUNTER_EVINV1
+        label: Invert Input Event 1
+      type: Boolean
+    PDEC_COUNTER_EVINV2:
+      attributes:
+        id: PDEC_COUNTER_EVINV2
+        label: Invert Input Event 2
+      type: Boolean
+    PDEC_COUNTER_HEADER:
+      attributes:
+        id: PDEC_COUNTER_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PDEC_COUNTER_SOURCE:
+      attributes:
+        id: PDEC_COUNTER_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PDEC_CTRLA_ANGULAR:
+      attributes:
+        id: PDEC_CTRLA_ANGULAR
+        label: Select No of Bits for Angular Position
+      children:
+      - children:
+        - attributes:
+            value: '16'
+          type: User
+        type: Values
+      type: Integer
+    PDEC_CTRLA_ANGULAR_MASK:
+      attributes:
+        id: PDEC_CTRLA_ANGULAR_MASK
+        label: PDEC_CTRLA_ANGULAR_MASK
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '65535'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PDEC_CTRLA_CONF:
+      attributes:
+        id: PDEC_CTRLA_CONF
+        label: Operating Mode
+      type: KeyValueSet
+    PDEC_CTRLA_MAXCMP:
+      attributes:
+        id: PDEC_CTRLA_MAXCMP
+        label: Select Maximum Consecutive Missing Pulses
+      type: Integer
+    PDEC_CTRLA_MODE:
+      attributes:
+        id: PDEC_CTRLA_MODE
+        label: Operating Mode
+      type: KeyValueSet
+    PDEC_CTRLA_PEREN:
+      attributes:
+        id: PDEC_CTRLA_PEREN
+        label: Enable Period Control
+      type: Boolean
+    PDEC_CTRLA_REVOLUTION:
+      attributes:
+        id: PDEC_CTRLA_REVOLUTION
+        label: No of Bits for Revolution Counter
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Integer
+    PDEC_CTRLA_REVOLUTION_MASK:
+      attributes:
+        id: PDEC_CTRLA_REVOLUTION_MASK
+        label: PDEC_CTRLA_REVOLUTION_MASK
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PDEC_CTRLA_RUNSTDBY:
+      attributes:
+        id: PDEC_CTRLA_RUNSTDBY
+        label: Run during Standby
+      type: Boolean
+    PDEC_CTRLA_SWAP:
+      attributes:
+        id: PDEC_CTRLA_SWAP
+        label: Swap Phase A and B
+      type: Boolean
+    PDEC_EVCTRL:
+      attributes:
+        id: PDEC_EVCTRL
+        label: PDEC_EVCTRL
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PDEC_EVCTRL_DIR:
+      attributes:
+        id: PDEC_EVCTRL_DIR
+        label: Enable Direction Event
+      type: Boolean
+    PDEC_EVCTRL_EVACT:
+      attributes:
+        id: PDEC_EVCTRL_EVACT
+        label: Select Event Action
+      type: KeyValueSet
+    PDEC_EVCTRL_MC_0:
+      attributes:
+        id: PDEC_EVCTRL_MC_0
+        label: Enable Compare Match 0 Event
+      type: Boolean
+    PDEC_EVCTRL_MC_1:
+      attributes:
+        id: PDEC_EVCTRL_MC_1
+        label: Enable Compare Match 1 Event
+      type: Boolean
+    PDEC_EVCTRL_OVF:
+      attributes:
+        id: PDEC_EVCTRL_OVF
+        label: Enable Overflow Event
+      type: Boolean
+    PDEC_EVCTRL_VLC:
+      attributes:
+        id: PDEC_EVCTRL_VLC
+        label: Enable Velocity Event
+      type: Boolean
+    PDEC_FILTER:
+      attributes:
+        id: PDEC_FILTER
+        label: Select Filter Value
+      children:
+      - children:
+        - attributes:
+            value: '128'
+          type: User
+        type: Values
+      type: Integer
+    PDEC_FREQUENCY:
+      attributes:
+        id: PDEC_FREQUENCY
+        label: Clock Frequency
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '1000000'
+          type: Dynamic
+        type: Values
+      type: Integer
+    PDEC_HALL_A:
+      attributes:
+        id: PDEC_HALL_A
+        label: Select Hall A
+      type: Combo
+    PDEC_HALL_B:
+      attributes:
+        id: PDEC_HALL_B
+        label: Select Hall B
+      type: Combo
+    PDEC_HALL_C:
+      attributes:
+        id: PDEC_HALL_C
+        label: Select Hall C
+      type: Combo
+    PDEC_HALL_FILTER:
+      attributes:
+        id: PDEC_HALL_FILTER
+        label: Select Filter Value
+      type: Integer
+    PDEC_HALL_HEADER:
+      attributes:
+        id: PDEC_HALL_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PDEC_HALL_PIN:
+      attributes:
+        id: PDEC_HALL_PIN
+        label: PDEC_HALL_PIN
+      type: Hex
+    PDEC_HALL_SOURCE:
+      attributes:
+        id: PDEC_HALL_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'false'
+          type: Boolean
+        type: Attributes
+      type: File
+    PDEC_INDEX:
+      attributes:
+        id: PDEC_INDEX
+        label: Select Quadrature Index
+      type: Combo
+    PDEC_INSTANCE_NAME:
+      attributes:
+        id: PDEC_INSTANCE_NAME
+        label: PDEC_INSTANCE_NAME
+      type: String
+    PDEC_INTENSET:
+      attributes:
+        id: PDEC_INTENSET
+        label: PDEC_INTENSET
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '12'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PDEC_INTENSET_DIR:
+      attributes:
+        id: PDEC_INTENSET_DIR
+        label: Enable Direction Interrupt
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    PDEC_INTENSET_MC_0:
+      attributes:
+        id: PDEC_INTENSET_MC_0
+        label: Enable Compare Match 0 Interrupt
+      type: Boolean
+    PDEC_INTENSET_MC_1:
+      attributes:
+        id: PDEC_INTENSET_MC_1
+        label: Enable Compare Match 1 Interrupt
+      type: Boolean
+    PDEC_INTENSET_OVF:
+      attributes:
+        id: PDEC_INTENSET_OVF
+        label: Enable Overflow Interrupt
+      type: Boolean
+    PDEC_INTENSET_VLC:
+      attributes:
+        id: PDEC_INTENSET_VLC
+        label: Enable Velocity Interrupt
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    PDEC_PHASE_A:
+      attributes:
+        id: PDEC_PHASE_A
+        label: Select Quadrature Phase A
+      children:
+      - children:
+        - attributes:
+            id: label
+          children:
+          - type: Value
+            value: Select Quadrature Phase A
+          type: String
+        type: Attributes
+      type: Combo
+    PDEC_PHASE_B:
+      attributes:
+        id: PDEC_PHASE_B
+        label: Select Quadrature Phase B
+      children:
+      - children:
+        - attributes:
+            id: label
+          children:
+          - type: Value
+            value: Select Quadrature Phase B
+          type: String
+        type: Attributes
+      type: Combo
+    PDEC_PIN:
+      attributes:
+        id: PDEC_PIN
+        label: PDEC_PIN
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '7'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PDEC_PIN_INV:
+      attributes:
+        id: PDEC_PIN_INV
+        label: PDEC_PIN_INV
+      children:
+      - children:
+        - attributes:
+            id: pdec
+            value: '0'
+          type: Dynamic
+        type: Values
+      type: Hex
+    PDEC_PRESC_PRESC:
+      attributes:
+        id: PDEC_PRESC_PRESC
+        label: Select Prescaler
+      type: KeyValueSet
+    PDEC_QDEC_HEADER:
+      attributes:
+        id: PDEC_QDEC_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    PDEC_QDEC_SOURCE:
+      attributes:
+        id: PDEC_QDEC_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+  userData: {}

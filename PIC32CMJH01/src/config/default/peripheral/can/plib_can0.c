@@ -53,6 +53,9 @@
 #include "interrupts.h"
 #include "plib_can0.h"
 
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 7.6 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_7_6_DR_1 */
+
 // *****************************************************************************
 // *****************************************************************************
 // Global Data
@@ -754,6 +757,8 @@ bool CAN0_BitTimingSet(CAN_BIT_TIMING *bitTiming)
     }
     return status;
 }
+
+/* MISRAC 2023 deviation block end */
 
 /*******************************************************************************
  End of File

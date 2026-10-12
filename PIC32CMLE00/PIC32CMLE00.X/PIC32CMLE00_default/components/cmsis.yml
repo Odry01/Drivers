@@ -11,11 +11,11 @@ dependency:
 - dependencyPackage: ''
   name: CMSIS_6
   type: package
-  version: v6.3.0
+  version: v6.4.0
 - dependencyPackage: ''
   name: csp
   type: package
-  version: v3.26.0
+  version: v3.26.1
 customDataClassName: com.microchip.utils_mh3.utils.persistence.CustomModuleData
 data:
   attachments: {}

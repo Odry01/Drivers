@@ -96,7 +96,7 @@ void NTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "NTC temperature: %.2f \xB0C\r\n",
+             "NTC temperature: %.2f °C\r\n",
              ntc_sensorData.CELSIUS_TEMPERATURE
              );
 }

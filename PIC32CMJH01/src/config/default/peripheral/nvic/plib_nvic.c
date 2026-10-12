@@ -81,6 +81,8 @@ void NVIC_Initialize( void )
     NVIC_EnableIRQ(TC4_IRQn);
     NVIC_SetPriority(ADC0_IRQn, 3);
     NVIC_EnableIRQ(ADC0_IRQn);
+    NVIC_SetPriority(PDEC_IRQn, 3);
+    NVIC_EnableIRQ(PDEC_IRQn);
 
 
 

@@ -436,6 +436,8 @@ void SYS_Initialize ( void* data )
 
     TC4_TimerInitialize();
 
+    PDEC_QDECInitialize();
+
 
     ADC0_Initialize();
 
@@ -445,18 +447,18 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_USART_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_USART_Initialize();
+
+    EVSYS_Initialize();
 
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
 
     SERCOM5_SPI_Initialize();
 
-    CAN0_Initialize();
-
     SERCOM4_SPI_Initialize();
+
+    CAN0_Initialize();
 
     EIC_Initialize();
 

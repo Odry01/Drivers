@@ -59,6 +59,9 @@
 #endif
 // DOM-IGNORE-END
 
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 7.6 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_7_6_DR_1 */
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Data types and constants
@@ -1192,6 +1195,8 @@ static inline void PORT_PinOutputEnable(PORT_PIN pin)
 {
     PORT_GroupOutputEnable(GET_PORT_GROUP(pin), GET_PIN_MASK(pin));
 }
+
+/* MISRAC 2023 deviation block end */
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

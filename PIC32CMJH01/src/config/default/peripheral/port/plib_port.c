@@ -47,6 +47,12 @@
 
 #include "plib_port.h"
 
+/* MISRAC 2023 deviation block start */
+/* MISRA C-2023 Rule 7.6 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_7_6_DR_1 */
+/* MISRA C-2023 Rule 10.1 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_1_DR_1 */
+/* MISRA C-2023 Rule 10.4 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_4_DR_1 */
+/* MISRA C-2023 Rule 10.8 deviated in this file. Deviation record ID - H3_MISRAC_2023_R_10_8_DR_1 */
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: PORT Implementation
@@ -74,6 +80,9 @@ void PORT_Initialize(void)
    PORT_REGS->GROUP[0].PORT_PINCFG[2] = 0x1U;
    PORT_REGS->GROUP[0].PORT_PINCFG[4] = 0x1U;
    PORT_REGS->GROUP[0].PORT_PINCFG[5] = 0x1U;
+   PORT_REGS->GROUP[0].PORT_PINCFG[8] = 0x1U;
+   PORT_REGS->GROUP[0].PORT_PINCFG[9] = 0x1U;
+   PORT_REGS->GROUP[0].PORT_PINCFG[10] = 0x1U;
    PORT_REGS->GROUP[0].PORT_PINCFG[12] = 0x1U;
    PORT_REGS->GROUP[0].PORT_PINCFG[13] = 0x1U;
    PORT_REGS->GROUP[0].PORT_PINCFG[16] = 0x1U;
@@ -85,6 +94,8 @@ void PORT_Initialize(void)
 
    PORT_REGS->GROUP[0].PORT_PMUX[1] = 0x1U;
    PORT_REGS->GROUP[0].PORT_PMUX[2] = 0x33U;
+   PORT_REGS->GROUP[0].PORT_PMUX[4] = 0x99U;
+   PORT_REGS->GROUP[0].PORT_PMUX[5] = 0x9U;
    PORT_REGS->GROUP[0].PORT_PMUX[6] = 0x22U;
    PORT_REGS->GROUP[0].PORT_PMUX[8] = 0x22U;
    PORT_REGS->GROUP[0].PORT_PMUX[10] = 0x33U;
@@ -368,3 +379,5 @@ void PORT_PinGPIOConfig(PORT_PIN pin)
     /* Disable peripheral control of the pin */
     ((port_group_registers_t*)group)->PORT_PINCFG[pin_num] &= ((uint8_t)(~PORT_PINCFG_PMUXEN_Msk));
 }
+
+/* MISRAC 2023 deviation block end */
