@@ -238,7 +238,6 @@
         <itemPath>../src/timer_driver.h</itemPath>
         <itemPath>../src/ws281x_driver.h</itemPath>
         <itemPath>../src/vcnl4200_driver.h</itemPath>
-        <itemPath>../src/xm125_driver.h</itemPath>
         <itemPath>../src/wincs02_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
@@ -617,7 +616,6 @@
         <itemPath>../src/timer_driver.c</itemPath>
         <itemPath>../src/vcnl4200_driver.c</itemPath>
         <itemPath>../src/ws281x_driver.c</itemPath>
-        <itemPath>../src/xm125_driver.c</itemPath>
         <itemPath>../src/wincs02_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>

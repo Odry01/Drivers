@@ -86,6 +86,54 @@ void SYS_Tasks ( void )
         /* Call Application task APP. */
     APP_Tasks();
 
+    /* Call Application task BME690_DRIVER. */
+    BME690_DRIVER_Tasks();
+
+    /* Call Application task BMP585_DRIVER. */
+    BMP585_DRIVER_Tasks();
+
+    /* Call Application task CONSOLE_DRIVER. */
+    CONSOLE_DRIVER_Tasks();
+
+    /* Call Application task FCM360W_DRIVER. */
+    FCM360W_DRIVER_Tasks();
+
+    /* Call Application task HDC302X_DRIVER. */
+    HDC302X_DRIVER_Tasks();
+
+    /* Call Application task KG200Z_DRIVER. */
+    KG200Z_DRIVER_Tasks();
+
+    /* Call Application task MCP9808_DRIVER. */
+    MCP9808_DRIVER_Tasks();
+
+    /* Call Application task NTC_DRIVER. */
+    NTC_DRIVER_Tasks();
+
+    /* Call Application task RSTC_DRIVER. */
+    RSTC_DRIVER_Tasks();
+
+    /* Call Application task RTC_DRIVER. */
+    RTC_DRIVER_Tasks();
+
+    /* Call Application task SEN63C_DRIVER. */
+    SEN63C_DRIVER_Tasks();
+
+    /* Call Application task SHT4X_DRIVER. */
+    SHT4X_DRIVER_Tasks();
+
+    /* Call Application task SSD1306_DRIVER. */
+    SSD1306_DRIVER_Tasks();
+
+    /* Call Application task STCC4_DRIVER. */
+    STCC4_DRIVER_Tasks();
+
+    /* Call Application task VCNL4200_DRIVER. */
+    VCNL4200_DRIVER_Tasks();
+
+    /* Call Application task WS281X_DRIVER. */
+    WS281X_DRIVER_Tasks();
+
 
 
 

@@ -22,7 +22,7 @@ data:
     - children:
       - attributes:
           id: drv_usart
-          x: '479'
+          x: '478'
           y: '407'
         type: ElementPosition
       type: ElementPositions

@@ -61,6 +61,8 @@ void NVIC_Initialize( void )
     NVIC_EnableIRQ(OSC32KCTRL_IRQn);
     NVIC_SetPriority(RTC_IRQn, 3);
     NVIC_EnableIRQ(RTC_IRQn);
+    NVIC_SetPriority(EIC_EXTINT_0_IRQn, 3);
+    NVIC_EnableIRQ(EIC_EXTINT_0_IRQn);
     NVIC_SetPriority(FREQM_IRQn, 3);
     NVIC_EnableIRQ(FREQM_IRQn);
     NVIC_SetPriority(DMAC_0_IRQn, 3);
@@ -115,6 +117,8 @@ void NVIC_Initialize( void )
     NVIC_EnableIRQ(SERCOM4_OTHER_IRQn);
     NVIC_SetPriority(TC2_IRQn, 3);
     NVIC_EnableIRQ(TC2_IRQn);
+    NVIC_SetPriority(ADC_RESRDY_IRQn, 3);
+    NVIC_EnableIRQ(ADC_RESRDY_IRQn);
     NVIC_SetPriority(TRNG_IRQn, 3);
     NVIC_EnableIRQ(TRNG_IRQn);
 

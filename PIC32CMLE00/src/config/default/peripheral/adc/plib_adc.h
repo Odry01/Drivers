@@ -113,7 +113,8 @@ void ADC_InterruptsEnable(ADC_STATUS interruptMask);
 void ADC_InterruptsDisable(ADC_STATUS interruptMask);
 
 
-bool ADC_ConversionStatusGet( void );
+void ADC_CallbackRegister( ADC_CALLBACK callback, uintptr_t context );
+
 
 
 // DOM-IGNORE-BEGIN

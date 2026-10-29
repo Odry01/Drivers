@@ -107,6 +107,9 @@
             <logicalFolder name="trng" displayName="trng" projectFiles="true">
               <itemPath>../src/config/default/peripheral/trng/plib_trng.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="wdt" displayName="wdt" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/wdt/plib_wdt.h</itemPath>
+            </logicalFolder>
           </logicalFolder>
           <logicalFolder name="system" displayName="system" projectFiles="true">
             <logicalFolder name="console" displayName="console" projectFiles="true">
@@ -151,6 +154,23 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f1" displayName="drivers" projectFiles="true">
+        <itemPath>../src/mcp9808_driver.h</itemPath>
+        <itemPath>../src/console_driver.h</itemPath>
+        <itemPath>../src/bmp585_driver.h</itemPath>
+        <itemPath>../src/bme690_driver.h</itemPath>
+        <itemPath>../src/hdc302x_driver.h</itemPath>
+        <itemPath>../src/fcm360w_driver.h</itemPath>
+        <itemPath>../src/kg200z_driver.h</itemPath>
+        <itemPath>../src/ntc_driver.h</itemPath>
+        <itemPath>../src/rstc_driver.h</itemPath>
+        <itemPath>../src/rtc_driver.h</itemPath>
+        <itemPath>../src/sen63c_driver.h</itemPath>
+        <itemPath>../src/ssd1306_driver.h</itemPath>
+        <itemPath>../src/sht4x_driver.h</itemPath>
+        <itemPath>../src/vcnl4200_driver.h</itemPath>
+        <itemPath>../src/timer_driver.h</itemPath>
+        <itemPath>../src/ws281x_driver.h</itemPath>
+        <itemPath>../src/stcc4_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
@@ -407,6 +427,9 @@
             <logicalFolder name="trng" displayName="trng" projectFiles="true">
               <itemPath>../src/config/default/peripheral/trng/plib_trng.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="wdt" displayName="wdt" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/wdt/plib_wdt.c</itemPath>
+            </logicalFolder>
           </logicalFolder>
           <logicalFolder name="stdio" displayName="stdio" projectFiles="true">
             <itemPath>../src/config/default/stdio/xc32_monitor.c</itemPath>
@@ -435,6 +458,23 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f1" displayName="drivers" projectFiles="true">
+        <itemPath>../src/fcm360w_driver.c</itemPath>
+        <itemPath>../src/console_driver.c</itemPath>
+        <itemPath>../src/ssd1306_driver.c</itemPath>
+        <itemPath>../src/sen63c_driver.c</itemPath>
+        <itemPath>../src/bmp585_driver.c</itemPath>
+        <itemPath>../src/kg200z_driver.c</itemPath>
+        <itemPath>../src/rstc_driver.c</itemPath>
+        <itemPath>../src/ntc_driver.c</itemPath>
+        <itemPath>../src/bme690_driver.c</itemPath>
+        <itemPath>../src/sht4x_driver.c</itemPath>
+        <itemPath>../src/mcp9808_driver.c</itemPath>
+        <itemPath>../src/rtc_driver.c</itemPath>
+        <itemPath>../src/hdc302x_driver.c</itemPath>
+        <itemPath>../src/vcnl4200_driver.c</itemPath>
+        <itemPath>../src/timer_driver.c</itemPath>
+        <itemPath>../src/ws281x_driver.c</itemPath>
+        <itemPath>../src/stcc4_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>

@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     app.h
 
+  Status:
+    Finished
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -16,7 +19,7 @@
     "APP_Initialize" and "APP_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "APP_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _APP_H
 #define _APP_H
@@ -27,16 +30,18 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdint.h>
+#include <stdio.h>
 #include <stdbool.h>
-#include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -47,8 +52,11 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
-/* Application states
+
+/** Application states
 
   Summary:
     Application states enumeration
@@ -56,20 +64,24 @@ extern "C" {
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
+ */
 
 typedef enum
 {
-    /* Application's state machine's initial state. */
-    APP_STATE_INIT=0,
-    APP_STATE_SERVICE_TASKS,
-    /* TODO: Define states used by the application state machine. */
-
+    APP_STATE_INIT = 0,
+    APP_STATE_IDLE,
+    APP_STATE_ENABLE_WDT,
+    APP_STATE_HDC302X_DRIVER_OPERATION,
+    APP_STATE_WAIT_FOR_FINISH_HDC302X_DRIVER_OPERATION,
+    APP_STATE_CONSOLE_DRIVER_OPERATION,
+    APP_STATE_WAIT_FOR_FINISH_CONSOLE_DRIVER_OPERATION,
+    APP_STATE_DISABLE_WDT,
+    APP_STATE_ENTER_TO_STANDBY_MODE,
 } APP_STATES;
 
-
 // *****************************************************************************
-/* Application Data
+
+/** Application Data
 
   Summary:
     Holds application data
@@ -86,8 +98,11 @@ typedef struct
     /* The application's current state */
     APP_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-
+    /* Application variables */
+    bool I2C_ERROR;
+    bool SPI_ERROR;
+    bool UART_ERROR;
+    uint8_t ERROR_STATUS;
 } APP_DATA;
 
 // *****************************************************************************
@@ -95,8 +110,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -104,71 +119,150 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void APP_Initialize ( void )
+/**
+    Function:
+    void APP_Initialize(void)
 
-  Summary:
-     MPLAB Harmony application initialization routine.
+    Summary:
+    Performs one‑time initialization of all application modules and hardware
+    peripherals.
 
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    APP_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
+    Parameters:
     None.
 
-  Returns:
+    Returns:
     None.
 
-  Example:
-    <code>
-    APP_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
-*/
-
-void APP_Initialize ( void );
-
-
-/*******************************************************************************
-  Function:
-    void APP_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
+    Remarks:
     None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    APP_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
  */
+void APP_Initialize(void);
 
-void APP_Tasks( void );
+/**
+    Function:
+    void APP_Tasks(void)
+
+    Summary:
+    Executes the main application task loop; should be called repeatedly.
+
+    Parameters:
+    None.
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void APP_Tasks(void);
+
+/**
+    Function:
+    bool APP_Get_I2C_Error_Status(void)
+
+    Summary:
+    Retrieves the current error status flag for I²C.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - current status of the I²C error flag (true = error pending)
+
+    Remarks:
+    None.
+ */
+bool APP_Get_I2C_Error_Status(void);
+
+/**
+    Function:
+    void APP_Set_I2C_Error_Status(bool STATUS)
+
+    Summary:
+    Sets or clears the I²C error status flag.
+
+    Parameters:
+    @param STATUS - desired state of the I²C error flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void APP_Set_I2C_Error_Status(bool STATUS);
+
+/**
+    Function:
+    bool APP_Get_SPI_Error_Status(void)
+
+    Summary:
+    Retrieves the current error status flag for SPI.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - current status of the SPI error flag (true = error pending)
+
+    Remarks:
+    None.
+ */
+bool APP_Get_SPI_Error_Status(void);
+
+/**
+    Function:
+    void APP_Set_SPI_Error_Status(bool STATUS)
+
+    Summary:
+    Sets or clears the SPI error status flag.
+
+    Parameters:
+    @param STATUS - desired state of the SPI error flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void APP_Set_SPI_Error_Status(bool STATUS);
+
+/**
+    Function:
+    bool APP_Get_UART_Error_Status(void)
+
+    Summary:
+    Retrieves the current error status flag for UART.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - current status of the UART error flag (true = error pending)
+
+    Remarks:
+    None.
+ */
+bool APP_Get_UART_Error_Status(void);
+
+/**
+    Function:
+    void APP_Set_UART_Error_Status(bool STATUS)
+
+    Summary:
+    Sets or clears the UART error status flag.
+
+    Parameters:
+    @param STATUS - desired state of the UART error flag
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void APP_Set_UART_Error_Status(bool STATUS);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -181,4 +275,3 @@ void APP_Tasks( void );
 /*******************************************************************************
  End of File
  */
-

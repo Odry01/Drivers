@@ -69,7 +69,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\configuration.h
   hash: 8ad005c6b0677a06f2a0095f8095598ef7a7f2b734e657fb925dc217b46962a4
 - file: ..\src\config\default\definitions.h
-  hash: e5212fad20ea4738cf8e0dfede803261c6dad031d5705676e4436a077185c2e5
+  hash: b70dcdcc1ce25cb62a6d39ad95eeaf4716cc9064e0b9bff4bc8b6637332a8c40
 - file: ..\src\config\default\device.h
   hash: 04b157a2340644f4ee17c29e3bd72ef709c024d6c973aa94c33756458c76bf87
 - file: ..\src\config\default\device_cache.h
@@ -245,7 +245,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: 4460457d985f664a3dcd5a719dd869dec9348b072e04671de668948ee99faa56
 - file: ..\src\config\default\initialization.c
-  hash: 6a23cfda484e9371247dd09574050ea9a0a5fc8f1d6bb91ac0926cd36b147fc6
+  hash: 8baa9c6246fc19789693e85c3afcfe57bcdde3f887b575481616a690a89ab0a6
 - file: ..\src\config\default\interrupts.c
   hash: 487df37c2f1a2b8c6c39c3ea20b2453090c6be44ca414b9c5c30db574a47901f
 - file: ..\src\config\default\interrupts.h
@@ -451,7 +451,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\system\wifi\sys_wincs_wifi_service.h
   hash: 1e507b0f73e6d4e1c4daed6feffff965c5169cf61c801d3f17480a93bb15c684
 - file: ..\src\config\default\tasks.c
-  hash: 32a181dc899f162e6bc28036556da3d9d965515840572a1902f7e3d2be4b3069
+  hash: 63bb827466566a1e4436876470c9a35e179ccd6a10e448b8ce7fc19b2fb7b47b
 - file: ..\src\config\default\toolchain_specifics.h
   hash: a4f1774c6f1f8c6cd522567536c9e9d75ca63259b868015ac9b0fb0aeeffe1f4
 - file: ..\src\config\default\user.h
@@ -712,7 +712,3 @@ generatedFileHashHistoryMap:
   hash: 4145827f88c9cc0327a550ec117480fae392e00fac624762719e6230b0ed2ba8
 - file: ..\src\ws281x_driver.h
   hash: 7393e4a23acf8393f1707e4b0dd0e4cf3128172b19f5877e9db322d353db00b9
-- file: ..\src\xm125_driver.c
-  hash: d004627c17edc644fb1f05724cd05982132b6fb0ba9e022e4177b42b828d9a71
-- file: ..\src\xm125_driver.h
-  hash: 95877d0aae5082f50646a965cfc6621629edcf713cb17170271028c5b8b8410d

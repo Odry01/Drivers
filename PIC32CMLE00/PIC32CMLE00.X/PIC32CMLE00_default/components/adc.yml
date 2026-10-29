@@ -224,4 +224,15 @@ data:
           type: Dynamic
         type: Values
       type: String
+    ADC_INTENSET_RESRDY:
+      attributes:
+        id: ADC_INTENSET_RESRDY
+        label: Enable Result Ready Interrupt
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
   userData: {}

@@ -456,9 +456,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM5_SPI_Initialize();
 
-    SERCOM4_SPI_Initialize();
-
     CAN0_Initialize();
+
+    SERCOM4_SPI_Initialize();
 
     EIC_Initialize();
 
@@ -517,7 +517,6 @@ void SYS_Initialize ( void* data )
     VCNL4200_DRIVER_Initialize();
     WINCS02_DRIVER_Initialize();
     WS281X_DRIVER_Initialize();
-    XM125_DRIVER_Initialize();
 
 
     NVIC_Initialize();

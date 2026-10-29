@@ -42,12 +42,20 @@ generatedFileHashHistoryMap:
   hash: 632c78c323cb9f8c6359f20337440c08f8461eb4b0304552b6a3cfd5c4052620
 - file: ..\src\app.h
   hash: 8e35d8509552a4d1d6e6f123ad75694cf784a707f7dac592ed33b55121aa8e28
+- file: ..\src\bme690_driver.c
+  hash: 3079a942a7d6fda4a37cf4372c61c02c950302a1076eaceb137a78ddc96b11e9
+- file: ..\src\bme690_driver.h
+  hash: 21e1e932f753726ac7f8a1ed180ebf2d5c36ce6663ca8d205e99ca7b8514daae
+- file: ..\src\bmp585_driver.c
+  hash: abd914f1b6af5c55e1d20b521b8a6b8a68f0a3236525524ca09202d653309744
+- file: ..\src\bmp585_driver.h
+  hash: e0eb9b2d31c3982b76366f03e104304193248a064994a3aacf2fa5556c721758
 - file: ..\src\config\default\PIC32CM5164LE00100.ld
   hash: e7861e329ca1cac23b1ff13969f21f2313697e31ad874bc0f08462bcdd84dd49
 - file: ..\src\config\default\configuration.h
   hash: 806cc1d80655f9542dbf9764c12d36f1ee43600543de3c32321a2278abd1ce24
 - file: ..\src\config\default\definitions.h
-  hash: ed4bfeb0c5a1acf67618066b1c424f9c80466594b79d1516c9f7c9d31e2c16cc
+  hash: 1fa0210f27f85f1bcc2713948c13676f10a9418a41ab74cad1361ac054d40008
 - file: ..\src\config\default\device.h
   hash: 9ac445b4af41d3a8e54b0c03d8f396280919830119b737e6e99ea753b7492469
 - file: ..\src\config\default\device_cache.h
@@ -85,11 +93,11 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: 4460457d985f664a3dcd5a719dd869dec9348b072e04671de668948ee99faa56
 - file: ..\src\config\default\initialization.c
-  hash: 7b77cefa42fd64b76a169dc5a063061f53f33a65ddbc492b5753b09c1fbcdfa4
+  hash: a640d3085a8330487f185cb109fae7b5c45edad9e2b94ae40a600976c7ccabb6
 - file: ..\src\config\default\interrupts.c
-  hash: b67adb6d3190b51f1f8ab163767ac3507b2285ec7067b28c4b5d102267bae400
+  hash: ceee72ad50abd26200490373dbf53e524f08bd310580b4d6140a33f79964a0d2
 - file: ..\src\config\default\interrupts.h
-  hash: ce739fc4cc77ae744f0116b51380fca700b129c319a79c02f32ccf2f25afffe2
+  hash: 11b6e0f4e13dfb453f41574fdc6b9f2a4d4ee131cab48b14382f25c76648fe90
 - file: ..\src\config\default\libc_syscalls.c
   hash: c9afc1b1257829415a1a6746ce3744f0a768b339d59fff2ab3ca1fab58b2a916
 - file: ..\src\config\default\osal\osal.h
@@ -99,9 +107,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\osal\osal_impl_basic.h
   hash: 158c4107f883f6d8c0244b73273361d1ca2ebd57c0934572b11a25c532fd22c5
 - file: ..\src\config\default\peripheral\adc\plib_adc.c
-  hash: aab346757bc7cd4a724d3928e79448c850813d0412c8c23bd34c419013c3018e
+  hash: 9261fb59a20d4c64f30f83b9944c904bbf79ad9d97eecec836987f6893400569
 - file: ..\src\config\default\peripheral\adc\plib_adc.h
-  hash: 9c715058624eeec3f9df15642df9d8c8406e033213023e398d96ee6c1f445b6c
+  hash: 5a5459a15845d340e60668393d123c9dc37453916a7e8d5313397f2fd5886ce6
 - file: ..\src\config\default\peripheral\adc\plib_adc_common.h
   hash: c2ebff6d5a064db1c09930f21b8db0de1774e45b0cf6dcfeb8ff53544de10bff
 - file: ..\src\config\default\peripheral\clock\plib_clock.c
@@ -117,9 +125,9 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\dmac\plib_dmac.h
   hash: d8dc178e1dfbe5178df9af3c9f56d078c5e533d663bec2fcf40b238625517467
 - file: ..\src\config\default\peripheral\eic\plib_eic.c
-  hash: 0d97ff4106b9183f915befc662a47cb5be9cb0075fa360f4147b4a55e175d01a
+  hash: a8cf83256cd92b24f8dc740abb86de678e25dfb6a54065a6b21a3d8fd71dcf19
 - file: ..\src\config\default\peripheral\eic\plib_eic.h
-  hash: 0cf54f537f01275d2a1008a01452319e4ddef7fcac0b3326bdb7ced3ba6eff7f
+  hash: 86ea1749420826d49d165f726d46a924e3d721ff020eb4d7eee53b3ccee6f794
 - file: ..\src\config\default\peripheral\evsys\plib_evsys.c
   hash: d788d709fe88f76d7801411754de9eb444c334e13455a40d37b61b605d353bde
 - file: ..\src\config\default\peripheral\evsys\plib_evsys.h
@@ -129,7 +137,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\peripheral\freqm\plib_freqm.h
   hash: c506b3c4317c2ae7f9ef67320bf8faa373dafcb8ac8009ac308df530128a5449
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.c
-  hash: 51786ea23df211aaeff37215216e73d1f92bf367e725bf4af58059dee7bacb42
+  hash: 899418d9b6228e672a4fedc9ee79773932030eb73bab9ca6874c2821b5add638
 - file: ..\src\config\default\peripheral\nvic\plib_nvic.h
   hash: 9936ac782115af41003255283fa2f603f4ff2212d16275b7c80ea8d067a9e208
 - file: ..\src\config\default\peripheral\nvmctrl\plib_nvmctrl.c
@@ -206,6 +214,10 @@ generatedFileHashHistoryMap:
   hash: 298f5d97d1fe4abafaf4895157505e343e3edfdbd072e1efc5e06c89389af1fd
 - file: ..\src\config\default\peripheral\trng\plib_trng.h
   hash: 48566ca89710499b06b05023743ac3dad992146be2b78928bf5f066de642a563
+- file: ..\src\config\default\peripheral\wdt\plib_wdt.c
+  hash: aee2321a82570e4e5107ee5a5e7fee8e424d8b39790e203d720662b31d42f6f7
+- file: ..\src\config\default\peripheral\wdt\plib_wdt.h
+  hash: d4bb429b750e4e2970fe12d9c4eea02d2e0b1f1d30279577033555379f94e1a0
 - file: ..\src\config\default\pin_configurations.csv
   hash: 5ca087695d913dee05bc3d569f47127f8ba68d5f469fc20d482554929872aaae
 - file: ..\src\config\default\startup_xc32.c
@@ -259,13 +271,37 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\system\time\sys_time_definitions.h
   hash: b8c332f36f8a6ed230dc25b1f9f7f2970699947567f80cb06534d405b7a0dd9d
 - file: ..\src\config\default\tasks.c
-  hash: 2c5b7b5402eb402d88e04c31c98e2f5c68367dcf6c85d154ce695d6356b0b7c2
+  hash: 9b34ef9432d936924603e360d3696c8c608bb28d7e12357be7e49ca39ed9a018
 - file: ..\src\config\default\toolchain_specifics.h
   hash: a4f1774c6f1f8c6cd522567536c9e9d75ca63259b868015ac9b0fb0aeeffe1f4
 - file: ..\src\config\default\user.h
   hash: 451e0878e9fcf6cf9fab046c1452ea662757988346c7f39e6bc98478ca25f995
+- file: ..\src\console_driver.c
+  hash: 1a50b3e586475bea3b2ffe2eae2a115fa88586dd784d78587db8b85e69906ffc
+- file: ..\src\console_driver.h
+  hash: a07652756e0d55d86000e303eb004a2236d304835af3e4b670953cd16b20aee5
+- file: ..\src\fcm360w_driver.c
+  hash: d0c064e08a74bed4f1e82d1b17976c56330efe9a064676ea310e34b6f067c779
+- file: ..\src\fcm360w_driver.h
+  hash: b9063d4348a0a1f54b4dbaac1dd60b93e21120b3d5249526173401d50a04438c
+- file: ..\src\hdc302x_driver.c
+  hash: fb35da790057aee9c4a0188aa6339602676aae44e358c35787366679b83b235e
+- file: ..\src\hdc302x_driver.h
+  hash: 30910e95faf9946ca4afc9c021b7b3c4892ec41e6d1113b36a507da23584653e
+- file: ..\src\kg200z_driver.c
+  hash: 789378586fb9598580f625cff82d986164fe65f23df0c5d61f51f40a0dda4114
+- file: ..\src\kg200z_driver.h
+  hash: f531b07669eaffc192b0cdd9abe9b1595a0cb2db7350ba0963ae2b5cb1f19994
 - file: ..\src\main.c
   hash: d3c233d419e6304bfacbafc18cc68c0f5c26e365f23b20ea40ccfac458f664c5
+- file: ..\src\mcp9808_driver.c
+  hash: a72f2b7be116751d97a4d29e5e14ed0b3d43b4847bd0f034f5136e77e143227b
+- file: ..\src\mcp9808_driver.h
+  hash: ccb5a26d8854e603e3525ad680285e208d9a622c83b44d3b6eecf6a386166523
+- file: ..\src\ntc_driver.c
+  hash: 4de049d56a142b35c00127e426df1cd59d88669693d97871b6cf4ff9c03addaa
+- file: ..\src\ntc_driver.h
+  hash: d3b770c5289cbfbc2fc91a7c4ea1e1e6d4c3a023b8f08caeac99ad6e631b9d31
 - file: ..\src\packs\CMSIS\CMSIS\Core\Include\cmsis_armclang.h
   hash: 28f5b17e0ba8b9b8246d96a9965bc6c17bb444a08f6c3d236f9378cc2a1e4f96
 - file: ..\src\packs\CMSIS\CMSIS\Core\Include\cmsis_compiler.h
@@ -438,3 +474,39 @@ generatedFileHashHistoryMap:
   hash: 363a04dcf66daa35374d30c4356b7bf4a0a7ba78853a54c8403c96d3a97d9443
 - file: ..\src\packs\PIC32CM5164LE00100_DFP\pio\pic32cm5164le00100.h
   hash: 7fae2808169c6b7214d33f22a9f47eca6c74769cf09da991fc0e8655765f958f
+- file: ..\src\rstc_driver.c
+  hash: 9962eb263e7c988ffd227839b0105496de646054250e24056f183132f7f827fe
+- file: ..\src\rstc_driver.h
+  hash: e0028dd6ba0d4582dc2ba31105a3532836a7a60addd444cf172c0e23382fc064
+- file: ..\src\rtc_driver.c
+  hash: b4e5bfb5ebfa73f65e1c79a7fc38060c8cd410770ca5162f68f97cac4372183a
+- file: ..\src\rtc_driver.h
+  hash: bb202f6edec6144673d439ba76b77bd12eea2707d728bdb17755f5d0025fca93
+- file: ..\src\sen63c_driver.c
+  hash: db013ac01b609755b888ce818f591af6439830c736443ce51dcb9d14aabc3c6b
+- file: ..\src\sen63c_driver.h
+  hash: c41f61e691e939c2e15a078b12cc6f8a56964261262e854b9e1c59e65ae8759d
+- file: ..\src\sht4x_driver.c
+  hash: 20c1600450592a95bc7554ea682a17c42863a29beeebf62e9c456c1d039b6ea8
+- file: ..\src\sht4x_driver.h
+  hash: c4347d303a7906a40b1612866687684595b57cc4ae68e7c95f80342914be5110
+- file: ..\src\ssd1306_driver.c
+  hash: 7e297f6673ea463194d74e16e3d1b2c526e19845378db4e4fdf98ae9fe1f6dd5
+- file: ..\src\ssd1306_driver.h
+  hash: 3a8fcb181709b983b33dbc794ab57e982da124753ef7fc0a4da10da0fed5171a
+- file: ..\src\stcc4_driver.c
+  hash: 657ac02cd7adac1f6ca49e02eb70a9f74a871b4f0a5ff3d1eb5e31398227b127
+- file: ..\src\stcc4_driver.h
+  hash: 80957be16a8bff43ad7f983ccb1c0212567b81c3add7928e5314c14880571c2e
+- file: ..\src\timer_driver.c
+  hash: 0b2a676913bb3f893f20966c8b19da6bedaf3416ce3be3876630845ead2960df
+- file: ..\src\timer_driver.h
+  hash: 7092d91cdbec44964c3186f2b2836559199199f8a1459823127446ab0c3d1fa3
+- file: ..\src\vcnl4200_driver.c
+  hash: a06724147b596edbd1018eb74026837d9e47373ff2f3cd2521181eba2575eb7d
+- file: ..\src\vcnl4200_driver.h
+  hash: 5c2a2bdf3e3327ac9d6ec6c7c7c5baad1d327f78a4609df7e053ec9ab9087815
+- file: ..\src\ws281x_driver.c
+  hash: 4145827f88c9cc0327a550ec117480fae392e00fac624762719e6230b0ed2ba8
+- file: ..\src\ws281x_driver.h
+  hash: 7393e4a23acf8393f1707e4b0dd0e4cf3128172b19f5877e9db322d353db00b9

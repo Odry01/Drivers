@@ -53,10 +53,10 @@
 #include "peripheral/supc/plib_supc.h"
 #include "peripheral/rtc/plib_rtc.h"
 #include "peripheral/freqm/plib_freqm.h"
-#include "driver/i2c/drv_i2c.h"
-#include "system/time/sys_time.h"
 #include "peripheral/tc/plib_tc4.h"
 #include "peripheral/pdec/plib_pdec.h"
+#include "system/time/sys_time.h"
+#include "driver/i2c/drv_i2c.h"
 #include "peripheral/adc/plib_adc0.h"
 #include "driver/spi/drv_spi.h"
 #include "peripheral/divas/plib_divas.h"
@@ -76,10 +76,10 @@
 #include "peripheral/systick/plib_systick.h"
 #include "peripheral/dmac/plib_dmac.h"
 #include "peripheral/wdt/plib_wdt.h"
-#include "peripheral/sercom/spi_master/plib_sercom5_spi_master.h"
 #include "peripheral/pm/plib_pm.h"
-#include "peripheral/sercom/spi_master/plib_sercom4_spi_master.h"
+#include "peripheral/sercom/spi_master/plib_sercom5_spi_master.h"
 #include "peripheral/can/plib_can0.h"
+#include "peripheral/sercom/spi_master/plib_sercom4_spi_master.h"
 #include "peripheral/eic/plib_eic.h"
 #include "peripheral/rstc/plib_rstc.h"
 #include "peripheral/dac/plib_dac.h"
@@ -107,7 +107,6 @@
 #include "vcnl4200_driver.h"
 #include "wincs02_driver.h"
 #include "ws281x_driver.h"
-#include "xm125_driver.h"
 
 
 

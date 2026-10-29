@@ -44,6 +44,12 @@ data:
       attributes:
         id: EIC_CHAN_0
         label: Enable EIC Channel0
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
       type: Boolean
     EIC_CHAN_1:
       attributes:
@@ -133,6 +139,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
       type: Boolean
     EIC_CONFIG_FILTEN_1:
       attributes:
@@ -334,6 +345,12 @@ data:
       attributes:
         id: EIC_CONFIG_SENSE_0
         label: External Interrupt0 Edge Selection
+      children:
+      - children:
+        - attributes:
+            value: '2'
+          type: User
+        type: Values
       type: KeyValueSet
     EIC_CONFIG_SENSE_1:
       attributes:
@@ -418,7 +435,7 @@ data:
       - children:
         - attributes:
             id: eic
-            value: '0'
+            value: '1'
           type: Dynamic
         type: Values
       type: Hex
@@ -435,6 +452,11 @@ data:
             value: 'true'
           type: Boolean
         type: Attributes
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
       type: Boolean
     EIC_DEBOUNCEN_1:
       attributes:
@@ -636,21 +658,45 @@ data:
       attributes:
         id: EIC_DEBOUNCER_NO_STATES_0
         label: Valid Pin States for EXTINT[7:0]
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
       type: KeyValueSet
     EIC_DEBOUNCER_NO_STATES_1:
       attributes:
         id: EIC_DEBOUNCER_NO_STATES_1
         label: Valid Pin States Duration for EXTINT[15:8]
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
       type: KeyValueSet
     EIC_DEBOUNCER_PRESCALER_0:
       attributes:
         id: EIC_DEBOUNCER_PRESCALER_0
         label: Debouncer Prescaler for EXTINT[7:0]
+      children:
+      - children:
+        - attributes:
+            value: '2'
+          type: User
+        type: Values
       type: KeyValueSet
     EIC_DEBOUNCER_PRESCALER_1:
       attributes:
         id: EIC_DEBOUNCER_PRESCALER_1
         label: Debouncer Prescaler for EXTINT[15:8]
+      children:
+      - children:
+        - attributes:
+            value: '2'
+          type: User
+        type: Values
       type: KeyValueSet
     EIC_EXTINTEO:
       attributes:
@@ -672,7 +718,7 @@ data:
       - children:
         - attributes:
             id: eic
-            value: '0'
+            value: '1'
           type: Dynamic
         type: Values
       type: Hex
@@ -680,6 +726,12 @@ data:
       attributes:
         id: EIC_INT_0
         label: Enable Interrupt
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
       type: Boolean
     EIC_INT_1:
       attributes:
@@ -768,4 +820,15 @@ data:
           type: Dynamic
         type: Values
       type: Boolean
+    EIC_PRESCALER_TICKON:
+      attributes:
+        id: EIC_PRESCALER_TICKON
+        label: Debouncer Sampler Clock Source
+      children:
+      - children:
+        - attributes:
+            value: '1'
+          type: User
+        type: Values
+      type: KeyValueSet
   userData: {}

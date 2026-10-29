@@ -133,22 +133,15 @@ void SYS_Tasks ( void )
 
     /* Call Application task STCC4_DRIVER. */
     STCC4_DRIVER_Tasks();
-
+    
     /* Call Application task VCNL4200_DRIVER. */
     VCNL4200_DRIVER_Tasks();
 
     /* Call Application task WINCS02_DRIVER. */
-//    WINCS02_DRIVER_Tasks();
+    WINCS02_DRIVER_Tasks();
 
     /* Call Application task WS281X_DRIVER. */
     WS281X_DRIVER_Tasks();
-
-    /* Call Application task XM125_DRIVER. */
-    XM125_DRIVER_Tasks();
-
-
-
-
 }
 
 /*******************************************************************************

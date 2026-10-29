@@ -1003,10 +1003,11 @@ data:
     GEN_APP_TASK_COUNT:
       attributes:
         id: GEN_APP_TASK_COUNT
+        label: Number of Applications
       children:
       - children:
         - attributes:
-            value: '21'
+            value: '20'
           type: User
         type: Values
       type: Integer
@@ -1467,13 +1468,13 @@ data:
             id: enabled
           children:
           - type: Value
-            value: 'true'
+            value: 'false'
           type: Boolean
         - attributes:
             id: name
           children:
           - type: Value
-            value: xm125_driver.c
+            value: app20.c
           type: String
         type: Attributes
       type: File
@@ -1486,24 +1487,19 @@ data:
             id: enabled
           children:
           - type: Value
-            value: 'true'
+            value: 'false'
           type: Boolean
         - attributes:
             id: name
           children:
           - type: Value
-            value: xm125_driver.h
+            value: app20.h
           type: String
         type: Attributes
       type: File
     GEN_APP_TASK_NAME_20:
       attributes:
         id: GEN_APP_TASK_NAME_20
-      children:
-      - children:
-        - attributes:
-            value: xm125_driver
-          type: User
-        type: Values
+        label: Application Name
       type: String
   userData: {}

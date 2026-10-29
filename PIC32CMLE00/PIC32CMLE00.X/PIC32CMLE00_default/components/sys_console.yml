@@ -22,7 +22,7 @@ data:
     - children:
       - attributes:
           id: sys_console
-          x: '479'
+          x: '478'
           y: '197'
         type: ElementPosition
       type: ElementPositions

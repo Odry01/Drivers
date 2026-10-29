@@ -881,7 +881,7 @@ data:
       - children:
         - attributes:
             id: eic
-            value: 'false'
+            value: 'true'
           type: Dynamic
         type: Values
       type: Boolean
@@ -893,7 +893,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: 'true'
+            value: 'false'
           type: Dynamic
         type: Values
       type: Boolean
@@ -905,7 +905,7 @@ data:
       - children:
         - attributes:
             id: eic
-            value: EIC_EXTINT_0_Handler
+            value: EIC_EXTINT_0_InterruptHandler
           type: Dynamic
         type: Values
       type: String
@@ -917,7 +917,7 @@ data:
       - children:
         - attributes:
             id: eic
-            value: 'false'
+            value: 'true'
           type: Dynamic
         type: Values
       type: Boolean
@@ -2445,7 +2445,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: 'false'
+            value: 'true'
           type: Dynamic
         type: Values
       type: Boolean
@@ -2457,7 +2457,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: EIC_EXTINT_0_Handler
+            value: EIC_EXTINT_0_InterruptHandler
           type: Dynamic
         type: Values
       type: String
@@ -2469,7 +2469,7 @@ data:
       - children:
         - attributes:
             id: core
-            value: 'false'
+            value: 'true'
           type: Dynamic
         type: Values
       type: Boolean
@@ -4996,6 +4996,224 @@ data:
           type: User
         type: Values
       type: Boolean
+    WDT_HEADER:
+      attributes:
+        id: WDT_HEADER
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    WDT_SOURCE:
+      attributes:
+        id: WDT_SOURCE
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    WDT_SYS_DEF:
+      attributes:
+        id: WDT_SYS_DEF
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        type: Attributes
+      type: File
+    WDT_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: WDT_INTERRUPT_ENABLE_UPDATE
+        label: NVIC Peripheral Enable/Disable Update
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_1_0_ENABLE:
+      attributes:
+        id: NVIC_1_0_ENABLE
+        label: Enable Watchdog Timer Interrupt
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    WDT_INTERRUPT_ENABLE:
+      attributes:
+        id: WDT_INTERRUPT_ENABLE
+        label: Vector Peripheral Enable
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_1_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_1_0_HANDLER_LOCK
+        label: Handler Lock
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    WDT_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: WDT_INTERRUPT_HANDLER_LOCK
+        label: Vector Peripheral Handler Lock
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_1_0_HANDLER:
+      attributes:
+        id: NVIC_1_0_HANDLER
+        label: Handler
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: WDT_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    WDT_INTERRUPT_HANDLER:
+      attributes:
+        id: WDT_INTERRUPT_HANDLER
+        label: Vector Peripheral Handler
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: WDT_Handler
+          type: Dynamic
+        type: Values
+      type: String
+    WDT_USE:
+      attributes:
+        id: WDT_USE
+        label: Use WDT ?
+      children:
+      - children:
+        - attributes:
+            value: 'true'
+          type: User
+        type: Values
+      type: Boolean
+    ADC_RESRDY_INTERRUPT_ENABLE_UPDATE:
+      attributes:
+        id: ADC_RESRDY_INTERRUPT_ENABLE_UPDATE
+        label: NVIC Peripheral Enable/Disable Update
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'false'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_63_0_ENABLE:
+      attributes:
+        id: NVIC_63_0_ENABLE
+        label: Enable ADC Result Ready Interrupt
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ADC_RESRDY_INTERRUPT_ENABLE:
+      attributes:
+        id: ADC_RESRDY_INTERRUPT_ENABLE
+        label: Vector Peripheral Enable
+      children:
+      - children:
+        - attributes:
+            id: adc
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_63_0_HANDLER_LOCK:
+      attributes:
+        id: NVIC_63_0_HANDLER_LOCK
+        label: Handler Lock
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    ADC_RESRDY_INTERRUPT_HANDLER_LOCK:
+      attributes:
+        id: ADC_RESRDY_INTERRUPT_HANDLER_LOCK
+        label: Vector Peripheral Handler Lock
+      children:
+      - children:
+        - attributes:
+            id: adc
+            value: 'true'
+          type: Dynamic
+        type: Values
+      type: Boolean
+    NVIC_63_0_HANDLER:
+      attributes:
+        id: NVIC_63_0_HANDLER
+        label: Handler
+      children:
+      - children:
+        - attributes:
+            id: core
+            value: ADC_RESRDY_InterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
+    ADC_RESRDY_INTERRUPT_HANDLER:
+      attributes:
+        id: ADC_RESRDY_INTERRUPT_HANDLER
+        label: Vector Peripheral Handler
+      children:
+      - children:
+        - attributes:
+            id: adc
+            value: ADC_RESRDY_InterruptHandler
+          type: Dynamic
+        type: Values
+      type: String
   userData:
     children:
     - attributes:

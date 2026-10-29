@@ -138,7 +138,7 @@ bool TIMER_DRIVER_Get_Delay_US_TMR_Status(void)
 
 void TIMER_DRIVER_Delay_US_TMR(uint32_t DELAY_US)
 {
-    SYS_TIME_DelayMS(DELAY_US, &timer_driverData.DELAY_US_TMR);
+    SYS_TIME_DelayUS(DELAY_US, &timer_driverData.DELAY_US_TMR);
 }
 
 bool TIMER_DRIVER_Get_Delay_MS_TMR_Status(void)

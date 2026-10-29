@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Source File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     app.c
 
+  Status:
+    Finished
+ 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
 
@@ -35,20 +38,9 @@
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the APP_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
-*/
 
 APP_DATA appData;
 
@@ -58,8 +50,7 @@ APP_DATA appData;
 // *****************************************************************************
 // *****************************************************************************
 
-/* TODO:  Add any necessary callback functions.
-*/
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -67,10 +58,35 @@ APP_DATA appData;
 // *****************************************************************************
 // *****************************************************************************
 
+bool APP_Get_I2C_Error_Status(void)
+{
+    return (appData.I2C_ERROR);
+}
 
-/* TODO:  Add any necessary local functions.
-*/
+void APP_Set_I2C_Error_Status(bool STATUS)
+{
+    appData.I2C_ERROR = STATUS;
+}
 
+bool APP_Get_SPI_Error_Status(void)
+{
+    return (appData.SPI_ERROR);
+}
+
+void APP_Set_SPI_Error_Status(bool STATUS)
+{
+    appData.SPI_ERROR = STATUS;
+}
+
+bool APP_Get_UART_Error_Status(void)
+{
+    return (appData.UART_ERROR);
+}
+
+void APP_Set_UART_Error_Status(bool STATUS)
+{
+    appData.UART_ERROR = STATUS;
+}
 
 // *****************************************************************************
 // *****************************************************************************
@@ -78,73 +94,106 @@ APP_DATA appData;
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void APP_Initialize ( void )
-
-  Remarks:
-    See prototype in app.h.
- */
-
-void APP_Initialize ( void )
+void APP_Initialize(void)
 {
-    /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
-
-
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
-
-/******************************************************************************
-  Function:
-    void APP_Tasks ( void )
-
-  Remarks:
-    See prototype in app.h.
- */
-
-void APP_Tasks ( void )
+void APP_Tasks(void)
 {
-
-    /* Check the application's current state. */
-    switch ( appData.state )
+    switch (appData.state)
     {
-        /* Application's initial state. */
         case APP_STATE_INIT:
         {
-            bool appInitialized = true;
+            appData.state = APP_STATE_IDLE;
+            break;
+        }
 
-
-            if (appInitialized)
+        case APP_STATE_IDLE:
+        {
+            if (TIMER_DRIVER_Get_Main_TMR_Status() == true)
             {
-
-                appData.state = APP_STATE_SERVICE_TASKS;
+                TIMER_DRIVER_Set_Main_TMR_Status(false);
+                appData.state = APP_STATE_ENABLE_WDT;
             }
             break;
         }
 
-        case APP_STATE_SERVICE_TASKS:
+        case APP_STATE_ENABLE_WDT:
         {
-
+            WDT_Enable();
+            appData.state = APP_STATE_HDC302X_DRIVER_OPERATION;
             break;
         }
 
-        /* TODO: implement your application state machine.*/
+        case APP_STATE_HDC302X_DRIVER_OPERATION:
+        {
+            if (APP_Get_I2C_Error_Status() == false)
+            {
+                HDC302X_DRIVER_Set_Task_Start_Status(true);
+                WDT_Clear();
+                appData.state = APP_STATE_WAIT_FOR_FINISH_HDC302X_DRIVER_OPERATION;
+            }
+            else
+            {
+                WDT_Clear();
+                appData.state = APP_STATE_CONSOLE_DRIVER_OPERATION;
+            }
+            break;
+        }
 
+        case APP_STATE_WAIT_FOR_FINISH_HDC302X_DRIVER_OPERATION:
+        {
+            if (HDC302X_DRIVER_Get_Task_Completed_Status() == true)
+            {
+                HDC302X_DRIVER_Set_Task_Start_Status(false);
+                HDC302X_DRIVER_Set_Task_Completed_Status(false);
+                WDT_Clear();
+                appData.state = APP_STATE_CONSOLE_DRIVER_OPERATION;
+            }
+            break;
+        }
 
-        /* The default state should never be executed. */
+        case APP_STATE_CONSOLE_DRIVER_OPERATION:
+        {
+            CONSOLE_DRIVER_Set_Task_Start_Status(true);
+            WDT_Clear();
+            appData.state = APP_STATE_WAIT_FOR_FINISH_CONSOLE_DRIVER_OPERATION;
+            break;
+        }
+
+        case APP_STATE_WAIT_FOR_FINISH_CONSOLE_DRIVER_OPERATION:
+        {
+            if (CONSOLE_DRIVER_Get_Task_Completed_Status() == true)
+            {
+                CONSOLE_DRIVER_Set_Task_Start_Status(false);
+                CONSOLE_DRIVER_Set_Task_Completed_Status(false);
+                WDT_Clear();
+                appData.state = APP_STATE_DISABLE_WDT;
+            }
+            break;
+        }
+
+        case APP_STATE_DISABLE_WDT:
+        {
+            WDT_Disable();
+            appData.state = APP_STATE_IDLE;
+            break;
+        }
+
+        case APP_STATE_ENTER_TO_STANDBY_MODE:
+        {
+            PM_StandbyModeEnter();
+            appData.state = APP_STATE_IDLE;
+            break;
+        }
+
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
-
 
 /*******************************************************************************
  End of File

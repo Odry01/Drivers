@@ -22,7 +22,7 @@ data:
     - children:
       - attributes:
           id: drv_spi
-          x: '479'
+          x: '478'
           y: '787'
         type: ElementPosition
       type: ElementPositions

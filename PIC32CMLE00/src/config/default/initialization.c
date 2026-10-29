@@ -431,10 +431,10 @@ void SYS_Initialize ( void* data )
 
     NVMCTRL_Initialize();
 
-
-    ADC_Initialize();
     SUPC_Initialize();
 
+
+    ADC_Initialize();
     RTC_Initialize();
 
     FREQM_Initialize();
@@ -449,9 +449,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_USART_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_USART_Initialize();
+
+    EVSYS_Initialize();
 
 	SYSTICK_TimerInitialize();
     DMAC_Initialize();
@@ -495,6 +495,23 @@ void SYS_Initialize ( void* data )
 
     /* MISRAC 2023 deviation block end */
     APP_Initialize();
+    BME690_DRIVER_Initialize();
+    BMP585_DRIVER_Initialize();
+    CONSOLE_DRIVER_Initialize();
+    FCM360W_DRIVER_Initialize();
+    HDC302X_DRIVER_Initialize();
+    KG200Z_DRIVER_Initialize();
+    MCP9808_DRIVER_Initialize();
+    NTC_DRIVER_Initialize();
+    RSTC_DRIVER_Initialize();
+    RTC_DRIVER_Initialize();
+    SEN63C_DRIVER_Initialize();
+    SHT4X_DRIVER_Initialize();
+    SSD1306_DRIVER_Initialize();
+    STCC4_DRIVER_Initialize();
+    TIMER_DRIVER_Initialize();
+    VCNL4200_DRIVER_Initialize();
+    WS281X_DRIVER_Initialize();
 
 
     NVIC_Initialize();

@@ -63,6 +63,7 @@ void SysTick_Handler (void);
 void OSC32KCTRL_InterruptHandler (void);
 void SUPC_InterruptHandler (void);
 void RTC_InterruptHandler (void);
+void EIC_EXTINT_0_InterruptHandler (void);
 void FREQM_InterruptHandler (void);
 void DMAC_0_InterruptHandler (void);
 void DMAC_1_InterruptHandler (void);
@@ -75,6 +76,7 @@ void SERCOM2_I2C_InterruptHandler (void);
 void SERCOM3_SPI_InterruptHandler (void);
 void SERCOM4_SPI_InterruptHandler (void);
 void TC2_TimerInterruptHandler (void);
+void ADC_RESRDY_InterruptHandler (void);
 void TRNG_InterruptHandler (void);
 
 
