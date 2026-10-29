@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     kg200z_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -16,7 +19,7 @@
     "KG200Z_DRIVER_Initialize" and "KG200Z_DRIVER_Tasks" prototypes) and some of them are only used
     internally by the application (such as the "KG200Z_DRIVER_STATES" definition).  Both
     are defined here for convenience.
-*******************************************************************************/
+ *******************************************************************************/
 
 #ifndef _KG200Z_DRIVER_H
 #define _KG200Z_DRIVER_H
@@ -27,16 +30,18 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdint.h>
+#include <stdio.h>
 #include <stdbool.h>
-#include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
 // DOM-IGNORE-END
@@ -47,47 +52,46 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+#define KG200Z_RX_DATA_SIZE                            256
+#define KG200Z_TX_DATA_SIZE                            256
+
 // *****************************************************************************
-/* Application states
-
-  Summary:
-    Application states enumeration
-
-  Description:
-    This enumeration defines the valid application states.  These states
-    determine the behavior of the application at various times.
-*/
 
 typedef enum
 {
-    /* Application's state machine's initial state. */
-    KG200Z_DRIVER_STATE_INIT=0,
-    KG200Z_DRIVER_STATE_SERVICE_TASKS,
-    /* TODO: Define states used by the application state machine. */
-
+    KG200Z_DRIVER_STATE_INIT = 0,
+    KG200Z_DRIVER_STATE_CHECK_USART_HANDLER,
+    KG200Z_DRIVER_STATE_IDLE,
+    KG200Z_DRIVER_STATE_ATQ_MESSAGE_TRANSMIT,
+    KG200Z_DRIVER_STATE_ATQ_WAIT_FOR_MESSAGE_TRANSMIT,
+    KG200Z_DRIVER_STATE_ATQ_READ_MODULE_RESPONSE,
+    KG200Z_DRIVER_STATE_ATQ_WAIT_FOR_MESSAGE_RECEIVE,
+    KG200Z_DRIVER_STATE_ATQ_STORE_BYTE,
+    KG200Z_DRIVER_STATE_ATQ_STORE_END_OF_LINE_COUNT,
+    KG200Z_DRIVER_STATE_ATQ_CHECK_CR_LF_COUNT,
+    KG200Z_DRIVER_STATE_ATQ_CHECK_MODULE_RESPONSE,
+    KG200Z_DRIVER_STATE_TIMER_EXPIRED,
+    KG200Z_DRIVER_STATE_ERROR,
 } KG200Z_DRIVER_STATES;
 
-
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    Application strings and buffers are be defined outside this structure.
- */
 
 typedef struct
 {
     /* The application's current state */
     KG200Z_DRIVER_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-
+    /* Driver variables */
+    DRV_HANDLE USART_HANDLE;
+    DRV_USART_BUFFER_HANDLE USART_BUFFER_HANDLE;
+    volatile bool KG200Z_TASK_START;
+    volatile bool KG200Z_TASK_COMPLETED;
+    volatile bool KG200Z_RESPONSE_STATUS;
+    char RX_BYTE;
+    char RX_BUFFER[KG200Z_RX_DATA_SIZE];
+    char TX_BUFFER[KG200Z_TX_DATA_SIZE];
+    uint8_t RX_COUNT;
+    uint8_t END_OF_LINE_COUNT;
 } KG200Z_DRIVER_DATA;
 
 // *****************************************************************************
@@ -95,8 +99,8 @@ typedef struct
 // Section: Application Callback Routines
 // *****************************************************************************
 // *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -104,71 +108,25 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void KG200Z_DRIVER_Initialize ( void )
+void KG200Z_DRIVER_Initialize(void);
 
-  Summary:
-     MPLAB Harmony application initialization routine.
+void KG200Z_DRIVER_Tasks(void);
 
-  Description:
-    This function initializes the Harmony application.  It places the
-    application in its initial state and prepares it to run so that its
-    KG200Z_DRIVER_Tasks function can be called.
+bool KG200Z_DRIVER_Get_Task_Start_Status(void);
 
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
+void KG200Z_DRIVER_Set_Task_Start_Status(bool STATUS);
 
-  Parameters:
-    None.
+bool KG200Z_DRIVER_Get_Task_Completed_Status(void);
 
-  Returns:
-    None.
+void KG200Z_DRIVER_Set_Task_Completed_Status(bool STATUS);
 
-  Example:
-    <code>
-    KG200Z_DRIVER_Initialize();
-    </code>
+void KG200Z_DRIVER_Write_Command(char *MESSAGE);
 
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
-*/
+void KG200Z_DRIVER_Read_Command(void);
 
-void KG200Z_DRIVER_Initialize ( void );
+bool KG200Z_DRIVER_Get_Module_Response_Status(void);
 
-
-/*******************************************************************************
-  Function:
-    void KG200Z_DRIVER_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    KG200Z_DRIVER_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
- */
-
-void KG200Z_DRIVER_Tasks( void );
+void KG200Z_DRIVER_Set_Module_Response_Status(bool KG200Z_RESPONSE_STATUS);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
@@ -181,4 +139,3 @@ void KG200Z_DRIVER_Tasks( void );
 /*******************************************************************************
  End of File
  */
-

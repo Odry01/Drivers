@@ -108,7 +108,6 @@ void FCM360W_DRIVER_Set_Module_Response_Status(bool FCM360W_RESPONSE_STATUS)
     fcm360w_driverData.FCM360W_RESPONSE_STATUS = FCM360W_RESPONSE_STATUS;
 }
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -218,7 +217,7 @@ void FCM360W_DRIVER_Tasks(void)
         case FCM360W_DRIVER_STATE_QRST_STORE_BYTE:
         {
             fcm360w_driverData.RX_BUFFER[fcm360w_driverData.RX_COUNT] = fcm360w_driverData.RX_BYTE;
-            fcm360w_driverData.RX_COUNT ++;
+            fcm360w_driverData.RX_COUNT++;
             fcm360w_driverData.state = FCM360W_DRIVER_STATE_QRST_STORE_END_OF_LINE_COUNT;
             break;
         }
@@ -227,7 +226,7 @@ void FCM360W_DRIVER_Tasks(void)
         {
             if (fcm360w_driverData.RX_BYTE == '\n')
             {
-                fcm360w_driverData.END_OF_LINE_COUNT ++;
+                fcm360w_driverData.END_OF_LINE_COUNT++;
                 fcm360w_driverData.state = FCM360W_DRIVER_STATE_QRST_CHECK_CR_LF_COUNT;
             }
             else

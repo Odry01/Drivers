@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Source File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     kg200z_driver.c
 
+  Status:
+    In development
+ 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
 
@@ -36,19 +39,6 @@
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the KG200Z_DRIVER_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
-*/
 
 KG200Z_DRIVER_DATA kg200z_driverData;
 
@@ -58,8 +48,7 @@ KG200Z_DRIVER_DATA kg200z_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/* TODO:  Add any necessary callback functions.
-*/
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -67,10 +56,47 @@ KG200Z_DRIVER_DATA kg200z_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
+bool KG200Z_DRIVER_Get_Task_Start_Status(void)
+{
+    return (kg200z_driverData.KG200Z_TASK_START);
+}
 
-/* TODO:  Add any necessary local functions.
-*/
+void KG200Z_DRIVER_Set_Task_Start_Status(bool STATUS)
+{
+    kg200z_driverData.KG200Z_TASK_START = STATUS;
+}
 
+bool KG200Z_DRIVER_Get_Task_Completed_Status(void)
+{
+    return (kg200z_driverData.KG200Z_TASK_COMPLETED);
+}
+
+void KG200Z_DRIVER_Set_Task_Completed_Status(bool STATUS)
+{
+    kg200z_driverData.KG200Z_TASK_COMPLETED = STATUS;
+}
+
+void KG200Z_DRIVER_Write_Command(char *MESSAGE)
+{
+    memset(kg200z_driverData.TX_BUFFER, 0, sizeof (kg200z_driverData.TX_BUFFER));
+    sprintf(kg200z_driverData.TX_BUFFER, "%s\r\n", MESSAGE);
+    DRV_USART_WriteBufferAdd(kg200z_driverData.USART_HANDLE, &kg200z_driverData.TX_BUFFER, strlen(kg200z_driverData.TX_BUFFER), &kg200z_driverData.USART_BUFFER_HANDLE);
+}
+
+void KG200Z_DRIVER_Read_Command(void)
+{
+    DRV_USART_ReadBufferAdd(kg200z_driverData.USART_HANDLE, &kg200z_driverData.RX_BYTE, 1, &kg200z_driverData.USART_BUFFER_HANDLE);
+}
+
+bool KG200Z_DRIVER_Get_Module_Response_Status(void)
+{
+    return (kg200z_driverData.KG200Z_RESPONSE_STATUS);
+}
+
+void KG200Z_DRIVER_Set_Module_Response_Status(bool KG200Z_RESPONSE_STATUS)
+{
+    kg200z_driverData.KG200Z_RESPONSE_STATUS = KG200Z_RESPONSE_STATUS;
+}
 
 // *****************************************************************************
 // *****************************************************************************
@@ -78,73 +104,181 @@ KG200Z_DRIVER_DATA kg200z_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void KG200Z_DRIVER_Initialize ( void )
-
-  Remarks:
-    See prototype in kg200z_driver.h.
- */
-
-void KG200Z_DRIVER_Initialize ( void )
+void KG200Z_DRIVER_Initialize(void)
 {
-    /* Place the App state machine in its initial state. */
     kg200z_driverData.state = KG200Z_DRIVER_STATE_INIT;
-
-
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
+    kg200z_driverData.USART_HANDLE = DRV_HANDLE_INVALID;
+    kg200z_driverData.USART_BUFFER_HANDLE = DRV_USART_BUFFER_HANDLE_INVALID;
 }
 
-
-/******************************************************************************
-  Function:
-    void KG200Z_DRIVER_Tasks ( void )
-
-  Remarks:
-    See prototype in kg200z_driver.h.
- */
-
-void KG200Z_DRIVER_Tasks ( void )
+void KG200Z_DRIVER_Tasks(void)
 {
-
-    /* Check the application's current state. */
-    switch ( kg200z_driverData.state )
+    switch (kg200z_driverData.state)
     {
-        /* Application's initial state. */
         case KG200Z_DRIVER_STATE_INIT:
         {
-            bool appInitialized = true;
+            kg200z_driverData.USART_HANDLE = DRV_USART_Open(DRV_USART_INDEX_0, DRV_IO_INTENT_READWRITE);
+            kg200z_driverData.state = KG200Z_DRIVER_STATE_CHECK_USART_HANDLER;
+            break;
+        }
 
-
-            if (appInitialized)
+        case KG200Z_DRIVER_STATE_CHECK_USART_HANDLER:
+        {
+            if (kg200z_driverData.USART_HANDLE == DRV_HANDLE_INVALID)
             {
-
-                kg200z_driverData.state = KG200Z_DRIVER_STATE_SERVICE_TASKS;
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ERROR;
+            }
+            else
+            {
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_IDLE;
             }
             break;
         }
 
-        case KG200Z_DRIVER_STATE_SERVICE_TASKS:
+        case KG200Z_DRIVER_STATE_IDLE:
         {
-
+            if (KG200Z_DRIVER_Get_Task_Start_Status() == true)
+            {
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_MESSAGE_TRANSMIT;
+            }
             break;
         }
 
-        /* TODO: implement your application state machine.*/
+        case KG200Z_DRIVER_STATE_ATQ_MESSAGE_TRANSMIT:
+        {
+            char TX_BUFFER[KG200Z_TX_DATA_SIZE];
+            snprintf(TX_BUFFER, sizeof (TX_BUFFER), "ATQ");
+            KG200Z_DRIVER_Write_Command(TX_BUFFER);
+            TIMER_DRIVER_Start_Bus_TMR();
+            kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_WAIT_FOR_MESSAGE_TRANSMIT;
+            break;
+        }
 
+        case KG200Z_DRIVER_STATE_ATQ_WAIT_FOR_MESSAGE_TRANSMIT:
+        {
+            if (DRV_USART_BufferStatusGet(kg200z_driverData.USART_BUFFER_HANDLE) == DRV_USART_BUFFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_READ_MODULE_RESPONSE;
+            }
+            else if (DRV_USART_BufferStatusGet(kg200z_driverData.USART_BUFFER_HANDLE) == DRV_USART_BUFFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
 
-        /* The default state should never be executed. */
+        case KG200Z_DRIVER_STATE_ATQ_READ_MODULE_RESPONSE:
+        {
+            KG200Z_DRIVER_Read_Command();
+            TIMER_DRIVER_Start_Bus_TMR();
+            kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_WAIT_FOR_MESSAGE_RECEIVE;
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_ATQ_WAIT_FOR_MESSAGE_RECEIVE:
+        {
+            if (DRV_USART_BufferStatusGet(kg200z_driverData.USART_BUFFER_HANDLE) == DRV_USART_BUFFER_EVENT_COMPLETE)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_STORE_BYTE;
+            }
+            else if (DRV_USART_BufferStatusGet(kg200z_driverData.USART_BUFFER_HANDLE) == DRV_USART_BUFFER_EVENT_ERROR)
+            {
+                TIMER_DRIVER_Stop_Bus_TMR();
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ERROR;
+            }
+            else if (TIMER_DRIVER_Get_Bus_TMR_Status() == true)
+            {
+                TIMER_DRIVER_Set_Bus_TMR_Status(false);
+                TIMER_DRIVER_Stop_Bus_TMR();
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_TIMER_EXPIRED;
+            }
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_ATQ_STORE_BYTE:
+        {
+            kg200z_driverData.RX_BUFFER[kg200z_driverData.RX_COUNT] = kg200z_driverData.RX_BYTE;
+            kg200z_driverData.RX_COUNT++;
+            kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_STORE_END_OF_LINE_COUNT;
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_ATQ_STORE_END_OF_LINE_COUNT:
+        {
+            if (kg200z_driverData.RX_BYTE == '\n')
+            {
+                kg200z_driverData.END_OF_LINE_COUNT++;
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_CHECK_CR_LF_COUNT;
+            }
+            else
+            {
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_READ_MODULE_RESPONSE;
+            }
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_ATQ_CHECK_CR_LF_COUNT:
+        {
+            if (kg200z_driverData.END_OF_LINE_COUNT == 2)
+            {
+                kg200z_driverData.RX_COUNT = 0;
+                kg200z_driverData.END_OF_LINE_COUNT = 0;
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_CHECK_MODULE_RESPONSE;
+            }
+            else
+            {
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ATQ_READ_MODULE_RESPONSE;
+            }
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_ATQ_CHECK_MODULE_RESPONSE:
+        {
+            if (KG200Z_DRIVER_Get_Module_Response_Status() == true)
+            {
+                KG200Z_DRIVER_Set_Module_Response_Status(false);
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_IDLE;
+            }
+            else
+            {
+                kg200z_driverData.state = KG200Z_DRIVER_STATE_ERROR;
+            }
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_TIMER_EXPIRED:
+        {
+            DRV_USART_Close(kg200z_driverData.USART_HANDLE);
+            APP_Set_UART_Error_Status(true);
+            KG200Z_DRIVER_Set_Task_Completed_Status(true);
+            kg200z_driverData.state = KG200Z_DRIVER_STATE_IDLE;
+            break;
+        }
+
+        case KG200Z_DRIVER_STATE_ERROR:
+        {
+            DRV_USART_Close(kg200z_driverData.USART_HANDLE);
+            APP_Set_UART_Error_Status(true);
+            KG200Z_DRIVER_Set_Task_Completed_Status(true);
+            kg200z_driverData.state = KG200Z_DRIVER_STATE_IDLE;
+            break;
+        }
+
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
-
 
 /*******************************************************************************
  End of File

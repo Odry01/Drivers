@@ -134,7 +134,7 @@ void FCM360W_DRIVER_Initialize(void);
 
 void FCM360W_DRIVER_Tasks(void);
 
-bool FCM360W_DRIVER_Get_Task_Start_Status_Get(void);
+bool FCM360W_DRIVER_Get_Task_Start_Status(void);
 
 void FCM360W_DRIVER_Set_Task_Start_Status(bool STATUS);
 
