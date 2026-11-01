@@ -88,21 +88,21 @@ void SEN63C_DRIVER_Start_Measurement(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_START_MEASUREMENT_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_START_MEASUREMENT_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Stop_Measurement(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_STOP_MEASUREMENT_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_STOP_MEASUREMENT_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Get_Data_Ready_Status(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_DATA_READY_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_DATA_READY_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Data_Ready_Status(void)
@@ -114,7 +114,7 @@ void SEN63C_DRIVER_Read_Measured_Values(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_READ_MEASURED_VALUES_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_READ_MEASURED_VALUES_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 21, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 21, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Measured_Values(void)
@@ -143,7 +143,7 @@ void SEN63C_DRIVER_Read_Measured_Raw_Values(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_READ_MEASURED_RAW_VALUES_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_READ_MEASURED_RAW_VALUES_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Measured_Raw_Values(void)
@@ -162,7 +162,7 @@ void SEN63C_DRIVER_Read_Number_Concentration_Values(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_READ_NUMBER_CONCENTRATION_VALUES_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_READ_NUMBER_CONCENTRATION_VALUES_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 15, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 15, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Number_Concentration_Values(void)
@@ -199,7 +199,7 @@ void SEN63C_DRIVER_Set_Temperature_Offset_Parameters(uint8_t I2C_ADDRESS, int8_t
     sen63c_driverData.I2C_DATA_TRANSMIT[11] = SLOT_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[12] = SLOT_LSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[13] = SEN63C_DRIVER_Calculation_Array_CRC(sen63c_driverData.I2C_DATA_TRANSMIT[11], sen63c_driverData.I2C_DATA_TRANSMIT[12]);
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 14, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 14, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Set_Temperature_Acceleration_Parameters(uint8_t I2C_ADDRESS, uint8_t K_MSB, uint8_t K_LSB, uint8_t P_MSB, uint8_t P_LSB, uint8_t T1_MSB, uint8_t T1_LSB, uint8_t T2_MSB, uint8_t T2_LSB)
@@ -218,14 +218,14 @@ void SEN63C_DRIVER_Set_Temperature_Acceleration_Parameters(uint8_t I2C_ADDRESS, 
     sen63c_driverData.I2C_DATA_TRANSMIT[11] = T2_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[12] = T2_LSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[13] = SEN63C_DRIVER_Calculation_Array_CRC(sen63c_driverData.I2C_DATA_TRANSMIT[11], sen63c_driverData.I2C_DATA_TRANSMIT[12]);
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 14, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 14, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Get_Product_Name(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_PRODUCT_NAME_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_PRODUCT_NAME_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 48, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 48, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Product_Name(void)
@@ -268,7 +268,7 @@ void SEN63C_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_SERIAL_NUMBER_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_SERIAL_NUMBER_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 48, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 48, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Serial_Number(void)
@@ -311,14 +311,14 @@ void SEN63C_DRIVER_Read_Device_Status(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_READ_DEVICE_STATUS_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_READ_DEVICE_STATUS_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Read_And_Clear_Device_Status(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_READ_AND_CLEAR_DEVICE_STATUS_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_READ_AND_CLEAR_DEVICE_STATUS_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Device_Status(void)
@@ -330,7 +330,7 @@ void SEN63C_DRIVER_Get_FW_Version(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_VERSION_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_VERSION_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 12, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 12, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_FW_Version(void)
@@ -342,28 +342,28 @@ void SEN63C_DRIVER_Reset_Device(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_DEVICE_RESET_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_DEVICE_RESET_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Start_Fan_Cleaning(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_START_FAN_CLEANING_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_START_FAN_CLEANING_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Activate_Heater(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_ACTIVATE_SHT_HEATER_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_ACTIVATE_SHT_HEATER_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Get_Heater_Measurement(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_SHT_HEATER_MEASUREMENTS_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_SHT_HEATER_MEASUREMENTS_MSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 6, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Heater_Measurement(void)
@@ -376,7 +376,7 @@ void SEN63C_DRIVER_Perform_Forced_CO2_Recalibration(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_PERFORM_FORCED_CO2_RECALIBRATION_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_PERFORM_FORCED_CO2_RECALIBRATION_MSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 5, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 5, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Forced_CO2_Recalibration(void)
@@ -389,7 +389,7 @@ void SEN63C_DRIVER_Get_CO2_Sensor_Automatic_Self_Calibration(uint8_t I2C_ADDRESS
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_CO2_Sensor_Automatic_Self_Calibration(void)
@@ -402,14 +402,14 @@ void SEN63C_DRIVER_Set_CO2_Sensor_Automatic_Self_Calibration(uint8_t I2C_ADDRESS
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_SET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_SET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 5, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 5, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Get_Ambient_Pressure(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_AMBIENT_PRESSURE_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_AMBIENT_PRESSURE_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Ambient_Pressure(void)
@@ -422,14 +422,14 @@ void SEN63C_DRIVER_Set_Ambient_Pressure(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_SET_AMBIENT_PRESSURE_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_SET_AMBIENT_PRESSURE_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 5, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 5, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Get_Sensor_Altitude(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_GET_SENSOR_ALTITUDE_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_GET_SENSOR_ALTITUDE_LSB;
-    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void*) &sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 2, (void *) sen63c_driverData.I2C_DATA_RECEIVE, 3, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SEN63C_DRIVER_Store_Sensor_Altitude(void)
@@ -442,7 +442,7 @@ void SEN63C_DRIVER_Set_Sensor_Altitude(uint8_t I2C_ADDRESS)
 {
     sen63c_driverData.I2C_DATA_TRANSMIT[0] = SEN63C_CMD_SET_SENSOR_ALTITUDE_MSB;
     sen63c_driverData.I2C_DATA_TRANSMIT[1] = SEN63C_CMD_SET_SENSOR_ALTITUDE_LSB;
-    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) &sen63c_driverData.I2C_DATA_TRANSMIT, 5, &sen63c_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(sen63c_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sen63c_driverData.I2C_DATA_TRANSMIT, 5, &sen63c_driverData.I2C_TRANSFER_HANDLE);
 }
 
 uint8_t SEN63C_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t NUMBER_OF_BYTES)

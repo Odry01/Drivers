@@ -108,7 +108,7 @@ void MCP9808_DRIVER_Set_I2C_Address(void)
 void MCP9808_DRIVER_Get_Sensor_Config(uint8_t I2C_ADDRESS)
 {
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_CONFIG_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 1, &mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 1, (void *) mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Store_Sensor_Config(void)
@@ -122,13 +122,13 @@ void MCP9808_DRIVER_Set_Sensor_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG_MSB, u
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_CONFIG_REGISTER;
     mcp9808_driverData.I2C_DATA_TRANSMIT[1] = CONFIG_MSB;
     mcp9808_driverData.I2C_DATA_TRANSMIT[2] = CONFIG_LSB;
-    DRV_I2C_WriteTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 3, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 3, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS)
 {
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_TEMPERATURE_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 1, &mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 1, (void *) mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Store_Measured_Values(void)
@@ -153,7 +153,7 @@ void MCP9808_DRIVER_Calculation_Temperature(void)
 void MCP9808_DRIVER_Get_Manufacturer_ID(uint8_t I2C_ADDRESS)
 {
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_MANUFACTURE_ID_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 1, &mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 1, (void *) mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Store_Manufacturer_ID(void)
@@ -165,7 +165,7 @@ void MCP9808_DRIVER_Store_Manufacturer_ID(void)
 void MCP9808_DRIVER_Get_Device_ID(uint8_t I2C_ADDRESS)
 {
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_DEVICE_ID_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 1, &mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 1, (void *) mcp9808_driverData.I2C_DATA_RECEIVE, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Store_Device_ID(void)
@@ -177,7 +177,7 @@ void MCP9808_DRIVER_Store_Device_ID(void)
 void MCP9808_DRIVER_Get_Result_Resolution(uint8_t I2C_ADDRESS)
 {
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_RESULT_RESOLUTION_REGISTER;
-    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 1, &mcp9808_driverData.I2C_DATA_RECEIVE, 1, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 1, (void *) mcp9808_driverData.I2C_DATA_RECEIVE, 1, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Store_Result_Resolution(void)
@@ -189,7 +189,7 @@ void MCP9808_DRIVER_Set_Result_Resolution(uint8_t I2C_ADDRESS, uint8_t RESULT_RE
 {
     mcp9808_driverData.I2C_DATA_TRANSMIT[0] = MCP9808_CMD_RESULT_RESOLUTION_REGISTER;
     mcp9808_driverData.I2C_DATA_TRANSMIT[1] = RESULT_RESOULUTION;
-    DRV_I2C_WriteTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, &mcp9808_driverData.I2C_DATA_TRANSMIT, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(mcp9808_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) mcp9808_driverData.I2C_DATA_TRANSMIT, 2, &mcp9808_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void MCP9808_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)

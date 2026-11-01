@@ -38,6 +38,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
+
+
 // *****************************************************************************
 
 KG200Z_DRIVER_DATA kg200z_driverData;
@@ -80,7 +82,7 @@ void KG200Z_DRIVER_Write_Command(char *MESSAGE)
 {
     memset(kg200z_driverData.TX_BUFFER, 0, sizeof (kg200z_driverData.TX_BUFFER));
     sprintf(kg200z_driverData.TX_BUFFER, "%s\r\n", MESSAGE);
-    DRV_USART_WriteBufferAdd(kg200z_driverData.USART_HANDLE, &kg200z_driverData.TX_BUFFER, strlen(kg200z_driverData.TX_BUFFER), &kg200z_driverData.USART_BUFFER_HANDLE);
+    DRV_USART_WriteBufferAdd(kg200z_driverData.USART_HANDLE, (void *) kg200z_driverData.TX_BUFFER, strlen(kg200z_driverData.TX_BUFFER), &kg200z_driverData.USART_BUFFER_HANDLE);
 }
 
 void KG200Z_DRIVER_Read_Command(void)

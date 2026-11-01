@@ -85,7 +85,7 @@ void AD9954_DRIVER_Set_Task_Completed_Status(bool STATUS)
 void AD9954_DRIVER_Get_CFR1_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_CFR1_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 4, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 4, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_CFR1_Register(void)
@@ -100,13 +100,13 @@ void AD9954_DRIVER_Set_CFR1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
     ad9954_driverData.SPI_DATA_TRANSMIT[2] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_CFR2_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_CFR2_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_CFR2_Register(void)
@@ -119,13 +119,13 @@ void AD9954_DRIVER_Set_CFR2_Register(uint8_t WORD_1, uint8_t WORD_0)
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_CFR2_ADDRESS & AD9954_RW_BIT;
     ad9954_driverData.SPI_DATA_TRANSMIT[1] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[2] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 3, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 3, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_ASF_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_ASF_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_ASF_Register(void)
@@ -138,13 +138,13 @@ void AD9954_DRIVER_Set_ASF_Register(uint8_t WORD_1, uint8_t WORD_0)
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_ASF_ADDRESS & AD9954_RW_BIT;
     ad9954_driverData.SPI_DATA_TRANSMIT[1] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[2] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 3, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 3, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_ARR_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_ARR_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 1, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 1, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_ARR_Register(void)
@@ -156,13 +156,13 @@ void AD9954_DRIVER_Set_ARR_Register(uint8_t WORD_0)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_ARR_ADDRESS & AD9954_RW_BIT;
     ad9954_driverData.SPI_DATA_TRANSMIT[1] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_FTW0_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_FTW0_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 4, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 4, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_FTW0_Register(void)
@@ -177,13 +177,13 @@ void AD9954_DRIVER_Set_FTW0_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
     ad9954_driverData.SPI_DATA_TRANSMIT[2] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_POW0_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_POW0_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 2, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_POW0_Register(void)
@@ -196,13 +196,13 @@ void AD9954_DRIVER_Set_POW0_Register(uint8_t WORD_0, uint8_t WORD_1)
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_POW0_ADDRESS & AD9954_RW_BIT;
     ad9954_driverData.SPI_DATA_TRANSMIT[1] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[2] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 3, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 3, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_FTW1_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_FTW1_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 4, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 4, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_FTW1_Register(void)
@@ -217,13 +217,13 @@ void AD9954_DRIVER_Set_FTW1_Register(uint8_t WORD_3, uint8_t WORD_2, uint8_t WOR
     ad9954_driverData.SPI_DATA_TRANSMIT[2] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_RSCW0_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_RSCW0_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_RSCW0_Register(void)
@@ -239,13 +239,13 @@ void AD9954_DRIVER_Set_RSCW0_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[5] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_RSCW1_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_RSCW1_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_RSCW1_Register(void)
@@ -261,13 +261,13 @@ void AD9954_DRIVER_Set_RSCW1_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[5] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_RSCW2_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_RSCW2_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_RSCW2_Register(void)
@@ -283,13 +283,13 @@ void AD9954_DRIVER_Set_RSCW2_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[5] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_RSCW3_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_RSCW3_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_RSCW3_Register(void)
@@ -305,13 +305,13 @@ void AD9954_DRIVER_Set_RSCW3_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[5] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_NLSCW_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_NLSCW_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_NLSCW_Register(void)
@@ -327,13 +327,13 @@ void AD9954_DRIVER_Set_NLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[5] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Get_PLSCW_Register(void)
 {
     ad9954_driverData.SPI_DATA_TRANSMIT[0] = AD9954_CMD_PLSCW_ADDRESS | AD9954_RW_BIT;
-    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 1, &ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteReadTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 1, (void *) ad9954_driverData.SPI_DATA_RECEIVE, 5, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Store_PLSCW_Register(void)
@@ -349,7 +349,7 @@ void AD9954_DRIVER_Set_PLSCW_Register(uint8_t WORD_4, uint8_t WORD_3, uint8_t WO
     ad9954_driverData.SPI_DATA_TRANSMIT[3] = WORD_2;
     ad9954_driverData.SPI_DATA_TRANSMIT[4] = WORD_1;
     ad9954_driverData.SPI_DATA_TRANSMIT[5] = WORD_0;
-    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, &ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
+    DRV_SPI_WriteTransferAdd(ad9954_driverData.SPI_HANDLE, (void *) ad9954_driverData.SPI_DATA_TRANSMIT, 6, &ad9954_driverData.SPI_TRANSFER_HANDLE);
 }
 
 void AD9954_DRIVER_Set_Frequency(uint32_t FREQUENCY)

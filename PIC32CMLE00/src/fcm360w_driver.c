@@ -82,7 +82,7 @@ void FCM360W_DRIVER_Write_Command(char *MESSAGE)
 {
     memset(fcm360w_driverData.TX_BUFFER, 0, sizeof (fcm360w_driverData.TX_BUFFER));
     sprintf(fcm360w_driverData.TX_BUFFER, "%s\r", MESSAGE);
-    DRV_USART_WriteBufferAdd(fcm360w_driverData.USART_HANDLE, &fcm360w_driverData.TX_BUFFER, strlen(fcm360w_driverData.TX_BUFFER), &fcm360w_driverData.USART_BUFFER_HANDLE);
+    DRV_USART_WriteBufferAdd(fcm360w_driverData.USART_HANDLE, (void *) fcm360w_driverData.TX_BUFFER, strlen(fcm360w_driverData.TX_BUFFER), &fcm360w_driverData.USART_BUFFER_HANDLE);
 }
 
 void FCM360W_DRIVER_Read_Command(void)

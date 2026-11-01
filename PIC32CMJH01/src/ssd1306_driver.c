@@ -193,14 +193,14 @@ void SSD1306_DRIVER_Write_CMD(uint8_t I2C_ADDRESS, uint8_t CMD)
 {
     ssd1306_driverData.I2C_DATA_TRANSMIT[0] = SSD1306_CMD_COMMAND;
     ssd1306_driverData.I2C_DATA_TRANSMIT[1] = CMD;
-    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, &ssd1306_driverData.I2C_DATA_TRANSMIT, 2, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) ssd1306_driverData.I2C_DATA_TRANSMIT, 2, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SSD1306_DRIVER_Update_Screen(uint8_t I2C_ADDRESS)
 {
     ssd1306_driverData.I2C_DATA_TRANSMIT[0] = SSD1306_CMD_DATA_CONTINUE;
     memcpy(&ssd1306_driverData.I2C_DATA_TRANSMIT[1], &ssd1306_driverData.FRAME_BUFFER[ssd1306_driverData.ROW_INDEX * SSD1306_OLED_WIDTH], SSD1306_OLED_WIDTH);
-    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, &ssd1306_driverData.I2C_DATA_TRANSMIT, 129, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(ssd1306_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) ssd1306_driverData.I2C_DATA_TRANSMIT, 129, &ssd1306_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void SSD1306_DRIVER_Clear_Display(void)

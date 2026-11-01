@@ -101,7 +101,7 @@ void VCNL4200_DRIVER_Set_I2C_Address(void)
 void VCNL4200_DRIVER_Get_ALS_CFG(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDH;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_CFG(void)
@@ -114,13 +114,13 @@ void VCNL4200_DRIVER_Set_ALS_CFG(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, uint8_t
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_CFG;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_ALS_High_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDH;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_High_Alert(void)
@@ -133,13 +133,13 @@ void VCNL4200_DRIVER_Set_ALS_High_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, 
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDH;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_ALS_Low_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDL;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_Low_Alert(void)
@@ -152,13 +152,13 @@ void VCNL4200_DRIVER_Set_ALS_Low_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, u
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_THDL;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_CFG1_CFG2(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG1;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_CFG1_CFG2(void)
@@ -172,13 +172,13 @@ void VCNL4200_DRIVER_Set_PS_CFG1_CFG2(uint8_t I2C_ADDRESS, uint8_t PS_CFG1_VALUE
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG1;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = PS_CFG1_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = PS_CFG2_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_CFG3_MS(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG3;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_CFG3_MS(void)
@@ -192,13 +192,13 @@ void VCNL4200_DRIVER_Set_PS_CFG3_MS(uint8_t I2C_ADDRESS, uint8_t PS_CONF3_VALUE,
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CFG3;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = PS_CONF3_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = PS_MS_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_Cancellation(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CANC;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_Cancellation(void)
@@ -212,13 +212,13 @@ void VCNL4200_DRIVER_Set_PS_Cancellation(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE,
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_CANC;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_High_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDH;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_High_Alert(void)
@@ -231,13 +231,13 @@ void VCNL4200_DRIVER_Set_PS_High_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, u
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDH;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_Low_Alert(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDL;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_Low_Alert(void)
@@ -250,13 +250,13 @@ void VCNL4200_DRIVER_Set_PS_Low_Alert(uint8_t I2C_ADDRESS, uint8_t MSB_VALUE, ui
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_THDL;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[1] = LSB_VALUE;
     vcnl4200_driverData.I2C_DATA_TRANSMIT[2] = MSB_VALUE;
-    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 3, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Get_PS_Data(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_PS_DATA;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_PS_Data(void)
@@ -267,7 +267,7 @@ void VCNL4200_DRIVER_Store_PS_Data(void)
 void VCNL4200_DRIVER_Get_ALS_Data(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_ALS_DATA;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_ALS_Data(void)
@@ -278,7 +278,7 @@ void VCNL4200_DRIVER_Store_ALS_Data(void)
 void VCNL4200_DRIVER_Get_White_Data(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_WHITE_DATA;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_White_Data(void)
@@ -289,7 +289,7 @@ void VCNL4200_DRIVER_Store_White_Data(void)
 void VCNL4200_DRIVER_Get_INT_Flag(uint8_t I2C_ADDRESS)
 {
     vcnl4200_driverData.I2C_DATA_TRANSMIT[0] = VCNL4200_CMD_INT_FLAG;
-    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, &vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, &vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(vcnl4200_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) vcnl4200_driverData.I2C_DATA_TRANSMIT, 1, (void *) vcnl4200_driverData.I2C_DATA_RECEIVE, 2, &vcnl4200_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void VCNL4200_DRIVER_Store_INT_Flag(void)
