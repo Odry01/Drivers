@@ -665,7 +665,7 @@ data:
             id: name
           children:
           - type: Value
-            value: mcp9808_driver.c
+            value: max17335_driver.c
           type: String
         type: Attributes
       type: File
@@ -684,7 +684,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ntc_driver.c
+            value: mcp9808_driver.c
           type: String
         type: Attributes
       type: File
@@ -703,7 +703,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rstc_driver.c
+            value: ntc_driver.c
           type: String
         type: Attributes
       type: File
@@ -722,7 +722,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rtc_driver.c
+            value: rstc_driver.c
           type: String
         type: Attributes
       type: File
@@ -741,7 +741,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sen63c_driver.c
+            value: rtc_driver.c
           type: String
         type: Attributes
       type: File
@@ -760,7 +760,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sht4x_driver.c
+            value: sen63c_driver.c
           type: String
         type: Attributes
       type: File
@@ -779,7 +779,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ssd1306_driver.c
+            value: sht4x_driver.c
           type: String
         type: Attributes
       type: File
@@ -798,7 +798,7 @@ data:
             id: name
           children:
           - type: Value
-            value: stcc4_driver.c
+            value: ssd1306_driver.c
           type: String
         type: Attributes
       type: File
@@ -817,7 +817,7 @@ data:
             id: name
           children:
           - type: Value
-            value: timer_driver.c
+            value: stcc4_driver.c
           type: String
         type: Attributes
       type: File
@@ -836,7 +836,7 @@ data:
             id: name
           children:
           - type: Value
-            value: vcnl4200_driver.c
+            value: timer_driver.c
           type: String
         type: Attributes
       type: File
@@ -969,7 +969,7 @@ data:
             id: name
           children:
           - type: Value
-            value: mcp9808_driver.h
+            value: max17335_driver.h
           type: String
         type: Attributes
       type: File
@@ -988,7 +988,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ntc_driver.h
+            value: mcp9808_driver.h
           type: String
         type: Attributes
       type: File
@@ -1007,7 +1007,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rstc_driver.h
+            value: ntc_driver.h
           type: String
         type: Attributes
       type: File
@@ -1026,7 +1026,7 @@ data:
             id: name
           children:
           - type: Value
-            value: rtc_driver.h
+            value: rstc_driver.h
           type: String
         type: Attributes
       type: File
@@ -1045,7 +1045,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sen63c_driver.h
+            value: rtc_driver.h
           type: String
         type: Attributes
       type: File
@@ -1064,7 +1064,7 @@ data:
             id: name
           children:
           - type: Value
-            value: sht4x_driver.h
+            value: sen63c_driver.h
           type: String
         type: Attributes
       type: File
@@ -1083,7 +1083,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ssd1306_driver.h
+            value: sht4x_driver.h
           type: String
         type: Attributes
       type: File
@@ -1102,7 +1102,7 @@ data:
             id: name
           children:
           - type: Value
-            value: stcc4_driver.h
+            value: ssd1306_driver.h
           type: String
         type: Attributes
       type: File
@@ -1121,7 +1121,7 @@ data:
             id: name
           children:
           - type: Value
-            value: timer_driver.h
+            value: stcc4_driver.h
           type: String
         type: Attributes
       type: File
@@ -1140,7 +1140,7 @@ data:
             id: name
           children:
           - type: Value
-            value: vcnl4200_driver.h
+            value: timer_driver.h
           type: String
         type: Attributes
       type: File
@@ -1151,7 +1151,7 @@ data:
       children:
       - children:
         - attributes:
-            value: '18'
+            value: '19'
           type: User
         type: Values
       type: Integer
@@ -1228,7 +1228,7 @@ data:
       children:
       - children:
         - attributes:
-            value: mcp9808_driver
+            value: max17335_driver
           type: User
         type: Values
       type: String
@@ -1239,7 +1239,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ntc_driver
+            value: mcp9808_driver
           type: User
         type: Values
       type: String
@@ -1250,7 +1250,7 @@ data:
       children:
       - children:
         - attributes:
-            value: rstc_driver
+            value: ntc_driver
           type: User
         type: Values
       type: String
@@ -1261,7 +1261,7 @@ data:
       children:
       - children:
         - attributes:
-            value: rtc_driver
+            value: rstc_driver
           type: User
         type: Values
       type: String
@@ -1272,7 +1272,7 @@ data:
       children:
       - children:
         - attributes:
-            value: sen63c_driver
+            value: rtc_driver
           type: User
         type: Values
       type: String
@@ -1283,7 +1283,7 @@ data:
       children:
       - children:
         - attributes:
-            value: sht4x_driver
+            value: sen63c_driver
           type: User
         type: Values
       type: String
@@ -1294,7 +1294,7 @@ data:
       children:
       - children:
         - attributes:
-            value: ssd1306_driver
+            value: sht4x_driver
           type: User
         type: Values
       type: String
@@ -1305,7 +1305,7 @@ data:
       children:
       - children:
         - attributes:
-            value: stcc4_driver
+            value: ssd1306_driver
           type: User
         type: Values
       type: String
@@ -1316,7 +1316,7 @@ data:
       children:
       - children:
         - attributes:
-            value: timer_driver
+            value: stcc4_driver
           type: User
         type: Values
       type: String
@@ -1327,7 +1327,7 @@ data:
       children:
       - children:
         - attributes:
-            value: vcnl4200_driver
+            value: timer_driver
           type: User
         type: Values
       type: String
@@ -1346,7 +1346,7 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.c
+            value: vcnl4200_driver.c
           type: String
         type: Attributes
       type: File
@@ -1365,13 +1365,62 @@ data:
             id: name
           children:
           - type: Value
-            value: ws281x_driver.h
+            value: vcnl4200_driver.h
           type: String
         type: Attributes
       type: File
     GEN_APP_TASK_NAME_17:
       attributes:
         id: GEN_APP_TASK_NAME_17
+        label: Application Name
+      children:
+      - children:
+        - attributes:
+            value: vcnl4200_driver
+          type: User
+        type: Values
+      type: String
+    APP18_C:
+      attributes:
+        id: APP18_C
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ws281x_driver.c
+          type: String
+        type: Attributes
+      type: File
+    APP18_H:
+      attributes:
+        id: APP18_H
+      children:
+      - children:
+        - attributes:
+            id: enabled
+          children:
+          - type: Value
+            value: 'true'
+          type: Boolean
+        - attributes:
+            id: name
+          children:
+          - type: Value
+            value: ws281x_driver.h
+          type: String
+        type: Attributes
+      type: File
+    GEN_APP_TASK_NAME_18:
+      attributes:
+        id: GEN_APP_TASK_NAME_18
         label: Application Name
       children:
       - children:

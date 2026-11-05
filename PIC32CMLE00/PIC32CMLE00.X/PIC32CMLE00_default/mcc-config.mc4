@@ -55,7 +55,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\configuration.h
   hash: 806cc1d80655f9542dbf9764c12d36f1ee43600543de3c32321a2278abd1ce24
 - file: ..\src\config\default\definitions.h
-  hash: 1fa0210f27f85f1bcc2713948c13676f10a9418a41ab74cad1361ac054d40008
+  hash: f9e55430b38510c5972739ef13ec76f115079d4a0d0b7c7935d33378da285fd0
 - file: ..\src\config\default\device.h
   hash: 9ac445b4af41d3a8e54b0c03d8f396280919830119b737e6e99ea753b7492469
 - file: ..\src\config\default\device_cache.h
@@ -93,7 +93,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\exceptions.c
   hash: 4460457d985f664a3dcd5a719dd869dec9348b072e04671de668948ee99faa56
 - file: ..\src\config\default\initialization.c
-  hash: a640d3085a8330487f185cb109fae7b5c45edad9e2b94ae40a600976c7ccabb6
+  hash: 37c09303e1be21baa3907978faf42e12bc749be94eb7128fc95435b97ee0ca14
 - file: ..\src\config\default\interrupts.c
   hash: ceee72ad50abd26200490373dbf53e524f08bd310580b4d6140a33f79964a0d2
 - file: ..\src\config\default\interrupts.h
@@ -271,7 +271,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\default\system\time\sys_time_definitions.h
   hash: b8c332f36f8a6ed230dc25b1f9f7f2970699947567f80cb06534d405b7a0dd9d
 - file: ..\src\config\default\tasks.c
-  hash: 9b34ef9432d936924603e360d3696c8c608bb28d7e12357be7e49ca39ed9a018
+  hash: 9fc45eeee6b4c4cdb70b7ca2a4c64b4c6fcf2459d6e3fd2264bbca0103dc815b
 - file: ..\src\config\default\toolchain_specifics.h
   hash: a4f1774c6f1f8c6cd522567536c9e9d75ca63259b868015ac9b0fb0aeeffe1f4
 - file: ..\src\config\default\user.h
@@ -294,6 +294,10 @@ generatedFileHashHistoryMap:
   hash: f531b07669eaffc192b0cdd9abe9b1595a0cb2db7350ba0963ae2b5cb1f19994
 - file: ..\src\main.c
   hash: d3c233d419e6304bfacbafc18cc68c0f5c26e365f23b20ea40ccfac458f664c5
+- file: ..\src\max17335_driver.c
+  hash: 95b226847941cb0f3bf624ebef41e07f21140df8d7cdb0ba2526a7efec74962c
+- file: ..\src\max17335_driver.h
+  hash: 7e16e146347a28c5c4b3c3fd438ae713e2ef90e5e4214521ab79acecb6ac9e3d
 - file: ..\src\mcp9808_driver.c
   hash: a72f2b7be116751d97a4d29e5e14ed0b3d43b4847bd0f034f5136e77e143227b
 - file: ..\src\mcp9808_driver.h

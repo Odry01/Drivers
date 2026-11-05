@@ -171,6 +171,7 @@
         <itemPath>../src/timer_driver.h</itemPath>
         <itemPath>../src/ws281x_driver.h</itemPath>
         <itemPath>../src/stcc4_driver.h</itemPath>
+        <itemPath>../src/max17335_driver.h</itemPath>
       </logicalFolder>
       <logicalFolder name="packs" displayName="packs" projectFiles="true">
         <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
@@ -475,6 +476,7 @@
         <itemPath>../src/timer_driver.c</itemPath>
         <itemPath>../src/ws281x_driver.c</itemPath>
         <itemPath>../src/stcc4_driver.c</itemPath>
+        <itemPath>../src/max17335_driver.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>
@@ -527,6 +529,7 @@
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="cast-align" value="false"/>
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
@@ -605,6 +608,7 @@
         <property key="additional-options-use-response-files" value="false"/>
         <property key="additional-options-write-sla" value="false"/>
         <property key="allocate-dinit" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="code-dinit" value="false"/>
         <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
@@ -650,6 +654,7 @@
       <C32CPP>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="check-new" value="false"/>
         <property key="eh-specs" value="true"/>
         <property key="enable-app-io" value="false"/>

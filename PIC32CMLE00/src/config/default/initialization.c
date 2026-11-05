@@ -431,10 +431,10 @@ void SYS_Initialize ( void* data )
 
     NVMCTRL_Initialize();
 
-    SUPC_Initialize();
-
 
     ADC_Initialize();
+    SUPC_Initialize();
+
     RTC_Initialize();
 
     FREQM_Initialize();
@@ -501,6 +501,7 @@ void SYS_Initialize ( void* data )
     FCM360W_DRIVER_Initialize();
     HDC302X_DRIVER_Initialize();
     KG200Z_DRIVER_Initialize();
+    MAX17335_DRIVER_Initialize();
     MCP9808_DRIVER_Initialize();
     NTC_DRIVER_Initialize();
     RSTC_DRIVER_Initialize();

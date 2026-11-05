@@ -104,6 +104,9 @@ void SYS_Tasks ( void )
     /* Call Application task KG200Z_DRIVER. */
     KG200Z_DRIVER_Tasks();
 
+    /* Call Application task MAX17335_DRIVER. */
+    MAX17335_DRIVER_Tasks();
+
     /* Call Application task MCP9808_DRIVER. */
     MCP9808_DRIVER_Tasks();
 
@@ -127,6 +130,9 @@ void SYS_Tasks ( void )
 
     /* Call Application task STCC4_DRIVER. */
     STCC4_DRIVER_Tasks();
+
+    /* Call Application task TIMER_DRIVER. */
+    TIMER_DRIVER_Tasks();
 
     /* Call Application task VCNL4200_DRIVER. */
     VCNL4200_DRIVER_Tasks();

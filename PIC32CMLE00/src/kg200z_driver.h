@@ -57,6 +57,16 @@ extern "C"
 
 // *****************************************************************************
 
+/** Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+ */
+    
 typedef enum
 {
     KG200Z_DRIVER_STATE_INIT = 0,
@@ -75,6 +85,18 @@ typedef enum
 } KG200Z_DRIVER_STATES;
 
 // *****************************************************************************
+
+/** Application Data
+
+  Summary:
+    Holds application data
+
+  Description:
+    This structure holds the application's data.
+
+  Remarks:
+    Application strings and buffers are be defined outside this structure.
+ */
 
 typedef struct
 {

@@ -49,13 +49,13 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "peripheral/nvmctrl/plib_nvmctrl.h"
-#include "peripheral/supc/plib_supc.h"
 #include "peripheral/adc/plib_adc.h"
+#include "peripheral/supc/plib_supc.h"
 #include "peripheral/rtc/plib_rtc.h"
 #include "peripheral/freqm/plib_freqm.h"
 #include "peripheral/tc/plib_tc2.h"
-#include "system/time/sys_time.h"
 #include "driver/i2c/drv_i2c.h"
+#include "system/time/sys_time.h"
 #include "peripheral/trng/plib_trng.h"
 #include "driver/spi/drv_spi.h"
 #include "system/int/sys_int.h"
@@ -91,6 +91,7 @@
 #include "fcm360w_driver.h"
 #include "hdc302x_driver.h"
 #include "kg200z_driver.h"
+#include "max17335_driver.h"
 #include "mcp9808_driver.h"
 #include "ntc_driver.h"
 #include "rstc_driver.h"

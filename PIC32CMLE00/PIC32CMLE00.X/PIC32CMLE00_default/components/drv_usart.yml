@@ -23,7 +23,7 @@ data:
       - attributes:
           id: drv_usart
           x: '478'
-          y: '407'
+          y: '408'
         type: ElementPosition
       type: ElementPositions
     type: ComponentGraph
