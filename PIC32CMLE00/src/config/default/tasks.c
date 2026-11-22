@@ -131,9 +131,6 @@ void SYS_Tasks ( void )
     /* Call Application task STCC4_DRIVER. */
     STCC4_DRIVER_Tasks();
 
-    /* Call Application task TIMER_DRIVER. */
-    TIMER_DRIVER_Tasks();
-
     /* Call Application task VCNL4200_DRIVER. */
     VCNL4200_DRIVER_Tasks();
 

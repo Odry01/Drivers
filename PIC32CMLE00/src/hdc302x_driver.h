@@ -167,7 +167,8 @@ typedef enum
     HDC302X_DRIVER_STATE_GET_AUTO_MEASURE_VALUES,
     HDC302X_DRIVER_STATE_GET_AUTO_MEASURE_VALUES_WAIT_FOR_TRANSFER,
     HDC302X_DRIVER_STATE_STORE_MEASURE_VALUES,
-    HDC302X_DRIVER_STATE_CALCULATE_DATA,
+    HDC302X_DRIVER_STATE_CALCULATE_TEMPERATURE,
+    HDC302X_DRIVER_STATE_CALCULATE_HUMIDITY,
     HDC302X_DRIVER_STATE_STORE_VALUES,
     HDC302X_DRIVER_STATE_TIMER_EXPIRED,
     HDC302X_DRIVER_STATE_ERROR,
@@ -211,21 +212,7 @@ typedef struct
     uint8_t NIST_VALUE_2;
     uint8_t NIST_VALUE_1;
     uint8_t NIST_VALUE_0;
-    uint16_t OFFSET;
-    uint16_t SET_HIGH_ALERT;
-    uint16_t CLEAR_HIGH_ALERT;
-    uint16_t SET_LOW_ALERT;
-    uint16_t CLEAR_LOW_ALERT;
-    uint16_t STATUS;
-    uint16_t T_VALUE;
-    uint16_t H_VALUE;
-    float CELSIUS_TEMPERATURE;
-    float FAHRENHEIT_TEMPERATURE;
-    float HUMIDITY;
-} HDC302X_SENSOR_DATA;
-
-typedef struct
-{
+    
     uint8_t MODE_MSB;
     uint8_t MODE_LSB;
     uint8_t OFFSET_MSB;
@@ -238,7 +225,19 @@ typedef struct
     uint8_t SET_LOW_ALERT_LSB;
     uint8_t CLEAR_LOW_ALERT_MSB;
     uint8_t CLEAR_LOW_ALERT_LSB;
-} HDC302X_SENSOR_SETTINGS;
+    
+    uint16_t OFFSET;
+    uint16_t SET_HIGH_ALERT;
+    uint16_t CLEAR_HIGH_ALERT;
+    uint16_t SET_LOW_ALERT;
+    uint16_t CLEAR_LOW_ALERT;
+    uint16_t STATUS;
+    uint16_t T_VALUE;
+    uint16_t H_VALUE;
+    float CELSIUS_TEMPERATURE;
+    float FAHRENHEIT_TEMPERATURE;
+    float HUMIDITY;
+} HDC302X_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -313,7 +312,7 @@ bool HDC302X_DRIVER_Get_Task_Start_Status(void);
     void HDC302X_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -349,7 +348,7 @@ bool HDC302X_DRIVER_Get_Task_Completed_Status(void);
     void HDC302X_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag
@@ -385,7 +384,7 @@ bool HDC302X_DRIVER_Get_Alert_Status(void);
     void HDC302X_DRIVER_Set_Alert_Status(bool STATUS)
 
     Summary:
-    Sets the "HDC302X_ALERT" flag
+    Sets the "HDC302X_ALERT" flag.
 
     Parameters:
     @param STATUS - desired state of the "HDC302X_ALERT" flag
@@ -436,7 +435,7 @@ void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Offset_Values(void)
+    bool HDC302X_DRIVER_Store_Offset_Values(void)
 
     Summary:
     Stores the offset values into variables.
@@ -445,12 +444,12 @@ void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS);
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Offset_Values(void);
+bool HDC302X_DRIVER_Store_Offset_Values(void);
 
 /**
     Function:
@@ -490,7 +489,7 @@ void HDC302X_DRIVER_Get_Set_High_Alert(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Set_High_Alert(void)
+    bool HDC302X_DRIVER_Store_Set_High_Alert(void)
 
     Summary:
     Stores the high alert threshold.
@@ -499,12 +498,12 @@ void HDC302X_DRIVER_Get_Set_High_Alert(uint8_t I2C_ADDRESS);
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Set_High_Alert(void);
+bool HDC302X_DRIVER_Store_Set_High_Alert(void);
 
 /**
     Function:
@@ -544,7 +543,7 @@ void HDC302X_DRIVER_Get_Clear_High_Alert(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Clear_High_Alert(void)
+    bool HDC302X_DRIVER_Store_Clear_High_Alert(void)
 
     Summary:
     Stores the clear high alert threshold from the sensor.
@@ -553,12 +552,12 @@ void HDC302X_DRIVER_Get_Clear_High_Alert(uint8_t I2C_ADDRESS);
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Clear_High_Alert(void);
+bool HDC302X_DRIVER_Store_Clear_High_Alert(void);
 
 /**
     Function:
@@ -598,7 +597,7 @@ void HDC302X_DRIVER_Get_Set_Low_Alert(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Set_Low_Alert(void)
+    bool HDC302X_DRIVER_Store_Set_Low_Alert(void)
 
     Summary:
     Stores the low alert threshold from the sensor.
@@ -607,12 +606,12 @@ void HDC302X_DRIVER_Get_Set_Low_Alert(uint8_t I2C_ADDRESS);
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Set_Low_Alert(void);
+bool HDC302X_DRIVER_Store_Set_Low_Alert(void);
 
 /**
     Function:
@@ -652,7 +651,7 @@ void HDC302X_DRIVER_Get_Clear_Low_Alert(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Clear_Low_Alert(void)
+    bool HDC302X_DRIVER_Store_Clear_Low_Alert(void)
 
     Summary:
     Stores the clear alert threshold from the sensor.
@@ -661,19 +660,19 @@ void HDC302X_DRIVER_Get_Clear_Low_Alert(uint8_t I2C_ADDRESS);
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Clear_Low_Alert(void);
+bool HDC302X_DRIVER_Store_Clear_Low_Alert(void);
 
 /**
     Function:
     void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS)
 
     Summary:
-    Writes the clear?low?alert thresholds to the sensor.
+    Writes the clear low alert thresholds to the sensor.
 
     Parameters:
     @param I2C_ADDRESS - sensor address where thresholds are written
@@ -711,7 +710,7 @@ void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS);
 
     Summary:
     Stops automatic sampling and returns the sensor to
-    manual?measurement mode.
+    manual measurement mode.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -781,29 +780,29 @@ void HDC302X_DRIVER_Get_Auto_Measure_Values(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Measurement_Values(void)
+    bool HDC302X_DRIVER_Store_Measurement_Values(void)
 
     Summary:
     Persists the latest temperature and humidity measurement
-    to non?volatile memory.
+    to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Measurement_Values(void);
+bool HDC302X_DRIVER_Store_Measurement_Values(void);
 
 /**
     Function:
     void HDC302X_DRIVER_Get_Minimum_Temperature_Value(uint8_t I2C_ADDRESS)
 
     Summary:
-    Reads the sensor’s minimum?temperature register.
+    Reads the sensor’s minimum temperature register.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -818,28 +817,28 @@ void HDC302X_DRIVER_Get_Minimum_Temperature_Value(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Minimum_Temperature_Value(void)
+    bool HDC302X_DRIVER_Store_Minimum_Temperature_Value(void)
 
     Summary:
-    Persists the cached minimum?temperature value to non?volatile memory.
+    Persists the cached minimum temperature value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Minimum_Temperature_Value(void);
+bool HDC302X_DRIVER_Store_Minimum_Temperature_Value(void);
 
 /**
     Function:
     void HDC302X_DRIVER_Get_Maximum_Temperature_Value(uint8_t I2C_ADDRESS)
 
     Summary:
-    Reads the sensor’s maximum?temperature register.
+    Reads the sensor’s maximum temperature register.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -854,28 +853,28 @@ void HDC302X_DRIVER_Get_Maximum_Temperature_Value(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Maximum_Temperature_Value(void)
+    bool HDC302X_DRIVER_Store_Maximum_Temperature_Value(void)
 
     Summary:
-    Persists the cached maximum?temperature value to non?volatile memory.
+    Persists the cached maximum temperature value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Maximum_Temperature_Value(void);
+bool HDC302X_DRIVER_Store_Maximum_Temperature_Value(void);
 
 /**
     Function:
     void HDC302X_DRIVER_Get_Minimum_Humidity_Value(uint8_t I2C_ADDRESS)
 
     Summary:
-    Reads the sensor’s minimum?humidity register.
+    Reads the sensor’s minimum humidity register.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -890,28 +889,28 @@ void HDC302X_DRIVER_Get_Minimum_Humidity_Value(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Minimum_Humidity_Value(void)
+    bool HDC302X_DRIVER_Store_Minimum_Humidity_Value(void)
 
     Summary:
-    Persists the cached minimum?humidity value to non?volatile memory.
+    Persists the cached minimum humidity value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Minimum_Humidity_Value(void);
+bool HDC302X_DRIVER_Store_Minimum_Humidity_Value(void);
 
 /**
     Function:
     void HDC302X_DRIVER_Get_Maximum_Humidity_Value(uint8_t I2C_ADDRESS)
 
     Summary:
-    Reads the sensor’s maximum?humidity register.
+    Reads the sensor’s maximum humidity register.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -926,21 +925,21 @@ void HDC302X_DRIVER_Get_Maximum_Humidity_Value(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Maximum_Humidity_Value(void)
+    bool HDC302X_DRIVER_Store_Maximum_Humidity_Value(void)
 
     Summary:
-    Persists the cached maximum?humidity value to non?volatile memory.
+    Persists the cached maximum humidity value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Maximum_Humidity_Value(void);
+bool HDC302X_DRIVER_Store_Maximum_Humidity_Value(void);
 
 /**
     Function:
@@ -950,7 +949,7 @@ void HDC302X_DRIVER_Store_Maximum_Humidity_Value(void);
     Converts a raw temperature register value to degrees Celsius.
 
     Parameters:
-    @param T_VALUE - raw 16?bit temperature reading from the sensor
+    @param T_VALUE - raw 16 bit temperature reading from the sensor
 
     Returns:
     None.
@@ -998,21 +997,21 @@ void HDC302X_DRIVER_Get_Sensor_Status(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_Sensor_Status(void)
+    bool HDC302X_DRIVER_Store_Sensor_Status(void)
 
     Summary:
-    Persists the cached sensor status byte to non?volatile memory.
+    Persists the cached sensor status byte to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_Sensor_Status(void);
+bool HDC302X_DRIVER_Store_Sensor_Status(void);
 
 /**
     Function:
@@ -1034,21 +1033,21 @@ void HDC302X_DRIVER_Get_NIST_3(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_NIST_3(void)
+    bool HDC302X_DRIVER_Store_NIST_3(void)
 
     Summary:
-    Persists the cached NIST3 value to non?volatile memory.
+    Persists the cached NIST3 value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_NIST_3(void);
+bool HDC302X_DRIVER_Store_NIST_3(void);
 
 /**
     Function:
@@ -1070,21 +1069,21 @@ void HDC302X_DRIVER_Get_NIST_2(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_NIST_2(void)
+    bool HDC302X_DRIVER_Store_NIST_2(void)
 
     Summary:
-    Persists the cached NIST2 value to non?volatile memory.
+    Persists the cached NIST2 value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_NIST_2(void);
+bool HDC302X_DRIVER_Store_NIST_2(void);
 
 /**
     Function:
@@ -1106,28 +1105,28 @@ void HDC302X_DRIVER_Get_NIST_1(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void HDC302X_DRIVER_Store_NIST_1(void)
+    bool HDC302X_DRIVER_Store_NIST_1(void)
 
     Summary:
-    Persists the cached NIST1 value to non?volatile memory.
+    Persists the cached NIST1 value to non volatile memory.
 
     Parameters:
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     None.
  */
-void HDC302X_DRIVER_Store_NIST_1(void);
+bool HDC302X_DRIVER_Store_NIST_1(void);
 
 /**
     Function:
     void HDC302X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
 
     Summary:
-    Sends the soft?reset command to the sensor.
+    Sends the soft reset command to the sensor.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -1145,7 +1144,7 @@ void HDC302X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS);
     void HDC302X_DRIVER_Enable_Heater(uint8_t I2C_ADDRESS)
 
     Summary:
-    Activates the on?chip heater.
+    Activates the on chip heater.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -1163,7 +1162,7 @@ void HDC302X_DRIVER_Enable_Heater(uint8_t I2C_ADDRESS);
     void HDC302X_DRIVER_Disable_Heater(uint8_t I2C_ADDRESS)
 
     Summary:
-    Deactivates the on?chip heater.
+    Deactivates the on chip heater.
 
     Parameters:
     @param I2C_ADDRESS - sensor address
@@ -1185,8 +1184,8 @@ void HDC302X_DRIVER_Disable_Heater(uint8_t I2C_ADDRESS);
 
     Parameters:
     @param I2C_ADDRESS   - sensor address
-    @param CURRENT_MSB   - most?significant byte of desired current
-    @param CURRENT_LSB   - least?significant byte of desired current
+    @param CURRENT_MSB   - most significant byte of desired current
+    @param CURRENT_LSB   - least significant byte of desired current
 
     Returns:
     None.
@@ -1201,11 +1200,11 @@ void HDC302X_DRIVER_Configuration_Heater(uint8_t I2C_ADDRESS, uint8_t CURRENT_MS
     uint8_t HDC302X_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH)
 
     Summary:
-    Computes the 8?bit CRC for a message buffer.
+    Computes the 8 bit CRC for a message buffer.
 
     Parameters:
-    @param MESSAGE         - pointer to message buffer
-    @param MESSAGE_LENGTH  - number of bytes over which to compute CRC
+    @param MESSAGE - pointer to message buffer
+    @param MESSAGE_LENGTH - number of bytes over which to compute CRC
 
     Returns:
     @return uint8_t - calculated CRC value
@@ -1214,25 +1213,6 @@ void HDC302X_DRIVER_Configuration_Heater(uint8_t I2C_ADDRESS, uint8_t CURRENT_MS
     None.
  */
 uint8_t HDC302X_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH);
-
-/**
-    Function:
-    uint8_t HDC302X_DRIVER_Calculation_Array_CRC(uint8_t MESSAGE_0, uint8_t MESSAGE_1)
-
-    Summary:
-    Computes the CRC for a two byte message.
-
-    Parameters:
-    @param MESSAGE_0 - first byte of the message
-    @param MESSAGE_1 - second byte of the message
-
-    Returns:
-    @return uint8_t - calculated CRC value
-
-    Remarks:
-    None.
- */
-uint8_t HDC302X_DRIVER_Calculation_Array_CRC(uint8_t MESSAGE_0, uint8_t MESSAGE_1);
 
 /**
     Function:

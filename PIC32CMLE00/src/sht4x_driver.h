@@ -91,7 +91,8 @@ typedef enum
     SHT4X_DRIVER_STATE_GET_MEASURED_VALUES,
     SHT4X_DRIVER_STATE_GET_MEASURED_VALUES_WAIT_FOR_TRANSFER,
     SHT4X_DRIVER_STATE_STORE_MEASURED_VALUES,
-    SHT4X_DRIVER_STATE_CALCULATE_DATA,
+    SHT4X_DRIVER_STATE_CALCULATE_TEMPERATURE,
+    SHT4X_DRIVER_STATE_CALCULATE_HUMIDITY,
     SHT4X_DRIVER_STATE_STORE_DATA,
     SHT4X_DRIVER_STATE_TIMER_EXPIRED,
     SHT4X_DRIVER_STATE_ERROR,
@@ -134,7 +135,7 @@ typedef struct
     float CELSIUS_TEMPERATURE;
     float FAHRENHEIT_TEMPERATURE;
     float HUMIDITY;
-} SHT4X_DRIVER_SENSOR_DATA;
+} SHT4X_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -209,7 +210,7 @@ bool SHT4X_DRIVER_Get_Task_Start_Status(void);
     void SHT4X_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -245,7 +246,7 @@ bool SHT4X_DRIVER_Get_Task_Completed_Status(void);
     void SHT4X_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag
@@ -315,7 +316,7 @@ void SHT4X_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS);
 
 /**
     Function:
-    void SHT4X_DRIVER_Store_Measured_Values(void)
+    bool SHT4X_DRIVER_Store_Measured_Values(void)
 
     Summary:
     Store the raw values to variables.
@@ -324,66 +325,12 @@ void SHT4X_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS);
     None.
 
     Returns:
-    None.
+    @return bool - CRC calculation status
 
     Remarks:
     Use when a new measurement has been performed.
  */
-void SHT4X_DRIVER_Store_Measured_Values(void);
-
-/**
-    Function:
-    void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS)
-
-    Summary:
-    Gets the serial number of the sensor.
-
-    Parameters:
-    @param I2C_ADDRESS - sensor address
-
-    Returns:
-    None.
-
-    Remarks:
-    None.
- */
-void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS);
-
-/**
-    Function:
-    void SHT4X_DRIVER_Store_Serial_Number(void)
-
-    Summary:
-    Store a serial number into variable.
-
-    Parameters:
-    None.
-
-    Returns:
-    None.
-
-    Remarks:
-    None.
- */
-void SHT4X_DRIVER_Store_Serial_Number(void);
-
-/**
-    Function:
-    void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
-
-    Summary:
-    Perform a soft reset to the sensor.
-
-    Parameters:
-    @param I2C_ADDRESS - sensor address
-
-    Returns:
-    None.
-
-    Remarks:
-    None.
- */
-void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS);
+bool SHT4X_DRIVER_Store_Measured_Values(void);
 
 /**
     Function:
@@ -420,6 +367,62 @@ void SHT4X_DRIVER_Calculation_Temperature(uint16_t T_VALUE);
     Equation is in the datasheet.
  */
 void SHT4X_DRIVER_Calculation_Humidity(uint16_t H_VALUE);
+
+/**
+    Function:
+    void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS)
+
+    Summary:
+    Gets the serial number of the sensor.
+
+    Parameters:
+    @param I2C_ADDRESS - sensor address
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS);
+
+/**
+    Function:
+    void SHT4X_DRIVER_Store_Serial_Number(void)
+
+    Summary:
+    Store a serial number into variable.
+
+    Parameters:
+    None.
+
+    Returns:
+    @return bool - CRC calculation status
+
+    Remarks:
+    None.
+ */
+bool SHT4X_DRIVER_Store_Serial_Number(void);
+
+/**
+    Function:
+    void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
+
+    Summary:
+    Perform a soft reset to the sensor.
+
+    Parameters:
+    @param I2C_ADDRESS - sensor address
+
+    Returns:
+    None.
+
+    Remarks:
+    None.
+ */
+void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS);
+
+uint8_t SHT4X_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH);
 
 /**
     Function:

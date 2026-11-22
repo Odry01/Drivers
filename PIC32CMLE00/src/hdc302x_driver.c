@@ -44,9 +44,7 @@
 
 HDC302X_DRIVER_DATA hdc302x_driverData;
 
-HDC302X_SENSOR_DATA hdc302x_sensorData;
-
-HDC302X_SENSOR_SETTINGS hdc302x_sensorSettings;
+HDC302X_DEVICE_DATA hdc302x_deviceData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -110,18 +108,26 @@ void HDC302X_DRIVER_Get_Offset_Values(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Offset_Values(void)
+bool HDC302X_DRIVER_Store_Offset_Values(void)
 {
-    hdc302x_sensorData.OFFSET = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.OFFSET = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Set_Offset_Values(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_CMD_OFFSET_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_CMD_OFFSET_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_sensorSettings.OFFSET_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_sensorSettings.OFFSET_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_Array_CRC(hdc302x_driverData.I2C_DATA_TRANSMIT[2], hdc302x_driverData.I2C_DATA_TRANSMIT[3]);
+    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_deviceData.OFFSET_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_deviceData.OFFSET_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -132,18 +138,26 @@ void HDC302X_DRIVER_Get_Set_High_Alert(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Set_High_Alert(void)
+bool HDC302X_DRIVER_Store_Set_High_Alert(void)
 {
-    hdc302x_sensorData.SET_HIGH_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.SET_HIGH_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Set_Set_High_Alert(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_CMD_WR_ALERT_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_CMD_WR_ALERT_SET_HI;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_sensorSettings.SET_HIGH_ALERT_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_sensorSettings.SET_HIGH_ALERT_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_Array_CRC(hdc302x_driverData.I2C_DATA_TRANSMIT[2], hdc302x_driverData.I2C_DATA_TRANSMIT[3]);
+    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_deviceData.SET_HIGH_ALERT_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_deviceData.SET_HIGH_ALERT_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -154,18 +168,26 @@ void HDC302X_DRIVER_Get_Clear_High_Alert(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Clear_High_Alert(void)
+bool HDC302X_DRIVER_Store_Clear_High_Alert(void)
 {
-    hdc302x_sensorData.CLEAR_HIGH_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.CLEAR_HIGH_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Set_Clear_High_Alert(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_CMD_WR_ALERT_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_CMD_WR_ALERT_CLR_HI;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_sensorSettings.CLEAR_HIGH_ALERT_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_sensorSettings.CLEAR_HIGH_ALERT_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_Array_CRC(hdc302x_driverData.I2C_DATA_TRANSMIT[2], hdc302x_driverData.I2C_DATA_TRANSMIT[3]);
+    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_deviceData.CLEAR_HIGH_ALERT_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_deviceData.CLEAR_HIGH_ALERT_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -176,18 +198,26 @@ void HDC302X_DRIVER_Get_Set_Low_Alert(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Set_Low_Alert(void)
+bool HDC302X_DRIVER_Store_Set_Low_Alert(void)
 {
-    hdc302x_sensorData.SET_LOW_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.SET_LOW_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Set_Set_Low_Alert(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_CMD_WR_ALERT_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_CMD_WR_ALERT_SET_LO;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_sensorSettings.SET_LOW_ALERT_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_sensorSettings.SET_LOW_ALERT_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_Array_CRC(hdc302x_driverData.I2C_DATA_TRANSMIT[2], hdc302x_driverData.I2C_DATA_TRANSMIT[3]);
+    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_deviceData.SET_LOW_ALERT_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_deviceData.SET_LOW_ALERT_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -198,39 +228,47 @@ void HDC302X_DRIVER_Get_Clear_Low_Alert(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Clear_Low_Alert(void)
+bool HDC302X_DRIVER_Store_Clear_Low_Alert(void)
 {
-    hdc302x_sensorData.CLEAR_LOW_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.CLEAR_LOW_ALERT = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Set_Clear_Low_Alert(uint8_t I2C_ADDRESS)
 {
     hdc302x_driverData.I2C_DATA_TRANSMIT[0] = HDC302X_CMD_WR_ALERT_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_CMD_WR_ALERT_CLR_LO;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_sensorSettings.CLEAR_LOW_ALERT_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_sensorSettings.CLEAR_LOW_ALERT_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_Array_CRC(hdc302x_driverData.I2C_DATA_TRANSMIT[2], hdc302x_driverData.I2C_DATA_TRANSMIT[3]);
+    hdc302x_driverData.I2C_DATA_TRANSMIT[2] = hdc302x_deviceData.CLEAR_LOW_ALERT_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[3] = hdc302x_deviceData.CLEAR_LOW_ALERT_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void HDC302X_DRIVER_Enter_Auto_Measurement_Mode(uint8_t I2C_ADDRESS)
 {
-    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_deviceData.MODE_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_deviceData.MODE_LSB;
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void HDC302X_DRIVER_Exit_Auto_Measurement_Mode(uint8_t I2C_ADDRESS)
 {
-    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_deviceData.MODE_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_deviceData.MODE_LSB;
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void HDC302X_DRIVER_Start_Manual_Measurement(uint8_t I2C_ADDRESS)
 {
-    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_sensorSettings.MODE_MSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_sensorSettings.MODE_LSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[0] = hdc302x_deviceData.MODE_MSB;
+    hdc302x_driverData.I2C_DATA_TRANSMIT[1] = hdc302x_deviceData.MODE_LSB;
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -246,10 +284,18 @@ void HDC302X_DRIVER_Get_Auto_Measure_Values(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 6, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Measurement_Values(void)
+bool HDC302X_DRIVER_Store_Measurement_Values(void)
 {
-    hdc302x_sensorData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
-    hdc302x_sensorData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[4];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2] && HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[3], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[5])
+    {
+        hdc302x_deviceData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        hdc302x_deviceData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[4];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_Minimum_Temperature_Value(uint8_t I2C_ADDRESS)
@@ -259,9 +305,17 @@ void HDC302X_DRIVER_Get_Minimum_Temperature_Value(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Minimum_Temperature_Value(void)
+bool HDC302X_DRIVER_Store_Minimum_Temperature_Value(void)
 {
-    hdc302x_sensorData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_Maximum_Temperature_Value(uint8_t I2C_ADDRESS)
@@ -271,9 +325,17 @@ void HDC302X_DRIVER_Get_Maximum_Temperature_Value(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Maximum_Temperature_Value(void)
+bool HDC302X_DRIVER_Store_Maximum_Temperature_Value(void)
 {
-    hdc302x_sensorData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.T_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_Minimum_Humidity_Value(uint8_t I2C_ADDRESS)
@@ -283,9 +345,17 @@ void HDC302X_DRIVER_Get_Minimum_Humidity_Value(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Minimum_Humidity_Value(void)
+bool HDC302X_DRIVER_Store_Minimum_Humidity_Value(void)
 {
-    hdc302x_sensorData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_Maximum_Humidity_Value(uint8_t I2C_ADDRESS)
@@ -295,20 +365,28 @@ void HDC302X_DRIVER_Get_Maximum_Humidity_Value(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Maximum_Humidity_Value(void)
+bool HDC302X_DRIVER_Store_Maximum_Humidity_Value(void)
 {
-    hdc302x_sensorData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.H_VALUE = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
 {
-    hdc302x_sensorData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) T_VALUE / 65535);
-    hdc302x_sensorData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) T_VALUE / 65535);
+    hdc302x_deviceData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) T_VALUE / 65535);
+    hdc302x_deviceData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) T_VALUE / 65535);
 }
 
 void HDC302X_DRIVER_Calculation_Humidity(uint16_t H_VALUE)
 {
-    hdc302x_sensorData.HUMIDITY = ((float) H_VALUE / 65535) * 100;
+    hdc302x_deviceData.HUMIDITY = ((float) H_VALUE / 65535) * 100;
 }
 
 void HDC302X_DRIVER_Get_Sensor_Status(uint8_t I2C_ADDRESS)
@@ -318,9 +396,17 @@ void HDC302X_DRIVER_Get_Sensor_Status(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_Sensor_Status(void)
+bool HDC302X_DRIVER_Store_Sensor_Status(void)
 {
-    hdc302x_sensorData.STATUS = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.STATUS = (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_NIST_3(uint8_t I2C_ADDRESS)
@@ -330,10 +416,18 @@ void HDC302X_DRIVER_Get_NIST_3(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_NIST_3(void)
+bool HDC302X_DRIVER_Store_NIST_3(void)
 {
-    hdc302x_sensorData.NIST_VALUE_5 = hdc302x_driverData.I2C_DATA_RECEIVE[0];
-    hdc302x_sensorData.NIST_VALUE_4 = hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.NIST_VALUE_5 = hdc302x_driverData.I2C_DATA_RECEIVE[0];
+        hdc302x_deviceData.NIST_VALUE_4 = hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_NIST_2(uint8_t I2C_ADDRESS)
@@ -343,10 +437,18 @@ void HDC302X_DRIVER_Get_NIST_2(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_NIST_2(void)
+bool HDC302X_DRIVER_Store_NIST_2(void)
 {
-    hdc302x_sensorData.NIST_VALUE_3 = hdc302x_driverData.I2C_DATA_RECEIVE[0];
-    hdc302x_sensorData.NIST_VALUE_2 = hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.NIST_VALUE_3 = hdc302x_driverData.I2C_DATA_RECEIVE[0];
+        hdc302x_deviceData.NIST_VALUE_2 = hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Get_NIST_1(uint8_t I2C_ADDRESS)
@@ -356,10 +458,18 @@ void HDC302X_DRIVER_Get_NIST_1(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 2, (void *) hdc302x_driverData.I2C_DATA_RECEIVE, 3, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void HDC302X_DRIVER_Store_NIST_1(void)
+bool HDC302X_DRIVER_Store_NIST_1(void)
 {
-    hdc302x_sensorData.NIST_VALUE_1 = hdc302x_driverData.I2C_DATA_RECEIVE[0];
-    hdc302x_sensorData.NIST_VALUE_0 = hdc302x_driverData.I2C_DATA_RECEIVE[1];
+    if (HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_RECEIVE[0], 2) == hdc302x_driverData.I2C_DATA_RECEIVE[2])
+    {
+        hdc302x_deviceData.NIST_VALUE_1 = hdc302x_driverData.I2C_DATA_RECEIVE[0];
+        hdc302x_deviceData.NIST_VALUE_0 = hdc302x_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void HDC302X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
@@ -389,7 +499,7 @@ void HDC302X_DRIVER_Configuration_Heater(uint8_t I2C_ADDRESS, uint8_t CURRENT_MS
     hdc302x_driverData.I2C_DATA_TRANSMIT[1] = HDC302X_CMD_HEATER_CFG;
     hdc302x_driverData.I2C_DATA_TRANSMIT[2] = CURRENT_MSB;
     hdc302x_driverData.I2C_DATA_TRANSMIT[3] = CURRENT_LSB;
-    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_Array_CRC(hdc302x_driverData.I2C_DATA_TRANSMIT[2], hdc302x_driverData.I2C_DATA_TRANSMIT[3]);
+    hdc302x_driverData.I2C_DATA_TRANSMIT[4] = HDC302X_DRIVER_Calculation_CRC(&hdc302x_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(hdc302x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) hdc302x_driverData.I2C_DATA_TRANSMIT, 5, &hdc302x_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -413,12 +523,6 @@ uint8_t HDC302X_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH
         }
     }
     return CRC;
-}
-
-uint8_t HDC302X_DRIVER_Calculation_Array_CRC(uint8_t MESSAGE_0, uint8_t MESSAGE_1)
-{
-    uint8_t MESSAGE[2] = {MESSAGE_0, MESSAGE_1};
-    return HDC302X_DRIVER_Calculation_CRC(MESSAGE, 2);
 }
 
 uint16_t HDC302X_DRIVER_Set_Offset_Code(uint16_t TEMPERATURE, uint16_t HUMIDITY)
@@ -451,12 +555,12 @@ void HDC302X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f ?C\r\n"
-             "Temperature: %.2f ?F\r\n"
+             "Temperature: %.2f *C\r\n"
+             "Temperature: %.2f *F\r\n"
              "Humidity: %.2f %%\r\n",
-             hdc302x_sensorData.CELSIUS_TEMPERATURE,
-             hdc302x_sensorData.FAHRENHEIT_TEMPERATURE,
-             hdc302x_sensorData.HUMIDITY
+             hdc302x_deviceData.CELSIUS_TEMPERATURE,
+             hdc302x_deviceData.FAHRENHEIT_TEMPERATURE,
+             hdc302x_deviceData.HUMIDITY
              );
 }
 
@@ -501,18 +605,18 @@ void HDC302X_DRIVER_Tasks(void)
 
         case HDC302X_DRIVER_STATE_SET_CONFIGURATION:
         {
-            hdc302x_sensorSettings.MODE_MSB = HDC302X_CMD_MODE_A2S_MSB;
-            hdc302x_sensorSettings.MODE_LSB = HDC302X_CMD_MODE_A2S_LPM0;
-            hdc302x_sensorSettings.OFFSET_MSB = 0x80;
-            hdc302x_sensorSettings.OFFSET_LSB = 0x80;
-            hdc302x_sensorSettings.SET_HIGH_ALERT_MSB = 0xCD;
-            hdc302x_sensorSettings.SET_HIGH_ALERT_LSB = 0x6D;
-            hdc302x_sensorSettings.CLEAR_HIGH_ALERT_MSB = 0xBF;
-            hdc302x_sensorSettings.CLEAR_HIGH_ALERT_LSB = 0x5F;
-            hdc302x_sensorSettings.SET_LOW_ALERT_MSB = 0x32;
-            hdc302x_sensorSettings.SET_LOW_ALERT_LSB = 0x83;
-            hdc302x_sensorSettings.CLEAR_LOW_ALERT_MSB = 0x40;
-            hdc302x_sensorSettings.CLEAR_LOW_ALERT_LSB = 0x92;
+            hdc302x_deviceData.MODE_MSB = HDC302X_CMD_MODE_A2S_MSB;
+            hdc302x_deviceData.MODE_LSB = HDC302X_CMD_MODE_A2S_LPM0;
+            hdc302x_deviceData.OFFSET_MSB = 0x80;
+            hdc302x_deviceData.OFFSET_LSB = 0x80;
+            hdc302x_deviceData.SET_HIGH_ALERT_MSB = 0xCD;
+            hdc302x_deviceData.SET_HIGH_ALERT_LSB = 0x6D;
+            hdc302x_deviceData.CLEAR_HIGH_ALERT_MSB = 0xBF;
+            hdc302x_deviceData.CLEAR_HIGH_ALERT_LSB = 0x5F;
+            hdc302x_deviceData.SET_LOW_ALERT_MSB = 0x32;
+            hdc302x_deviceData.SET_LOW_ALERT_LSB = 0x83;
+            hdc302x_deviceData.CLEAR_LOW_ALERT_MSB = 0x40;
+            hdc302x_deviceData.CLEAR_LOW_ALERT_LSB = 0x92;
             hdc302x_driverData.state = HDC302X_DRIVER_STATE_ENTER_AUTO_MEASUREMENT_MODE;
             break;
         }
@@ -586,15 +690,27 @@ void HDC302X_DRIVER_Tasks(void)
 
         case HDC302X_DRIVER_STATE_STORE_MEASURE_VALUES:
         {
-            HDC302X_DRIVER_Store_Measurement_Values();
-            hdc302x_driverData.state = HDC302X_DRIVER_STATE_CALCULATE_DATA;
+            if (HDC302X_DRIVER_Store_Measurement_Values() == true)
+            {
+                hdc302x_driverData.state = HDC302X_DRIVER_STATE_CALCULATE_TEMPERATURE;
+            }
+            else
+            {
+                hdc302x_driverData.state = HDC302X_DRIVER_STATE_GET_AUTO_MEASURE_VALUES;
+            }
             break;
         }
 
-        case HDC302X_DRIVER_STATE_CALCULATE_DATA:
+        case HDC302X_DRIVER_STATE_CALCULATE_TEMPERATURE:
         {
-            HDC302X_DRIVER_Calculation_Temperature(hdc302x_sensorData.T_VALUE);
-            HDC302X_DRIVER_Calculation_Humidity(hdc302x_sensorData.H_VALUE);
+            HDC302X_DRIVER_Calculation_Temperature(hdc302x_deviceData.T_VALUE);
+            hdc302x_driverData.state = HDC302X_DRIVER_STATE_CALCULATE_HUMIDITY;
+            break;
+        }
+
+        case HDC302X_DRIVER_STATE_CALCULATE_HUMIDITY:
+        {
+            HDC302X_DRIVER_Calculation_Humidity(hdc302x_deviceData.H_VALUE);
             hdc302x_driverData.state = HDC302X_DRIVER_STATE_STORE_VALUES;
             break;
         }

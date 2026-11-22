@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Source File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     max17335_driver.c
 
+  Status:
+    In development
+ 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
 
@@ -55,7 +58,40 @@ MAX17335_DRIVER_DATA max17335_driverData;
 // *****************************************************************************
 // *****************************************************************************
 
+bool MAX17335_DRIVER_Get_Task_Start_Status(void)
+{
+    return (max17335_driverData.MAX17335_TASK_START);
+}
 
+void MAX17335_DRIVER_Set_Task_Start_Status(bool STATUS)
+{
+    max17335_driverData.MAX17335_TASK_START = STATUS;
+}
+
+bool MAX17335_DRIVER_Get_Task_Completed_Status(void)
+{
+    return (max17335_driverData.MAX17335_TASK_COMPLETED);
+}
+
+void MAX17335_DRIVER_Set_Task_Completed_Status(bool STATUS)
+{
+    max17335_driverData.MAX17335_TASK_COMPLETED = STATUS;
+}
+
+void MAX17335_DRIVER_Set_I2C_Address(void)
+{
+    max17335_driverData.I2C_ADDRESS[0] = 0x64;
+}
+
+bool MAX17335_DRIVER_Get_Alert_Status(void)
+{
+    return (max17335_driverData.MAX17335_ALERT);
+}
+
+void MAX17335_DRIVER_Set_Alert_Status(bool STATUS)
+{
+    max17335_driverData.MAX17335_ALERT = STATUS;
+}
 
 // *****************************************************************************
 // *****************************************************************************
@@ -66,6 +102,8 @@ MAX17335_DRIVER_DATA max17335_driverData;
 void MAX17335_DRIVER_Initialize(void)
 {
     max17335_driverData.state = MAX17335_DRIVER_STATE_INIT;
+    max17335_driverData.I2C_HANDLE = DRV_HANDLE_INVALID;
+    max17335_driverData.I2C_TRANSFER_HANDLE = DRV_I2C_TRANSFER_HANDLE_INVALID;
 }
 
 void MAX17335_DRIVER_Tasks(void)

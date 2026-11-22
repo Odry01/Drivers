@@ -44,7 +44,7 @@
 
 STCC4_DRIVER_DATA stcc4_driverData;
 
-STCC4_DRIVER_SENSOR_DATA stcc4_sensorData;
+STCC4_DEVICE_DATA stcc4_deviceData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -107,12 +107,20 @@ void STCC4_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void*) stcc4_driverData.I2C_DATA_RECEIVE, 12, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void STCC4_DRIVER_Store_Measured_Values(void)
+bool STCC4_DRIVER_Store_Measured_Values(void)
 {
-    stcc4_sensorData.CO2_VALUE = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[1];
-    stcc4_sensorData.T_VALUE = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[4];
-    stcc4_sensorData.H_VALUE = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[6] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[7];
-    stcc4_sensorData.SENSOR_STATUS = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[9] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[10];
+    if (STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[0], 2) == stcc4_driverData.I2C_DATA_RECEIVE[2] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[3], 2) == stcc4_driverData.I2C_DATA_RECEIVE[5] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[6], 2) == stcc4_driverData.I2C_DATA_RECEIVE[8] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[9], 2) == stcc4_driverData.I2C_DATA_RECEIVE[11])
+    {
+        stcc4_deviceData.CO2_VALUE = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[1];
+        stcc4_deviceData.T_VALUE = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[4];
+        stcc4_deviceData.H_VALUE = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[6] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[7];
+        stcc4_deviceData.SENSOR_STATUS = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[9] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[10];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void STCC4_DRIVER_Set_RHT_Compensation(uint8_t I2C_ADDRESS, uint8_t T_VALUE_MSB, uint8_t T_VALUE_LSB, uint8_t H_VALUE_MSB, uint8_t H_VALUE_LSB)
@@ -121,10 +129,10 @@ void STCC4_DRIVER_Set_RHT_Compensation(uint8_t I2C_ADDRESS, uint8_t T_VALUE_MSB,
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_SET_RHT_COMPENSATION_LSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[2] = T_VALUE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[3] = T_VALUE_LSB;
-    stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_Array_CRC(T_VALUE_MSB, T_VALUE_LSB);
+    stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_TRANSMIT[2], 2);
     stcc4_driverData.I2C_DATA_TRANSMIT[5] = H_VALUE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[6] = H_VALUE_LSB;
-    stcc4_driverData.I2C_DATA_TRANSMIT[7] = STCC4_DRIVER_Calculation_Array_CRC(H_VALUE_MSB, H_VALUE_LSB);
+    stcc4_driverData.I2C_DATA_TRANSMIT[7] = STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_TRANSMIT[5], 2);
     DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) stcc4_driverData.I2C_DATA_TRANSMIT, 8, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -134,7 +142,7 @@ void STCC4_DRIVER_Set_Pressure_Compensation(uint8_t I2C_ADDRESS, uint8_t P_VALUE
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_SET_PRESSURE_COMPENSATION_LSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[2] = P_VALUE_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[3] = P_VALUE_LSB;
-    stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_Array_CRC(P_VALUE_MSB, P_VALUE_LSB);
+    stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) stcc4_driverData.I2C_DATA_TRANSMIT, 5, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
@@ -180,19 +188,27 @@ void STCC4_DRIVER_Perform_Factory_Reset(uint8_t I2C_ADDRESS)
 
 void STCC4_DRIVER_Store_Factory_Reset_Result(void)
 {
-    stcc4_sensorData.FACTORY_RESET_RESULT = stcc4_driverData.I2C_DATA_RECEIVE[0];
+    stcc4_deviceData.FACTORY_RESET_RESULT = stcc4_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void STCC4_DRIVER_Perform_Self_Test(uint8_t I2C_ADDRESS)
 {
     stcc4_driverData.I2C_DATA_TRANSMIT[0] = STCC4_CMD_PERFORM_SELF_TEST_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_PERFORM_SELF_TEST_LSB;
-    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void *) stcc4_driverData.I2C_DATA_RECEIVE, 2, &stcc4_driverData.I2C_TRANSFER_HANDLE);
+    DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void *) stcc4_driverData.I2C_DATA_RECEIVE, 3, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void STCC4_DRIVER_Store_Self_Test_Result(void)
+bool STCC4_DRIVER_Store_Self_Test_Result(void)
 {
-    stcc4_sensorData.SELF_TEST_RESULT = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[1];
+    if (STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[0], 2) == stcc4_driverData.I2C_DATA_RECEIVE[2])
+    {
+        stcc4_deviceData.SELF_TEST_RESULT = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void STCC4_DRIVER_Enable_Testing_Mode(uint8_t I2C_ADDRESS)
@@ -215,13 +231,21 @@ void STCC4_DRIVER_Perform_Forced_Recalibration(uint8_t I2C_ADDRESS, uint8_t CO2_
     stcc4_driverData.I2C_DATA_TRANSMIT[1] = STCC4_CMD_PERFORM_FORCED_RECALIBRATION_LSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[2] = CO2_TARGET_MSB;
     stcc4_driverData.I2C_DATA_TRANSMIT[3] = CO2_TARGET_LSB;
-    stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_Array_CRC(CO2_TARGET_MSB, CO2_TARGET_LSB);
+    stcc4_driverData.I2C_DATA_TRANSMIT[4] = STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_TRANSMIT[2], 2);
     DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void *) stcc4_driverData.I2C_DATA_RECEIVE, 3, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void STCC4_DRIVER_Store_Forced_Recalibration_Result(void)
+bool STCC4_DRIVER_Store_Forced_Recalibration_Result(void)
 {
-    stcc4_sensorData.FORCED_RECALIBRATION_RESULT = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[1];
+    if (STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[0], 2) == stcc4_driverData.I2C_DATA_RECEIVE[2])
+    {
+        stcc4_deviceData.FORCED_RECALIBRATION_RESULT = (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) stcc4_driverData.I2C_DATA_RECEIVE[1];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void STCC4_DRIVER_Get_Product_ID(uint8_t I2C_ADDRESS)
@@ -231,26 +255,34 @@ void STCC4_DRIVER_Get_Product_ID(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteReadTransferAdd(stcc4_driverData.I2C_HANDLE, I2C_ADDRESS, (void*) stcc4_driverData.I2C_DATA_TRANSMIT, 2, (void*) stcc4_driverData.I2C_DATA_RECEIVE, 18, &stcc4_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void STCC4_DRIVER_Store_Product_ID(void)
+bool STCC4_DRIVER_Store_Product_ID(void)
 {
-    stcc4_sensorData.PRODUCT_ID = (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 24 | (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[1] << 16 | (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[4];
-    stcc4_sensorData.SERIAL_NUMBER = (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[6] << 56 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[7] << 48 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[9] << 40 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[10] << 32 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[12] << 24 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[13] << 16 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[15] << 8 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[16];
+    if (STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[0], 2) == stcc4_driverData.I2C_DATA_RECEIVE[2] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[3], 2) == stcc4_driverData.I2C_DATA_RECEIVE[5] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[6], 2) == stcc4_driverData.I2C_DATA_RECEIVE[8] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[9], 2) == stcc4_driverData.I2C_DATA_RECEIVE[11] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[12], 2) == stcc4_driverData.I2C_DATA_RECEIVE[14] && STCC4_DRIVER_Calculation_CRC(&stcc4_driverData.I2C_DATA_RECEIVE[15], 2) == stcc4_driverData.I2C_DATA_RECEIVE[17])
+    {
+        stcc4_deviceData.PRODUCT_ID = (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[0] << 24 | (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[1] << 16 | (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint32_t) stcc4_driverData.I2C_DATA_RECEIVE[4];
+        stcc4_deviceData.SERIAL_NUMBER = (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[6] << 56 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[7] << 48 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[9] << 40 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[10] << 32 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[12] << 24 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[13] << 16 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[15] << 8 | (uint64_t) stcc4_driverData.I2C_DATA_RECEIVE[16];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void STCC4_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
 {
-    stcc4_sensorData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) T_VALUE / 65535);
-    stcc4_sensorData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) T_VALUE / 65535);
+    stcc4_deviceData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) T_VALUE / 65535);
+    stcc4_deviceData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) T_VALUE / 65535);
 }
 
 void STCC4_DRIVER_Calculation_Humidity(uint16_t H_VALUE)
 {
-    stcc4_sensorData.HUMIDITY = -6 + 125 * ((float) H_VALUE / 65535);
+    stcc4_deviceData.HUMIDITY = -6 + 125 * ((float) H_VALUE / 65535);
 }
 
 void STCC4_DRIVER_Calculation_CO2(uint16_t CO2_VALUE)
 {
-    stcc4_sensorData.CO2_PPM = (float) CO2_VALUE;
+    stcc4_deviceData.CO2_PPM = (float) CO2_VALUE;
 }
 
 uint8_t STCC4_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH)
@@ -275,25 +307,19 @@ uint8_t STCC4_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH)
     return CRC;
 }
 
-uint8_t STCC4_DRIVER_Calculation_Array_CRC(uint8_t MESSAGE_0, uint8_t MESSAGE_1)
-{
-    uint8_t MESSAGE[2] = {MESSAGE_0, MESSAGE_1};
-    return HDC302X_DRIVER_Calculation_CRC(MESSAGE, 2);
-}
-
 void STCC4_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
 {
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f ?C\r\n"
+             "Temperature: %.2f *C\r\n"
              "Humidity: %.2f %%\r\n"
              "CO2: %.0f ppm\r\n"
              "Status: 0x%X\r\n",
-             stcc4_sensorData.CELSIUS_TEMPERATURE,
-             stcc4_sensorData.HUMIDITY,
-             stcc4_sensorData.CO2_PPM,
-             stcc4_sensorData.SENSOR_STATUS
+             stcc4_deviceData.CELSIUS_TEMPERATURE,
+             stcc4_deviceData.HUMIDITY,
+             stcc4_deviceData.CO2_PPM,
+             stcc4_deviceData.SENSOR_STATUS
              );
 }
 
@@ -524,8 +550,14 @@ void STCC4_DRIVER_Tasks(void)
 
         case STCC4_DRIVER_STATE_STORE_MEASURED_VALUES:
         {
-            STCC4_DRIVER_Store_Measured_Values();
-            stcc4_driverData.state = STCC4_DRIVER_STATE_CALCULATE_DATA;
+            if (STCC4_DRIVER_Store_Measured_Values() == true)
+            {
+                stcc4_driverData.state = STCC4_DRIVER_STATE_ENTER_SLEEP_MODE;
+            }
+            else
+            {
+                stcc4_driverData.state = STCC4_DRIVER_STATE_START_SINGLE_SHOT_MEASURE;
+            }
             break;
         }
 
@@ -542,7 +574,7 @@ void STCC4_DRIVER_Tasks(void)
             if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_COMPLETE)
             {
                 TIMER_DRIVER_Stop_Bus_TMR();
-                stcc4_driverData.state = STCC4_DRIVER_STATE_CALCULATE_DATA;
+                stcc4_driverData.state = STCC4_DRIVER_STATE_CALCULATE_CO2;
             }
             else if (DRV_I2C_TransferStatusGet(stcc4_driverData.I2C_TRANSFER_HANDLE) == DRV_I2C_TRANSFER_EVENT_ERROR)
             {
@@ -558,11 +590,23 @@ void STCC4_DRIVER_Tasks(void)
             break;
         }
 
-        case STCC4_DRIVER_STATE_CALCULATE_DATA:
+        case STCC4_DRIVER_STATE_CALCULATE_CO2:
         {
-            STCC4_DRIVER_Calculation_CO2(stcc4_sensorData.CO2_VALUE);
-            STCC4_DRIVER_Calculation_Temperature(stcc4_sensorData.T_VALUE);
-            STCC4_DRIVER_Calculation_Humidity(stcc4_sensorData.H_VALUE);
+            STCC4_DRIVER_Calculation_CO2(stcc4_deviceData.CO2_VALUE);
+            stcc4_driverData.state = STCC4_DRIVER_STATE_CALCULATE_TEMPERATURE;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_CALCULATE_TEMPERATURE:
+        {
+            STCC4_DRIVER_Calculation_Temperature(stcc4_deviceData.T_VALUE);
+            stcc4_driverData.state = STCC4_DRIVER_STATE_CALCULATE_HUMIDITY;
+            break;
+        }
+
+        case STCC4_DRIVER_STATE_CALCULATE_HUMIDITY:
+        {
+            STCC4_DRIVER_Calculation_Humidity(stcc4_deviceData.H_VALUE);
             stcc4_driverData.state = STCC4_DRIVER_STATE_STORE_DATA;
             break;
         }

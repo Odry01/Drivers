@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     max17335_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -27,11 +30,12 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdint.h>
+#include <stdio.h>
 #include <stdbool.h>
-#include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include "configuration.h"
+#include "definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -48,7 +52,8 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-
+#define MAX17335_I2C_RX_BUFFER_SIZE                     32
+#define MAX17335_I2C_TX_BUFFER_SIZE                     32
 
 // *****************************************************************************
 
@@ -92,6 +97,10 @@ typedef struct
     DRV_I2C_TRANSFER_HANDLE I2C_TRANSFER_HANDLE;
     volatile bool MAX17335_TASK_START;
     volatile bool MAX17335_TASK_COMPLETED;
+    volatile bool MAX17335_ALERT;
+    uint8_t I2C_ADDRESS[2];
+    uint8_t I2C_DATA_RECEIVE[MAX17335_I2C_RX_BUFFER_SIZE];
+    uint8_t I2C_DATA_TRANSMIT[MAX17335_I2C_TX_BUFFER_SIZE];
 } MAX17335_DRIVER_DATA;
 
 // *****************************************************************************
@@ -111,6 +120,22 @@ typedef struct
 void MAX17335_DRIVER_Initialize(void);
 
 void MAX17335_DRIVER_Tasks(void);
+
+bool MAX17335_DRIVER_Get_Task_Start_Status(void);
+
+void MAX17335_DRIVER_Set_Task_Start_Status(bool STATUS);
+
+bool MAX17335_DRIVER_Get_Task_Completed_Status(void);
+
+void MAX17335_DRIVER_Set_Task_Completed_Status(bool STATUS);
+
+bool MAX17335_DRIVER_Get_Alert_Status(void);
+
+void MAX17335_DRIVER_Set_Alert_Status(bool STATUS);
+
+void MAX17335_DRIVER_Set_I2C_Address(void);
+
+void MAX17335_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

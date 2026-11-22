@@ -1,12 +1,15 @@
 /*******************************************************************************
   MPLAB Harmony Application Header File
 
-  Company:
-    Microchip Technology Inc.
+  Author:
+    Odry01
 
   File Name:
     sen63c_driver.h
 
+  Status:
+    In development
+ 
   Summary:
     This header file provides prototypes and definitions for the application.
 
@@ -178,6 +181,26 @@ typedef struct
 {
     char PRODUCT_NAME[48];
     char SERIAL_NUMBER[48];
+    
+    int8_t OFFSET_MSB;
+    int8_t OFFSET_LSB;
+    int8_t SLOPE_MSB;
+    int8_t SLOPE_LSB;
+    
+    uint8_t TIME_CONSTANT_MSB;
+    uint8_t TIME_CONSTANT_LSB;
+    uint8_t SLOT_MSB;
+    uint8_t SLOT_LSB;
+    
+    uint8_t K_MSB;
+    uint8_t K_LSB;
+    uint8_t P_MSB;
+    uint8_t P_LSB;
+    uint8_t T1_MSB;
+    uint8_t T1_LSB;
+    uint8_t T2_MSB;
+    uint8_t T2_LSB;
+    
     int16_t T_VALUE;
     int16_t H_VALUE;
     int16_t CO2_VALUE;
@@ -185,14 +208,22 @@ typedef struct
     int16_t H_RAW_VALUE;
     int16_t T_HEATER_VALUE;
     int16_t H_HEATER_VALUE;
+    
     uint16_t DATA_READY_STATUS;
-    uint16_t DEVICE_STATUS;
     uint16_t FW_VERSION;
     uint16_t PM05_VALUE;
     uint16_t PM10_VALUE;
     uint16_t PM25_VALUE;
     uint16_t PM40_VALUE;
     uint16_t PM100_VALUE;
+    
+    uint16_t CO2_SENSOR_FORCED_RECALIBRATION;
+    uint16_t CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION;
+    uint16_t AMBIENT_PRESSURE;
+    uint16_t SENSOR_ALTITUDE;
+    
+    uint32_t DEVICE_STATUS;
+    
     float PM05;
     float PM10;
     float PM25;
@@ -201,44 +232,7 @@ typedef struct
     float CELSIUS_TEMPERATURE;
     float HUMIDITY;
     float CO2;
-} SEN63C_SENSOR_DATA;
-
-typedef struct
-{
-
-    struct
-    {
-        int8_t OFFSET_MSB;
-        int8_t OFFSET_LSB;
-        int8_t SLOPE_MSB;
-        int8_t SLOPE_LSB;
-        uint8_t TIME_CONSTANT_MSB;
-        uint8_t TIME_CONSTANT_LSB;
-        uint8_t SLOT_MSB;
-        uint8_t SLOT_LSB;
-    } TEMPERATURE_OFFSET_PARAMETERS;
-
-    struct
-    {
-        uint8_t K_MSB;
-        uint8_t K_LSB;
-        uint8_t P_MSB;
-        uint8_t P_LSB;
-        uint8_t T1_MSB;
-        uint8_t T1_LSB;
-        uint8_t T2_MSB;
-        uint8_t T2_LSB;
-    } TEMPERATURE_ACCELERATION_PARAMETERS;
-
-    uint8_t CO2_SENSOR_FORCED_RECALIBRATION_MSB;
-    uint8_t CO2_SENSOR_FORCED_RECALIBRATION_LSB;
-    uint8_t CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB;
-    uint8_t CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_LSB;
-    uint8_t AMBIENT_PRESSURE_MSB;
-    uint8_t AMBIENT_PRESSURE_LSB;
-    uint8_t SENSOR_ALTITUDE_MSB;
-    uint8_t SENSOR_ALTITUDE_LSB;
-} SEN63C_SENSOR_SETTINGS;
+} SEN63C_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -344,7 +338,7 @@ void SEN63C_DRIVER_Set_Sensor_Altitude(uint8_t I2C_ADDRESS);
 
 uint8_t SEN63C_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t NUMBER_OF_BYTES);
 
-uint8_t SEN63C_DRIVER_Calculation_Array_CRC(uint8_t BYTE_0, uint8_t BYTE_1);
+void SEN63C_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

@@ -44,7 +44,7 @@
 
 SHT4X_DRIVER_DATA sht4x_driverData;
 
-SHT4X_DRIVER_SENSOR_DATA sht4x_sensorData;
+SHT4X_DEVICE_DATA sht4x_deviceData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,21 +98,48 @@ void SHT4X_DRIVER_Get_Measured_Values(uint8_t I2C_ADDRESS)
     DRV_I2C_ReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void SHT4X_DRIVER_Store_Measured_Values(void)
+bool SHT4X_DRIVER_Store_Measured_Values(void)
 {
-    sht4x_sensorData.T_VALUE = (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[1];
-    sht4x_sensorData.H_VALUE = (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[4];
+    if (SHT4X_DRIVER_Calculation_CRC(&sht4x_driverData.I2C_DATA_RECEIVE[0], 2) == sht4x_driverData.I2C_DATA_RECEIVE[2] && SHT4X_DRIVER_Calculation_CRC(&sht4x_driverData.I2C_DATA_RECEIVE[3], 2) == sht4x_driverData.I2C_DATA_RECEIVE[5])
+    {
+        sht4x_deviceData.T_VALUE = (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[1];
+        sht4x_deviceData.H_VALUE = (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint16_t) sht4x_driverData.I2C_DATA_RECEIVE[4];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
-void SHT4X_DRIVER_Read_Serial_Number(uint8_t I2C_ADDRESS)
+void SHT4X_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
+{
+    sht4x_deviceData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) T_VALUE / 65535);
+    sht4x_deviceData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) T_VALUE / 65535);
+}
+
+void SHT4X_DRIVER_Calculation_Humidity(uint16_t H_VALUE)
+{
+    sht4x_deviceData.HUMIDITY = -6 + 125 * ((float) H_VALUE / 65535);
+}
+
+void SHT4X_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS)
 {
     sht4x_driverData.I2C_DATA_TRANSMIT[0] = SHT4X_CMD_SERIAL_NUMBER;
     DRV_I2C_WriteReadTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sht4x_driverData.I2C_DATA_TRANSMIT, 1, (void *) sht4x_driverData.I2C_DATA_RECEIVE, 6, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void SHT4X_DRIVER_Store_Serial_Number(void)
+bool SHT4X_DRIVER_Store_Serial_Number(void)
 {
-    sht4x_sensorData.SERIAL_NUMBER = (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[0] << 24 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[1] << 16 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[4];
+    if (SHT4X_DRIVER_Calculation_CRC(&sht4x_driverData.I2C_DATA_RECEIVE[0], 2) == sht4x_driverData.I2C_DATA_RECEIVE[2] && SHT4X_DRIVER_Calculation_CRC(&sht4x_driverData.I2C_DATA_RECEIVE[3], 2) == sht4x_driverData.I2C_DATA_RECEIVE[5])
+    {
+        sht4x_deviceData.SERIAL_NUMBER = (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[0] << 24 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[1] << 16 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[3] << 8 | (uint32_t) sht4x_driverData.I2C_DATA_RECEIVE[4];
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
 }
 
 void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
@@ -121,15 +148,26 @@ void SHT4X_DRIVER_Soft_Reset(uint8_t I2C_ADDRESS)
     DRV_I2C_WriteTransferAdd(sht4x_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) sht4x_driverData.I2C_DATA_TRANSMIT, 1, &sht4x_driverData.I2C_TRANSFER_HANDLE);
 }
 
-void SHT4X_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
+uint8_t SHT4X_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH)
 {
-    sht4x_sensorData.CELSIUS_TEMPERATURE = -45 + 175 * ((float) T_VALUE / 65535);
-    sht4x_sensorData.FAHRENHEIT_TEMPERATURE = -49 + 315 * ((float) T_VALUE / 65535);
-}
-
-void SHT4X_DRIVER_Calculation_Humidity(uint16_t H_VALUE)
-{
-    sht4x_sensorData.HUMIDITY = -6 + 125 * ((float) H_VALUE / 65535);
+    uint8_t CRC = 0xFF;
+    uint8_t BIT;
+    for (uint8_t BYTE = 0; BYTE < MESSAGE_LENGTH; BYTE++)
+    {
+        CRC ^= MESSAGE[BYTE];
+        for (BIT = 0; BIT < 8; BIT++)
+        {
+            if (CRC & 0x80)
+            {
+                CRC = (CRC << 1) ^ 0x31;
+            }
+            else
+            {
+                CRC = (CRC << 1);
+            }
+        }
+    }
+    return CRC;
 }
 
 void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -137,12 +175,12 @@ void SHT4X_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Temperature: %.2f ?C\r\n"
-             "Temperature: %.2f ?F\r\n"
+             "Temperature: %.2f *C\r\n"
+             "Temperature: %.2f *F\r\n"
              "Humidity: %.2f %%\r\n",
-             sht4x_sensorData.CELSIUS_TEMPERATURE,
-             sht4x_sensorData.FAHRENHEIT_TEMPERATURE,
-             sht4x_sensorData.HUMIDITY
+             sht4x_deviceData.CELSIUS_TEMPERATURE,
+             sht4x_deviceData.FAHRENHEIT_TEMPERATURE,
+             sht4x_deviceData.HUMIDITY
              );
 }
 
@@ -269,15 +307,27 @@ void SHT4X_DRIVER_Tasks(void)
 
         case SHT4X_DRIVER_STATE_STORE_MEASURED_VALUES:
         {
-            SHT4X_DRIVER_Store_Measured_Values();
-            sht4x_driverData.state = SHT4X_DRIVER_STATE_CALCULATE_DATA;
+            if (SHT4X_DRIVER_Store_Measured_Values() == true)
+            {
+                sht4x_driverData.state = SHT4X_DRIVER_STATE_CALCULATE_TEMPERATURE;
+            }
+            else
+            {
+                sht4x_driverData.state = SHT4X_DRIVER_STATE_START_MEASURE;
+            }
             break;
         }
 
-        case SHT4X_DRIVER_STATE_CALCULATE_DATA:
+        case SHT4X_DRIVER_STATE_CALCULATE_TEMPERATURE:
         {
-            SHT4X_DRIVER_Calculation_Temperature(sht4x_sensorData.T_VALUE);
-            SHT4X_DRIVER_Calculation_Humidity(sht4x_sensorData.H_VALUE);
+            SHT4X_DRIVER_Calculation_Temperature(sht4x_deviceData.T_VALUE);
+            sht4x_driverData.state = SHT4X_DRIVER_STATE_CALCULATE_HUMIDITY;
+            break;
+        }
+
+        case SHT4X_DRIVER_STATE_CALCULATE_HUMIDITY:
+        {
+            SHT4X_DRIVER_Calculation_Humidity(sht4x_deviceData.H_VALUE);
             sht4x_driverData.state = SHT4X_DRIVER_STATE_STORE_DATA;
             break;
         }

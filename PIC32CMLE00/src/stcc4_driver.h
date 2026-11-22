@@ -122,7 +122,9 @@ typedef enum
     STCC4_DRIVER_STATE_STORE_MEASURED_VALUES,
     STCC4_DRIVER_STATE_ENTER_SLEEP_MODE,
     STCC4_DRIVER_STATE_ENTER_SLEEP_MODE_WAIT_FOR_TRANSFER,
-    STCC4_DRIVER_STATE_CALCULATE_DATA,
+    STCC4_DRIVER_STATE_CALCULATE_CO2,
+    STCC4_DRIVER_STATE_CALCULATE_TEMPERATURE,
+    STCC4_DRIVER_STATE_CALCULATE_HUMIDITY,
     STCC4_DRIVER_STATE_STORE_DATA,
     STCC4_DRIVER_STATE_TIMER_EXPIRED,
     STCC4_DRIVER_STATE_ERROR,
@@ -172,7 +174,7 @@ typedef struct
     float HUMIDITY;
     float CO2_PPM;
     uint64_t SERIAL_NUMBER;
-} STCC4_DRIVER_SENSOR_DATA;
+} STCC4_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -208,7 +210,7 @@ void STCC4_DRIVER_Stop_Continuous_Measurement(uint8_t I2C_ADDRESS);
 
 void STCC4_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS);
 
-void STCC4_DRIVER_Store_Measured_Values(void);
+bool STCC4_DRIVER_Store_Measured_Values(void);
 
 void STCC4_DRIVER_Set_RHT_Compensation(uint8_t I2C_ADDRESS, uint8_t T_VALUE_MSB, uint8_t T_VALUE_LSB, uint8_t H_VALUE_MSB, uint8_t H_VALUE_LSB);
 
@@ -230,7 +232,7 @@ void STCC4_DRIVER_Store_Factory_Reset_Result(void);
 
 void STCC4_DRIVER_Perform_Self_Test(uint8_t I2C_ADDRESS);
 
-void STCC4_DRIVER_Store_Self_Test_Result(void);
+bool STCC4_DRIVER_Store_Self_Test_Result(void);
 
 void STCC4_DRIVER_Enable_Testing_Mode(uint8_t I2C_ADDRESS);
 
@@ -238,11 +240,11 @@ void STCC4_DRIVER_Disable_Testing_Mode(uint8_t I2C_ADDRESS);
 
 void STCC4_DRIVER_Perform_Forced_Recalibration(uint8_t I2C_ADDRESS, uint8_t CO2_TARGET_MSB, uint8_t CO2_TARGET_LSB);
 
-void STCC4_DRIVER_Store_Forced_Recalibration_Result(void);
+bool STCC4_DRIVER_Store_Forced_Recalibration_Result(void);
 
 void STCC4_DRIVER_Get_Product_ID(uint8_t I2C_ADDRESS);
 
-void STCC4_DRIVER_Store_Product_ID(void);
+bool STCC4_DRIVER_Store_Product_ID(void);
 
 void STCC4_DRIVER_Calculation_Temperature(uint16_t T_VALUE);
 
@@ -251,8 +253,6 @@ void STCC4_DRIVER_Calculation_Humidity(uint16_t H_VALUE);
 void STCC4_DRIVER_Calculation_CO2(uint16_t CO2_VALUE);
 
 uint8_t STCC4_DRIVER_Calculation_CRC(uint8_t MESSAGE[], uint8_t MESSAGE_LENGTH);
-
-uint8_t STCC4_DRIVER_Calculation_Array_CRC(uint8_t MESSAGE_0, uint8_t MESSAGE_1);
 
 void STCC4_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE);
 
