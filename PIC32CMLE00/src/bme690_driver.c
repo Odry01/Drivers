@@ -44,11 +44,7 @@
 
 BME690_DRIVER_DATA bme690_driverData;
 
-BME690_DRIVER_REGISTER_DATA bme690_regData;
-
-BME690_DRIVER_SENSOR_DATA bme690_sensorData;
-
-BME690_DRIVER_CALIBRATION_DATA bme690_calibrationData;
+BME690_DRIVER_DEVICE_DATA bme690_deviceData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -100,7 +96,7 @@ void BME690_DRIVER_Get_VARIANT_ID_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_VARIANT_ID_Value(void)
 {
-    bme690_sensorData.VARIANT_ID = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.VARIANT_ID = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_CHIP_ID_Value(uint8_t I2C_ADDRESS)
@@ -111,7 +107,7 @@ void BME690_DRIVER_Get_CHIP_ID_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_CHIP_ID_Value(void)
 {
-    bme690_sensorData.CHIP_ID = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.CHIP_ID = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_CONFIG_Value(uint8_t I2C_ADDRESS, uint8_t DATA)
@@ -129,7 +125,7 @@ void BME690_DRIVER_Get_CONFIG_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_CONFIG_Value(void)
 {
-    bme690_sensorData.CONFIG = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.CONFIG = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_CTRL_MEAS_Value(uint8_t I2C_ADDRESS, uint8_t DATA)
@@ -147,7 +143,7 @@ void BME690_DRIVER_Get_CTRL_MEAS_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_CTRL_MEAS_Value(void)
 {
-    bme690_sensorData.CTRL_MEAS = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.CTRL_MEAS = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_CTRL_HUM_Value(uint8_t I2C_ADDRESS, uint8_t DATA)
@@ -165,7 +161,7 @@ void BME690_DRIVER_Get_CTRL_HUM_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_CTRL_HUM_Value(void)
 {
-    bme690_sensorData.CTRL_HUM = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.CTRL_HUM = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_CTRL_GAS_1_Value(uint8_t I2C_ADDRESS, uint8_t DATA)
@@ -183,7 +179,7 @@ void BME690_DRIVER_Get_CTRL_GAS_1_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_CTRL_GAS_1_Value(void)
 {
-    bme690_sensorData.CTRL_GAS_1 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.CTRL_GAS_1 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_CTRL_GAS_0_Value(uint8_t I2C_ADDRESS, uint8_t DATA)
@@ -201,139 +197,139 @@ void BME690_DRIVER_Get_CTRL_GAS_0_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_CTRL_GAS_0_Value(void)
 {
-    bme690_sensorData.CTRL_GAS_0 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.CTRL_GAS_0 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_T_MSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.T_MSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.T_MSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_T_MSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.T_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.T_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_T_LSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.T_LSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.T_LSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_T_LSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.T_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.T_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_T_XLSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.T_XLSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.T_XLSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_T_XLSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.T_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.T_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_H_MSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.H_MSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.H_MSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_H_MSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.H_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.H_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_H_LSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.H_LSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.H_LSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_H_LSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.H_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.H_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_G_MSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.G_MSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.G_MSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_G_MSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.G_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.G_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_G_LSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.G_LSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.G_LSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_G_LSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.G_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.G_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_P_MSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_MSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.P_MSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_P_MSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.P_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.P_VALUE_MSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_P_LSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_LSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.P_LSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_P_LSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.P_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.P_VALUE_LSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_P_XLSB_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_XLSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.P_XLSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_P_XLSB_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_SUB_MEAS_INDEX_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_XLSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.P_XLSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_SUB_MEAS_INDEX_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_MEAS_STATUS_Value(uint8_t I2C_ADDRESS, uint8_t BUFFER)
 {
-    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_regData.P_XLSB_REGISTER[BUFFER];
+    bme690_driverData.I2C_DATA_TRANSMIT[0] = bme690_deviceData.P_XLSB_REGISTER[BUFFER];
     DRV_I2C_WriteReadTransferAdd(bme690_driverData.I2C_HANDLE, I2C_ADDRESS, (void *) bme690_driverData.I2C_DATA_TRANSMIT, 1, (void *) bme690_driverData.I2C_DATA_RECEIVE, 1, &bme690_driverData.I2C_TRANSFER_HANDLE);
 }
 
 void BME690_DRIVER_Store_MEAS_STATUS_Value(uint8_t BUFFER)
 {
-    bme690_sensorData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.P_VALUE_XLSB[BUFFER] = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_T1_LSB_Value(uint8_t I2C_ADDRESS)
@@ -344,7 +340,7 @@ void BME690_DRIVER_Get_PAR_T1_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_T1_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_T1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_T1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_T1_MSB_Value(uint8_t I2C_ADDRESS)
@@ -355,7 +351,7 @@ void BME690_DRIVER_Get_PAR_T1_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_T1_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_T1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_T1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_T2_LSB_Value(uint8_t I2C_ADDRESS)
@@ -366,7 +362,7 @@ void BME690_DRIVER_Get_PAR_T2_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_T2_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_T2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_T2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_T2_MSB_Value(uint8_t I2C_ADDRESS)
@@ -377,7 +373,7 @@ void BME690_DRIVER_Get_PAR_T2_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_T2_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_T2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_T2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_T3_Value(uint8_t I2C_ADDRESS)
@@ -388,7 +384,7 @@ void BME690_DRIVER_Get_PAR_T3_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_T3_Value(void)
 {
-    bme690_calibrationData.PAR_T3 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_T3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H1_LSB_Value(uint8_t I2C_ADDRESS)
@@ -399,7 +395,7 @@ void BME690_DRIVER_Get_PAR_H1_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H1_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_H1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H1_MSB_Value(uint8_t I2C_ADDRESS)
@@ -410,7 +406,7 @@ void BME690_DRIVER_Get_PAR_H1_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H1_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_H1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H2_Value(uint8_t I2C_ADDRESS)
@@ -421,7 +417,7 @@ void BME690_DRIVER_Get_PAR_H2_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H2_Value(void)
 {
-    bme690_calibrationData.PAR_H2 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H2 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H3_Value(uint8_t I2C_ADDRESS)
@@ -432,7 +428,7 @@ void BME690_DRIVER_Get_PAR_H3_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H3_Value(void)
 {
-    bme690_calibrationData.PAR_H3 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H4_Value(uint8_t I2C_ADDRESS)
@@ -443,7 +439,7 @@ void BME690_DRIVER_Get_PAR_H4_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H4_Value(void)
 {
-    bme690_calibrationData.PAR_H4 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H4 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H5_LSB_Value(uint8_t I2C_ADDRESS)
@@ -454,7 +450,7 @@ void BME690_DRIVER_Get_PAR_H5_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H5_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_H5_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H5_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H5_MSB_Value(uint8_t I2C_ADDRESS)
@@ -465,7 +461,7 @@ void BME690_DRIVER_Get_PAR_H5_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H5_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_H5_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H5_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_H6_Value(uint8_t I2C_ADDRESS)
@@ -476,7 +472,7 @@ void BME690_DRIVER_Get_PAR_H6_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_H6_Value(void)
 {
-    bme690_calibrationData.PAR_H6 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_H6 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P1_LSB_Value(uint8_t I2C_ADDRESS)
@@ -487,7 +483,7 @@ void BME690_DRIVER_Get_PAR_P1_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P1_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_P1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P1_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P1_MSB_Value(uint8_t I2C_ADDRESS)
@@ -498,7 +494,7 @@ void BME690_DRIVER_Get_PAR_P1_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P1_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_P1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P1_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P2_LSB_Value(uint8_t I2C_ADDRESS)
@@ -509,7 +505,7 @@ void BME690_DRIVER_Get_PAR_P2_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P2_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_P2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P2_MSB_Value(uint8_t I2C_ADDRESS)
@@ -520,7 +516,7 @@ void BME690_DRIVER_Get_PAR_P2_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P2_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_P2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P3_Value(uint8_t I2C_ADDRESS)
@@ -531,7 +527,7 @@ void BME690_DRIVER_Get_PAR_P3_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P3_Value(void)
 {
-    bme690_calibrationData.PAR_P3 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P4_Value(uint8_t I2C_ADDRESS)
@@ -542,7 +538,7 @@ void BME690_DRIVER_Get_PAR_P4_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P4_Value(void)
 {
-    bme690_calibrationData.PAR_P4 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P4 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P5_LSB_Value(uint8_t I2C_ADDRESS)
@@ -553,7 +549,7 @@ void BME690_DRIVER_Get_PAR_P5_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P5_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_P5_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P5_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P5_MSB_Value(uint8_t I2C_ADDRESS)
@@ -564,7 +560,7 @@ void BME690_DRIVER_Get_PAR_P5_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P5_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_P5_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P5_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P6_LSB_Value(uint8_t I2C_ADDRESS)
@@ -575,7 +571,7 @@ void BME690_DRIVER_Get_PAR_P6_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P6_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_P6_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P6_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P6_MSB_Value(uint8_t I2C_ADDRESS)
@@ -586,7 +582,7 @@ void BME690_DRIVER_Get_PAR_P6_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P6_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_P6_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P6_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P7_Value(uint8_t I2C_ADDRESS)
@@ -597,7 +593,7 @@ void BME690_DRIVER_Get_PAR_P7_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P7_Value(void)
 {
-    bme690_calibrationData.PAR_P7 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P7 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P8_Value(uint8_t I2C_ADDRESS)
@@ -608,7 +604,7 @@ void BME690_DRIVER_Get_PAR_P8_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P8_Value(void)
 {
-    bme690_calibrationData.PAR_P8 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P8 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P9_LSB_Value(uint8_t I2C_ADDRESS)
@@ -619,7 +615,7 @@ void BME690_DRIVER_Get_PAR_P9_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P9_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_P9_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P9_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P9_MSB_Value(uint8_t I2C_ADDRESS)
@@ -630,7 +626,7 @@ void BME690_DRIVER_Get_PAR_P9_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P9_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_P9_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P9_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P10_Value(uint8_t I2C_ADDRESS)
@@ -641,7 +637,7 @@ void BME690_DRIVER_Get_PAR_P10_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P10_Value(void)
 {
-    bme690_calibrationData.PAR_P10 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P10 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_P11_Value(uint8_t I2C_ADDRESS)
@@ -652,7 +648,7 @@ void BME690_DRIVER_Get_PAR_P11_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_P11_Value(void)
 {
-    bme690_calibrationData.PAR_P11 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_P11 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_G1_Value(uint8_t I2C_ADDRESS)
@@ -663,7 +659,7 @@ void BME690_DRIVER_Get_PAR_G1_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_G1_Value(void)
 {
-    bme690_calibrationData.PAR_G1 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_G1 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_G2_LSB_Value(uint8_t I2C_ADDRESS)
@@ -674,7 +670,7 @@ void BME690_DRIVER_Get_PAR_G2_LSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_G2_LSB_Value(void)
 {
-    bme690_calibrationData.PAR_G2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_G2_LSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_G2_MSB_Value(uint8_t I2C_ADDRESS)
@@ -685,7 +681,7 @@ void BME690_DRIVER_Get_PAR_G2_MSB_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_G2_MSB_Value(void)
 {
-    bme690_calibrationData.PAR_G2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_G2_MSB = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Get_PAR_G3_Value(uint8_t I2C_ADDRESS)
@@ -696,66 +692,66 @@ void BME690_DRIVER_Get_PAR_G3_Value(uint8_t I2C_ADDRESS)
 
 void BME690_DRIVER_Store_PAR_G3_Value(void)
 {
-    bme690_calibrationData.PAR_G3 = bme690_driverData.I2C_DATA_RECEIVE[0];
+    bme690_deviceData.PAR_G3 = bme690_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void BME690_DRIVER_Set_Calibration_Registers(void)
 {
-    bme690_calibrationData.PAR_T1 = (uint16_t) bme690_calibrationData.PAR_T1_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_T1_LSB;
-    bme690_calibrationData.PAR_T2 = (uint16_t) bme690_calibrationData.PAR_T2_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_T2_LSB;
-    bme690_calibrationData.PAR_H1 = (uint16_t) bme690_calibrationData.PAR_H1_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_H1_LSB;
-    bme690_calibrationData.PAR_H5 = (uint16_t) bme690_calibrationData.PAR_H5_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_H5_LSB;
-    bme690_calibrationData.PAR_P1 = (uint16_t) bme690_calibrationData.PAR_P1_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_P1_LSB;
-    bme690_calibrationData.PAR_P2 = (uint16_t) bme690_calibrationData.PAR_P2_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_P2_LSB;
-    bme690_calibrationData.PAR_P5 = (uint16_t) bme690_calibrationData.PAR_P5_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_P5_LSB;
-    bme690_calibrationData.PAR_P6 = (uint16_t) bme690_calibrationData.PAR_P6_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_P6_LSB;
-    bme690_calibrationData.PAR_P9 = (uint16_t) bme690_calibrationData.PAR_P9_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_P9_LSB;
-    bme690_calibrationData.PAR_G2 = (uint16_t) bme690_calibrationData.PAR_G2_MSB << 8 | (uint16_t) bme690_calibrationData.PAR_G2_LSB;
+    bme690_deviceData.PAR_T1 = (uint16_t) bme690_deviceData.PAR_T1_MSB << 8 | (uint16_t) bme690_deviceData.PAR_T1_LSB;
+    bme690_deviceData.PAR_T2 = (uint16_t) bme690_deviceData.PAR_T2_MSB << 8 | (uint16_t) bme690_deviceData.PAR_T2_LSB;
+    bme690_deviceData.PAR_H1 = (uint16_t) bme690_deviceData.PAR_H1_MSB << 8 | (uint16_t) bme690_deviceData.PAR_H1_LSB;
+    bme690_deviceData.PAR_H5 = (uint16_t) bme690_deviceData.PAR_H5_MSB << 8 | (uint16_t) bme690_deviceData.PAR_H5_LSB;
+    bme690_deviceData.PAR_P1 = (uint16_t) bme690_deviceData.PAR_P1_MSB << 8 | (uint16_t) bme690_deviceData.PAR_P1_LSB;
+    bme690_deviceData.PAR_P2 = (uint16_t) bme690_deviceData.PAR_P2_MSB << 8 | (uint16_t) bme690_deviceData.PAR_P2_LSB;
+    bme690_deviceData.PAR_P5 = (uint16_t) bme690_deviceData.PAR_P5_MSB << 8 | (uint16_t) bme690_deviceData.PAR_P5_LSB;
+    bme690_deviceData.PAR_P6 = (uint16_t) bme690_deviceData.PAR_P6_MSB << 8 | (uint16_t) bme690_deviceData.PAR_P6_LSB;
+    bme690_deviceData.PAR_P9 = (uint16_t) bme690_deviceData.PAR_P9_MSB << 8 | (uint16_t) bme690_deviceData.PAR_P9_LSB;
+    bme690_deviceData.PAR_G2 = (uint16_t) bme690_deviceData.PAR_G2_MSB << 8 | (uint16_t) bme690_deviceData.PAR_G2_LSB;
 }
 
 void BME690_DRIVER_Set_Measure_Registers(void)
 {
-    bme690_regData.T_MSB_REGISTER[0] = BME690_CMD_TEMP_MSB_0_REGISTER;
-    bme690_regData.T_MSB_REGISTER[1] = BME690_CMD_TEMP_MSB_1_REGISTER;
-    bme690_regData.T_MSB_REGISTER[2] = BME690_CMD_TEMP_MSB_2_REGISTER;
-    bme690_regData.H_MSB_REGISTER[0] = BME690_CMD_HUM_MSB_0_REGISTER;
-    bme690_regData.H_MSB_REGISTER[1] = BME690_CMD_HUM_MSB_1_REGISTER;
-    bme690_regData.H_MSB_REGISTER[2] = BME690_CMD_HUM_MSB_2_REGISTER;
-    bme690_regData.P_MSB_REGISTER[0] = BME690_CMD_PRESS_MSB_0_REGISTER;
-    bme690_regData.P_MSB_REGISTER[1] = BME690_CMD_PRESS_MSB_1_REGISTER;
-    bme690_regData.P_MSB_REGISTER[2] = BME690_CMD_PRESS_MSB_2_REGISTER;
-    bme690_regData.G_MSB_REGISTER[0] = BME690_CMD_GAS_R_MSB_0_REGISTER;
-    bme690_regData.G_MSB_REGISTER[1] = BME690_CMD_GAS_R_MSB_1_REGISTER;
-    bme690_regData.G_MSB_REGISTER[2] = BME690_CMD_GAS_R_MSB_2_REGISTER;
-    bme690_regData.T_LSB_REGISTER[0] = BME690_CMD_TEMP_LSB_0_REGISTER;
-    bme690_regData.T_LSB_REGISTER[1] = BME690_CMD_TEMP_LSB_1_REGISTER;
-    bme690_regData.T_LSB_REGISTER[2] = BME690_CMD_TEMP_LSB_2_REGISTER;
-    bme690_regData.H_LSB_REGISTER[0] = BME690_CMD_HUM_LSB_0_REGISTER;
-    bme690_regData.H_LSB_REGISTER[1] = BME690_CMD_HUM_LSB_1_REGISTER;
-    bme690_regData.H_LSB_REGISTER[2] = BME690_CMD_HUM_LSB_2_REGISTER;
-    bme690_regData.P_LSB_REGISTER[0] = BME690_CMD_PRESS_LSB_0_REGISTER;
-    bme690_regData.P_LSB_REGISTER[1] = BME690_CMD_PRESS_LSB_1_REGISTER;
-    bme690_regData.P_LSB_REGISTER[2] = BME690_CMD_PRESS_LSB_2_REGISTER;
-    bme690_regData.G_LSB_REGISTER[0] = BME690_CMD_GAS_R_LSB_0_REGISTER;
-    bme690_regData.G_LSB_REGISTER[1] = BME690_CMD_GAS_R_LSB_1_REGISTER;
-    bme690_regData.G_LSB_REGISTER[2] = BME690_CMD_GAS_R_LSB_2_REGISTER;
-    bme690_regData.T_XLSB_REGISTER[0] = BME690_CMD_TEMP_XLSB_0_REGISTER;
-    bme690_regData.T_XLSB_REGISTER[1] = BME690_CMD_TEMP_XLSB_1_REGISTER;
-    bme690_regData.T_XLSB_REGISTER[2] = BME690_CMD_TEMP_XLSB_2_REGISTER;
-    bme690_regData.P_XLSB_REGISTER[0] = BME690_CMD_PRESS_XLSB_0_REGISTER;
-    bme690_regData.P_XLSB_REGISTER[1] = BME690_CMD_PRESS_XLSB_1_REGISTER;
-    bme690_regData.P_XLSB_REGISTER[2] = BME690_CMD_PRESS_XLSB_2_REGISTER;
-    bme690_regData.SUB_MEAS_INDEX_REGISTER[0] = BME690_CMD_SUB_MEAS_INDEX_0_REGISTER;
-    bme690_regData.SUB_MEAS_INDEX_REGISTER[1] = BME690_CMD_SUB_MEAS_INDEX_1_REGISTER;
-    bme690_regData.SUB_MEAS_INDEX_REGISTER[2] = BME690_CMD_SUB_MEAS_INDEX_2_REGISTER;
-    bme690_regData.MEAS_STATUS_REGISTER[0] = BME690_CMD_MEAS_STATUS_0_REGISTER;
-    bme690_regData.MEAS_STATUS_REGISTER[1] = BME690_CMD_MEAS_STATUS_1_REGISTER;
-    bme690_regData.MEAS_STATUS_REGISTER[2] = BME690_CMD_MEAS_STATUS_2_REGISTER;
+    bme690_deviceData.T_MSB_REGISTER[0] = BME690_CMD_TEMP_MSB_0_REGISTER;
+    bme690_deviceData.T_MSB_REGISTER[1] = BME690_CMD_TEMP_MSB_1_REGISTER;
+    bme690_deviceData.T_MSB_REGISTER[2] = BME690_CMD_TEMP_MSB_2_REGISTER;
+    bme690_deviceData.H_MSB_REGISTER[0] = BME690_CMD_HUM_MSB_0_REGISTER;
+    bme690_deviceData.H_MSB_REGISTER[1] = BME690_CMD_HUM_MSB_1_REGISTER;
+    bme690_deviceData.H_MSB_REGISTER[2] = BME690_CMD_HUM_MSB_2_REGISTER;
+    bme690_deviceData.P_MSB_REGISTER[0] = BME690_CMD_PRESS_MSB_0_REGISTER;
+    bme690_deviceData.P_MSB_REGISTER[1] = BME690_CMD_PRESS_MSB_1_REGISTER;
+    bme690_deviceData.P_MSB_REGISTER[2] = BME690_CMD_PRESS_MSB_2_REGISTER;
+    bme690_deviceData.G_MSB_REGISTER[0] = BME690_CMD_GAS_R_MSB_0_REGISTER;
+    bme690_deviceData.G_MSB_REGISTER[1] = BME690_CMD_GAS_R_MSB_1_REGISTER;
+    bme690_deviceData.G_MSB_REGISTER[2] = BME690_CMD_GAS_R_MSB_2_REGISTER;
+    bme690_deviceData.T_LSB_REGISTER[0] = BME690_CMD_TEMP_LSB_0_REGISTER;
+    bme690_deviceData.T_LSB_REGISTER[1] = BME690_CMD_TEMP_LSB_1_REGISTER;
+    bme690_deviceData.T_LSB_REGISTER[2] = BME690_CMD_TEMP_LSB_2_REGISTER;
+    bme690_deviceData.H_LSB_REGISTER[0] = BME690_CMD_HUM_LSB_0_REGISTER;
+    bme690_deviceData.H_LSB_REGISTER[1] = BME690_CMD_HUM_LSB_1_REGISTER;
+    bme690_deviceData.H_LSB_REGISTER[2] = BME690_CMD_HUM_LSB_2_REGISTER;
+    bme690_deviceData.P_LSB_REGISTER[0] = BME690_CMD_PRESS_LSB_0_REGISTER;
+    bme690_deviceData.P_LSB_REGISTER[1] = BME690_CMD_PRESS_LSB_1_REGISTER;
+    bme690_deviceData.P_LSB_REGISTER[2] = BME690_CMD_PRESS_LSB_2_REGISTER;
+    bme690_deviceData.G_LSB_REGISTER[0] = BME690_CMD_GAS_R_LSB_0_REGISTER;
+    bme690_deviceData.G_LSB_REGISTER[1] = BME690_CMD_GAS_R_LSB_1_REGISTER;
+    bme690_deviceData.G_LSB_REGISTER[2] = BME690_CMD_GAS_R_LSB_2_REGISTER;
+    bme690_deviceData.T_XLSB_REGISTER[0] = BME690_CMD_TEMP_XLSB_0_REGISTER;
+    bme690_deviceData.T_XLSB_REGISTER[1] = BME690_CMD_TEMP_XLSB_1_REGISTER;
+    bme690_deviceData.T_XLSB_REGISTER[2] = BME690_CMD_TEMP_XLSB_2_REGISTER;
+    bme690_deviceData.P_XLSB_REGISTER[0] = BME690_CMD_PRESS_XLSB_0_REGISTER;
+    bme690_deviceData.P_XLSB_REGISTER[1] = BME690_CMD_PRESS_XLSB_1_REGISTER;
+    bme690_deviceData.P_XLSB_REGISTER[2] = BME690_CMD_PRESS_XLSB_2_REGISTER;
+    bme690_deviceData.SUB_MEAS_INDEX_REGISTER[0] = BME690_CMD_SUB_MEAS_INDEX_0_REGISTER;
+    bme690_deviceData.SUB_MEAS_INDEX_REGISTER[1] = BME690_CMD_SUB_MEAS_INDEX_1_REGISTER;
+    bme690_deviceData.SUB_MEAS_INDEX_REGISTER[2] = BME690_CMD_SUB_MEAS_INDEX_2_REGISTER;
+    bme690_deviceData.MEAS_STATUS_REGISTER[0] = BME690_CMD_MEAS_STATUS_0_REGISTER;
+    bme690_deviceData.MEAS_STATUS_REGISTER[1] = BME690_CMD_MEAS_STATUS_1_REGISTER;
+    bme690_deviceData.MEAS_STATUS_REGISTER[2] = BME690_CMD_MEAS_STATUS_2_REGISTER;
 }
 
 void BME690_DRIVER_Calculate_Temperature(uint8_t BUFFER)
 {
-    bme690_sensorData.T_VALUE = 0;
+    bme690_deviceData.T_VALUE = 0;
 }
 
 void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -765,8 +761,8 @@ void BME690_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
              CONSOLE_HANDLE,
              "Temperature: %.2f ?C\r\n"
              "Humidity: %.2f %%\r\n",
-             bme690_sensorData.TEMPERATURE,
-             bme690_sensorData.HUMIDITY
+             bme690_deviceData.TEMPERATURE,
+             bme690_deviceData.HUMIDITY
              );
 }
 

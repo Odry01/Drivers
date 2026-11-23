@@ -178,7 +178,7 @@ bool RSTC_DRIVER_Get_Task_Start_Status(void);
     void RSTC_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -214,7 +214,7 @@ bool RSTC_DRIVER_Get_Task_Completed_Status(void);
     void RSTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag
@@ -232,7 +232,7 @@ void RSTC_DRIVER_Set_Task_Completed_Status(bool STATUS);
     void RSTC_DRIVER_Set_Reset_Reason(char *RESET_REASON)
 
     Summary:
-    Sets the MCU reset reason 
+    Sets the MCU reset reason.
 
     Parameters:
     @param RESET_REASON - describe of MCU reset reason

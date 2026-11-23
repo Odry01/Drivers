@@ -52,8 +52,8 @@ extern "C"
 // *****************************************************************************
 // *****************************************************************************
 
-#define KG200Z_RX_DATA_SIZE                            256
-#define KG200Z_TX_DATA_SIZE                            256
+#define KG200Z_RX_DATA_SIZE     256
+#define KG200Z_TX_DATA_SIZE     256
 
 // *****************************************************************************
 
@@ -66,7 +66,7 @@ extern "C"
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
  */
-    
+
 typedef enum
 {
     KG200Z_DRIVER_STATE_INIT = 0,

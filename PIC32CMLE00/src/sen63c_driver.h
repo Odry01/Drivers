@@ -54,73 +54,50 @@ extern "C"
 
 #define SEN63C_CMD_START_MEASUREMENT_MSB                            0x00
 #define SEN63C_CMD_START_MEASUREMENT_LSB                            0x21
-
 #define SEN63C_CMD_STOP_MEASUREMENT_MSB                             0x01
 #define SEN63C_CMD_STOP_MEASUREMENT_LSB                             0x04
-
 #define SEN63C_CMD_GET_DATA_READY_MSB                               0x02
 #define SEN63C_CMD_GET_DATA_READY_LSB                               0x02
-
 #define SEN63C_CMD_READ_MEASURED_VALUES_MSB                         0x04
 #define SEN63C_CMD_READ_MEASURED_VALUES_LSB                         0x71
-
 #define SEN63C_CMD_READ_MEASURED_RAW_VALUES_MSB                     0x04
 #define SEN63C_CMD_READ_MEASURED_RAW_VALUES_LSB                     0x92
-
 #define SEN63C_CMD_READ_NUMBER_CONCENTRATION_VALUES_MSB             0x03
 #define SEN63C_CMD_READ_NUMBER_CONCENTRATION_VALUES_LSB             0x16
-
 #define SEN63C_CMD_SET_TEMPERATURE_OFFSET_PARAMETERS_MSB            0x60
 #define SEN63C_CMD_SET_TEMPERATURE_OFFSET_PARAMETERS_LSB            0xB2
-
 #define SEN63C_CMD_SET_TEMPERATURE_ACCELERATION_PARAMETERS_MSB      0x61
 #define SEN63C_CMD_SET_TEMPERATURE_ACCELERATION_PARAMETERS_LSB      0x00
-
 #define SEN63C_CMD_GET_PRODUCT_NAME_MSB                             0xD0
 #define SEN63C_CMD_GET_PRODUCT_NAME_LSB                             0x14
-
 #define SEN63C_CMD_GET_SERIAL_NUMBER_MSB                            0xD0
 #define SEN63C_CMD_GET_SERIAL_NUMBER_LSB                            0x33
-
 #define SEN63C_CMD_READ_DEVICE_STATUS_MSB                           0xD2
 #define SEN63C_CMD_READ_DEVICE_STATUS_LSB                           0x06
-
 #define SEN63C_CMD_READ_AND_CLEAR_DEVICE_STATUS_MSB                 0xD2
 #define SEN63C_CMD_READ_AND_CLEAR_DEVICE_STATUS_LSB                 0x10
-
 #define SEN63C_CMD_GET_VERSION_MSB                                  0xD1
 #define SEN63C_CMD_GET_VERSION_LSB                                  0x00
-
 #define SEN63C_CMD_DEVICE_RESET_MSB                                 0xD3
 #define SEN63C_CMD_DEVICE_RESET_LSB                                 0x04
-
 #define SEN63C_CMD_START_FAN_CLEANING_MSB                           0x56
 #define SEN63C_CMD_START_FAN_CLEANING_LSB                           0x07
-
 #define SEN63C_CMD_ACTIVATE_SHT_HEATER_MSB                          0x67
 #define SEN63C_CMD_ACTIVATE_SHT_HEATER_LSB                          0x65
-
 #define SEN63C_CMD_GET_SHT_HEATER_MEASUREMENTS_MSB                  0x67
 #define SEN63C_CMD_GET_SHT_HEATER_MEASUREMENTS_LSB                  0x90
-
 #define SEN63C_CMD_PERFORM_FORCED_CO2_RECALIBRATION_MSB             0x67
 #define SEN63C_CMD_PERFORM_FORCED_CO2_RECALIBRATION_LSB             0x07
-
 #define SEN63C_CMD_GET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB    0x67
 #define SEN63C_CMD_GET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_LSB    0x11
-
 #define SEN63C_CMD_SET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_MSB    0x67
 #define SEN63C_CMD_SET_CO2_SENSOR_AUTOMATIC_SELF_CALIBRATION_LSB    0x11
-
 #define SEN63C_CMD_GET_AMBIENT_PRESSURE_MSB                         0x67
 #define SEN63C_CMD_GET_AMBIENT_PRESSURE_LSB                         0x20
-
 #define SEN63C_CMD_SET_AMBIENT_PRESSURE_MSB                         0x67
 #define SEN63C_CMD_SET_AMBIENT_PRESSURE_LSB                         0x20
-
 #define SEN63C_CMD_GET_SENSOR_ALTITUDE_MSB                          0x67
 #define SEN63C_CMD_GET_SENSOR_ALTITUDE_LSB                          0x36
-
 #define SEN63C_CMD_SET_SENSOR_ALTITUDE_MSB                          0x67
 #define SEN63C_CMD_SET_SENSOR_ALTITUDE_LSB                          0x36
 
@@ -268,19 +245,19 @@ void SEN63C_DRIVER_Stop_Measurement(uint8_t I2C_ADDRESS);
 
 void SEN63C_DRIVER_Get_Data_Ready_Status(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Data_Ready_Status(void);
+bool SEN63C_DRIVER_Store_Data_Ready_Status(void);
 
 void SEN63C_DRIVER_Read_Measured_Values(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Measured_Values(void);
+bool SEN63C_DRIVER_Store_Measured_Values(void);
 
 void SEN63C_DRIVER_Read_Measured_Raw_Values(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Measured_Raw_Values(void);
+bool SEN63C_DRIVER_Store_Measured_Raw_Values(void);
 
 void SEN63C_DRIVER_Read_Number_Concentration_Values(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Number_Concentration_Values(void);
+bool SEN63C_DRIVER_Store_Number_Concentration_Values(void);
 
 void SEN63C_DRIVER_Set_Temperature_Offset_Parameters(uint8_t I2C_ADDRESS, int8_t OFFSET_MSB, int8_t OFFSET_LSB, int8_t SLOPE_MSB, int8_t SLOPE_LSB, uint8_t TIME_CONSTANT_MSB, uint8_t TIME_CONSTANT_LSB, uint8_t SLOT_MSB, uint8_t SLOT_LSB);
 
@@ -288,21 +265,21 @@ void SEN63C_DRIVER_Set_Temperature_Acceleration_Parameters(uint8_t I2C_ADDRESS, 
 
 void SEN63C_DRIVER_Get_Product_Name(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Product_Name(void);
+bool SEN63C_DRIVER_Store_Product_Name(void);
 
 void SEN63C_DRIVER_Get_Serial_Number(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Serial_Number(void);
+bool SEN63C_DRIVER_Store_Serial_Number(void);
 
 void SEN63C_DRIVER_Read_Device_Status(uint8_t I2C_ADDRESS);
 
 void SEN63C_DRIVER_Read_And_Clear_Device_Status(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Device_Status(void);
+bool SEN63C_DRIVER_Store_Device_Status(void);
 
 void SEN63C_DRIVER_Get_FW_Version(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_FW_Version(void);
+bool SEN63C_DRIVER_Store_FW_Version(void);
 
 void SEN63C_DRIVER_Reset_Device(uint8_t I2C_ADDRESS);
 
@@ -312,27 +289,27 @@ void SEN63C_DRIVER_Activate_Heater(uint8_t I2C_ADDRESS);
 
 void SEN63C_DRIVER_Get_Heater_Measurement(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Heater_Measurement(void);
+bool SEN63C_DRIVER_Store_Heater_Measurement(void);
 
 void SEN63C_DRIVER_Perform_Forced_CO2_Recalibration(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Forced_CO2_Recalibration(void);
+bool SEN63C_DRIVER_Store_Forced_CO2_Recalibration(void);
 
 void SEN63C_DRIVER_Get_CO2_Sensor_Automatic_Self_Calibration(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_CO2_Sensor_Automatic_Self_Calibration(void);
+bool SEN63C_DRIVER_Store_CO2_Sensor_Automatic_Self_Calibration(void);
 
 void SEN63C_DRIVER_Set_CO2_Sensor_Automatic_Self_Calibration(uint8_t I2C_ADDRESS);
 
 void SEN63C_DRIVER_Get_Ambient_Pressure(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Ambient_Pressure(void);
+bool SEN63C_DRIVER_Store_Ambient_Pressure(void);
 
 void SEN63C_DRIVER_Set_Ambient_Pressure(uint8_t I2C_ADDRESS);
 
 void SEN63C_DRIVER_Get_Sensor_Altitude(uint8_t I2C_ADDRESS);
 
-void SEN63C_DRIVER_Store_Sensor_Altitude(void);
+bool SEN63C_DRIVER_Store_Sensor_Altitude(void);
 
 void SEN63C_DRIVER_Set_Sensor_Altitude(uint8_t I2C_ADDRESS);
 

@@ -106,7 +106,7 @@ typedef struct
 {
     uint16_t T_VALUE;
     float CELSIUS_TEMPERATURE;
-} NTC_DRIVER_SENSOR_DATA;
+} NTC_DRIVER_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -181,7 +181,7 @@ bool NTC_DRIVER_Get_Task_Start_Status(void);
     void NTC_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -217,7 +217,7 @@ bool NTC_DRIVER_Get_Task_Completed_Status(void);
     void NTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag

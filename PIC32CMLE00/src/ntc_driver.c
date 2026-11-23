@@ -44,7 +44,7 @@
 
 NTC_DRIVER_DATA ntc_driverData;
 
-NTC_DRIVER_SENSOR_DATA ntc_sensorData;
+NTC_DRIVER_DEVICE_DATA ntc_deviceData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -88,7 +88,7 @@ void NTC_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
 void NTC_DRIVER_Calculation_Temperature(uint16_t T_VALUE)
 {
-    ntc_sensorData.CELSIUS_TEMPERATURE = (float) T_VALUE / 100;
+    ntc_deviceData.CELSIUS_TEMPERATURE = (float) T_VALUE / 100;
 }
 
 void NTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
@@ -96,8 +96,8 @@ void NTC_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "NTC temperature: %.2f ?C\r\n",
-             ntc_sensorData.CELSIUS_TEMPERATURE
+             "NTC temperature: %.2f *C\r\n",
+             ntc_deviceData.CELSIUS_TEMPERATURE
              );
 }
 
@@ -152,14 +152,14 @@ void NTC_DRIVER_Tasks(void)
 
         case NTC_DRIVER_STATE_GET_RESULT:
         {
-            ntc_sensorData.T_VALUE = ADC_ConversionResultGet();
+            ntc_deviceData.T_VALUE = ADC_ConversionResultGet();
             ntc_driverData.state = NTC_DRIVER_STATE_CALCULATION_TEMPERATURE;
             break;
         }
 
         case NTC_DRIVER_STATE_CALCULATION_TEMPERATURE:
         {
-            NTC_DRIVER_Calculation_Temperature(ntc_sensorData.T_VALUE);
+            NTC_DRIVER_Calculation_Temperature(ntc_deviceData.T_VALUE);
             ntc_driverData.state = NTC_DRIVER_STATE_STORE_DATA;
             break;
         }

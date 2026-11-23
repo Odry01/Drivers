@@ -164,7 +164,7 @@ typedef struct
     uint16_t ALS_DATA;
     uint16_t WHITE_DATA;
     uint16_t ID;
-} VCNL4200_SENSOR_DATA;
+} VCNL4200_DRIVER_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -239,7 +239,7 @@ bool VCNL4200_DRIVER_Get_Task_Start_Status(void);
     void VCNL4200_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -275,7 +275,7 @@ bool VCNL4200_DRIVER_Get_Task_Completed_Status(void);
     void VCNL4200_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag
@@ -311,7 +311,7 @@ bool VCNL4200_DRIVER_Get_Alert_Status(void);
     void VCNL4200_DRIVER_Set_Alert_Status(bool STATUS)
 
     Summary:
-    Sets the "VCNL4200_ALERT" flag
+    Sets the "VCNL4200_ALERT" flag.
 
     Parameters:
     @param STATUS - desired state of the "VCNL4200_ALERT" flag

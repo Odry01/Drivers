@@ -195,7 +195,7 @@ typedef struct
     uint32_t P_VALUE;
     float CELSIUS_TEMPERATURE;
     float PA_PRESSURE;
-} BMP585_SENSOR_DATA;
+} BMP585_DRIVER_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************

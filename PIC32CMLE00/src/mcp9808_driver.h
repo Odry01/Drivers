@@ -129,17 +129,15 @@ typedef struct
 
 typedef struct
 {
-    uint8_t CONFIG_MSB;
-    uint8_t CONFIG_LSB;
     uint8_t T_VALUE_MSB;
     uint8_t T_VALUE_LSB;
-    uint8_t MANUFACTURER_ID_MSB;
-    uint8_t MANUFACTURER_ID_LSB;
     uint8_t DEVICE_ID;
     uint8_t DEVICE_REVISION;
     uint8_t RESULT_RESOLUTION;
+    uint16_t CONFIG;
+    uint16_t MANUFACTURER_ID;
     float CELSIUS_TEMPERATURE;
-} MCP9808_DRIVER_SENSOR_DATA;
+} MCP9808_DRIVER_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -214,7 +212,7 @@ bool MCP9808_DRIVER_Get_Task_Start_Status(void);
     void MCP9808_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -250,7 +248,7 @@ bool MCP9808_DRIVER_Get_Task_Completed_Status(void);
     void MCP9808_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag
@@ -286,7 +284,7 @@ bool MCP9808_DRIVER_Get_Alert_Status(void);
     void MCP9808_DRIVER_Set_Alert_Status(bool STATUS)
 
     Summary:
-    Sets the "MCP9808_ALERT" flag
+    Sets the "MCP9808_ALERT" flag.
 
     Parameters:
     @param STATUS - desired state of the "MCP9808_ALERT" flag

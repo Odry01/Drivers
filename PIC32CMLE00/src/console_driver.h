@@ -171,7 +171,7 @@ bool CONSOLE_DRIVER_Get_Task_Start_Status(void);
     void CONSOLE_DRIVER_Set_Task_Start_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_START" flag
+    Sets the "TASK_START" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_START" flag
@@ -207,7 +207,7 @@ bool CONSOLE_DRIVER_Get_Task_Completed_Status(void);
     void CONSOLE_DRIVER_Set_Task_Completed_Status(bool STATUS)
 
     Summary:
-    Sets the "TASK_COMPLETED" flag
+    Sets the "TASK_COMPLETED" flag.
 
     Parameters:
     @param STATUS - desired state of the "TASK_COMPLETED" flag

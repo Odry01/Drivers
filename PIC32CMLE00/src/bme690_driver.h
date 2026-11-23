@@ -139,8 +139,8 @@ extern "C"
 #define BME690_CMD_PAR_G2_CALIBRATION_MSB_REGISTER          0xEC
 #define BME690_CMD_PAR_G3_CALIBRATION_LSB_REGISTER          0xEE
 
-#define BME690_I2C_RX_BUFFER_SIZE                       8
-#define BME690_I2C_TX_BUFFER_SIZE                       8
+#define BME690_I2C_RX_BUFFER_SIZE                           8
+#define BME690_I2C_TX_BUFFER_SIZE                           8
 
 // *****************************************************************************
 
@@ -302,22 +302,6 @@ typedef struct
 
 typedef struct
 {
-    uint8_t T_MSB_REGISTER[3];
-    uint8_t H_MSB_REGISTER[3];
-    uint8_t P_MSB_REGISTER[3];
-    uint8_t G_MSB_REGISTER[3];
-    uint8_t T_LSB_REGISTER[3];
-    uint8_t H_LSB_REGISTER[3];
-    uint8_t P_LSB_REGISTER[3];
-    uint8_t G_LSB_REGISTER[3];
-    uint8_t T_XLSB_REGISTER[3];
-    uint8_t P_XLSB_REGISTER[3];
-    uint8_t SUB_MEAS_INDEX_REGISTER[3];
-    uint8_t MEAS_STATUS_REGISTER[3];
-} BME690_DRIVER_REGISTER_DATA;
-
-typedef struct
-{
     uint8_t VARIANT_ID;
     uint8_t CHIP_ID;
     uint8_t CONFIG;
@@ -335,62 +319,74 @@ typedef struct
     uint8_t G_VALUE_LSB[3];
     uint8_t T_VALUE_XLSB[3];
     uint8_t P_VALUE_XLSB[3];
-    uint32_t T_VALUE;
-    uint32_t H_VALUE;
-    uint32_t P_VALUE;
-    uint32_t G_VALUE;
-    float TEMPERATURE;
-    float HUMIDITY;
-    float PRESSURE;
-    float GAS_RESISTANCE;
-} BME690_DRIVER_SENSOR_DATA;
 
-typedef struct
-{
+    uint8_t T_MSB_REGISTER[3];
+    uint8_t H_MSB_REGISTER[3];
+    uint8_t P_MSB_REGISTER[3];
+    uint8_t G_MSB_REGISTER[3];
+    uint8_t T_LSB_REGISTER[3];
+    uint8_t H_LSB_REGISTER[3];
+    uint8_t P_LSB_REGISTER[3];
+    uint8_t G_LSB_REGISTER[3];
+    uint8_t T_XLSB_REGISTER[3];
+    uint8_t P_XLSB_REGISTER[3];
+    uint8_t SUB_MEAS_INDEX_REGISTER[3];
+    uint8_t MEAS_STATUS_REGISTER[3];
+
     uint8_t PAR_T1_MSB;
     uint8_t PAR_T1_LSB;
-    uint16_t PAR_T1;
     uint8_t PAR_T2_MSB;
     uint8_t PAR_T2_LSB;
-    uint16_t PAR_T2;
     uint8_t PAR_T3;
     uint8_t PAR_H1_MSB;
     uint8_t PAR_H1_LSB;
-    uint16_t PAR_H1;
     uint8_t PAR_H2;
     uint8_t PAR_H3;
     uint8_t PAR_H4;
     uint8_t PAR_H5_MSB;
     uint8_t PAR_H5_LSB;
-    uint16_t PAR_H5;
     uint8_t PAR_H6;
     uint8_t PAR_P1_MSB;
     uint8_t PAR_P1_LSB;
-    uint16_t PAR_P1;
     uint8_t PAR_P2_MSB;
     uint8_t PAR_P2_LSB;
-    uint16_t PAR_P2;
     uint8_t PAR_P3;
     uint8_t PAR_P4;
     uint8_t PAR_P5_MSB;
     uint8_t PAR_P5_LSB;
-    uint16_t PAR_P5;
     uint8_t PAR_P6_MSB;
     uint8_t PAR_P6_LSB;
-    uint16_t PAR_P6;
     uint8_t PAR_P7;
     uint8_t PAR_P8;
     uint8_t PAR_P9_MSB;
     uint8_t PAR_P9_LSB;
-    uint16_t PAR_P9;
     uint8_t PAR_P10;
     uint8_t PAR_P11;
     uint8_t PAR_G1;
     uint8_t PAR_G2_MSB;
     uint8_t PAR_G2_LSB;
-    uint16_t PAR_G2;
     uint8_t PAR_G3;
-} BME690_DRIVER_CALIBRATION_DATA;
+    uint16_t PAR_T1;
+    uint16_t PAR_T2;
+    uint16_t PAR_H1;
+    uint16_t PAR_H5;
+    uint16_t PAR_P1;
+    uint16_t PAR_P2;
+    uint16_t PAR_P5;
+    uint16_t PAR_P6;
+    uint16_t PAR_P9;
+    uint16_t PAR_G2;
+
+    uint32_t T_VALUE;
+    uint32_t H_VALUE;
+    uint32_t P_VALUE;
+    uint32_t G_VALUE;
+
+    float TEMPERATURE;
+    float HUMIDITY;
+    float PRESSURE;
+    float GAS_RESISTANCE;
+} BME690_DRIVER_DEVICE_DATA;
 
 // *****************************************************************************
 // *****************************************************************************

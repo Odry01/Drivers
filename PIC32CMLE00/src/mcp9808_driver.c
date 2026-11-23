@@ -44,7 +44,7 @@
 
 MCP9808_DRIVER_DATA mcp9808_driverData;
 
-MCP9808_DRIVER_SENSOR_DATA mcp9808_sensorData;
+MCP9808_DRIVER_DEVICE_DATA mcp9808_deviceData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -113,8 +113,7 @@ void MCP9808_DRIVER_Get_Sensor_Config(uint8_t I2C_ADDRESS)
 
 void MCP9808_DRIVER_Store_Sensor_Config(void)
 {
-    mcp9808_sensorData.CONFIG_MSB = mcp9808_driverData.I2C_DATA_RECEIVE[0];
-    mcp9808_sensorData.CONFIG_LSB = mcp9808_driverData.I2C_DATA_RECEIVE[1];
+    mcp9808_deviceData.CONFIG = (uint16_t) mcp9808_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) mcp9808_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void MCP9808_DRIVER_Set_Sensor_Config(uint8_t I2C_ADDRESS, uint8_t CONFIG_MSB, uint8_t CONFIG_LSB)
@@ -133,20 +132,20 @@ void MCP9808_DRIVER_Get_Measure_Values(uint8_t I2C_ADDRESS)
 
 void MCP9808_DRIVER_Store_Measured_Values(void)
 {
-    mcp9808_sensorData.T_VALUE_MSB = mcp9808_driverData.I2C_DATA_RECEIVE[0];
-    mcp9808_sensorData.T_VALUE_LSB = mcp9808_driverData.I2C_DATA_RECEIVE[1];
+    mcp9808_deviceData.T_VALUE_MSB = mcp9808_driverData.I2C_DATA_RECEIVE[0];
+    mcp9808_deviceData.T_VALUE_LSB = mcp9808_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void MCP9808_DRIVER_Calculation_Temperature(void)
 {
-    mcp9808_sensorData.T_VALUE_MSB = mcp9808_sensorData.T_VALUE_MSB & 0xF;
-    if ((mcp9808_sensorData.T_VALUE_MSB & 0x10) == 0x10)
+    mcp9808_deviceData.T_VALUE_MSB = mcp9808_deviceData.T_VALUE_MSB & 0xF;
+    if ((mcp9808_deviceData.T_VALUE_MSB & 0x10) == 0x10)
     {
-        mcp9808_sensorData.CELSIUS_TEMPERATURE = 256.00 - (((float) mcp9808_sensorData.T_VALUE_MSB * 16.00) + ((float) mcp9808_sensorData.T_VALUE_LSB / 16.00));
+        mcp9808_deviceData.CELSIUS_TEMPERATURE = 256.00 - (((float) mcp9808_deviceData.T_VALUE_MSB * 16.00) + ((float) mcp9808_deviceData.T_VALUE_LSB / 16.00));
     }
     else
     {
-        mcp9808_sensorData.CELSIUS_TEMPERATURE = (((float) mcp9808_sensorData.T_VALUE_MSB * 16.00) + ((float) mcp9808_sensorData.T_VALUE_LSB / 16.00));
+        mcp9808_deviceData.CELSIUS_TEMPERATURE = (((float) mcp9808_deviceData.T_VALUE_MSB * 16.00) + ((float) mcp9808_deviceData.T_VALUE_LSB / 16.00));
     }
 }
 
@@ -158,8 +157,7 @@ void MCP9808_DRIVER_Get_Manufacturer_ID(uint8_t I2C_ADDRESS)
 
 void MCP9808_DRIVER_Store_Manufacturer_ID(void)
 {
-    mcp9808_sensorData.MANUFACTURER_ID_MSB = mcp9808_driverData.I2C_DATA_RECEIVE[0];
-    mcp9808_sensorData.MANUFACTURER_ID_LSB = mcp9808_driverData.I2C_DATA_RECEIVE[1];
+    mcp9808_deviceData.MANUFACTURER_ID = (uint16_t) mcp9808_driverData.I2C_DATA_RECEIVE[0] << 8 | (uint16_t) mcp9808_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void MCP9808_DRIVER_Get_Device_ID(uint8_t I2C_ADDRESS)
@@ -170,8 +168,8 @@ void MCP9808_DRIVER_Get_Device_ID(uint8_t I2C_ADDRESS)
 
 void MCP9808_DRIVER_Store_Device_ID(void)
 {
-    mcp9808_sensorData.DEVICE_ID = mcp9808_driverData.I2C_DATA_RECEIVE[0];
-    mcp9808_sensorData.DEVICE_REVISION = mcp9808_driverData.I2C_DATA_RECEIVE[1];
+    mcp9808_deviceData.DEVICE_ID = mcp9808_driverData.I2C_DATA_RECEIVE[0];
+    mcp9808_deviceData.DEVICE_REVISION = mcp9808_driverData.I2C_DATA_RECEIVE[1];
 }
 
 void MCP9808_DRIVER_Get_Result_Resolution(uint8_t I2C_ADDRESS)
@@ -182,7 +180,7 @@ void MCP9808_DRIVER_Get_Result_Resolution(uint8_t I2C_ADDRESS)
 
 void MCP9808_DRIVER_Store_Result_Resolution(void)
 {
-    mcp9808_sensorData.RESULT_RESOLUTION = mcp9808_driverData.I2C_DATA_RECEIVE[0];
+    mcp9808_deviceData.RESULT_RESOLUTION = mcp9808_driverData.I2C_DATA_RECEIVE[0];
 }
 
 void MCP9808_DRIVER_Set_Result_Resolution(uint8_t I2C_ADDRESS, uint8_t RESULT_RESOULUTION)
@@ -197,13 +195,13 @@ void MCP9808_DRIVER_Print_Data(SYS_CONSOLE_HANDLE CONSOLE_HANDLE)
     SYS_CONSOLE_Print
             (
              CONSOLE_HANDLE,
-             "Manufacturer ID: %X%X\r\n"
+             "Manufacturer ID: %X\r\n"
              "Device ID: %X\r\n"
              "Device version: %d\r\n"
-             "Temperature: %.2f ?C\r\n",
-             mcp9808_sensorData.MANUFACTURER_ID_MSB, mcp9808_sensorData.MANUFACTURER_ID_LSB,
-             mcp9808_sensorData.DEVICE_ID, mcp9808_sensorData.DEVICE_REVISION,
-             mcp9808_sensorData.CELSIUS_TEMPERATURE
+             "Temperature: %.2f *C\r\n",
+             mcp9808_deviceData.MANUFACTURER_ID,
+             mcp9808_deviceData.DEVICE_ID, mcp9808_deviceData.DEVICE_REVISION,
+             mcp9808_deviceData.CELSIUS_TEMPERATURE
              );
 }
 
